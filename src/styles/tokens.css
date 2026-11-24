@@ -16,7 +16,9 @@
   /* 書体 */
   --font-ja: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
   --font-display: "Anton", "Zen Kaku Gothic New", sans-serif;
-  --font-latin: "Inter", "Zen Kaku Gothic New", sans-serif;
+  /* Framer の Inter の文字に混ざる日本語は、Inter に無いため端末の標準の書体で描かれる（iPhone では Hiragino Sans）。
+     結果画面の見た目に揃えるため、同じ順で落とす */
+  --font-latin: "Inter", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   --inter-features: "cv03" 1, "cv04" 1, "cv09" 1, "cv11" 1;
 
   /* 余白（結果画面 WQLkyLRf1 の値） */

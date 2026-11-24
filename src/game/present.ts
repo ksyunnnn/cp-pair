@@ -15,6 +15,17 @@ export function splitTitle(title: string): { kicker: string | null; body: string
   return { kicker: null, body: text };
 }
 
+/**
+ * 称号の本体を「前半」と「末尾のカタカナの語」に分ける。
+ * Framer の結果画面は「表舞台 × 裏の実力者」と「ギャップペア」を別の行に置く。
+ * 1 行に収まらないときだけ、末尾の語を次の行に送るために使う。
+ */
+export function splitTitleBody(body: string): [string, string] {
+  const m = body.match(/[\u30A0-\u30FF・]+[！!]?$/u);
+  if (!m || m.index === undefined || m.index === 0) return [body, ""];
+  return [body.slice(0, m.index), m[0]];
+}
+
 /** 発動トリガーの表示名。Framer の表記に合わせ、半角の括弧を全角にする。 */
 export function tagLabel(tag: string): string {
   return tag.replace(/\(/g, "（").replace(/\)/g, "）");

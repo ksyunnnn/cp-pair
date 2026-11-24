@@ -35,7 +35,6 @@ export function HostPick({ room, participantId }: { room: Room; participantId: s
       <PhilosophyPicker
         room={room}
         participant={participant}
-        eyebrow={`${participant.name}さんの番`}
         onDone={() => {
           toast(`${participant.name}さんの選択を受け付けました。端末をホストに戻してください`, "success");
           back();

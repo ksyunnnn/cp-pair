@@ -37,7 +37,6 @@ export function ParticipantRoom({ room }: { room: Room }) {
         <PhilosophyPicker
           room={room}
           participant={me}
-          eyebrow={`${me.name}さんの端末`}
           onDone={() => undefined}
         />
       </div>

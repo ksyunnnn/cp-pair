@@ -145,6 +145,11 @@ export function ParticipantRow({
   onAction?: () => void;
   onRemove?: () => void;
 }) {
+  const removeButton = onRemove && (
+    <button type="button" className="cp-row__remove" aria-label={`${name}さんを削除`} onClick={onRemove}>
+      <CpSymbol name="Remove" size={16} />
+    </button>
+  );
   return (
     <div className="cp-row">
       <div className="cp-row__info">
@@ -156,20 +161,16 @@ export function ParticipantRow({
             <span className="t-small c-muted">{JOIN_LABEL[joinType]}</span>
           </span>
         </div>
+        {/* 操作ボタンがない行は、削除を名前の横に置く（空の行を作らない） */}
+        {!action && removeButton}
       </div>
       <span className={`t-label${done ? "" : " c-muted"}`}>{status}</span>
-      {(action || onRemove) && (
-        <div className={`cp-row__ops${action ? "" : " is-end"}`}>
-          {action && (
-            <button type="button" className="cp-row__action t-label" onClick={onAction}>
-              {action}
-            </button>
-          )}
-          {onRemove && (
-            <button type="button" className="cp-row__remove" aria-label={`${name}さんを削除`} onClick={onRemove}>
-              <CpSymbol name="Remove" size={16} />
-            </button>
-          )}
+      {action && (
+        <div className="cp-row__ops">
+          <button type="button" className="cp-row__action t-label" onClick={onAction}>
+            {action}
+          </button>
+          {removeButton}
         </div>
       )}
     </div>

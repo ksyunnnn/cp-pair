@@ -3,7 +3,7 @@ import { Heart, Intersect, Sparkle } from "@phosphor-icons/react";
 import type { ReactNode } from "react";
 import { getPreset } from "../game/presets.ts";
 import { TRIGGER_CONFIG } from "../game/triggers.ts";
-import { companyMeta, splitTitle, tagIcon, tagLabel, type TagIcon } from "../game/present.ts";
+import { companyMeta, splitTitle, splitTitleBody, tagIcon, tagLabel, type TagIcon } from "../game/present.ts";
 import type { Archetype, MatchedPerson, MatchResult, UnmatchedPerson } from "../game/types.ts";
 import { BrandHeader, Button } from "../ui/components.tsx";
 import { PairLogo } from "../ui/symbols.tsx";
@@ -15,6 +15,27 @@ function PhIcon({ name, size }: { name: TagIcon; size: number }) {
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;
   return <Intersect {...props} />;
+}
+
+/* 相性と称号（P74_Bj9RK）。称号の本体は、1 行に収まらないときだけ末尾の語を次の行に送る（行の間は 4px）。 */
+export function ScoreAndTitle({ score, title }: { score: number; title: string }) {
+  const t = splitTitle(title);
+  const [head, tail] = splitTitleBody(t.body);
+  return (
+    <div className="r-score">
+      <div className="r-score__num">
+        <p className="t-score c-accent">{score}%</p>
+        <p className="t-tiny c-muted">こじつけ相性度</p>
+      </div>
+      <div className="r-score__title">
+        {t.kicker && <p className="t-label c-accent">{t.kicker}</p>}
+        <p className="t-strong r-title-body">
+          <span>{head}</span>
+          {tail && <span>{tail}</span>}
+        </p>
+      </div>
+    </div>
+  );
 }
 
 function Karte({ heading, person, arch }: { heading: string; person: MatchedPerson; arch: Archetype }) {
@@ -89,8 +110,7 @@ export function ResultScreen({
     const partner = isA ? pair.personB : pair.personA;
     const myArch = isA ? pair.evaluation.archetypes.personA : pair.evaluation.archetypes.personB;
     const partnerArch = isA ? pair.evaluation.archetypes.personB : pair.evaluation.archetypes.personA;
-    const title = splitTitle(pair.evaluation.title);
-
+    
     return (
       <Frame right="ふたりだけの結果">
         <section className="r-partner" aria-label="あなたのマッチ相手">
@@ -110,16 +130,7 @@ export function ResultScreen({
             <p className="r-phrase-card__phrase cp-phrase">{partner.company.phrase}</p>
             <p className="t-small r-on-ink">{partner.company.company_name}</p>
           </div>
-          <div className="r-score">
-            <div className="r-score__num">
-              <p className="t-score c-accent">{pair.evaluation.score}%</p>
-              <p className="t-tiny c-muted">こじつけ相性度</p>
-            </div>
-            <div className="r-score__title">
-              {title.kicker && <p className="t-label c-accent">{title.kicker}</p>}
-              <p className="t-strong">{title.body}</p>
-            </div>
-          </div>
+          <ScoreAndTitle score={pair.evaluation.score} title={pair.evaluation.title} />
         </section>
 
         <section className="r-talk" aria-label="話しかけるきっかけ">

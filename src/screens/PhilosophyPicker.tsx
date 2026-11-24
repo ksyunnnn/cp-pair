@@ -1,5 +1,5 @@
 // 理念選び（8 択・入れ替え・企業名は出さない）。参加者の端末とホストの端末で共通。
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { dataset } from "../game/dataset.ts";
 import { getPreset } from "../game/presets.ts";
 import { pad2 } from "../game/present.ts";
@@ -39,28 +39,24 @@ function ensurePool(room: Room, participantId: string): Company[] {
 export function PhilosophyPicker({
   room,
   participant,
-  eyebrow,
   onDone,
   secondary,
 }: {
   room: Room;
   participant: Participant;
-  eyebrow: string;
   onDone: (company: Company) => void;
   secondary?: { label: string; onClick: () => void };
 }) {
   const toast = useToast();
   const preset = getPreset(room.presetId);
   const [version, setVersion] = useState(0);
-  const [chosen, setChosen] = useState<number | null>(null);
+  const [picked, setChosen] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
 
-  const signature = room.participants.map((p) => `${p.id}:${p.selectedCompanyId}`).join("|");
-  const options = useMemo(() => ensurePool(room, participant.id), [signature, participant.id, version]);
-
-  useEffect(() => {
-    if (chosen !== null && !options.some((c) => c.id === chosen)) setChosen(null);
-  }, [options, chosen]);
+  // version は「入れ替える」で並びを作り直すための合図
+  const options = useMemo(() => ensurePool(room, participant.id), [room, participant.id, version]);
+  // ほかの人が先に選んで消えた理念は、選んでいない扱いにする
+  const chosen = picked !== null && options.some((c) => c.id === picked) ? picked : null;
 
   const reroll = () => {
     const excluded = excludedFor(room, participant.id);
@@ -101,7 +97,7 @@ export function PhilosophyPicker({
       <main className="cp-content has-floating">
         <ProgressSteps current={2} />
         <ScreenHeading
-          eyebrow={eyebrow}
+          eyebrow="PICK A PHILOSOPHY"
           icon={<CpSymbol name="Secret" size={17} />}
           title={preset.label}
           lead="直感でひとつ。企業名は、結果が出るまで伏せられています。"
@@ -123,7 +119,7 @@ export function PhilosophyPicker({
           </Button>
         )}
       </main>
-      <FloatingBar note={chosen === null ? "ひとつ選ぶと、決められます" : `${participant.name}さんの理念として送ります`}>
+      <FloatingBar note={chosen === null ? `${participant.name}さんの番です。ひとつ選んでください` : `${participant.name}さんの理念として送ります`}>
         <div className="cp-button-row">
           <Button kind="secondary" onClick={reroll}>
             入れ替える

@@ -303,9 +303,6 @@ button {
   align-items: center;
   gap: 8px;
 }
-.cp-row__ops.is-end {
-  justify-content: flex-end;
-}
 .cp-row__action {
   appearance: none;
   border: 0;
@@ -535,8 +532,11 @@ button {
 /* ---------- 開発パネル（本番の画面には出ない） ---------- */
 .dev-panel {
   position: fixed;
-  left: 8px;
-  bottom: 8px;
+  right: 4px;
+  bottom: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   z-index: 100;
   font: 500 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
   color: #e5e5e5;
@@ -553,7 +553,7 @@ button {
 .dev-panel__body {
   margin-bottom: 6px;
   width: 260px;
-  max-height: 70dvh;
+  max-height: 60dvh;
   overflow: auto;
   background: #111;
   border: 1px dashed #888;
@@ -598,4 +598,15 @@ button {
 
 .cp-join-submit {
   padding-top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-toast {
+    animation: none;
+  }
+  .cp-button,
+  .cp-choice,
+  .cp-gender__option {
+    transition: none;
+  }
 }

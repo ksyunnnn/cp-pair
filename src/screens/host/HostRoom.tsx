@@ -5,7 +5,7 @@ import { inviteUrl, isHostOf } from "../../device.ts";
 import { dataset } from "../../game/dataset.ts";
 import { MatchingEngine } from "../../game/engine.ts";
 import { getPreset } from "../../game/presets.ts";
-import { pad2, splitTitle } from "../../game/present.ts";
+import { pad2 } from "../../game/present.ts";
 import type { Gender, MatchedPerson } from "../../game/types.ts";
 import { navigate } from "../../router.ts";
 import { roomStore, type Room } from "../../store/index.ts";
@@ -23,6 +23,7 @@ import {
 } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
+import { ScoreAndTitle } from "../ResultScreen.tsx";
 
 export function NotHost({ roomId }: { roomId: string }) {
   return (
@@ -196,22 +197,6 @@ function HostLobby({ room }: { room: Room }) {
           登録完了を宣言
         </Button>
       </FloatingBar>
-    </div>
-  );
-}
-
-function ScoreAndTitle({ score, title }: { score: number; title: string }) {
-  const t = splitTitle(title);
-  return (
-    <div className="r-score">
-      <div className="r-score__num">
-        <p className="t-score c-accent">{score}%</p>
-        <p className="t-tiny c-muted">こじつけ相性度</p>
-      </div>
-      <div className="r-score__title">
-        {t.kicker && <p className="t-label c-accent">{t.kicker}</p>}
-        <p className="t-strong">{t.body}</p>
-      </div>
     </div>
   );
 }
