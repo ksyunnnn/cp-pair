@@ -1,0 +1,30 @@
+# secrets: 公開リポジトリのため、環境変数と鍵は追跡しない
+.env
+.env.*
+!.env.example
+.dev.vars*
+!.dev.vars.example
+*.pem
+*.key
+
+# dependencies
+/node_modules
+
+# build output
+/dist/
+/build/
+/coverage/
+
+# misc
+.DS_Store
+*.log
+
+# Playwright
+.playwright-mcp/
+.playwright-cli/
+/test-results/
+/playwright-report/
+
+# Claude Code
+.claude/settings.local.json
+.claude/worktrees/
