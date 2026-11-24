@@ -1,0 +1,62 @@
+/*
+  Framer プロジェクト xdh5lhXEtr2QsuFohBhR の色トークンと文字スタイル。
+  値の出どころは docs/design/framer-values.md にある。
+*/
+:root {
+  /* 色トークン（ColorStyleTokenNode） */
+  --cp-paper: #f4f2eb;
+  --cp-ink: #22231f;
+  --cp-muted: #75766d;
+  --cp-line: #d8d8ce;
+  --cp-accent: #f4523d;
+  --cp-soft: #e9e9df;
+  /* 結果画面の黒いカードの上の補足文字（UaQrcBXd3 / XUILCZVQt の textColor） */
+  --cp-on-ink-muted: rgb(188, 190, 177);
+
+  /* 書体 */
+  --font-ja: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  --font-display: "Anton", "Zen Kaku Gothic New", sans-serif;
+  --font-latin: "Inter", "Zen Kaku Gothic New", sans-serif;
+  --inter-features: "cv03" 1, "cv04" 1, "cv09" 1, "cv11" 1;
+
+  /* 余白（結果画面 WQLkyLRf1 の値） */
+  --page-x: 24px;
+  --block-gap: 28px;
+  --page-max: 440px;
+
+  /* 操作の層（CP フローティング操作バー pm5oXSZwN） */
+  --glass-fill: rgba(244, 242, 235, 0.94);
+  --glass-blur: 20px;
+  --glass-border: 1px solid rgba(244, 242, 235, 0.9);
+  --glass-shadow: 0px 4px 16px 0px rgba(34, 35, 31, 0.08);
+}
+
+/* 文字スタイル（TextStylePresetNode） */
+.t-section { font: 900 17px/1.5 var(--font-ja); letter-spacing: -0.02em; }
+.t-phrase  { font: 900 30px/1.5 var(--font-ja); letter-spacing: -0.02em; }
+.t-body    { font: 500 14px/1.8 var(--font-ja); letter-spacing: -0.02em; }
+.t-small   { font: 500 11px/1.6 var(--font-ja); letter-spacing: -0.02em; }
+.t-label   { font: 700 12px/1.5 var(--font-ja); letter-spacing: -0.02em; }
+.t-title   { font: 900 24px/1.45 var(--font-ja); letter-spacing: -0.02em; }
+
+/* 結果画面にだけある文字の指定 */
+.t-eyebrow {
+  font: 700 10px/1.6 var(--font-latin);
+  letter-spacing: 0.12em;
+  font-feature-settings: var(--inter-features);
+}
+.t-chip {
+  font: 700 11px/1.6 var(--font-latin);
+  letter-spacing: -0.02em;
+  font-feature-settings: var(--inter-features);
+}
+.t-name    { font: 900 48px/1.2 var(--font-ja); letter-spacing: -0.04em; }
+.t-strong  { font: 700 16px/1.5 var(--font-ja); letter-spacing: -0.02em; }
+.t-type    { font: 700 14px/1.5 var(--font-ja); letter-spacing: -0.02em; }
+.t-comment { font: 500 13px/1.8 var(--font-ja); letter-spacing: -0.02em; }
+.t-score   { font: 400 42px/1.1 var(--font-display); letter-spacing: -0.02em; }
+.t-tiny    { font: 500 9px/1.6 var(--font-ja); letter-spacing: -0.02em; }
+.t-logo    { font: 400 24px/1.45 var(--font-display); letter-spacing: -0.02em; }
+
+.c-muted { color: var(--cp-muted); }
+.c-accent { color: var(--cp-accent); }

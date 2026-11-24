@@ -1,0 +1,154 @@
+/* 結果画面。Framer のブレイクポイント WQLkyLRf1 の値（docs/design/framer-values.md の「結果画面」）。 */
+
+.r-content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 16px 24px 32px;
+}
+
+/* あなたのマッチ相手（W3MD1a4KO） */
+.r-partner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.r-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.r-name__text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.r-name__mark {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* 相手の企業理念（yVtV5IpsY） */
+.r-phrase-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+  border-radius: 24px;
+  background: var(--cp-ink);
+  color: var(--cp-paper);
+}
+.r-on-ink {
+  color: var(--cp-on-ink-muted);
+}
+.r-phrase-card__phrase {
+  font: 900 26px/1.45 var(--font-ja);
+  letter-spacing: -0.02em;
+  color: var(--cp-paper);
+}
+
+/* 相性と称号（P74_Bj9RK） */
+.r-score {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 4px;
+}
+.r-score__num {
+  width: 98px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+.r-score__title {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 話しかけるきっかけ（oIXT7TAd0） */
+.r-talk {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--cp-line);
+  padding-top: 24px;
+}
+.r-talk__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.r-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.r-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 11px;
+  border-radius: 8px;
+  background: var(--cp-soft);
+}
+
+/* あなたが選んだ理念（bJjVzFS_I） */
+.r-you {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--cp-line);
+}
+.r-you__phrase {
+  font: 900 21px/1.45 var(--font-ja);
+  letter-spacing: -0.02em;
+}
+
+/* ふたりの診断カルテ（RVBXPbAzy） */
+.r-karte {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-top: 1px solid var(--cp-line);
+  padding-top: 24px;
+}
+.r-karte__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.r-source {
+  color: var(--cp-muted);
+  text-decoration: underline;
+  align-self: flex-start;
+}
+.r-source:hover {
+  color: var(--cp-ink);
+}
+
+/* ゲームについて（dRC26Wq3b） */
+.r-about {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--cp-soft);
+  text-align: center;
+}
+
+/* フリー枠の説明（結果画面の「相性と称号」の文字の組み合わせに揃えた） */
+.r-free-note {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

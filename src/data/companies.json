@@ -1,0 +1,2231 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "total_count": 100,
+    "description": "合コン・パーティーゲーム向け 企業理念・スローガン100選データセット",
+    "schema_notes": {
+      "factual_fields": [
+        "id",
+        "company_name",
+        "phrase",
+        "phrase_type",
+        "industry",
+        "source_url",
+        "metrics.founded_year",
+        "metrics.is_listed",
+        "metrics.stock_code"
+      ],
+      "heuristic_fields": [
+        "metrics.b2c_affinity (1-5: 一般消費者向けの馴染みやすさ指標)"
+      ],
+      "creative_fields": [
+        "creative.personality_comment",
+        "creative.params.passion (1-5)",
+        "creative.params.romance (1-5)",
+        "creative.params.stability (1-5)"
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": 1,
+      "company_name": "リクルートホールディングス",
+      "phrase": "まだ、ここにない、出会い。",
+      "phrase_type": "ビジョン",
+      "industry": "人材・IT",
+      "source_url": "https://recruit-holdings.com/ja/about/philosophy/",
+      "metrics": {
+        "founded_year": 1960,
+        "is_listed": true,
+        "stock_code": "6098",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "今夜の合コンで一番新しい出会いに貪欲なハンタータイプ。未知の体験に飛び込む行動派。",
+        "params": {
+          "passion": 5,
+          "romance": 4,
+          "stability": 2
+        }
+      }
+    },
+    {
+      "id": 2,
+      "company_name": "サントリーホールディングス",
+      "phrase": "人と自然と響きあう",
+      "phrase_type": "企業理念（約束）",
+      "industry": "飲料・食品",
+      "source_url": "https://www.suntory.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1899,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "場の空気を和ませる癒やし系のナチュラル派。相手と波長を合わせる共感力の持ち主。",
+        "params": {
+          "passion": 3,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 3,
+      "company_name": "ニトリホールディングス",
+      "phrase": "お、ねだん以上。",
+      "phrase_type": "タグライン",
+      "industry": "小売・家具",
+      "source_url": "https://www.nitorihd.co.jp/about/vision.html",
+      "metrics": {
+        "founded_year": 1967,
+        "is_listed": true,
+        "stock_code": "9843",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "見た目より中身とコスパを重視する堅実派。付き合うと期待以上の安心感を与えてくれる。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 4,
+      "company_name": "任天堂",
+      "phrase": "独創",
+      "phrase_type": "経営理念（DNA）",
+      "industry": "ゲーム・エンタメ",
+      "source_url": "https://www.nintendo.co.jp/corporate/outline/index.html",
+      "metrics": {
+        "founded_year": 1889,
+        "is_listed": true,
+        "stock_code": "7974",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "予測不能なマイペース。常識にとらわれない発想で相手を飽きさせない魅力の持ち主。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 2
+        }
+      }
+    },
+    {
+      "id": 5,
+      "company_name": "メルカリ",
+      "phrase": "あらゆる価値を循環させ、あらゆる人の可能性を広げる",
+      "phrase_type": "グループミッション",
+      "industry": "IT・フリマ",
+      "source_url": "https://about.mercari.com/about/philosophy/",
+      "metrics": {
+        "founded_year": 2013,
+        "is_listed": true,
+        "stock_code": "4385",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "切り替えが早く過去を引きずらない合理主義者。お互いのメリットを大切にするスマート派。",
+        "params": {
+          "passion": 4,
+          "romance": 2,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 6,
+      "company_name": "RIZAPグループ",
+      "phrase": "「人は変われる。」を証明する",
+      "phrase_type": "企業理念",
+      "industry": "ヘルスケア・フィットネス",
+      "source_url": "https://www.rizapgroup.com/about/philosophy",
+      "metrics": {
+        "founded_year": 2003,
+        "is_listed": true,
+        "stock_code": "2928",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "目標に向かってストイックに突き進む情熱家。パートナーと一緒に成長したいタイプ。",
+        "params": {
+          "passion": 5,
+          "romance": 3,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 7,
+      "company_name": "サイバーエージェント",
+      "phrase": "21世紀を代表する会社を創る",
+      "phrase_type": "ビジョン",
+      "industry": "IT・メディア",
+      "source_url": "https://www.cyberagent.co.jp/corporate/vision/",
+      "metrics": {
+        "founded_year": 1998,
+        "is_listed": true,
+        "stock_code": "4751",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "野心家でノリが良い飲み会のムードメーカー。大きな夢を語るエネルギッシュなリーダー。",
+        "params": {
+          "passion": 5,
+          "romance": 4,
+          "stability": 2
+        }
+      }
+    },
+    {
+      "id": 8,
+      "company_name": "良品計画（無印良品）",
+      "phrase": "感じ良い暮らしと社会",
+      "phrase_type": "理念・目的",
+      "industry": "小売・雑貨",
+      "source_url": "https://www.ryohin-keikaku.jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1989,
+        "is_listed": true,
+        "stock_code": "7453",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "飾らない自然体が一番好き。派手さはないが、波長が合うと居心地抜群で長く続くタイプ。",
+        "params": {
+          "passion": 2,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 9,
+      "company_name": "吉野家ホールディングス",
+      "phrase": "うまい、やすい、はやい",
+      "phrase_type": "提供価値（モットー）",
+      "industry": "外食",
+      "source_url": "https://www.yoshinoya-holdings.com/company/philosophy/",
+      "metrics": {
+        "founded_year": 1899,
+        "is_listed": true,
+        "stock_code": "9861",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "面倒な駆け引きなし！直球勝負のスピード決断タイプ。裏表がなくさっぱりした性格。",
+        "params": {
+          "passion": 4,
+          "romance": 1,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 10,
+      "company_name": "オリエンタルランド（ディズニー）",
+      "phrase": "すべての人にハピネスを",
+      "phrase_type": "企業使命",
+      "industry": "エンタメ・レジャー",
+      "source_url": "http://www.olc.co.jp/ja/company/philosophy.html",
+      "metrics": {
+        "founded_year": 1960,
+        "is_listed": true,
+        "stock_code": "4661",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "ロマンチストでサービス精神旺盛な理想主義者。デートは全力で楽しませたいエンターテイナー。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 11,
+      "company_name": "トヨタ自動車",
+      "phrase": "幸せの量産",
+      "phrase_type": "ミッション",
+      "industry": "自動車",
+      "source_url": "https://global.toyota/jp/company/vision-philosophy/",
+      "metrics": {
+        "founded_year": 1937,
+        "is_listed": true,
+        "stock_code": "7203",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "圧倒的な安心感と包容力の持ち主。小さな改善を積み重ねて二人の関係を盤石にするタイプ。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 12,
+      "company_name": "ソニーグループ",
+      "phrase": "クリエイティビティとテクノロジーの力で、世界を感動で満たす。",
+      "phrase_type": "パーパス",
+      "industry": "電機・エンタメ",
+      "source_url": "https://www.sony.com/ja/SonyInfo/CorporateInfo/purpose_and_values/",
+      "metrics": {
+        "founded_year": 1946,
+        "is_listed": true,
+        "stock_code": "6758",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "センスと知性を兼ね備えたロマンチスト。相手を驚かせるサプライズが大好きなタイプ。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 13,
+      "company_name": "ファーストリテイリング（ユニクロ）",
+      "phrase": "服を変え、常識を変え、世界を変えていく",
+      "phrase_type": "ステートメント",
+      "industry": "アパレル・小売",
+      "source_url": "https://www.fastretailing.com/jp/about/frway/",
+      "metrics": {
+        "founded_year": 1963,
+        "is_listed": true,
+        "stock_code": "9983",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "シンプルかつ合理的、それでいて野心も秘めた実力派。無駄を嫌うスマートな完璧主義者。",
+        "params": {
+          "passion": 5,
+          "romance": 2,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 14,
+      "company_name": "ソフトバンクグループ",
+      "phrase": "情報革命で人々を幸せに",
+      "phrase_type": "経営理念",
+      "industry": "通信・投資",
+      "source_url": "https://group.softbank/philosophy",
+      "metrics": {
+        "founded_year": 1981,
+        "is_listed": true,
+        "stock_code": "9984",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "スケールが大きく未来志向。細かいことは気にせず、大きなビジョンで周囲を巻き込むタイプ。",
+        "params": {
+          "passion": 5,
+          "romance": 4,
+          "stability": 1
+        }
+      }
+    },
+    {
+      "id": 15,
+      "company_name": "楽天グループ",
+      "phrase": "イノベーションを通じて、人々と社会をエンパワーメントする",
+      "phrase_type": "ミッション",
+      "industry": "IT・EC",
+      "source_url": "https://corp.rakuten.co.jp/about/philosophy/",
+      "metrics": {
+        "founded_year": 1997,
+        "is_listed": true,
+        "stock_code": "4755",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "ポイントも愛情も貯めるのが上手なエネルギッシュ派。応援し合える関係を求める熱血タイプ。",
+        "params": {
+          "passion": 5,
+          "romance": 3,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 16,
+      "company_name": "LINEヤフー",
+      "phrase": "「WOW」なライフプラットフォームを創り、日常に「！」を届ける。",
+      "phrase_type": "ミッション",
+      "industry": "IT・メディア",
+      "source_url": "https://www.lycorp.co.jp/ja/company/mission/",
+      "metrics": {
+        "founded_year": 1996,
+        "is_listed": true,
+        "stock_code": "4689",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "連絡マメでコミュニケーション上手。日常のちょっとした驚きや楽しさを共有したいタイプ。",
+        "params": {
+          "passion": 4,
+          "romance": 4,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 17,
+      "company_name": "キリンホールディングス",
+      "phrase": "自然と人を見つめるものづくりで、「食と健康」の新たなよろこびを広げ、こころ豊かな社会の実現に貢献します。",
+      "phrase_type": "経営理念",
+      "industry": "飲料・食品",
+      "source_url": "https://www.kirinholdings.com/jp/profile/philosophy/",
+      "metrics": {
+        "founded_year": 1907,
+        "is_listed": true,
+        "stock_code": "2503",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "美味しいお酒とご飯を一緒に楽しめる人を大切にする王道派。誠実で温かみのある大人。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 18,
+      "company_name": "アサヒグループホールディングス",
+      "phrase": "期待を超えるおいしさ、楽しい生活文化の創造",
+      "phrase_type": "ミッション",
+      "industry": "飲料・食品",
+      "source_url": "https://www.asahigroup-holdings.com/company/philosophy/",
+      "metrics": {
+        "founded_year": 1889,
+        "is_listed": true,
+        "stock_code": "2502",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "乾杯のテンションを上げるのが得意な社交家。キレのあるトークで場を一気に盛り上げる。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 19,
+      "company_name": "味の素",
+      "phrase": "アミノサイエンスで、人・社会・地球のWell-beingに貢献する",
+      "phrase_type": "パーパス（志）",
+      "industry": "食品",
+      "source_url": "https://www.ajinomoto.co.jp/company/jp/aboutus/philosophy/",
+      "metrics": {
+        "founded_year": 1909,
+        "is_listed": true,
+        "stock_code": "2802",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "本質的な優しさと知性を持つ家庭的タイプ。さりげない気配りで相手の胃袋と心を掴む。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 20,
+      "company_name": "日清食品ホールディングス",
+      "phrase": "EARTH FOOD CREATOR",
+      "phrase_type": "グループ理念",
+      "industry": "食品",
+      "source_url": "https://www.nissin.com/jp/about/philosophy/",
+      "metrics": {
+        "founded_year": 1948,
+        "is_listed": true,
+        "stock_code": "2897",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "ユーモアセンス抜群のアイデアマン。真面目な顔して突拍子もないボケをかます愛されキャラ。",
+        "params": {
+          "passion": 4,
+          "romance": 4,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 21,
+      "company_name": "明治ホールディングス",
+      "phrase": "「おいしさ・たのしさ」の世界をひろげ、「健康・安心」への期待にこたえていきます。",
+      "phrase_type": "グループ理念",
+      "industry": "食品・菓子",
+      "source_url": "https://www.meiji.com/corporate/about-meiji/philosophy/",
+      "metrics": {
+        "founded_year": 1917,
+        "is_listed": true,
+        "stock_code": "2269",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "甘さと優しさの塊。一緒にいるだけでホッとする、国民的アイドルのような安心感がある。",
+        "params": {
+          "passion": 2,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 22,
+      "company_name": "森永製菓",
+      "phrase": "世代を超えて愛されるすこやかな食を創造し続け、世界の人々の笑顔を未来につなぎます",
+      "phrase_type": "パーパス",
+      "industry": "食品・菓子",
+      "source_url": "https://www.morinaga.co.jp/company/about/philosophy.html",
+      "metrics": {
+        "founded_year": 1899,
+        "is_listed": true,
+        "stock_code": "2201",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "無邪気な笑顔がチャームポイント。童心を忘れない純粋さで、年上からも年下からも好かれる。",
+        "params": {
+          "passion": 3,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 23,
+      "company_name": "カルビー",
+      "phrase": "掘りだそう、自然の力。育てよう、未来の力。",
+      "phrase_type": "企業理念",
+      "industry": "食品・菓子",
+      "source_url": "https://www.calbee.co.jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1949,
+        "is_listed": true,
+        "stock_code": "2229",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "飾らない親しみやすさが武器。一度話し始めると止まらない、やみつきになる魅力の持ち主。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 24,
+      "company_name": "ヤクルト本社",
+      "phrase": "私たちは、生命科学の追究を基盤として、世界の人々の健康で楽しい生活づくりに貢献します。",
+      "phrase_type": "企業理念",
+      "industry": "飲料・食品",
+      "source_url": "https://www.yakult.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1935,
+        "is_listed": true,
+        "stock_code": "2267",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "相手の体調やメンタルを気遣える献身タイプ。毎日の小さな習慣や記念日を大切にする。",
+        "params": {
+          "passion": 2,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 25,
+      "company_name": "カゴメ",
+      "phrase": "感謝・自然・開かれた企業",
+      "phrase_type": "企業理念",
+      "industry": "飲料・食品",
+      "source_url": "https://www.kagome.co.jp/company/about/philosophy/",
+      "metrics": {
+        "founded_year": 1899,
+        "is_listed": true,
+        "stock_code": "2811",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "「ありがとう」を素直に言えるオープンな性格。健康的で裏表のない爽やか好青年・好女子。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 26,
+      "company_name": "キッコーマン",
+      "phrase": "おいしい記憶をつくりたい。",
+      "phrase_type": "コーポレートスローガン",
+      "industry": "食品",
+      "source_url": "https://www.kikkoman.com/jp/corporate/about/philosophy/",
+      "metrics": {
+        "founded_year": 1917,
+        "is_listed": true,
+        "stock_code": "2801",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "エモーショナルな思い出作りを大切にするロマン派。美味しいお店をたくさん知っているグルメ。",
+        "params": {
+          "passion": 2,
+          "romance": 5,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 27,
+      "company_name": "セブン＆アイ・ホールディングス",
+      "phrase": "明日の笑顔を 共に創る",
+      "phrase_type": "社是・基本理念",
+      "industry": "小売・コンビニ",
+      "source_url": "https://www.7andi.com/company/philosophy.html",
+      "metrics": {
+        "founded_year": 2005,
+        "is_listed": true,
+        "stock_code": "3382",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "24時間365日頼りになる圧倒的インフラ系。困ったときに一番最初に声をかけたくなる存在。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 28,
+      "company_name": "ローソン",
+      "phrase": "私たちは“みんなと暮らすマチ”を幸せにします。",
+      "phrase_type": "グループ理念",
+      "industry": "小売・コンビニ",
+      "source_url": "https://www.lawson.co.jp/company/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1975,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "地域密着・身内思いの優しいタイプ。ちょっとしたスイーツの差し入れなど気遣いが上手い。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 29,
+      "company_name": "ファミリーマート",
+      "phrase": "あなたと、コンビに、ファミリーマート",
+      "phrase_type": "コーポレートメッセージ",
+      "industry": "小売・コンビニ",
+      "source_url": "https://www.family.co.jp/company/philosophy.html",
+      "metrics": {
+        "founded_year": 1981,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "最初から「コンビ」を組む気満々の距離感ゼロタイプ。誰とでもすぐ仲良くなれる親近感の塊。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 30,
+      "company_name": "イオン",
+      "phrase": "お客さまを原点に平和を追求し、人間を尊重し、地域社会に貢献する。",
+      "phrase_type": "基本理念",
+      "industry": "小売・流通",
+      "source_url": "https://www.aeon.info/company/concept/",
+      "metrics": {
+        "founded_year": 1926,
+        "is_listed": true,
+        "stock_code": "8267",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "平和主義で包容力抜群のファミリータイプ。休日は一緒に大型モールで買い物を楽しみたい派。",
+        "params": {
+          "passion": 2,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 31,
+      "company_name": "パン・パシフィック・インターナショナルHD（ドン・キホーテ）",
+      "phrase": "顧客最優先主義",
+      "phrase_type": "企業原理",
+      "industry": "小売・ディスカウント",
+      "source_url": "https://ppih.co.jp/corp/philosophy/",
+      "metrics": {
+        "founded_year": 1980,
+        "is_listed": true,
+        "stock_code": "7532",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "深夜テンションもOKなカオスで楽しい遊び人。引き出しが多すぎて一緒にいると退屈しない。",
+        "params": {
+          "passion": 5,
+          "romance": 3,
+          "stability": 1
+        }
+      }
+    },
+    {
+      "id": 32,
+      "company_name": "マクドナルド（日本マクドナルドHD）",
+      "phrase": "おいしさと笑顔を地域の皆さまに",
+      "phrase_type": "パーパス",
+      "industry": "外食",
+      "source_url": "https://www.mcd-holdings.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1971,
+        "is_listed": true,
+        "stock_code": "2702",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "スマイル0円の愛嬌抜群タイプ。気取らないデートが一番楽しいと思わせてくれる。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 33,
+      "company_name": "スターバックスコーヒージャパン",
+      "phrase": "人々の心を豊かで活力あるものにするために—ひとりのお客様、一杯のコーヒー、そしてひとつのコミュニティから",
+      "phrase_type": "ミッション",
+      "industry": "外食・カフェ",
+      "source_url": "https://www.starbucks.co.jp/company/mission.html",
+      "metrics": {
+        "founded_year": 1995,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "おしゃれで意識高めな空間作り上手。カフェで何時間でも語れる雰囲気重視のロマンチスト。",
+        "params": {
+          "passion": 3,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 34,
+      "company_name": "サイゼリヤ",
+      "phrase": "毎日の暮らしの豊かさを食を通して提供する",
+      "phrase_type": "企業理念",
+      "industry": "外食",
+      "source_url": "https://www.saizeriya.co.jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1973,
+        "is_listed": true,
+        "stock_code": "7581",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "「初デートでもサイゼで喜べる人と付き合いたい」系。見栄を張らず本質的な楽しさを追求する。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 35,
+      "company_name": "スシロー（FOOD & LIFE COMPANIES）",
+      "phrase": "うまいすしを、腹一杯。うまいすしで、心も一杯。",
+      "phrase_type": "企業理念",
+      "industry": "外食",
+      "source_url": "https://www.food-and-life.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1984,
+        "is_listed": true,
+        "stock_code": "3563",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "難しい理屈より「美味しいものを食べて幸せになろう！」が信条のストレートな快楽主義者。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 36,
+      "company_name": "ココイチ（壱番屋）",
+      "phrase": "ニコ・キビ・ハキ",
+      "phrase_type": "経営理念（行動指針）",
+      "industry": "外食",
+      "source_url": "https://www.ichibanya.co.jp/comp/philosophy.html",
+      "metrics": {
+        "founded_year": 1982,
+        "is_listed": true,
+        "stock_code": "7630",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "ニコニコ・キビキビ・ハキハキ！体育会系の爽やかさと、相手の好みに合わせる柔軟性を併せ持つ。",
+        "params": {
+          "passion": 4,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 37,
+      "company_name": "本田技研工業（Honda）",
+      "phrase": "人間尊重・三つの喜び（買う喜び、売る喜び、創る喜び）",
+      "phrase_type": "基本理念",
+      "industry": "自動車・モビリティ",
+      "source_url": "https://global.honda/jp/philosophy/",
+      "metrics": {
+        "founded_year": 1948,
+        "is_listed": true,
+        "stock_code": "7267",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "自由な発想とチャレンジ精神の塊。ドライブデートでどこまでも連れて行ってくれる頼もしさ。",
+        "params": {
+          "passion": 5,
+          "romance": 4,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 38,
+      "company_name": "日産自動車",
+      "phrase": "人々の生活を豊かに。イノベーションをドライブし続ける",
+      "phrase_type": "コーポレートパーパス",
+      "industry": "自動車",
+      "source_url": "https://www.nissan-global.com/JP/COMPANY/PROFILE/PURPOSE/",
+      "metrics": {
+        "founded_year": 1933,
+        "is_listed": true,
+        "stock_code": "7201",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "「やっちゃえ」精神の持ち主。マンネリを嫌い、二人の関係に常に新しい刺激を求めるタイプ。",
+        "params": {
+          "passion": 4,
+          "romance": 4,
+          "stability": 2
+        }
+      }
+    },
+    {
+      "id": 39,
+      "company_name": "マツダ",
+      "phrase": "前向きに今日を生きる人の輪を広げる",
+      "phrase_type": "パーパス",
+      "industry": "自動車",
+      "source_url": "https://www.mazda.com/ja/about/vision/",
+      "metrics": {
+        "founded_year": 1920,
+        "is_listed": true,
+        "stock_code": "7261",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "美学とこだわりを持つ職人肌。一度好きになったものや人は一途に愛し抜くタイプ。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 40,
+      "company_name": "SUBARU",
+      "phrase": "笑顔をつくる会社",
+      "phrase_type": "ありたい姿（ビジョン）",
+      "industry": "自動車",
+      "source_url": "https://www.subaru.co.jp/outline/philosophy.html",
+      "metrics": {
+        "founded_year": 1953,
+        "is_listed": true,
+        "stock_code": "7270",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "安全性と信頼性重視の誠実派。派手な駆け引きより、大切な人をしっかり守り抜くタイプ。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 41,
+      "company_name": "パナソニック ホールディングス",
+      "phrase": "物と心が共に豊かな理想の社会の実現",
+      "phrase_type": "経営理念",
+      "industry": "電機・家電",
+      "source_url": "https://holdings.panasonic/jp/corporate/about/philosophy.html",
+      "metrics": {
+        "founded_year": 1918,
+        "is_listed": true,
+        "stock_code": "6752",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "物質的な豊かさも心のつながりも両方大事にするバランス派。結婚相手として非常に優秀。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 42,
+      "company_name": "日立製作所",
+      "phrase": "優れた自主技術・製品の開発を通じて社会に貢献する",
+      "phrase_type": "企業理念",
+      "industry": "電機・インフラ",
+      "source_url": "https://www.hitachi.co.jp/about/corporate/vision/",
+      "metrics": {
+        "founded_year": 1910,
+        "is_listed": true,
+        "stock_code": "6501",
+        "b2c_affinity": 3
+      },
+      "creative": {
+        "personality_comment": "裏表のない実直な大黒柱タイプ。口数は少なくても、行動と実績で信頼を勝ち取る。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 43,
+      "company_name": "シャープ",
+      "phrase": "誠意と創意",
+      "phrase_type": "経営信条",
+      "industry": "電機・家電",
+      "source_url": "https://corporate.jp.sharp/corporate/info/philosophy/",
+      "metrics": {
+        "founded_year": 1912,
+        "is_listed": true,
+        "stock_code": "6753",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "基本は誠実なのに、たまにSNSでバズるような斜め上のユーモアを繰り出すギャップ萌えタイプ。",
+        "params": {
+          "passion": 3,
+          "romance": 4,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 44,
+      "company_name": "富士フイルムホールディングス",
+      "phrase": "地球上の笑顔の回数を増やしていく。",
+      "phrase_type": "グループパーパス",
+      "industry": "精密機器・ヘルスケア",
+      "source_url": "https://holdings.fujifilm.com/ja/about/purpose",
+      "metrics": {
+        "founded_year": 1934,
+        "is_listed": true,
+        "stock_code": "4901",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "変化を恐れず自分をアップデートできる柔軟な大人。思い出を写真に残すのが好きなロマン派。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 45,
+      "company_name": "キヤノン",
+      "phrase": "共生（きょうせい）",
+      "phrase_type": "企業理念",
+      "industry": "精密機器",
+      "source_url": "https://global.canon/ja/corporate/philosophy.html",
+      "metrics": {
+        "founded_year": 1937,
+        "is_listed": true,
+        "stock_code": "7751",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "違いを認め合って一緒に歩める平和主義者。相手の趣味やライフスタイルを尊重できる器がある。",
+        "params": {
+          "passion": 2,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 46,
+      "company_name": "キーエンス",
+      "phrase": "最小の資本と人で最大の付加価値をあげる",
+      "phrase_type": "経営理念",
+      "industry": "精密機器・FA",
+      "source_url": "https://www.keyence.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1974,
+        "is_listed": true,
+        "stock_code": "6861",
+        "b2c_affinity": 2
+      },
+      "creative": {
+        "personality_comment": "超効率主義のハイスペックエリート。最短ルートで相手の心を射止めるロジカルな恋愛マスター。",
+        "params": {
+          "passion": 5,
+          "romance": 1,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 47,
+      "company_name": "NTT（日本電信電話）",
+      "phrase": "つなぐ。そして、その先へ。",
+      "phrase_type": "コーポレートスローガン",
+      "industry": "通信・インフラ",
+      "source_url": "https://group.ntt/jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1985,
+        "is_listed": true,
+        "stock_code": "9432",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "人と人との縁をつなぐキューピッド気質。安定感抜群で、連絡のレスも早い信頼できる人。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 48,
+      "company_name": "KDDI（au）",
+      "phrase": "おもしろいほうの未来へ。",
+      "phrase_type": "ブランドスローガン",
+      "industry": "通信",
+      "source_url": "https://www.kddi.com/corporate/kddi/philosophy/",
+      "metrics": {
+        "founded_year": 1984,
+        "is_listed": true,
+        "stock_code": "9433",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "迷ったらワクワクする方を選ぶポジティブ派！一緒にいると毎日がイベントのように楽しくなる。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 49,
+      "company_name": "DeNA（ディー・エヌ・エー）",
+      "phrase": "一人ひとりに 想像を超えるDelightを",
+      "phrase_type": "ミッション",
+      "industry": "IT・ゲーム・スポーツ",
+      "source_url": "https://dena.com/jp/company/mission/",
+      "metrics": {
+        "founded_year": 1999,
+        "is_listed": true,
+        "stock_code": "2432",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "相手を喜ばせることに全力を注ぐエンターテイナー。勝負強く、ここぞという時に頼りになる。",
+        "params": {
+          "passion": 5,
+          "romance": 4,
+          "stability": 2
+        }
+      }
+    },
+    {
+      "id": 50,
+      "company_name": "MIXI",
+      "phrase": "豊かなコミュニケーションを広げ、世界を幸せな驚きで包む。",
+      "phrase_type": "パーパス",
+      "industry": "IT・エンタメ",
+      "source_url": "https://mixi.co.jp/company/purpose/",
+      "metrics": {
+        "founded_year": 1999,
+        "is_listed": true,
+        "stock_code": "2121",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "友人や仲間とのつながりを何より大切にする人情派。グループ交際やダブルデートも盛り上げる。",
+        "params": {
+          "passion": 3,
+          "romance": 4,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 51,
+      "company_name": "ZOZO",
+      "phrase": "世界中をカッコよく、世界中に笑顔を。",
+      "phrase_type": "企業理念",
+      "industry": "IT・ファッション",
+      "source_url": "https://corp.zozo.com/about/philosophy/",
+      "metrics": {
+        "founded_year": 1998,
+        "is_listed": true,
+        "stock_code": "3092",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "美意識が高くセンス抜群。自分磨きを怠らず、相手のファッションや魅力を引き出すのも得意。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 52,
+      "company_name": "クックパッド",
+      "phrase": "毎日の料理を楽しみにする",
+      "phrase_type": "ミッション",
+      "industry": "IT・フード",
+      "source_url": "https://info.cookpad.com/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1997,
+        "is_listed": true,
+        "stock_code": "2193",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "日常の小さな幸せを丁寧に作れる家庭的タイプ。おうちデートの手料理で胃袋を掴むのが得意。",
+        "params": {
+          "passion": 2,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 53,
+      "company_name": "カカクコム（食べログ）",
+      "phrase": "ユーザー本位の価値あるサービスを創出しつづける",
+      "phrase_type": "ミッション",
+      "industry": "IT・メディア",
+      "source_url": "https://corporate.kakaku.com/company/philosophy",
+      "metrics": {
+        "founded_year": 1997,
+        "is_listed": true,
+        "stock_code": "2371",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "リサーチ力抜群の失敗しない幹事タイプ。デートのお店選びで絶対に外さない頼れる存在。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 54,
+      "company_name": "Sansan",
+      "phrase": "出会いからイノベーションを生み出す",
+      "phrase_type": "ミッション",
+      "industry": "IT・SaaS",
+      "source_url": "https://jp.corp-sansan.com/company/mission/",
+      "metrics": {
+        "founded_year": 2007,
+        "is_listed": true,
+        "stock_code": "4443",
+        "b2c_affinity": 3
+      },
+      "creative": {
+        "personality_comment": "「それ早く言ってよ〜」と言わせないスマートな気配り屋。人脈が広く、偶然の出会いを運命に変える。",
+        "params": {
+          "passion": 4,
+          "romance": 4,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 55,
+      "company_name": "freee",
+      "phrase": "スモールビジネスを、世界の主役に。",
+      "phrase_type": "ミッション",
+      "industry": "IT・Fintech",
+      "source_url": "https://corp.freee.co.jp/company/mission/",
+      "metrics": {
+        "founded_year": 2012,
+        "is_listed": true,
+        "stock_code": "4478",
+        "b2c_affinity": 3
+      },
+      "creative": {
+        "personality_comment": "自由な発想で面倒なことをスッキリ解決するサポーター気質。相手の夢を全力で応援する。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 56,
+      "company_name": "マネーフォワード",
+      "phrase": "お金を前へ。人生をもっと前へ。",
+      "phrase_type": "ミッション",
+      "industry": "IT・Fintech",
+      "source_url": "https://corp.moneyforward.com/aboutus/mission/",
+      "metrics": {
+        "founded_year": 2012,
+        "is_listed": true,
+        "stock_code": "3994",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "将来のライフプランをしっかり描ける堅実＆ポジティブ派。金銭感覚がしっかりしていて安心。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 57,
+      "company_name": "SmartHR",
+      "phrase": "well-working 労働にまつわる社会課題をなくし、誰もがその人らしく働ける社会をつくる。",
+      "phrase_type": "ミッション",
+      "industry": "IT・HRテック",
+      "source_url": "https://smarthr.co.jp/company/mission/",
+      "metrics": {
+        "founded_year": 2013,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 2
+      },
+      "creative": {
+        "personality_comment": "面倒な手続きやストレスを嫌うスマートな合理主義者。お互いが自然体でいられる関係を好む。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 58,
+      "company_name": "資生堂",
+      "phrase": "BEAUTY INNOVATIONS FOR A BETTER WORLD",
+      "phrase_type": "企業使命",
+      "industry": "化粧品",
+      "source_url": "https://corp.shiseido.com/jp/company/mission/",
+      "metrics": {
+        "founded_year": 1872,
+        "is_listed": true,
+        "stock_code": "4911",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "美意識と品格を備えたエレガント派。相手の良いところを見つけて褒めるのが上手な大人の魅力。",
+        "params": {
+          "passion": 3,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 59,
+      "company_name": "花王",
+      "phrase": "豊かな共生世界の実現",
+      "phrase_type": "パーパス",
+      "industry": "日用品・化粧品",
+      "source_url": "https://www.kao.com/jp/corporate/purpose/",
+      "metrics": {
+        "founded_year": 1887,
+        "is_listed": true,
+        "stock_code": "4452",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "清潔感あふれる好感度No.1タイプ。日常の暮らしを心地よく整える生活力の高さが光る。",
+        "params": {
+          "passion": 2,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 60,
+      "company_name": "ライオン",
+      "phrase": "より良い習慣づくりで、人々の毎日に貢献する",
+      "phrase_type": "パーパス",
+      "industry": "日用品",
+      "source_url": "https://www.lion.co.jp/ja/company/purpose/",
+      "metrics": {
+        "founded_year": 1891,
+        "is_listed": true,
+        "stock_code": "4912",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "「今日を愛する」精神で毎日を大切にする誠実派。小さな積み重ねで愛情を育てるタイプ。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 61,
+      "company_name": "ユニ・チャーム",
+      "phrase": "NOLA & DOLA（生活快適実現・夢実現）",
+      "phrase_type": "企業理念",
+      "industry": "日用品",
+      "source_url": "https://www.unicharm.co.jp/ja/company/philosophy.html",
+      "metrics": {
+        "founded_year": 1961,
+        "is_listed": true,
+        "stock_code": "8113",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "相手の不快や悩みを先回りして取り除く気配りの達人。優しく寄り添う包容力がある。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 62,
+      "company_name": "バンダイナムコホールディングス",
+      "phrase": "Fun for All into the Future",
+      "phrase_type": "パーパス",
+      "industry": "玩具・エンタメ",
+      "source_url": "https://www.bandainamco.co.jp/about/philosophy.html",
+      "metrics": {
+        "founded_year": 2005,
+        "is_listed": true,
+        "stock_code": "7832",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "遊び心とロマンを忘れない永遠の少年・少女。趣味を一緒に楽しめるパートナーと最高の相性。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 63,
+      "company_name": "セガサミーホールディングス",
+      "phrase": "感動体験を創造し続ける",
+      "phrase_type": "ミッション",
+      "industry": "ゲーム・エンタメ",
+      "source_url": "https://www.segasammy.co.jp/ja/company/philosophy/",
+      "metrics": {
+        "founded_year": 2004,
+        "is_listed": true,
+        "stock_code": "6460",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "スリルとドラマを求める情熱家。普通のデートじゃ物足りない、熱い展開を好むタイプ。",
+        "params": {
+          "passion": 5,
+          "romance": 4,
+          "stability": 2
+        }
+      }
+    },
+    {
+      "id": 64,
+      "company_name": "カプコン",
+      "phrase": "遊文化をクリエイトする感性開発企業",
+      "phrase_type": "経営理念",
+      "industry": "ゲーム",
+      "source_url": "https://www.capcom.co.jp/ir/company/philosophy.html",
+      "metrics": {
+        "founded_year": 1979,
+        "is_listed": true,
+        "stock_code": "9697",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "困難な壁（モンスター）も協力プレイで乗り越える頼もしい相棒。こだわりが強い職人気質。",
+        "params": {
+          "passion": 4,
+          "romance": 4,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 65,
+      "company_name": "スクウェア・エニックス・ホールディングス",
+      "phrase": "最高の「物語」を提供することで、世界中の人々の幸福に貢献する。",
+      "phrase_type": "企業理念",
+      "industry": "ゲーム",
+      "source_url": "https://www.hd.square-enix.com/jpn/company/philosophy.html",
+      "metrics": {
+        "founded_year": 1975,
+        "is_listed": true,
+        "stock_code": "9684",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "二人の出会いを壮大なRPGのように捉える究極のロマンチスト。ドラマチックな展開に弱い。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 66,
+      "company_name": "東宝",
+      "phrase": "健全な娯楽を広く大衆に提供すること",
+      "phrase_type": "社是",
+      "industry": "映画・エンタメ",
+      "source_url": "https://www.toho.co.jp/company/philosophy",
+      "metrics": {
+        "founded_year": 1932,
+        "is_listed": true,
+        "stock_code": "9602",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "王道で真っ直ぐなエンターテイナー。映画デートから始まる正統派の恋愛を好むタイプ。",
+        "params": {
+          "passion": 3,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 67,
+      "company_name": "サンリオ",
+      "phrase": "みんななかよく",
+      "phrase_type": "企業理念",
+      "industry": "キャラクター・エンタメ",
+      "source_url": "https://www.sanrio.co.jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1960,
+        "is_listed": true,
+        "stock_code": "8136",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "争いを嫌う究極の平和主義者！小さなプレゼントや思いやりで相手を笑顔にする愛されキャラ。",
+        "params": {
+          "passion": 2,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 68,
+      "company_name": "JR東日本（東日本旅客鉄道）",
+      "phrase": "究極の安全を追求し、サステナブルな社会を実現する",
+      "phrase_type": "グループ経営ビジョン",
+      "industry": "鉄道・インフラ",
+      "source_url": "https://www.jreast.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1987,
+        "is_listed": true,
+        "stock_code": "9020",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "時間厳守・安全第一の超真面目タイプ。約束は絶対に破らない、誠実さの塊のような存在。",
+        "params": {
+          "passion": 2,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 69,
+      "company_name": "JR東海（東海旅客鉄道）",
+      "phrase": "日本の大動脈と社会基盤の発展に貢献する",
+      "phrase_type": "経営理念",
+      "industry": "鉄道・インフラ",
+      "source_url": "https://company.jr-central.co.jp/company/philosophy.html",
+      "metrics": {
+        "founded_year": 1987,
+        "is_listed": true,
+        "stock_code": "9022",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "新幹線のようにスピーディーかつ正確無比！遠距離恋愛でもマメに会いに行く行動力がある。",
+        "params": {
+          "passion": 4,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 70,
+      "company_name": "ANAホールディングス",
+      "phrase": "安心と信頼を基礎に、世界をつなぐ心の翼で夢にあふれる未来に貢献します",
+      "phrase_type": "経営理念",
+      "industry": "航空",
+      "source_url": "https://www.ana.co.jp/group/about-us/philosophy/",
+      "metrics": {
+        "founded_year": 1952,
+        "is_listed": true,
+        "stock_code": "9202",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "爽やかでホスピタリティ精神にあふれる好人物。旅行デートで最高のエスコートをしてくれる。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 71,
+      "company_name": "日本航空（JAL）",
+      "phrase": "世界で一番選ばれ、愛されるエアライングループへ",
+      "phrase_type": "ビジョン",
+      "industry": "航空",
+      "source_url": "https://www.jal.com/ja/company/philosophy/",
+      "metrics": {
+        "founded_year": 1951,
+        "is_listed": true,
+        "stock_code": "9201",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "礼儀正しく情に厚い王道タイプ。苦難を乗り越える芯の強さと、気品ある優しさを兼ね備える。",
+        "params": {
+          "passion": 4,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 72,
+      "company_name": "ヤマトホールディングス",
+      "phrase": "豊かな社会の実現に貢献します",
+      "phrase_type": "企業理念",
+      "industry": "物流・運輸",
+      "source_url": "https://www.yamato-hd.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1919,
+        "is_listed": true,
+        "stock_code": "9064",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "雨の日も風の日も想いを届ける一途なタイプ。フットワークが軽く、困ったときにすぐ駆けつける。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 73,
+      "company_name": "東京電力ホールディングス",
+      "phrase": "暮らしに欠かせないエネルギーを安定的に届け、快適な生活を支える",
+      "phrase_type": "企業理念",
+      "industry": "エネルギー・インフラ",
+      "source_url": "https://www.tepco.co.jp/about/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1951,
+        "is_listed": true,
+        "stock_code": "9501",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "そこにいるだけでホッとする生活の必需品タイプ。派手さより日常の温かさを大切にする。",
+        "params": {
+          "passion": 2,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 74,
+      "company_name": "東京ガス",
+      "phrase": "人によりそい、社会をささえ、未来をつむぐエネルギーになる。",
+      "phrase_type": "グループ経営理念",
+      "industry": "エネルギー・インフラ",
+      "source_url": "https://www.tokyo-gas.co.jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1885,
+        "is_listed": true,
+        "stock_code": "9531",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "「人によりそう」の言葉通り、聞き上手で優しい癒やし系。ハートに火をつけるのも密かに上手い。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 75,
+      "company_name": "三菱UFJフィナンシャル・グループ",
+      "phrase": "世界が進むチカラになる。",
+      "phrase_type": "パーパス",
+      "industry": "金融・銀行",
+      "source_url": "https://www.mufg.jp/profile/philosophy/",
+      "metrics": {
+        "founded_year": 2005,
+        "is_listed": true,
+        "stock_code": "8306",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "信頼と実績のメガバンク系エリート。将来を見据えた堅実さと、ここぞの決断力を併せ持つ。",
+        "params": {
+          "passion": 4,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 76,
+      "company_name": "三井住友フィナンシャルグループ",
+      "phrase": "最高の信頼を通じて、日本・世界の発展に貢献し、お客様・社会とともに成長する",
+      "phrase_type": "経営理念",
+      "industry": "金融・銀行",
+      "source_url": "https://www.smfg.co.jp/aboutus/philosophy/",
+      "metrics": {
+        "founded_year": 2002,
+        "is_listed": true,
+        "stock_code": "8316",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "「最高の信頼」を重んじる誠実なパートナー。浮気や裏切りとは無縁の安心感を提供する。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 77,
+      "company_name": "東京海上ホールディングス",
+      "phrase": "お客様の信頼をあらゆる事業活動の原点におき、企業価値を永続的に高めていく",
+      "phrase_type": "経営理念",
+      "industry": "金融・保険",
+      "source_url": "https://www.tokiomarinehd.com/company/philosophy/",
+      "metrics": {
+        "founded_year": 1879,
+        "is_listed": true,
+        "stock_code": "8766",
+        "b2c_affinity": 3
+      },
+      "creative": {
+        "personality_comment": "いざという時に一番頼りになる守護神タイプ。リスク管理が完璧で、一緒にいて不安がない。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 78,
+      "company_name": "日本生命保険",
+      "phrase": "共存共栄・相互扶助",
+      "phrase_type": "基本理念",
+      "industry": "金融・保険",
+      "source_url": "https://www.nissay.co.jp/kaisha/rinen/",
+      "metrics": {
+        "founded_year": 1889,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "「助け合い」を大切にする人情派。人生の山あり谷ありを一緒に乗り越えられる最高の伴侶タイプ。",
+        "params": {
+          "passion": 2,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 79,
+      "company_name": "三井不動産",
+      "phrase": "都市に豊かさと潤いを",
+      "phrase_type": "グループステートメント",
+      "industry": "不動産",
+      "source_url": "https://www.mitsuifudosan.co.jp/corporate/about_us/statement/",
+      "metrics": {
+        "founded_year": 1941,
+        "is_listed": true,
+        "stock_code": "8801",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "洗練された都会派のジェントルマン・レディ。おしゃれな街歩きや空間作りで相手を魅了する。",
+        "params": {
+          "passion": 3,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 80,
+      "company_name": "三菱地所",
+      "phrase": "人を、想う力。街を、想う力。",
+      "phrase_type": "基本使命",
+      "industry": "不動産",
+      "source_url": "https://www.mec.co.jp/company/mission/",
+      "metrics": {
+        "founded_year": 1937,
+        "is_listed": true,
+        "stock_code": "8802",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "丸の内のような落ち着きと品格の持ち主。相手への深い思いやりと長期的な視点を持つ大人。",
+        "params": {
+          "passion": 3,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 81,
+      "company_name": "積水ハウス",
+      "phrase": "「わが家」を世界一幸せな場所にする",
+      "phrase_type": "グローバルビジョン",
+      "industry": "住宅・建設",
+      "source_url": "https://www.sekisuihouse.co.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1960,
+        "is_listed": true,
+        "stock_code": "1928",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "合コンの場ですでに「幸せな家庭」をイメージさせる結婚願望＆家庭愛の塊。温かい家庭を築く人。",
+        "params": {
+          "passion": 3,
+          "romance": 4,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 82,
+      "company_name": "大和ハウス工業",
+      "phrase": "人・街・暮らしの価値共創グループ",
+      "phrase_type": "グループビジョン",
+      "industry": "住宅・建設",
+      "source_url": "https://www.daiwahouse.co.jp/about/philosophy/",
+      "metrics": {
+        "founded_year": 1955,
+        "is_listed": true,
+        "stock_code": "1925",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "一緒に生活基盤や未来を作っていくのが楽しいパートナー型。頼りがいのある行動派。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 83,
+      "company_name": "星野リゾート",
+      "phrase": "旅を楽しくする",
+      "phrase_type": "ミッション",
+      "industry": "観光・ホテル",
+      "source_url": "https://www.hoshinoresorts.com/aboutus/",
+      "metrics": {
+        "founded_year": 1914,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "非日常の演出が天才的に上手いロマンチスト！週末の旅行計画を立てさせたら右に出る者はいない。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 84,
+      "company_name": "JTB",
+      "phrase": "交流創造事業",
+      "phrase_type": "ブランドスローガン（事業ドメイン）",
+      "industry": "旅行・観光",
+      "source_url": "https://www.jtbcorp.jp/jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1912,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "人との交流そのものがエネルギー源！初対面でも一瞬で打ち解けるコミュニケーションの達人。",
+        "params": {
+          "passion": 4,
+          "romance": 4,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 85,
+      "company_name": "HIS（エイチ・アイ・エス）",
+      "phrase": "「心躍る」を解き放つ",
+      "phrase_type": "パーパス",
+      "industry": "旅行・観光",
+      "source_url": "https://www.his.co.jp/company/philosophy.html",
+      "metrics": {
+        "founded_year": 1980,
+        "is_listed": true,
+        "stock_code": "9603",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "思い立ったら即行動の冒険家！「来週海外行かない？」と誘ってくるようなフットワークの軽さ。",
+        "params": {
+          "passion": 5,
+          "romance": 5,
+          "stability": 1
+        }
+      }
+    },
+    {
+      "id": 86,
+      "company_name": "ベネッセホールディングス",
+      "phrase": "よく生きる（Benesse）",
+      "phrase_type": "企業理念",
+      "industry": "教育・生活",
+      "source_url": "https://www.benesse-hd.co.jp/ja/about/philosophy.html",
+      "metrics": {
+        "founded_year": 1955,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "向上心が高く、人生を丁寧に味わう知性派。お互いを高め合える知的な会話が大好き。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 87,
+      "company_name": "公文教育研究会（KUMON）",
+      "phrase": "一人ひとりの可能性の追求",
+      "phrase_type": "理念",
+      "industry": "教育",
+      "source_url": "https://www.kumon.ne.jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1958,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "自分のペースでコツコツ積み上げる努力家。相手の成長を温かく見守れる忍耐強さがある。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 88,
+      "company_name": "パーソルホールディングス（doda）",
+      "phrase": "はたらいて、笑おう。",
+      "phrase_type": "グループビジョン",
+      "industry": "人材",
+      "source_url": "https://www.persol-group.co.jp/corporate/vision/",
+      "metrics": {
+        "founded_year": 2008,
+        "is_listed": true,
+        "stock_code": "2181",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "仕事もプライベートも笑顔で楽しみたいポジティブ派！愚痴より前向きな話で盛り上がれる。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 89,
+      "company_name": "アシックス",
+      "phrase": "健全な身体に健全な精神があれかし",
+      "phrase_type": "創業哲学",
+      "industry": "スポーツ用品",
+      "source_url": "https://corp.asics.com/jp/about_asics/philosophy",
+      "metrics": {
+        "founded_year": 1949,
+        "is_listed": true,
+        "stock_code": "7936",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "爽やかでアクティブな健康志向タイプ！一緒にランニングやアウトドアを楽しめる健全な魅力。",
+        "params": {
+          "passion": 4,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 90,
+      "company_name": "ミズノ",
+      "phrase": "より良いスポーツ品とスポーツの振興を通じて社会に貢献する",
+      "phrase_type": "経営理念",
+      "industry": "スポーツ用品",
+      "source_url": "https://corp.mizuno.com/jp/about/philosophy",
+      "metrics": {
+        "founded_year": 1906,
+        "is_listed": true,
+        "stock_code": "8022",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "チームワークとフェアプレーを重んじる硬派なスポーツマン。裏表がなく信頼度バツグン。",
+        "params": {
+          "passion": 4,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 91,
+      "company_name": "ヤマハ",
+      "phrase": "感動を・ともに・創る",
+      "phrase_type": "企業理念",
+      "industry": "楽器・音響",
+      "source_url": "https://www.yamaha.com/ja/about/philosophy/",
+      "metrics": {
+        "founded_year": 1887,
+        "is_listed": true,
+        "stock_code": "7951",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "感性豊かで芸術肌なロマンチスト。二人でハーモニーを奏でるように波長を合わせるのが上手い。",
+        "params": {
+          "passion": 3,
+          "romance": 5,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 92,
+      "company_name": "TOTO",
+      "phrase": "豊かで快適な生活文化を創造します",
+      "phrase_type": "企業理念",
+      "industry": "住宅設備",
+      "source_url": "https://jp.toto.com/company/profile/philosophy/",
+      "metrics": {
+        "founded_year": 1917,
+        "is_listed": true,
+        "stock_code": "5332",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "綺麗好きで清潔感にこだわる誠実派。水回りが綺麗な部屋に住んでいそうな安心感がある。",
+        "params": {
+          "passion": 2,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 93,
+      "company_name": "ダイキン工業",
+      "phrase": "空気で答えを出す会社",
+      "phrase_type": "コーポレートメッセージ",
+      "industry": "空調・電機",
+      "source_url": "https://www.daikin.co.jp/corporate/overview/philosophy",
+      "metrics": {
+        "founded_year": 1924,
+        "is_listed": true,
+        "stock_code": "6367",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "誰よりも「空気を読む」天才！気まずい沈黙も快適な温度に変えてくれる場の救世主。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 94,
+      "company_name": "セコム",
+      "phrase": "信頼される安心を、社会へ。",
+      "phrase_type": "企業理念",
+      "industry": "警備・セキュリティ",
+      "source_url": "https://www.secom.co.jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 1962,
+        "is_listed": true,
+        "stock_code": "9735",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "「守ってあげたい」本能全開のボディガード系！ちょっと心配性だけど愛情深さはトップクラス。",
+        "params": {
+          "passion": 3,
+          "romance": 2,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 95,
+      "company_name": "日本郵便（日本郵政グループ）",
+      "phrase": "そばにいるから、できることがある。",
+      "phrase_type": "グループスローガン",
+      "industry": "郵便・物流・金融",
+      "source_url": "https://www.japanpost.jp/corporate/philosophy/",
+      "metrics": {
+        "founded_year": 2007,
+        "is_listed": true,
+        "stock_code": "6178",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "距離の近さと安心感で勝負する幼馴染み系。特別な日じゃなくても、いつもそばにいてくれる存在。",
+        "params": {
+          "passion": 2,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 96,
+      "company_name": "博報堂",
+      "phrase": "生活者発想・パートナー主義",
+      "phrase_type": "フィロソフィー",
+      "industry": "広告・クリエイティブ",
+      "source_url": "https://www.hakuhodo.co.jp/about/philosophy/",
+      "metrics": {
+        "founded_year": 1895,
+        "is_listed": true,
+        "stock_code": "2433",
+        "b2c_affinity": 3
+      },
+      "creative": {
+        "personality_comment": "人の心理を読むのが上手いクリエイティブ派。「パートナー主義」の名の通り対等で楽しい関係を築く。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    },
+    {
+      "id": 97,
+      "company_name": "電通グループ",
+      "phrase": "人起点の変革（People-Centered Transformation）",
+      "phrase_type": "パーパス",
+      "industry": "広告・メディア",
+      "source_url": "https://www.group.dentsu.com/jp/about-us/purpose.html",
+      "metrics": {
+        "founded_year": 1901,
+        "is_listed": true,
+        "stock_code": "4324",
+        "b2c_affinity": 3
+      },
+      "creative": {
+        "personality_comment": "流行に敏感でプロデュース力抜群の盛り上げ役。相手の魅力を最大限に引き出す天才。",
+        "params": {
+          "passion": 5,
+          "romance": 4,
+          "stability": 2
+        }
+      }
+    },
+    {
+      "id": 98,
+      "company_name": "大塚製薬（大塚ホールディングス）",
+      "phrase": "Otsuka-people creating new products for better health worldwide",
+      "phrase_type": "企業理念",
+      "industry": "製薬・飲料",
+      "source_url": "https://www.otsuka.com/jp/company/philosophy/",
+      "metrics": {
+        "founded_year": 1921,
+        "is_listed": true,
+        "stock_code": "4578",
+        "b2c_affinity": 5
+      },
+      "creative": {
+        "personality_comment": "ポカリのように乾いた心にスッと染み渡る爽やかさ！独創的なアイデアで相手を元気にする。",
+        "params": {
+          "passion": 4,
+          "romance": 3,
+          "stability": 4
+        }
+      }
+    },
+    {
+      "id": 99,
+      "company_name": "武田薬品工業",
+      "phrase": "世界中の人々の健康と、輝かしい未来に貢献する",
+      "phrase_type": "存在意義（パーパス）",
+      "industry": "製薬",
+      "source_url": "https://www.takeda.com/jp/who-we-are/our-purpose/",
+      "metrics": {
+        "founded_year": 1781,
+        "is_listed": true,
+        "stock_code": "4502",
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "創業240年超の圧倒的歴史と誠実さ！弱っているときに優しく支えてくれる頼もしい存在。",
+        "params": {
+          "passion": 3,
+          "romance": 3,
+          "stability": 5
+        }
+      }
+    },
+    {
+      "id": 100,
+      "company_name": "スノーピーク",
+      "phrase": "人間性の回復",
+      "phrase_type": "ミッション",
+      "industry": "アウトドア",
+      "source_url": "https://www.snowpeak.co.jp/about/mission/",
+      "metrics": {
+        "founded_year": 1958,
+        "is_listed": false,
+        "stock_code": null,
+        "b2c_affinity": 4
+      },
+      "creative": {
+        "personality_comment": "都会の喧騒を離れて焚き火を囲みたい自然派ロマンチスト。深く語り合える相手を求めるタイプ。",
+        "params": {
+          "passion": 4,
+          "romance": 5,
+          "stability": 3
+        }
+      }
+    }
+  ]
+}
