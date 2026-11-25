@@ -1,9 +1,19 @@
 // Framer の部品 10 個を React にしたもの。値は docs/design/framer-values.md の「部品」による。
 import { m, type Variants } from "motion/react";
-import type { KeyboardEvent, ReactNode } from "react";
+import { createContext, useContext, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import type { Gender, JoinType } from "../game/types.ts";
-import { FADE, OFFSET, PRESS_SCALE, SPRING } from "../styles/motion.ts";
+import { FADE, GLASS_PRESS, OFFSET, PRESS_SCALE, SPRING } from "../styles/motion.ts";
 import { CpSymbol, PairLogo, type SymbolName } from "./symbols.tsx";
+
+/* FloatingBar の中のボタンは Liquid Glass の押し方にする（WWDC25 Meet Liquid Glass https://developer.apple.com/videos/play/wwdc2025/219/ ） */
+const OnGlass = createContext(false);
+
+/* 指の位置を --press-x / --press-y に書き、光をそこから広げる */
+function markPressPoint(e: PointerEvent<HTMLButtonElement>) {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--press-x", `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty("--press-y", `${e.clientY - r.top}px`);
+}
 
 /* CP 主ボタン / CP 副ボタン / CP 文字リンクボタン */
 export function Button({
@@ -23,15 +33,20 @@ export function Button({
   icon?: SymbolName;
   className?: string;
 }) {
+  const onGlass = useContext(OnGlass);
+  const press = onGlass
+    ? { scaleX: GLASS_PRESS.scaleX, scaleY: GLASS_PRESS.scaleY, transition: SPRING.glassPress }
+    : { scale: PRESS_SCALE, transition: SPRING.press };
   return (
     // 押した瞬間に縮み、離すと spring で戻る（操作の層の動き）。reduced motion では縮みが止まり、:active の薄まりだけが残る
     <m.button
       type={type}
       className={`cp-button cp-button--${kind} t-label${className ? ` ${className}` : ""}`}
       onClick={onClick}
+      onPointerDown={onGlass ? markPressPoint : undefined}
       disabled={disabled}
-      whileTap={disabled ? undefined : { scale: PRESS_SCALE, transition: SPRING.press }}
-      transition={SPRING.release}
+      whileTap={disabled ? undefined : press}
+      transition={onGlass ? SPRING.glassRelease : SPRING.release}
     >
       {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--cp-soft)" />}
       <span>{children}</span>
@@ -264,7 +279,7 @@ export function FloatingBar({ note, children }: { note?: ReactNode; children: Re
     <div className="cp-floating" role="region" aria-label="操作">
       <div className="cp-floating__bar">
         {note && <p className="t-small c-muted cp-floating__note">{note}</p>}
-        {children}
+        <OnGlass.Provider value={true}>{children}</OnGlass.Provider>
       </div>
     </div>
   );

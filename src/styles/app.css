@@ -413,14 +413,61 @@ html:has(.cp-floating) {
   gap: 8px;
   padding: 12px;
   border-radius: 28px;
-  background: var(--glass-fill);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
+/* バーの中のボタン（Liquid Glass の押し方）。押すと指の下から光が広がり、離すと消える（WWDC25 Meet Liquid Glass） */
+.cp-floating__bar .cp-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cp-floating__bar .cp-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 120px at var(--press-x, 50%) var(--press-y, 50%),
+    var(--glass-press-glow) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--motion-glass-glow-out) ease-out;
+}
+.cp-floating__bar .cp-button:active:not(:disabled) {
+  opacity: 1;
+}
+.cp-floating__bar .cp-button:active:not(:disabled)::after {
+  opacity: 1;
+  transition-duration: var(--motion-glass-glow-in);
+}
+/* 副ボタンは塗らずにガラスの上の文字にする（HIG Toolbars: Reduce the use of toolbar backgrounds and tinted controls） */
+.cp-floating__bar .cp-button--secondary {
+  background: transparent;
+  --glass-press-glow: rgba(255, 255, 255, 0.95);
+}
+.cp-floating__bar .cp-button--secondary:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.35);
+}
+.cp-floating__bar .cp-button--primary {
+  --glass-press-glow: rgba(255, 255, 255, 0.32);
+}
 .cp-floating__note {
   text-align: center;
+  color: var(--glass-label-muted);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .cp-floating__bar,
+  .cp-toast {
+    background: var(--glass-fill-reduced);
+  }
 }
 @media (prefers-contrast: more) {
   .cp-floating__bar,
@@ -429,6 +476,9 @@ html:has(.cp-floating) {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     border-color: var(--cp-ink);
+  }
+  .cp-floating__note {
+    color: var(--cp-muted);
   }
 }
 
@@ -455,9 +505,11 @@ html:has(.cp-floating) {
   gap: 12px;
   padding: 14px 16px;
   border-radius: var(--radius-card);
-  background: var(--glass-fill);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
