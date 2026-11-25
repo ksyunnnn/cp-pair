@@ -25,7 +25,7 @@ export function HostStart() {
 
   return (
     <div className="cp-page">
-      <BrandHeader right="ホストの端末" />
+      <BrandHeader aboutLink />
       <ScreenMain className="cp-content has-floating">
         <ProgressSteps current={1} />
         <ScreenHeading

@@ -2,6 +2,7 @@
 import { animate, m, useMotionValue, useReducedMotion, type MotionValue, type Variants } from "motion/react";
 import { createContext, useContext, useRef, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import type { Gender, JoinType } from "../game/types.ts";
+import { aboutEntry } from "../router.ts";
 import { FADE, GLASS_PRESS, OFFSET, PRESS_SCALE, SPRING, STAMP } from "../styles/motion.ts";
 import { CpSymbol, PairLogo, type SymbolName } from "./symbols.tsx";
 
@@ -367,13 +368,18 @@ export function FloatingBar({ note, children }: { note?: ReactNode; children: Re
   );
 }
 
-/* 結果画面の上部「ブランド」 */
-export function BrandHeader({ right }: { right?: ReactNode }) {
+/* 結果画面の上部「ブランド」。aboutLink のときは、右端に about へのリンクを置く（トップ画面だけ） */
+export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; aboutLink?: boolean }) {
   return (
     <header className="cp-brand">
       <PairLogo width={30} />
       <span className="t-logo">CP PAIR</span>
       <span className="t-small c-muted cp-brand__right">{right}</span>
+      {aboutLink && (
+        <a className="t-chip cp-link" href="#/about" onClick={() => (aboutEntry.fromApp = true)}>
+          ABOUT
+        </a>
+      )}
     </header>
   );
 }
