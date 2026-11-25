@@ -6,12 +6,13 @@ import { TRIGGER_CONFIG } from "../game/triggers.ts";
 import { companyMeta, splitTitle, splitTitleBody, tagIcon, tagLabel, type TagIcon } from "../game/present.ts";
 import type { Archetype, MatchedPerson, MatchResult, UnmatchedPerson } from "../game/types.ts";
 import { BrandHeader, Button } from "../ui/components.tsx";
+import { COLOR } from "../styles/tokens.ts";
 import { PairLogo } from "../ui/symbols.tsx";
 
 const PHOSPHOR_WEIGHT = "regular" as const;
 
 function PhIcon({ name, size }: { name: TagIcon; size: number }) {
-  const props = { size, color: "#22231F", weight: PHOSPHOR_WEIGHT, style: { display: "block", flexShrink: 0 } };
+  const props = { size, color: COLOR.ink, weight: PHOSPHOR_WEIGHT, style: { display: "block", flexShrink: 0 } };
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;
   return <Intersect {...props} />;
@@ -28,7 +29,7 @@ export function ScoreAndTitle({ score, title }: { score: number; title: string }
         <p className="t-tiny c-muted">こじつけ相性度</p>
       </div>
       <div className="r-score__title">
-        {t.kicker && <p className="t-label c-accent">{t.kicker}</p>}
+        {t.kicker && <p className="t-label c-accent-text">{t.kicker}</p>}
         <p className="t-strong r-title-body">
           <span>{head}</span>
           {tail && <span>{tail}</span>}
@@ -193,7 +194,7 @@ function FreeResult({ me, onBackToHost }: { me: UnmatchedPerson; onBackToHost?: 
           </span>
         </div>
         <div className="r-free-note">
-          <p className="t-label c-accent">今回はフリー／ジョーカー枠！</p>
+          <p className="t-label c-accent-text">今回はフリー／ジョーカー枠！</p>
           <p className="t-strong">全員と自由にトークできる特権ポジションです</p>
           <p className="t-body c-muted">{me.reason}</p>
         </div>

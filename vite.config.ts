@@ -12,7 +12,8 @@ export default defineConfig({
     // https://vite-pwa-org.netlify.app/guide/
     VitePWA({
       registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      // 登録は src/ui/offlineReady.tsx で行い、保存が終わったことを画面で知らせる
+      injectRegister: false,
       workbox: {
         // 書体は woff2 だけを保存する。@fontsource の CSS は woff2 を先に挙げ、
         // Safari を含む対象のブラウザは woff2 を読むため、woff は取りに行かない

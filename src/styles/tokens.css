@@ -6,9 +6,14 @@
   /* 色トークン（ColorStyleTokenNode） */
   --cp-paper: #f4f2eb;
   --cp-ink: #22231f;
-  --cp-muted: #75766d;
+  /* Framer の値は #75766d。CP paper の上で 4.10:1、CP soft の上で 3.76:1 と、WCAG 2.2 AA の文字の 4.5:1 に届かない。
+     色相と彩度を保って明度だけ下げた（CP paper の上で 4.96:1、CP soft の上で 4.54:1） */
+  --cp-muted: #686961;
   --cp-line: #d8d8ce;
   --cp-accent: #f4523d;
+  /* 足した値: 小さい文字に使う CP accent。CP accent は CP paper の上で 3.06:1 で、大きい文字（24px 以上、太字なら 18.66px 以上）の 3:1 だけを満たす。
+     色相と彩度を保って明度だけ下げた（CP paper の上で 4.67:1） */
+  --cp-accent-text: #d3230c;
   --cp-soft: #e9e9df;
   /* 結果画面の黒いカードの上の補足文字（UaQrcBXd3 / XUILCZVQt の textColor） */
   --cp-on-ink-muted: rgb(188, 190, 177);
@@ -21,6 +26,12 @@
   --font-latin: "Inter", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   --inter-features: "cv03" 1, "cv04" 1, "cv09" 1, "cv11" 1;
 
+  /* 角丸（部品の値。docs/design/framer-values.md の「部品」）。高さの半分で丸めるもの（ボタン・番号・印）は、高さとともに書く */
+  --radius-chip: 8px;
+  --radius-field: 12px;
+  --radius-card: 20px;
+  --radius-card-ink: 24px;
+
   /* 余白（結果画面 WQLkyLRf1 の値） */
   --page-x: 24px;
   --block-gap: 28px;
@@ -31,6 +42,17 @@
   --glass-blur: 20px;
   --glass-border: 1px solid rgba(244, 242, 235, 0.9);
   --glass-shadow: 0px 4px 16px 0px rgba(34, 35, 31, 0.08);
+
+  /* 浮いた操作バーの高さ（約 113px）＋余白。足した値 */
+  --floating-clearance: 160px;
+
+  /* 開発パネル（?dev のときだけ出る）。Framer にない値 */
+  --dev-bg: #111;
+  --dev-surface: #1d1d1d;
+  --dev-fg: #e5e5e5;
+  --dev-fg-muted: #9a9a9a;
+  --dev-line: #888;
+  --dev-line-soft: #444;
 }
 
 /* 文字スタイル（TextStylePresetNode） */
@@ -62,3 +84,4 @@
 
 .c-muted { color: var(--cp-muted); }
 .c-accent { color: var(--cp-accent); }
+.c-accent-text { color: var(--cp-accent-text); }

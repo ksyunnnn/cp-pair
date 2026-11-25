@@ -8,7 +8,7 @@ interface ToastItem {
   message: string;
 }
 
-const ToastContext = createContext<(message: string, kind?: ToastKind) => void>(() => {});
+const ToastContext = createContext<(message: string, kind?: ToastKind, durationMs?: number) => void>(() => {});
 
 export function useToast() {
   return useContext(ToastContext);
@@ -18,10 +18,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<ToastItem[]>([]);
   const seq = useRef(0);
 
-  const push = useCallback((message: string, kind: ToastKind = "success") => {
+  const push = useCallback((message: string, kind: ToastKind = "success", durationMs = 2800) => {
     const id = ++seq.current;
     setItems((prev) => [...prev.slice(-1), { id, kind, message }]);
-    window.setTimeout(() => setItems((prev) => prev.filter((t) => t.id !== id)), 2800);
+    window.setTimeout(() => setItems((prev) => prev.filter((t) => t.id !== id)), durationMs);
   }, []);
 
   const value = useMemo(() => push, [push]);
