@@ -29,7 +29,7 @@ export function ScoreAndTitle({ score, title }: { score: number; title: string }
         <p className="t-tiny c-muted">こじつけ相性度</p>
       </div>
       <div className="r-score__title">
-        {t.kicker && <p className="t-label c-accent">{t.kicker}</p>}
+        {t.kicker && <p className="t-label c-accent-text">{t.kicker}</p>}
         <p className="t-strong r-title-body">
           <span>{head}</span>
           {tail && <span>{tail}</span>}
@@ -194,7 +194,7 @@ function FreeResult({ me, onBackToHost }: { me: UnmatchedPerson; onBackToHost?: 
           </span>
         </div>
         <div className="r-free-note">
-          <p className="t-label c-accent">今回はフリー／ジョーカー枠！</p>
+          <p className="t-label c-accent-text">今回はフリー／ジョーカー枠！</p>
           <p className="t-strong">全員と自由にトークできる特権ポジションです</p>
           <p className="t-body c-muted">{me.reason}</p>
         </div>
