@@ -1,4 +1,5 @@
 import { LazyMotion, MotionConfig } from "motion/react";
+import { AboutScreen } from "./screens/AboutScreen.tsx";
 import { DevPanel } from "./dev/DevPanel.tsx";
 import { isDevMode, useRoute } from "./router.ts";
 import { HostPick, HostResultView } from "./screens/host/HostDeviceViews.tsx";
@@ -18,6 +19,8 @@ function Screen() {
   const { room, loading } = useRoom(roomId);
 
   if (route.name === "hostStart") return <HostStart />;
+  // about はルームを読まない。どの画面からでも開ける
+  if (route.name === "about") return <AboutScreen />;
   if (loading) return <div className="cp-page" />;
   if (!room) return <RoomMissing roomId={roomId ?? ""} />;
 

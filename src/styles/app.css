@@ -82,6 +82,25 @@ label {
   flex: 1;
   text-align: right;
 }
+/* 文字のリンク（ヘッダの ABOUT、about の画面）。色と下線は CP Source（L7rQ5OG8k）による */
+.cp-link {
+  color: var(--cp-muted);
+  text-decoration: underline;
+  position: relative;
+}
+/* 押せる範囲を、見た目を変えずに上下 14px・左右 8px 広げる（11px の文字の行 17.6px で高さ 45.6px。HIG Buttons の 44×44pt） */
+.cp-link::after {
+  content: "";
+  position: absolute;
+  inset: -14px -8px;
+}
+.cp-link:hover {
+  color: var(--cp-ink);
+}
+/* about の画面のリンクは、縦に積んだ中で文字の幅に留める */
+.cp-about__link {
+  align-self: flex-start;
+}
 
 .cp-content {
   display: flex;
