@@ -1,4 +1,5 @@
 import { LazyMotion, MotionConfig } from "motion/react";
+import { AboutScreen } from "./screens/AboutScreen.tsx";
 import { DevPanel } from "./dev/DevPanel.tsx";
 import { isDevMode, useRoute } from "./router.ts";
 import { HostPick, HostResultView } from "./screens/host/HostDeviceViews.tsx";
@@ -10,8 +11,9 @@ import { useRoom } from "./store/index.ts";
 import { OfflineReady } from "./ui/offlineReady.tsx";
 import { ToastProvider } from "./ui/toast.tsx";
 
-// 動きの機能は後から読み込む（初めの JS を小さくする）
-const loadMotionFeatures = () => import("./ui/motionFeatures.ts").then((m) => m.default);
+// 動きの機能は最初から読み込む。後から読み込むと、再読み込みで結果の画面を開いたときに機能が揃う前に描かれ、
+// 発表の見出しと相性度を中央へ置く指示が効かない（2026-11-25 に確かめた）
+import loadMotionFeatures from "./ui/motionFeatures.ts";
 
 function Screen() {
   const route = useRoute();
@@ -20,6 +22,8 @@ function Screen() {
 
   if (route.name === "hostStart") return <HostStart />;
   if (route.name === "rules") return <RulesScreen />;
+  // about はルームを読まない。どの画面からでも開ける
+  if (route.name === "about") return <AboutScreen />;
   if (loading) return <div className="cp-page" />;
   if (!room) return <RoomMissing roomId={roomId ?? ""} />;
 

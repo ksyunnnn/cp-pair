@@ -3,7 +3,7 @@
 .r-content {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 48px;
   padding: 16px 24px 32px;
 }
 
@@ -13,14 +13,26 @@
   flex-direction: column;
   gap: 14px;
 }
+/* 名前を主役にする: 前後に間を取り、文字を画面幅に合わせて大きくする */
+.r-partner > .r-name {
+  margin: 20px 0 22px;
+}
+.r-partner > .r-score {
+  margin-top: 18px;
+}
 .r-name {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 12px;
 }
 .r-name__text {
   min-width: 0;
   overflow-wrap: anywhere;
+  font-size: clamp(56px, 19vw, 80px);
+  line-height: 1.05;
+}
+.r-name__mark {
+  align-self: center;
 }
 .r-name__mark {
   flex: 1;
@@ -68,18 +80,13 @@
   gap: 4px;
 }
 
-/* 話しかけるきっかけ（oIXT7TAd0） */
+/* ひとこと（Framer の「話しかけるきっかけ」oIXT7TAd0） */
 .r-talk {
   display: flex;
   flex-direction: column;
   gap: 12px;
   border-top: 1px solid var(--cp-line);
-  padding-top: 24px;
-}
-.r-talk__head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  padding-top: 32px;
 }
 .r-tags {
   list-style: none;
@@ -176,7 +183,7 @@
   overflow-wrap: anywhere;
 }
 
-/* 結果の発表（src/screens/useReveal.ts）。名前・理念・相性・称号は Motion が出し、ほかの区画（.r-later）はここで出す。
+/* 結果の発表（src/screens/useReveal.ts）。見出し・名前・理念・相性・称号は Motion が動かし、ほかの区画（.r-later）はここで出す。
    途中の区画は押せない。本文を押すと最後の状態へ飛ぶ */
 .r-content[data-revealing] > * {
   pointer-events: none;

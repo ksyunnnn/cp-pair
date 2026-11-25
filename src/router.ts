@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export type Route =
   | { name: "hostStart" }
   | { name: "rules" }
+  | { name: "about" }
   | { name: "host"; roomId: string }
   | { name: "hostPick"; roomId: string; participantId: string }
   | { name: "hostResult"; roomId: string; participantId: string }
@@ -16,6 +17,7 @@ export function parseHash(hash: string): Route {
     return { name: "host", roomId: parts[1] };
   }
   if (parts[0] === "rules") return { name: "rules" };
+  if (parts[0] === "about") return { name: "about" };
   if (parts[0] === "r" && parts[1]) return { name: "participant", roomId: parts[1].toUpperCase() };
   return { name: "hostStart" };
 }
@@ -37,5 +39,8 @@ export function useRoute(): Route {
   }, []);
   return route;
 }
+
+/* about をアプリの中のリンクから開いたか。開いたなら「戻る」は履歴を 1 つ戻す。URL を直に開いたときは false */
+export const aboutEntry = { fromApp: false };
 
 export const isDevMode = () => new URLSearchParams(location.search).has("dev");
