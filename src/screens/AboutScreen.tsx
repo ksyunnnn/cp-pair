@@ -1,4 +1,4 @@
-// about: クレジット・開発の経緯・出典とライセンス。ルームを読まないので、どの画面からでも開ける。
+// about: つくったひと・開発の経緯・出典とライセンス。ルームを読まないので、どの画面からでも開ける。
 import { useEffect, useState, type ReactNode } from "react";
 import { STORY } from "../content/story.ts";
 import { aboutEntry, navigate } from "../router.ts";
@@ -78,17 +78,14 @@ export function AboutScreen() {
         <ScreenHeading
           eyebrow="ABOUT CP PAIR"
           icon={<CpSymbol name="Talk" size={17} />}
-          title="理念はまじめ。相性は、こじつけ。"
-          lead="企業の言葉を借りた、ジョークの相性診断です。"
+          title="企業理念は意外とかっこいい"
+          lead="企業理念を無理やりこじつけた、ジョークの相性診断です。"
         />
 
-        <Section title="クレジット">
-          <div className="cp-stack cp-stack--8">
-            <p className="t-small c-muted">つくった人</p>
-            <a className="t-body cp-link cp-about__link" href={CREATOR_URL} target="_blank" rel="noopener noreferrer">
-              @ksyunnnn
-            </a>
-          </div>
+        <Section title="つくったひと">
+          <a className="t-body cp-link cp-about__link" href={CREATOR_URL} target="_blank" rel="noopener noreferrer">
+            @ksyunnnn
+          </a>
         </Section>
 
         <Section title="開発の経緯">
