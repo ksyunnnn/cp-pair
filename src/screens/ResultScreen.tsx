@@ -159,8 +159,8 @@ export function ResultScreen({
           <ScoreAndTitle score={pair.evaluation.score} title={pair.evaluation.title} reveal={reveal} />
         </section>
 
-        <section className="r-talk r-later" aria-label="診断者からの一言">
-          <p className="t-small c-muted">診断者からの一言</p>
+        <section className="r-talk r-later" aria-label="ひとこと">
+          <p className="t-small c-muted">ひとこと</p>
           <p className="t-body">{pair.evaluation.story}</p>
           {pair.evaluation.triggeredTags.length > 0 && (
             <ul className="r-tags">

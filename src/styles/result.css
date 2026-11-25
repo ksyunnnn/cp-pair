@@ -80,7 +80,7 @@
   gap: 4px;
 }
 
-/* 診断者からの一言（Framer の「話しかけるきっかけ」oIXT7TAd0） */
+/* ひとこと（Framer の「話しかけるきっかけ」oIXT7TAd0） */
 .r-talk {
   display: flex;
   flex-direction: column;
