@@ -136,11 +136,11 @@
   align-self: flex-start;
   position: relative;
 }
-/* 押せる範囲を、見た目を変えずに高さ 44px まで広げる（文字の行は約 18px。HIG Buttons の 44×44pt） */
+/* 押せる範囲を、見た目を変えずに高さ 44px まで広げる（文字の行は 17.6px。HIG Buttons の 44×44pt） */
 .r-source::after {
   content: "";
   position: absolute;
-  inset: -13px -8px;
+  inset: -14px -8px;
 }
 .r-source:hover {
   color: var(--cp-ink);
