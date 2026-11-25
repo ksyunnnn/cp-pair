@@ -73,8 +73,32 @@ export const STAMP = {
   },
 } as const satisfies Record<string, Transition>;
 
-/** のぞき見防止の画面の記号がまばたきする間隔（秒） */
-export const BLINK_EVERY = 3;
+/**
+ * うなずく動き（24fps のコマ数）。mcbess のループ（ベースを弾いてうなずく、約 72 BPM）の拍に合わせた。
+ * 1 拍 = ため 8 → 止め 7 → 打ち 2 → 収め 2 → 休み。拍は beatTicks（20 コマ = 833ms）を中心に ±jitterTicks コマ揺らし、機械的にしない。
+ * 動くのは頭（記号）だけ。回転の軸は記号の下端に置く（app.css の .cp-nod）。
+ * rotate（deg）と y（px）は ため → 止め → 打ち込んだ底 → 元 を順に通る。まばたきは blinkEvery 拍に 1 回、止めの間に入れる
+ */
+const NOD_TICKS = SEAL_TICKS;
+const NOD_MOVE = NOD_TICKS.windUp + NOD_TICKS.hold + NOD_TICKS.strike + NOD_TICKS.settle;
+export const NOD = {
+  ticks: NOD_TICKS,
+  beatTicks: 20,
+  jitterTicks: 1,
+  rotate: [0, -4, -4, 1, 0],
+  y: [0, -3, -3, 1, 0],
+  /** ため〜収めの長さ（秒）。拍の残りは休み */
+  duration: TICK * NOD_MOVE,
+  times: [
+    0,
+    NOD_TICKS.windUp / NOD_MOVE,
+    (NOD_TICKS.windUp + NOD_TICKS.hold) / NOD_MOVE,
+    (NOD_TICKS.windUp + NOD_TICKS.hold + NOD_TICKS.strike) / NOD_MOVE,
+    1,
+  ],
+  ease: ["easeOut", "linear", "easeIn", "easeOut"],
+  blinkEvery: 4,
+} as const;
 
 /** 押したときの縮み */
 export const PRESS_SCALE = 0.96;

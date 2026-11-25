@@ -593,8 +593,15 @@ html:has(.cp-floating) {
   gap: 12px;
   flex-wrap: wrap;
 }
+/* 記号のうなずき: 回転の軸を記号の下端（viewBox 64 の y=59）に置き、頭が前後に振れるように見せる。
+   拍は Handoff.tsx が motion.ts の NOD で刻む */
+.cp-nod {
+  display: block;
+  width: fit-content;
+  transform-origin: 50% 92%;
+}
 /* 記号の目のまばたき: 半分 → 閉じる の 2 コマ。目の形は変えず、縦に縮めるだけ。
-   間隔は Handoff.tsx が is-blinking を付けて刻む（ふだんは動きを持たせず、静止の描画を変えない） */
+   いつ付けるかは Handoff.tsx がうなずきの止めに合わせて is-blinking を付けて決める（ふだんは動きを持たせず、静止の描画を変えない） */
 .cp-blink {
   transform-box: fill-box;
   transform-origin: center;
