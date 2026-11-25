@@ -432,14 +432,58 @@ html:has(.cp-floating) {
   gap: 8px;
   padding: 12px;
   border-radius: 28px;
-  background: var(--glass-fill);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
+/* バーの中のボタン（Liquid Glass の押し方）。押すと塗りが透明なガラスに変わり、膨らんで浮く。
+   膨らみ・指への追従は Motion が書く（components.tsx の GlassButton）。はみ出させるため overflow で切らない */
+.cp-floating__bar .cp-button {
+  position: relative;
+  /* 押したまま横へ動かす指を、ブラウザのスクロールに取られないようにする */
+  touch-action: none;
+  transition:
+    opacity 0.18s ease,
+    background-color var(--motion-glass-fill-out) ease-out,
+    box-shadow var(--motion-glass-fill-out) ease-out;
+}
+.cp-floating__bar .cp-button[data-pressed],
+.cp-floating__bar .cp-button:active:focus-visible {
+  z-index: 1;
+  opacity: 1;
+  -webkit-backdrop-filter: var(--glass-press-filter);
+  backdrop-filter: var(--glass-press-filter);
+  transition-duration: var(--motion-glass-fill-in);
+}
+/* 副ボタンは塗らずにガラスの上の文字にする（HIG Toolbars: Reduce the use of toolbar backgrounds and tinted controls） */
+.cp-floating__bar .cp-button--secondary {
+  background-color: transparent;
+}
+.cp-floating__bar .cp-button--secondary[data-pressed],
+.cp-floating__bar .cp-button--secondary:active:focus-visible {
+  background-color: var(--glass-press-secondary);
+  box-shadow: var(--glass-press-rim-light), var(--glass-press-lift);
+}
+/* 主ボタンは墨を透かし、文字は CP paper のまま。文字の縁を少し締めて読ませる */
+.cp-floating__bar .cp-button--primary[data-pressed],
+.cp-floating__bar .cp-button--primary:active:focus-visible {
+  background-color: var(--glass-press-primary);
+  box-shadow: var(--glass-press-rim), var(--glass-press-lift);
+  text-shadow: 0 0 2px rgba(34, 35, 31, 0.45);
+}
 .cp-floating__note {
   text-align: center;
+  color: var(--glass-label-muted);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .cp-floating__bar,
+  .cp-toast {
+    background: var(--glass-fill-reduced);
+  }
 }
 @media (prefers-contrast: more) {
   .cp-floating__bar,
@@ -448,6 +492,9 @@ html:has(.cp-floating) {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     border-color: var(--cp-ink);
+  }
+  .cp-floating__note {
+    color: var(--cp-muted);
   }
 }
 
@@ -474,9 +521,11 @@ html:has(.cp-floating) {
   gap: 12px;
   padding: 14px 16px;
   border-radius: var(--radius-card);
-  background: var(--glass-fill);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
@@ -563,8 +612,15 @@ html:has(.cp-floating) {
   gap: 12px;
   flex-wrap: wrap;
 }
+/* 記号のうなずき: 回転の軸を記号の下端（viewBox 64 の y=59）に置き、頭が前後に振れるように見せる。
+   拍は Handoff.tsx が motion.ts の NOD で刻む */
+.cp-nod {
+  display: block;
+  width: fit-content;
+  transform-origin: 50% 92%;
+}
 /* 記号の目のまばたき: 半分 → 閉じる の 2 コマ。目の形は変えず、縦に縮めるだけ。
-   間隔は Handoff.tsx が is-blinking を付けて刻む（ふだんは動きを持たせず、静止の描画を変えない） */
+   いつ付けるかは Handoff.tsx がうなずきの止めに合わせて is-blinking を付けて決める（ふだんは動きを持たせず、静止の描画を変えない） */
 .cp-blink {
   transform-box: fill-box;
   transform-origin: center;
