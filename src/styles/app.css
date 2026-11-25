@@ -82,6 +82,25 @@ label {
   flex: 1;
   text-align: right;
 }
+/* 文字のリンク（ヘッダの ABOUT、about の画面）。色と下線は CP Source（L7rQ5OG8k）による */
+.cp-link {
+  color: var(--cp-muted);
+  text-decoration: underline;
+  position: relative;
+}
+/* 押せる範囲を、見た目を変えずに上下 14px・左右 8px 広げる（11px の文字の行 17.6px で高さ 45.6px。HIG Buttons の 44×44pt） */
+.cp-link::after {
+  content: "";
+  position: absolute;
+  inset: -14px -8px;
+}
+.cp-link:hover {
+  color: var(--cp-ink);
+}
+/* about の画面のリンクは、縦に積んだ中で文字の幅に留める */
+.cp-about__link {
+  align-self: flex-start;
+}
 
 .cp-content {
   display: flex;
@@ -149,7 +168,8 @@ html:has(.cp-floating) {
   justify-content: center;
   gap: 12px;
   cursor: pointer;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  /* 押したときの縮みは Motion が書く（components.tsx の Button）。transform に CSS の transition を重ねない */
+  transition: opacity 0.18s ease;
 }
 .cp-button--primary {
   background: var(--cp-ink);
@@ -272,6 +292,18 @@ html:has(.cp-floating) {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+/* 印を左から 3 コマで描き込む（なめらかに補間しない）。印が出たときに 1 回だけ */
+.cp-choice__mark svg {
+  animation: cp-mark-draw var(--motion-mark) steps(3, jump-start);
+}
+@keyframes cp-mark-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /* ---------- バッジ ---------- */
@@ -400,14 +432,58 @@ html:has(.cp-floating) {
   gap: 8px;
   padding: 12px;
   border-radius: 28px;
-  background: var(--glass-fill);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
+/* バーの中のボタン（Liquid Glass の押し方）。押すと塗りが透明なガラスに変わり、膨らんで浮く。
+   膨らみ・指への追従は Motion が書く（components.tsx の GlassButton）。はみ出させるため overflow で切らない */
+.cp-floating__bar .cp-button {
+  position: relative;
+  /* 押したまま横へ動かす指を、ブラウザのスクロールに取られないようにする */
+  touch-action: none;
+  transition:
+    opacity 0.18s ease,
+    background-color var(--motion-glass-fill-out) ease-out,
+    box-shadow var(--motion-glass-fill-out) ease-out;
+}
+.cp-floating__bar .cp-button[data-pressed],
+.cp-floating__bar .cp-button:active:focus-visible {
+  z-index: 1;
+  opacity: 1;
+  -webkit-backdrop-filter: var(--glass-press-filter);
+  backdrop-filter: var(--glass-press-filter);
+  transition-duration: var(--motion-glass-fill-in);
+}
+/* 副ボタンは塗らずにガラスの上の文字にする（HIG Toolbars: Reduce the use of toolbar backgrounds and tinted controls） */
+.cp-floating__bar .cp-button--secondary {
+  background-color: transparent;
+}
+.cp-floating__bar .cp-button--secondary[data-pressed],
+.cp-floating__bar .cp-button--secondary:active:focus-visible {
+  background-color: var(--glass-press-secondary);
+  box-shadow: var(--glass-press-rim-light), var(--glass-press-lift);
+}
+/* 主ボタンは墨を透かし、文字は CP paper のまま。文字の縁を少し締めて読ませる */
+.cp-floating__bar .cp-button--primary[data-pressed],
+.cp-floating__bar .cp-button--primary:active:focus-visible {
+  background-color: var(--glass-press-primary);
+  box-shadow: var(--glass-press-rim), var(--glass-press-lift);
+  text-shadow: 0 0 2px rgba(34, 35, 31, 0.45);
+}
 .cp-floating__note {
   text-align: center;
+  color: var(--glass-label-muted);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .cp-floating__bar,
+  .cp-toast {
+    background: var(--glass-fill-reduced);
+  }
 }
 @media (prefers-contrast: more) {
   .cp-floating__bar,
@@ -416,6 +492,9 @@ html:has(.cp-floating) {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     border-color: var(--cp-ink);
+  }
+  .cp-floating__note {
+    color: var(--cp-muted);
   }
 }
 
@@ -442,12 +521,13 @@ html:has(.cp-floating) {
   gap: 12px;
   padding: 14px 16px;
   border-radius: var(--radius-card);
-  background: var(--glass-fill);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
-  animation: cp-toast-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2);
 }
 .cp-toast__icon {
   width: 28px;
@@ -464,16 +544,6 @@ html:has(.cp-floating) {
 }
 .cp-toast--warn .cp-toast__icon {
   background: var(--cp-accent);
-}
-@keyframes cp-toast-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 /* ---------- 共有カード ---------- */
@@ -541,6 +611,33 @@ html:has(.cp-floating) {
   align-items: baseline;
   gap: 12px;
   flex-wrap: wrap;
+}
+/* 記号のうなずき: 回転の軸を記号の下端（viewBox 64 の y=59）に置き、頭が前後に振れるように見せる。
+   拍は Handoff.tsx が motion.ts の NOD で刻む */
+.cp-nod {
+  display: block;
+  width: fit-content;
+  transform-origin: 50% 92%;
+}
+/* 記号の目のまばたき: 半分 → 閉じる の 2 コマ。目の形は変えず、縦に縮めるだけ。
+   いつ付けるかは Handoff.tsx がうなずきの止めに合わせて is-blinking を付けて決める（ふだんは動きを持たせず、静止の描画を変えない） */
+.cp-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.cp-blink.is-blinking {
+  animation: cp-blink calc(var(--motion-frame) * 2) step-end;
+}
+@keyframes cp-blink {
+  0% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
+  100% {
+    transform: none;
+  }
 }
 
 /* ---------- 開発パネル（本番の画面には出ない） ---------- */
@@ -615,7 +712,8 @@ html:has(.cp-floating) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cp-toast {
+  /* まばたきは止めて静止画にする。印の描き込みは位置が動かないため残す */
+  .cp-blink.is-blinking {
     animation: none;
   }
   .cp-button,

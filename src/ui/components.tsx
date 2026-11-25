@@ -1,7 +1,13 @@
 // Framer の部品 10 個を React にしたもの。値は docs/design/framer-values.md の「部品」による。
-import type { KeyboardEvent, ReactNode } from "react";
+import { animate, m, useMotionValue, useReducedMotion, type MotionValue, type Variants } from "motion/react";
+import { createContext, useContext, useRef, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import type { Gender, JoinType } from "../game/types.ts";
+import { aboutEntry } from "../router.ts";
+import { FADE, GLASS_PRESS, OFFSET, PRESS_SCALE, SPRING, STAMP } from "../styles/motion.ts";
 import { CpSymbol, PairLogo, type SymbolName } from "./symbols.tsx";
+
+/* FloatingBar の中のボタンは Liquid Glass の押し方にする（WWDC25 Meet Liquid Glass https://developer.apple.com/videos/play/wwdc2025/219/ ） */
+const OnGlass = createContext(false);
 
 /* CP 主ボタン / CP 副ボタン / CP 文字リンクボタン */
 export function Button({
@@ -11,6 +17,7 @@ export function Button({
   disabled,
   type = "button",
   icon,
+  className,
 }: {
   kind?: "primary" | "secondary" | "link";
   children: ReactNode;
@@ -18,12 +25,129 @@ export function Button({
   disabled?: boolean;
   type?: "button" | "submit";
   icon?: SymbolName;
+  className?: string;
 }) {
+  const onGlass = useContext(OnGlass);
+  if (onGlass) {
+    return (
+      <GlassButton kind={kind} onClick={onClick} disabled={disabled} type={type} icon={icon} className={className}>
+        {children}
+      </GlassButton>
+    );
+  }
   return (
-    <button type={type} className={`cp-button cp-button--${kind} t-label`} onClick={onClick} disabled={disabled}>
+    // 押した瞬間に縮み、離すと spring で戻る（操作の層の動き）。reduced motion では縮みが止まり、:active の薄まりだけが残る
+    <m.button
+      type={type}
+      className={`cp-button cp-button--${kind} t-label${className ? ` ${className}` : ""}`}
+      onClick={onClick}
+      disabled={disabled}
+      whileTap={disabled ? undefined : { scale: PRESS_SCALE, transition: SPRING.press }}
+      transition={SPRING.release}
+    >
       {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--cp-soft)" />}
       <span>{children}</span>
-    </button>
+    </m.button>
+  );
+}
+
+/* 0 から離れるほど上限 max に近づく（指から離れても上限で止まる） */
+const damp = (d: number, max: number) => max * Math.tanh((d * GLASS_PRESS.follow) / max);
+
+function to(value: MotionValue<number>, target: number, transition: (typeof SPRING)[keyof typeof SPRING]) {
+  animate(value, target, transition);
+}
+
+/*
+ * FloatingBar の中のボタン（iOS 26.3 Safari の segmented control の thumb の押し方）。
+ * 押すと塗りが透明なガラスに変わり（app.css の [data-pressed]）、膨らんで浮く。押したまま動かすと指へ寄って伸び、離すと spring で戻る。
+ * 動きは motion value に直接書き、指を動かすたびに React を描き直さない。reduced motion では塗りの変化だけを残す
+ */
+function GlassButton({
+  kind,
+  children,
+  onClick,
+  disabled,
+  type,
+  icon,
+  className,
+}: {
+  kind: "primary" | "secondary" | "link";
+  children: ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  type: "button" | "submit";
+  icon?: SymbolName;
+  className?: string;
+}) {
+  const reduced = useReducedMotion() ?? false;
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const scaleX = useMotionValue(1);
+  const scaleY = useMotionValue(1);
+  const origin = useRef<{ id: number; x: number; y: number } | null>(null);
+
+  const press = (e: PointerEvent<HTMLButtonElement>) => {
+    if (disabled || origin.current) return;
+    origin.current = { id: e.pointerId, x: e.clientX, y: e.clientY };
+    e.currentTarget.dataset.pressed = "";
+    if (reduced) return;
+    to(scaleX, GLASS_PRESS.scale, SPRING.glassPress);
+    to(scaleY, GLASS_PRESS.scale, SPRING.glassPress);
+  };
+
+  const follow = (e: PointerEvent<HTMLButtonElement>) => {
+    const o = origin.current;
+    if (!o || o.id !== e.pointerId || reduced) return;
+    const tx = damp(e.clientX - o.x, GLASS_PRESS.maxX);
+    const ty = damp(e.clientY - o.y, GLASS_PRESS.maxY);
+    const nx = Math.abs(tx) / GLASS_PRESS.maxX;
+    const ny = Math.abs(ty) / GLASS_PRESS.maxY;
+    to(x, tx, SPRING.glassFollow);
+    to(y, ty, SPRING.glassFollow);
+    to(scaleX, GLASS_PRESS.scale + GLASS_PRESS.stretch * nx - GLASS_PRESS.squash * ny, SPRING.glassFollow);
+    to(scaleY, GLASS_PRESS.scale + GLASS_PRESS.stretch * ny - GLASS_PRESS.squash * nx, SPRING.glassFollow);
+  };
+
+  const release = (e: PointerEvent<HTMLButtonElement>) => {
+    const o = origin.current;
+    if (!o || o.id !== e.pointerId) return;
+    origin.current = null;
+    delete e.currentTarget.dataset.pressed;
+    if (reduced) return;
+    for (const [v, rest] of [[x, 0], [y, 0], [scaleX, 1], [scaleY, 1]] as const) to(v, rest, SPRING.glassRelease);
+  };
+
+  return (
+    <m.button
+      type={type}
+      className={`cp-button cp-button--${kind} t-label${className ? ` ${className}` : ""}`}
+      onClick={onClick}
+      disabled={disabled}
+      style={{ x, y, scaleX, scaleY }}
+      onPointerDown={press}
+      onPointerMove={follow}
+      onPointerUp={release}
+      onPointerCancel={release}
+      onPointerLeave={release}
+    >
+      {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--cp-soft)" />}
+      <span>{children}</span>
+    </m.button>
+  );
+}
+
+/* 画面の本文。入るときに下から打ち込み、着地したら止まる。出るときは動かさずに消す（次の画面を待たせない） */
+export function ScreenMain({ className, children }: { className: string; children: ReactNode }) {
+  return (
+    <m.main
+      className={className}
+      initial={{ opacity: 0, y: OFFSET.enterY }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ y: SPRING.enter, opacity: FADE.quick }}
+    >
+      {children}
+    </m.main>
   );
 }
 
@@ -99,6 +223,16 @@ export function GenderSelect({ value, onChange }: { value: Gender | null; onChan
   );
 }
 
+/* 選んだカードの押印: 少し大きく傾いた所から元より少し下まで打ち込み、0° で収める。選び外したときは動かさない */
+const CARD_VARIANTS: Variants = {
+  stamped: {
+    scale: [OFFSET.cardScale, OFFSET.cardStrikeScale, 1],
+    rotate: [OFFSET.cardRotate, 0, 0],
+    transition: STAMP.card,
+  },
+  rest: { scale: 1, rotate: 0 },
+};
+
 /* CP 選択肢カード（お題と企業理念で共通） */
 export function ChoiceCard({
   category,
@@ -112,22 +246,26 @@ export function ChoiceCard({
   onClick?: () => void;
 }) {
   return (
-    <button
+    <m.button
       type="button"
       className={`cp-choice${selected ? " is-selected" : ""}`}
       aria-pressed={selected}
       onClick={onClick}
+      variants={CARD_VARIANTS}
+      initial={false}
+      animate={selected ? "stamped" : "rest"}
     >
       <span className="cp-choice__head">
         <span className="t-small cp-choice__category">{category}</span>
         {selected && (
           <span className="cp-choice__mark">
+            {/* 印は 3 コマで左から描き込む（app.css の .cp-choice__mark svg） */}
             <CpSymbol name="Done" size={16} />
           </span>
         )}
       </span>
       <span className="t-section cp-choice__label">{label}</span>
-    </button>
+    </m.button>
   );
 }
 
@@ -149,6 +287,7 @@ export function ParticipantRow({
   action,
   onAction,
   onRemove,
+  entering,
 }: {
   name: string;
   gender: Gender;
@@ -158,6 +297,8 @@ export function ParticipantRow({
   action?: string;
   onAction?: () => void;
   onRemove?: () => void;
+  /** 一覧に後から加わった行。上から打ち込んで止まる */
+  entering?: boolean;
 }) {
   const removeButton = onRemove && (
     <button type="button" className="cp-row__remove" aria-label={`${name}さんを削除`} onClick={onRemove}>
@@ -165,7 +306,12 @@ export function ParticipantRow({
     </button>
   );
   return (
-    <div className="cp-row">
+    <m.div
+      className="cp-row"
+      initial={entering ? { opacity: 0, y: OFFSET.rowY } : false}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ y: SPRING.row, opacity: FADE.quick }}
+    >
       <div className="cp-row__info">
         <CpSymbol name="Person" size={28} />
         <div className="cp-row__text">
@@ -187,7 +333,7 @@ export function ParticipantRow({
           {removeButton}
         </div>
       )}
-    </div>
+    </m.div>
   );
 }
 
@@ -216,19 +362,24 @@ export function FloatingBar({ note, children }: { note?: ReactNode; children: Re
     <div className="cp-floating" role="region" aria-label="操作">
       <div className="cp-floating__bar">
         {note && <p className="t-small c-muted cp-floating__note">{note}</p>}
-        {children}
+        <OnGlass.Provider value={true}>{children}</OnGlass.Provider>
       </div>
     </div>
   );
 }
 
-/* 結果画面の上部「ブランド」 */
-export function BrandHeader({ right }: { right?: ReactNode }) {
+/* 結果画面の上部「ブランド」。aboutLink のときは、右端に about へのリンクを置く（トップ画面だけ） */
+export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; aboutLink?: boolean }) {
   return (
     <header className="cp-brand">
       <PairLogo width={30} />
       <span className="t-logo">CP PAIR</span>
       <span className="t-small c-muted cp-brand__right">{right}</span>
+      {aboutLink && (
+        <a className="t-chip cp-link" href="#/about" onClick={() => (aboutEntry.fromApp = true)}>
+          ABOUT
+        </a>
+      )}
     </header>
   );
 }
