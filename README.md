@@ -48,6 +48,7 @@ npm run dev
 | `npm run verify` | 相性の計算が、元のモックと同じ結果を返すかを確かめる |
 | `npm run test:e2e` | ビルドした版を Playwright で動かし、ホストの端末だけで結果まで進む流れと、オフラインでの開き直しを確かめる |
 | `npm run test:firestore` | Firestore のエミュレーターを立て、`firestore.rules` が許す操作と拒む操作、Firestore 版の保存の動きを確かめる |
+| `npm run test:e2e:firestore` | Auth と Firestore のエミュレーターを立て、Firestore 版のビルドを Playwright で動かし、オフラインモードへの切り替えと解除を確かめる |
 
 `test:e2e` を初めて動かす前に `npx playwright install chromium` でブラウザを入れる。
 
@@ -62,7 +63,8 @@ src/
   ui/        共通の部品・記号・トースト
   styles/    デザインの値（tokens.css）と画面のスタイル
   dev/       ?dev の開発パネル
-e2e/         Playwright のテスト
+e2e/         Playwright のテスト（既定の版）
+e2e-firestore/ Playwright のテスト（Firestore 版。エミュレーターにつなぐ）
 test/        Firestore のルールと保存の層のテスト（Vitest）
 scripts/     計算の照合（verify-matching.ts）とスクリーンショットの撮影
 docs/        デザインの値（design/）と全画面のスクリーンショット（screenshots/）
@@ -70,6 +72,7 @@ docs/        デザインの値（design/）と全画面のスクリーンショ
 
 - 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`）で分ける
 - ルームのデータは `src/store/RoomStore.ts` のインターフェースを通して出し入れする。既定は localStorage の実装で、`VITE_ROOM_STORE=firestore` のときだけ Firestore の実装（`firestoreRoomStore.ts`）を使う。設定の雛形は `.env.local.example`、守りは `firestore.rules` にある
+- Firestore 版では、ホストの端末がつながらないときにオフラインモード（ホストの端末 1 台で進める状態）へ自動で入り、そのルームを localStorage の実装に置く。入るのは、ルームを作るときにネットが無いか Firestore に作れなかったときと、ルームの途中でブラウザの `offline` イベントを受けたとき。解除はホストが画面の「各自の端末での参加に戻す」で行い、ホストの端末のルームを Firestore へ引き継ぐ。切り替えは `src/store/index.ts`、記録は `src/store/offlineMode.ts` にある
 - オフライン: `vite-plugin-pwa`（Workbox）の Service Worker が、ビルドした全ファイルを最初の表示のあとに保存する。新しい版は、オンラインで開いたときに取得して入れ替わる
 
 ## 配信
