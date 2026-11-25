@@ -16,12 +16,11 @@ const ANY_COMPANY = {
   metrics: { founded_year: ANY as unknown as number },
 } as Company;
 
-/** 企業の 3 つの値（companies.json の creative.params、1〜5）。
- * 呼び名と両端の言葉は gemini_output/参考_超初期のデータセット仕様書・活用アイデア集.md 40-42 行 */
-export const PARAM_LABELS: readonly { key: keyof CompanyParams; label: string; low: string; high: string }[] = [
-  { key: "stability", label: "堅実・安定度", low: "冒険家・刺激好き", high: "安心感・誠実重視" },
-  { key: "passion", label: "熱血・野心度", low: "まったり・マイペース", high: "情熱的・野心家" },
-  { key: "romance", label: "ロマン・感性度", low: "現実的・合理主義", high: "夢見がち・ロマンチスト" },
+/** 企業の 3 つの値（companies.json の creative.params、1〜5）。呼び名は engine.ts 165 行の称号の説明文の語 */
+export const PARAM_LABELS: readonly { key: keyof CompanyParams; label: string }[] = [
+  { key: "stability", label: "堅実度" },
+  { key: "passion", label: "熱量" },
+  { key: "romance", label: "ロマン" },
 ];
 
 /** 先頭の絵文字を除いた称号（splitTitle と同じ除き方） */
@@ -33,15 +32,15 @@ function plainTitle(title: string): string {
 /** お題のトリガーの条件。presets.ts の各 evaluate を書き下したもの */
 const PRESET_CONDITION: Record<string, string> = {
   // presets.ts 11-16
-  desert_island: "ふたりとも堅実・安定度 4 以上、またはどちらかの業界がインフラ・飲料・食品・日用品・製薬・エネルギー・小売",
+  desert_island: "ふたりとも堅実度 4 以上、またはどちらかの業界がインフラ・飲料・食品・日用品・製薬・エネルギー・小売",
   // presets.ts 27-30
-  theme_song: "ふたりとも熱血・野心度 4 以上、またはキャラ型が同じ",
+  theme_song: "ふたりとも熱量 4 以上、またはキャラ型が同じ",
   // presets.ts 41-45
-  propose: "ふたりともロマン・感性度 4 以上、またはふたりとも堅実・安定度 4 以上",
+  propose: "ふたりともロマン 4 以上、またはふたりとも堅実度 4 以上",
   // presets.ts 56-61
-  first_date: "どちらかの堅実・安定度が 5、またはどちらかの業界が鉄道・航空・通信・外食・小売・旅行・観光",
+  first_date: "どちらかの堅実度が 5、またはどちらかの業界が鉄道・航空・通信・外食・小売・旅行・観光",
   // presets.ts 72-77
-  gokon_vibe: "ふたりの熱血・野心度とロマン・感性度の合計が 15 以上",
+  gokon_vibe: "ふたりの熱量とロマンの合計が 15 以上",
 };
 
 export interface TagRule {
@@ -99,13 +98,13 @@ export function titleRules(): TitleRule[] {
     { condition: "創業年が同じ", titles: one(t.foundedYear.buildSameYearTitle(ANY_COMPANY.metrics.founded_year)) },
     { condition: "創業年の差が 100 年以上", titles: one(t.foundedYear.buildGapTitle(ANY_COMPANY.metrics.founded_year)) },
     // engine.ts 159-161: stabilitySync >= 0.75 は差 1 以下、passionGap・romanceGap >= 0.5 は差 2 以上（値は 1〜5、差を 4 で割る）
-    { condition: "堅実・安定度の差が 1 以下で、熱血・野心度かロマン・感性度の差が 2 以上", titles: one(HYBRID_TITLE) },
+    { condition: "堅実度の差が 1 以下で、熱量かロマンの差が 2 以上", titles: one(HYBRID_TITLE) },
     { condition: "どれにも当てはまらない", titles: one(BALANCE_TITLE) },
   ];
 }
 
 export interface ArchetypeRule extends Archetype {
-  /** 診断コメント（personality_comment）にこの語のどれかが入っていれば、この型。空ならどれにも当てはまらないとき */
+  /** 診断カルテの文（personality_comment）にこの語のどれかが入っていれば、この型。空ならどれにも当てはまらないとき */
   words: string[];
 }
 

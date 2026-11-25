@@ -64,26 +64,17 @@ export function RulesScreen() {
         </div>
 
         <Section title="3 つの値">
-          <p className="t-small c-muted">企業ごとに 1〜5 の値を持つ。相性度の基本点と、お題のタグと称号の判定に使う。</p>
-          <ul className="rl-list">
-            {PARAM_LABELS.map((p) => (
-              <li key={p.key} className="rl-item">
-                <p className="t-type">{p.label}</p>
-                <p className="t-small c-muted">
-                  1: {p.low} 〜 5: {p.high}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <p className="t-type">{PARAM_LABELS.map((p) => p.label).join("・")}</p>
+          <p className="t-small c-muted">企業ごとに 1〜5。</p>
         </Section>
 
         <Section title="こじつけ相性度">
           <p className="t-body">基本点（52〜90）と、付いたタグの点の合計。50〜100% に収める。</p>
-          <p className="t-small c-muted">基本点は、堅実・安定度が近いほど、熱血・野心度とロマン・感性度が離れているほど高い。</p>
+          <p className="t-small c-muted">基本点は、堅実度が近いほど、熱量とロマンが離れているほど高い。</p>
         </Section>
 
         <Section title="キャラ型">
-          <p className="t-small c-muted">カルテの診断コメントに次の語が入っているかを上から順に見て、最初に当てはまった型になる。</p>
+          <p className="t-small c-muted">診断カルテの文に次の語が入っているかを上から順に見て、最初に当てはまった型になる。</p>
           <ul className="rl-list">
             {archetypeRules().map((r) => (
               <li key={r.code} className="rl-item">

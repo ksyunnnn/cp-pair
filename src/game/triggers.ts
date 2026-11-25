@@ -1,7 +1,7 @@
 // gemini_output/v1.1_モック.html の TRIGGER_CONFIG を移したもの。値と式は変えない（キャラ型の判定の並びだけ ARCHETYPE_RULES に出した）。
 import type { Archetype, Company } from "./types.ts";
 
-// キャラ型の判定。診断コメント（personality_comment）を上から順に照らし、最初に当てはまった型にする。
+// キャラ型の判定。診断カルテの文（personality_comment）を上から順に照らし、最初に当てはまった型にする。
 // 結果画面の「診断の説明」が語の一覧を読むため、classify から取り出して並べた（値と順は元のまま）。
 export const ARCHETYPE_RULES: readonly (Archetype & { pattern: RegExp })[] = [
   { code: "RM-型", label: "夢見るロマンチスト気質", pattern: /ロマン|夢|ドラマ|サプライズ|芸術|理想/ },
