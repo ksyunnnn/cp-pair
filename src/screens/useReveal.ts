@@ -89,14 +89,20 @@ export function useReveal(_key: string, finalScore: number | null, glyphCount: n
 
   const running = elapsed !== Infinity;
 
-  // 描く前に、ページを先頭へ戻してから中央までの距離を測り、見出しと相性度を中央へ置く
+  // 描く前に、ページを先頭へ戻してから中央までの距離を測り、見出しと相性度を中央へ置く。
+  // 再読み込みでは、ルームのデータが揃う前の描画で部品がまだ無いことがあるため、部品が揃った描画で 1 度だけ測る。
+  // ブラウザが再読み込み前のスクロール位置へ戻さないよう、発表の間は scrollRestoration を manual にする。
   const [initialRunning] = useState(running);
+  const measured = useRef(false);
   useLayoutEffect(() => {
-    if (!initialRunning) return;
+    if (!initialRunning || measured.current) return;
+    if (!eyebrowRef.current || (hasScore && !scoreRef.current)) return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
     eyebrowY.jump(offsetToCenter(eyebrowRef.current));
     scoreY.jump(offsetToCenter(scoreRef.current));
-  }, [initialRunning, eyebrowY, scoreY]);
+    measured.current = true;
+  });
 
   useEffect(() => {
     if (!running) return;
