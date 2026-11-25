@@ -1,5 +1,5 @@
 // ルームのデータの出し入れはこのインターフェースを通す。
-// ブラウザ内の実装は localRoomStore.ts。Firebase に差し替えるときは同じ形の実装を作り、index.ts で切り替える。
+// ブラウザ内の実装は localRoomStore.ts、端末をまたぐ実装は firestoreRoomStore.ts。どちらを使うかは index.ts で切り替える。
 import type { Gender, JoinType, MatchResult, Participant } from "../game/types.ts";
 
 export type RoomStatus = "open" | "declared";

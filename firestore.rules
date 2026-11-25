@@ -1,0 +1,158 @@
+rules_version = '2';
+
+// CP PAIR の通常モード（各自の端末で参加）の保存先。読み書きの実装は src/store/firestoreRoomStore.ts。
+//
+// 形:
+//  - rooms/{roomId}                       ホストが作る。hostUid が作った人の匿名認証の uid
+//  - rooms/{roomId}/participants/{pid}    参加者。ownerUid がその参加者を動かせる uid
+//                                         （自分の端末で参加した人は本人、手動で登録した人はホスト）
+//  - rooms/{roomId}/claims/{companyId}    理念の札。1 つの理念を選べるのは 1 人だけ、を文書の一意性で守る
+//
+// 守ること（RoomStore.ts の約束と、画面から読み取った役割）:
+//  - 読み書きはすべて匿名認証を含むサインイン済みの利用者だけ
+//  - 宣言・宣言の取り消し・参加者の削除・手動の参加者の登録はホストだけ
+//  - 参加者の選択を変えられるのは、その参加者の ownerUid だけ
+//  - 他の参加者が選んだ理念は選べない（claims の文書が既にあれば作れない）
+//  - 宣言の後は、参加・選択・選択の解除・削除ができない
+//  - 参加者の selectedCompanyId と claims は常に食い違わない（同じ一括の書き込みで変える）
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function roomPath(roomId) {
+      return /databases/$(database)/documents/rooms/$(roomId);
+    }
+
+    function participantPath(roomId, pid) {
+      return /databases/$(database)/documents/rooms/$(roomId)/participants/$(pid);
+    }
+
+    function claimPath(roomId, companyId) {
+      return /databases/$(database)/documents/rooms/$(roomId)/claims/$(companyId);
+    }
+
+    function isHost(roomId) {
+      return signedIn() && get(roomPath(roomId)).data.hostUid == request.auth.uid;
+    }
+
+    function roomOpen(roomId) {
+      return get(roomPath(roomId)).data.status == 'open';
+    }
+
+    function isCompanyId(value) {
+      return value is int && value >= 1;
+    }
+
+    match /rooms/{roomId} {
+      // ルームの ID を知っている人だけが開ける。一覧は出さない
+      allow get: if signedIn();
+      allow list: if false;
+
+      allow create: if signedIn()
+        && roomId.matches('^[0-9A-Z]{5}$')
+        && request.resource.data.keys().hasOnly(['hostUid', 'presetId', 'status', 'result', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['hostUid', 'presetId', 'status', 'result', 'createdAt', 'updatedAt'])
+        && request.resource.data.hostUid == request.auth.uid
+        && request.resource.data.presetId is string
+        && request.resource.data.presetId.size() >= 1
+        && request.resource.data.presetId.size() <= 64
+        && request.resource.data.status == 'open'
+        && request.resource.data.result == null
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+
+      // 宣言（open → declared）と取り消し（declared → open）だけ。ホストだけ
+      allow update: if signedIn()
+        && resource.data.hostUid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'result', 'updatedAt'])
+        && request.resource.data.updatedAt == request.time
+        && (
+          (resource.data.status == 'open'
+            && request.resource.data.status == 'declared'
+            && request.resource.data.result is map
+            && request.resource.data.result.keys().hasAll(['pairs', 'unmatched', 'presetId', 'timestamp'])
+            && request.resource.data.result.pairs is list
+            && request.resource.data.result.unmatched is list
+            && request.resource.data.result.presetId == resource.data.presetId
+            && request.resource.data.result.timestamp is string)
+          ||
+          (resource.data.status == 'declared'
+            && request.resource.data.status == 'open'
+            && request.resource.data.result == null)
+        );
+
+      allow delete: if false;
+
+      match /participants/{pid} {
+        allow read: if signedIn();
+
+        // 自分の端末で参加する人は誰でも、手動の参加者はホストだけが登録できる。宣言の後は登録できない
+        allow create: if signedIn()
+          && roomOpen(roomId)
+          && request.resource.data.keys().hasOnly(['ownerUid', 'name', 'gender', 'joinType', 'selectedCompanyId', 'joinedAt'])
+          && request.resource.data.keys().hasAll(['ownerUid', 'name', 'gender', 'joinType', 'selectedCompanyId', 'joinedAt'])
+          && request.resource.data.ownerUid == request.auth.uid
+          && request.resource.data.name is string
+          && request.resource.data.name.size() >= 1
+          && request.resource.data.name.size() <= 12
+          && request.resource.data.gender in ['M', 'F']
+          && request.resource.data.joinType in ['device', 'manual']
+          && (request.resource.data.joinType == 'device' || isHost(roomId))
+          && request.resource.data.selectedCompanyId == null
+          && request.resource.data.joinedAt == request.time;
+
+        // 選択と解除。変えられるのは selectedCompanyId だけで、claims と同じ一括の書き込みで変える
+        allow update: if signedIn()
+          && resource.data.ownerUid == request.auth.uid
+          && roomOpen(roomId)
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['selectedCompanyId'])
+          && (
+            request.resource.data.selectedCompanyId == null
+            || (isCompanyId(request.resource.data.selectedCompanyId)
+              && existsAfter(claimPath(roomId, string(request.resource.data.selectedCompanyId)))
+              && getAfter(claimPath(roomId, string(request.resource.data.selectedCompanyId))).data.participantId == pid)
+          )
+          && (
+            resource.data.selectedCompanyId == null
+            || resource.data.selectedCompanyId == request.resource.data.selectedCompanyId
+            || !existsAfter(claimPath(roomId, string(resource.data.selectedCompanyId)))
+          );
+
+        // ホストだけ。選んでいた理念の札も同じ一括の書き込みで外す
+        allow delete: if isHost(roomId)
+          && roomOpen(roomId)
+          && (resource.data.selectedCompanyId == null
+            || !existsAfter(claimPath(roomId, string(resource.data.selectedCompanyId))));
+      }
+
+      match /claims/{companyId} {
+        // 選ぶ前に「ほかの人が選んだか」を確かめるために読む
+        allow get: if signedIn();
+        allow list: if false;
+
+        // 札を取れるのは、同じ一括の書き込みでその理念を選ぶ参加者の ownerUid だけ。既にある札は作れない（create にならない）
+        allow create: if signedIn()
+          && roomOpen(roomId)
+          && companyId.matches('^[1-9][0-9]*$')
+          && request.resource.data.keys().hasOnly(['participantId'])
+          && request.resource.data.participantId is string
+          && get(participantPath(roomId, request.resource.data.participantId)).data.ownerUid == request.auth.uid
+          && getAfter(participantPath(roomId, request.resource.data.participantId)).data.selectedCompanyId == int(companyId);
+
+        allow update: if false;
+
+        // 札を外せるのは、札の参加者の ownerUid かホスト。参加者の選択が札を指したまま外すことはできない
+        allow delete: if signedIn()
+          && roomOpen(roomId)
+          && (get(participantPath(roomId, resource.data.participantId)).data.ownerUid == request.auth.uid
+            || isHost(roomId))
+          && (!existsAfter(participantPath(roomId, resource.data.participantId))
+            || getAfter(participantPath(roomId, resource.data.participantId)).data.selectedCompanyId != int(companyId));
+      }
+    }
+  }
+}
