@@ -111,7 +111,7 @@ function PickOnHost({ room, reach }: { room: Room; reach: Exclude<HostReach, "ok
   return (
     <div className="cp-page">
       <BrandHeader right={`ルーム ${room.id}`} />
-      <main className="cp-content">
+      <ScreenMain className="cp-content">
         <ProgressSteps current={2} />
         <ScreenHeading
           eyebrow="PICK ON THE HOST DEVICE"
@@ -124,7 +124,7 @@ function PickOnHost({ room, reach }: { room: Room; reach: Exclude<HostReach, "ok
           }
         />
         <ThemeCard room={room} />
-      </main>
+      </ScreenMain>
     </div>
   );
 }
