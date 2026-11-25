@@ -23,10 +23,12 @@ export const SPRING = {
   seal: { type: "spring", visualDuration: 0.18, bounce: 0.3 },
   /** 結果の名前と理念が出る */
   settle: { type: "spring", visualDuration: 0.3, bounce: 0 },
-  /** ガラスの上のボタンを押した瞬間（膨らむ）。gel のように少し行き過ぎる */
+  /** ガラスの上のボタンを押した瞬間（膨らんで浮く）。gel のように少し行き過ぎる */
   glassPress: { type: "spring", visualDuration: 0.16, bounce: 0.3 },
-  /** ガラスの上のボタンを離したとき（戻る） */
-  glassRelease: { type: "spring", visualDuration: 0.4, bounce: 0.3 },
+  /** ガラスの上のボタンを押したまま指を動かしたとき（指へ寄って伸びる） */
+  glassFollow: { type: "spring", visualDuration: 0.15, bounce: 0 },
+  /** ガラスの上のボタンを離したとき（大きさ・位置が元に戻る） */
+  glassRelease: { type: "spring", visualDuration: 0.4, bounce: 0.25 },
   /** トーストが出る */
   toast: { type: "spring", visualDuration: 0.3, bounce: 0.15 },
 } as const satisfies Record<string, Transition>;
@@ -46,8 +48,19 @@ export const BLINK_EVERY = 3;
 /** 押したときの縮み */
 export const PRESS_SCALE = 0.96;
 
-/** ガラスの上のボタンを押したときの膨らみ。横に少し多く伸ばす（Liquid Glass の flex） */
-export const GLASS_PRESS = { scaleX: 1.05, scaleY: 1.03 } as const;
+/**
+ * ガラスの上のボタンを押したときの動き（iOS 26.3 Safari の segmented control の thumb を見て合わせた）。
+ * 押すと scale だけ膨らみ、押したまま動かすと指へ寄る。寄る量は指の移動 × follow を tanh で maxX / maxY に収める。
+ * 動かした向きに stretch だけ伸ばし、直交する向きを squash だけ縮める
+ */
+export const GLASS_PRESS = {
+  scale: 1.1,
+  follow: 0.2,
+  maxX: 6,
+  maxY: 4,
+  stretch: 0.06,
+  squash: 0.03,
+} as const;
 
 /** 動き始めの距離（px）・大きさ・角度（deg）。どれも最後は元の位置・大きさ・0° に戻る */
 export const OFFSET = {

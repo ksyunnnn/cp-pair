@@ -421,43 +421,40 @@ html:has(.cp-floating) {
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
-/* バーの中のボタン（Liquid Glass の押し方）。押すと指の下から光が広がり、離すと消える（WWDC25 Meet Liquid Glass） */
+/* バーの中のボタン（Liquid Glass の押し方）。押すと塗りが透明なガラスに変わり、膨らんで浮く。
+   膨らみ・指への追従は Motion が書く（components.tsx の GlassButton）。はみ出させるため overflow で切らない */
 .cp-floating__bar .cp-button {
   position: relative;
-  overflow: hidden;
-  isolation: isolate;
+  /* 押したまま横へ動かす指を、ブラウザのスクロールに取られないようにする */
+  touch-action: none;
+  transition:
+    opacity 0.18s ease,
+    background-color var(--motion-glass-fill-out) ease-out,
+    box-shadow var(--motion-glass-fill-out) ease-out;
 }
-.cp-floating__bar .cp-button::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(
-    circle 120px at var(--press-x, 50%) var(--press-y, 50%),
-    var(--glass-press-glow) 0%,
-    transparent 100%
-  );
-  opacity: 0;
-  transition: opacity var(--motion-glass-glow-out) ease-out;
-}
-.cp-floating__bar .cp-button:active:not(:disabled) {
+.cp-floating__bar .cp-button[data-pressed],
+.cp-floating__bar .cp-button:active:focus-visible {
+  z-index: 1;
   opacity: 1;
-}
-.cp-floating__bar .cp-button:active:not(:disabled)::after {
-  opacity: 1;
-  transition-duration: var(--motion-glass-glow-in);
+  -webkit-backdrop-filter: var(--glass-press-filter);
+  backdrop-filter: var(--glass-press-filter);
+  transition-duration: var(--motion-glass-fill-in);
 }
 /* 副ボタンは塗らずにガラスの上の文字にする（HIG Toolbars: Reduce the use of toolbar backgrounds and tinted controls） */
 .cp-floating__bar .cp-button--secondary {
-  background: transparent;
-  --glass-press-glow: rgba(255, 255, 255, 0.95);
+  background-color: transparent;
 }
-.cp-floating__bar .cp-button--secondary:active:not(:disabled) {
-  background: rgba(255, 255, 255, 0.35);
+.cp-floating__bar .cp-button--secondary[data-pressed],
+.cp-floating__bar .cp-button--secondary:active:focus-visible {
+  background-color: var(--glass-press-secondary);
+  box-shadow: var(--glass-press-rim-light), var(--glass-press-lift);
 }
-.cp-floating__bar .cp-button--primary {
-  --glass-press-glow: rgba(255, 255, 255, 0.32);
+/* 主ボタンは墨を透かし、文字は CP paper のまま。文字の縁を少し締めて読ませる */
+.cp-floating__bar .cp-button--primary[data-pressed],
+.cp-floating__bar .cp-button--primary:active:focus-visible {
+  background-color: var(--glass-press-primary);
+  box-shadow: var(--glass-press-rim), var(--glass-press-lift);
+  text-shadow: 0 0 2px rgba(34, 35, 31, 0.45);
 }
 .cp-floating__note {
   text-align: center;
