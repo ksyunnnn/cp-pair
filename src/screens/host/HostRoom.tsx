@@ -145,18 +145,24 @@ function HostLobby({ room }: { room: Room }) {
 
         <Section title="URL を開けない人" aside="ホストの端末で選びます">
           {adding ? (
-            <div className="cp-stack cp-stack--16">
+            <form
+              className="cp-stack cp-stack--16"
+              onSubmit={(e) => {
+                e.preventDefault();
+                add();
+              }}
+            >
               <NicknameInput value={name} onChange={setName} autoFocus />
               <GenderSelect value={gender} onChange={setGender} />
               <div className="cp-button-row">
                 <Button kind="link" onClick={() => setAdding(false)}>
                   やめる
                 </Button>
-                <Button kind="secondary" onClick={add}>
+                <Button kind="secondary" type="submit">
                   登録する
                 </Button>
               </div>
-            </div>
+            </form>
           ) : (
             <Button kind="link" onClick={() => setAdding(true)}>
               参加者を手動で追加

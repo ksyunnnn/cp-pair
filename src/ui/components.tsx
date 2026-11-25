@@ -1,5 +1,5 @@
 // Framer の部品 10 個を React にしたもの。値は docs/design/framer-values.md の「部品」による。
-import type { ReactNode } from "react";
+import type { KeyboardEvent, ReactNode } from "react";
 import type { Gender, JoinType } from "../game/types.ts";
 import { CpSymbol, PairLogo, type SymbolName } from "./symbols.tsx";
 
@@ -49,6 +49,8 @@ export function NicknameInput({
         placeholder={placeholder}
         maxLength={12}
         autoComplete="off"
+        autoCorrect="off"
+        spellCheck={false}
         enterKeyHint="done"
         autoFocus={autoFocus}
       />
@@ -62,18 +64,30 @@ export function GenderSelect({ value, onChange }: { value: Gender | null; onChan
     { value: "M", label: "男性" },
     { value: "F", label: "女性" },
   ];
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const steps: Record<string, number> = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+    const step = steps[e.key];
+    if (!step) return;
+    e.preventDefault();
+    const current = options.findIndex((o) => o.value === value);
+    const next = (Math.max(current, 0) + step + options.length) % options.length;
+    onChange(options[next].value);
+    e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="radio"]')[next]?.focus();
+  };
   return (
     <div className="cp-field">
       <span className="t-label" id="gender-label">
         性別
       </span>
-      <div className="cp-gender" role="radiogroup" aria-labelledby="gender-label">
-        {options.map((o) => (
+      {/* 矢印キーで選び替え、Tab では選んだ 1 つにだけ止まる（W3C APG Radio Group https://www.w3.org/WAI/ARIA/apg/patterns/radio/ ） */}
+      <div className="cp-gender" role="radiogroup" aria-labelledby="gender-label" onKeyDown={onKeyDown}>
+        {options.map((o, i) => (
           <button
             key={o.value}
             type="button"
             role="radio"
             aria-checked={value === o.value}
+            tabIndex={value === o.value || (value === null && i === 0) ? 0 : -1}
             className={`cp-gender__option t-label${value === o.value ? " is-selected" : ""}`}
             onClick={() => onChange(o.value)}
           >

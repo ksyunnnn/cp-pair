@@ -37,6 +37,15 @@ button {
   margin: 0;
 }
 
+/* 押す部品では、2 回続けて押したときの拡大を止める（ピンチでの拡大は残る）
+   https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action */
+button,
+a,
+input,
+label {
+  touch-action: manipulation;
+}
+
 /* 日本語の改行を文節で（題や理念が単語の途中で折れないように） */
 .t-title,
 .t-section,
@@ -66,7 +75,8 @@ button {
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 24px var(--page-x) 16px;
+  /* ホーム画面から開いたとき、状態バーの領域に重ならないように（Safari のタブの中では 0） */
+  padding: calc(24px + env(safe-area-inset-top)) var(--page-x) 16px;
 }
 .cp-brand__right {
   flex: 1;
@@ -80,7 +90,12 @@ button {
   padding: 16px var(--page-x) 32px;
 }
 .cp-content.has-floating {
-  padding-bottom: var(--floating-clearance);
+  /* 操作バーはホームインジケーターの領域の分だけ上がるため、同じ分を足す */
+  padding-bottom: calc(var(--floating-clearance) + env(safe-area-inset-bottom));
+}
+/* キーボードで移った先が操作バーの下に隠れないように（WCAG 2.2 の 2.4.11 Focus Not Obscured） */
+html:has(.cp-floating) {
+  scroll-padding-bottom: calc(var(--floating-clearance) + env(safe-area-inset-bottom));
 }
 
 .cp-eyebrow {
