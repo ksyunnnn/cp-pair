@@ -6,12 +6,13 @@ import { TRIGGER_CONFIG } from "../game/triggers.ts";
 import { companyMeta, splitTitle, splitTitleBody, tagIcon, tagLabel, type TagIcon } from "../game/present.ts";
 import type { Archetype, MatchedPerson, MatchResult, UnmatchedPerson } from "../game/types.ts";
 import { BrandHeader, Button } from "../ui/components.tsx";
+import { COLOR } from "../styles/tokens.ts";
 import { PairLogo } from "../ui/symbols.tsx";
 
 const PHOSPHOR_WEIGHT = "regular" as const;
 
 function PhIcon({ name, size }: { name: TagIcon; size: number }) {
-  const props = { size, color: "#22231F", weight: PHOSPHOR_WEIGHT, style: { display: "block", flexShrink: 0 } };
+  const props = { size, color: COLOR.ink, weight: PHOSPHOR_WEIGHT, style: { display: "block", flexShrink: 0 } };
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;
   return <Intersect {...props} />;

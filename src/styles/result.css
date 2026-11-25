@@ -34,7 +34,7 @@
   flex-direction: column;
   gap: 18px;
   padding: 24px;
-  border-radius: 24px;
+  border-radius: var(--radius-card-ink);
   background: var(--cp-ink);
   color: var(--cp-paper);
 }
@@ -95,7 +95,7 @@
   align-items: center;
   gap: 7px;
   padding: 6px 11px;
-  border-radius: 8px;
+  border-radius: var(--radius-chip);
   background: var(--cp-soft);
 }
 /* Framer の描画では、この文字の枠は高さ 20px（Inter の行に日本語が混ざるため）。行の高さを 20px にして揃える */
@@ -109,7 +109,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: var(--radius-card);
   border: 1px solid var(--cp-line);
 }
 .r-you__phrase {
@@ -145,7 +145,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: var(--radius-field);
   background: var(--cp-soft);
   text-align: center;
 }

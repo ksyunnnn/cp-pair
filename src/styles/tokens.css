@@ -21,6 +21,12 @@
   --font-latin: "Inter", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   --inter-features: "cv03" 1, "cv04" 1, "cv09" 1, "cv11" 1;
 
+  /* 角丸（部品の値。docs/design/framer-values.md の「部品」）。高さの半分で丸めるもの（ボタン・番号・印）は、高さとともに書く */
+  --radius-chip: 8px;
+  --radius-field: 12px;
+  --radius-card: 20px;
+  --radius-card-ink: 24px;
+
   /* 余白（結果画面 WQLkyLRf1 の値） */
   --page-x: 24px;
   --block-gap: 28px;
@@ -31,6 +37,17 @@
   --glass-blur: 20px;
   --glass-border: 1px solid rgba(244, 242, 235, 0.9);
   --glass-shadow: 0px 4px 16px 0px rgba(34, 35, 31, 0.08);
+
+  /* 浮いた操作バーの高さ（約 113px）＋余白。足した値 */
+  --floating-clearance: 160px;
+
+  /* 開発パネル（?dev のときだけ出る）。Framer にない値 */
+  --dev-bg: #111;
+  --dev-surface: #1d1d1d;
+  --dev-fg: #e5e5e5;
+  --dev-fg-muted: #9a9a9a;
+  --dev-line: #888;
+  --dev-line-soft: #444;
 }
 
 /* 文字スタイル（TextStylePresetNode） */
