@@ -3,7 +3,7 @@
 .r-content {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 48px;
   padding: 16px 24px 32px;
 }
 
@@ -13,14 +13,26 @@
   flex-direction: column;
   gap: 14px;
 }
+/* 名前を主役にする: 前後に間を取り、文字を画面幅に合わせて大きくする */
+.r-partner > .r-name {
+  margin: 20px 0 22px;
+}
+.r-partner > .r-score {
+  margin-top: 18px;
+}
 .r-name {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 12px;
 }
 .r-name__text {
   min-width: 0;
   overflow-wrap: anywhere;
+  font-size: clamp(56px, 19vw, 80px);
+  line-height: 1.05;
+}
+.r-name__mark {
+  align-self: center;
 }
 .r-name__mark {
   flex: 1;
@@ -74,7 +86,7 @@
   flex-direction: column;
   gap: 12px;
   border-top: 1px solid var(--cp-line);
-  padding-top: 24px;
+  padding-top: 32px;
 }
 .r-talk__head {
   display: flex;
