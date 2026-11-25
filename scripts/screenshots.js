@@ -8,6 +8,9 @@ async (page) => {
   const OUT = "docs/screenshots/";
   const shot = async (name) => {
     await page.waitForTimeout(450);
+    // 結果の発表（約 3 秒）が終わり、静止してから撮る
+    await page.waitForFunction(() => !document.querySelector("[data-revealing]"));
+    await page.waitForTimeout(450);
     await page.screenshot({ path: `${OUT}${name}.png` });
   };
   const readRoom = (id) =>

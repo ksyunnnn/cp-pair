@@ -5,7 +5,7 @@ import { getPreset } from "../game/presets.ts";
 import { pad2 } from "../game/present.ts";
 import type { Company, Participant } from "../game/types.ts";
 import { roomStore, type Room } from "../store/index.ts";
-import { Button, ChoiceCard, FloatingBar, ProgressSteps, ScreenHeading } from "../ui/components.tsx";
+import { Button, ChoiceCard, FloatingBar, ProgressSteps, ScreenHeading, ScreenMain } from "../ui/components.tsx";
 import { CpSymbol } from "../ui/symbols.tsx";
 import { useToast } from "../ui/toast.tsx";
 
@@ -94,7 +94,7 @@ export function PhilosophyPicker({
 
   return (
     <>
-      <main className="cp-content has-floating">
+      <ScreenMain className="cp-content has-floating">
         <ProgressSteps current={2} />
         <ScreenHeading
           eyebrow="PICK A PHILOSOPHY"
@@ -118,7 +118,7 @@ export function PhilosophyPicker({
             {secondary.label}
           </Button>
         )}
-      </main>
+      </ScreenMain>
       <FloatingBar note={chosen === null ? `${participant.name}さんの番です。ひとつ選んでください` : `${participant.name}さんの理念として送ります`}>
         <div className="cp-button-row">
           <Button kind="secondary" onClick={reroll}>

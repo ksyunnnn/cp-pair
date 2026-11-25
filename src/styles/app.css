@@ -149,7 +149,8 @@ html:has(.cp-floating) {
   justify-content: center;
   gap: 12px;
   cursor: pointer;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  /* 押したときの縮みは Motion が書く（components.tsx の Button）。transform に CSS の transition を重ねない */
+  transition: opacity 0.18s ease;
 }
 .cp-button--primary {
   background: var(--cp-ink);
@@ -272,6 +273,18 @@ html:has(.cp-floating) {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+/* 印を左から 3 コマで描き込む（なめらかに補間しない）。印が出たときに 1 回だけ */
+.cp-choice__mark svg {
+  animation: cp-mark-draw var(--motion-mark) steps(3, jump-start);
+}
+@keyframes cp-mark-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 /* ---------- バッジ ---------- */
@@ -447,7 +460,6 @@ html:has(.cp-floating) {
   backdrop-filter: blur(var(--glass-blur));
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
-  animation: cp-toast-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2);
 }
 .cp-toast__icon {
   width: 28px;
@@ -464,16 +476,6 @@ html:has(.cp-floating) {
 }
 .cp-toast--warn .cp-toast__icon {
   background: var(--cp-accent);
-}
-@keyframes cp-toast-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 /* ---------- 共有カード ---------- */
@@ -541,6 +543,26 @@ html:has(.cp-floating) {
   align-items: baseline;
   gap: 12px;
   flex-wrap: wrap;
+}
+/* 記号の目のまばたき: 半分 → 閉じる の 2 コマ。目の形は変えず、縦に縮めるだけ。
+   間隔は Handoff.tsx が is-blinking を付けて刻む（ふだんは動きを持たせず、静止の描画を変えない） */
+.cp-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.cp-blink.is-blinking {
+  animation: cp-blink calc(var(--motion-frame) * 2) step-end;
+}
+@keyframes cp-blink {
+  0% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
+  100% {
+    transform: none;
+  }
 }
 
 /* ---------- 開発パネル（本番の画面には出ない） ---------- */
@@ -615,7 +637,8 @@ html:has(.cp-floating) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cp-toast {
+  /* まばたきは止めて静止画にする。印の描き込みは位置が動かないため残す */
+  .cp-blink.is-blinking {
     animation: none;
   }
   .cp-button,

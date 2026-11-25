@@ -175,3 +175,28 @@
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
+
+/* 結果の発表（src/screens/useReveal.ts）。名前・理念・相性・称号は Motion が出し、ほかの区画（.r-later）はここで出す。
+   途中の区画は押せない。本文を押すと最後の状態へ飛ぶ */
+.r-content[data-revealing] > * {
+  pointer-events: none;
+}
+.r-content[data-later="off"] .r-later {
+  opacity: 0;
+}
+.r-content[data-later="on"] .r-later {
+  /* backwards: 待つ間は隠し、終わった後は animation を残さない（静止の描画を変えない） */
+  animation: r-later-in var(--motion-fade) ease-out var(--motion-fade-delay) backwards;
+}
+@keyframes r-later-in {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* 段取りを省き、全体を一度に出す */
+  .r-content[data-later="on"] .r-later {
+    animation-delay: 0s;
+    animation-duration: var(--motion-fade-reveal);
+  }
+}

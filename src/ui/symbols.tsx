@@ -52,6 +52,7 @@ export function CpSymbol({
   eyeColor = "var(--cp-paper)",
   style,
   className,
+  eyeClassName,
 }: {
   name: SymbolName;
   size?: number;
@@ -59,6 +60,8 @@ export function CpSymbol({
   eyeColor?: string;
   style?: CSSProperties;
   className?: string;
+  /** 目のパスに付けるクラス（まばたきに使う） */
+  eyeClassName?: string;
 }) {
   return (
     <svg
@@ -74,7 +77,7 @@ export function CpSymbol({
         <path key={d} d={d} fill={color} />
       ))}
       {(EYES[name] || []).map((d) => (
-        <path key={d} d={d} fill={eyeColor} />
+        <path key={d} d={d} fill={eyeColor} className={eyeClassName} />
       ))}
     </svg>
   );

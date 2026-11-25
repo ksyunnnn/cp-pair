@@ -5,7 +5,7 @@ import { pad2 } from "../../game/present.ts";
 import { rememberHostRoom } from "../../device.ts";
 import { navigate } from "../../router.ts";
 import { roomStore } from "../../store/index.ts";
-import { BrandHeader, Button, ChoiceCard, FloatingBar, ProgressSteps, ScreenHeading } from "../../ui/components.tsx";
+import { BrandHeader, Button, ChoiceCard, FloatingBar, ProgressSteps, ScreenHeading, ScreenMain } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
 
@@ -26,7 +26,7 @@ export function HostStart() {
   return (
     <div className="cp-page">
       <BrandHeader right="ホストの端末" />
-      <main className="cp-content has-floating">
+      <ScreenMain className="cp-content has-floating">
         <ProgressSteps current={1} />
         <ScreenHeading
           eyebrow="HOST · CHOOSE A THEME"
@@ -45,7 +45,7 @@ export function HostStart() {
             />
           ))}
         </div>
-      </main>
+      </ScreenMain>
       <FloatingBar note={presetId ? "ルームを作ると、招待の QR コードと URL が出ます" : "お題を選ぶと、ルームを作れます"}>
         <Button onClick={create} disabled={!presetId || busy}>
           このお題でルームを作る

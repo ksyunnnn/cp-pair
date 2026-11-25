@@ -54,3 +54,32 @@ test('一度開いた後は、オフラインで開き直しても遊べる', as
   await expect(page.getByRole('heading', { name: '今夜のお題を選ぶ' })).toBeVisible()
   await playHostOnly(page)
 })
+
+test('結果の発表は、画面を押すと最後の状態へ飛ぶ', async ({ page }) => {
+  await page.goto('/')
+  await playHostOnly(page)
+  await page.getByRole('button', { name: '端末を渡して見せる' }).first().click()
+  await page.getByRole('button', { name: /^私は.+です$/ }).click()
+
+  // 発表の途中（ため 1.2 秒）は、相手の名前がまだ見えない
+  const main = page.locator('main.r-content')
+  await expect(main).toHaveAttribute('data-revealing', 'true')
+  await expect(page.locator('.r-name')).toHaveCSS('opacity', '0')
+
+  await main.click()
+  await expect(main).not.toHaveAttribute('data-revealing')
+  await expect(page.locator('.r-name')).toHaveCSS('opacity', '1')
+  await expect(page.locator('.r-score__title')).toHaveCSS('transform', 'none')
+  await expect(page.getByText(/^\d+%$/)).toBeVisible()
+})
+
+test('reduced motion では、結果の発表を待たずに出す', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/')
+  await playHostOnly(page)
+  await page.getByRole('button', { name: '端末を渡して見せる' }).first().click()
+  await page.getByRole('button', { name: /^私は.+です$/ }).click()
+
+  await expect(page.locator('main.r-content')).not.toHaveAttribute('data-revealing')
+  await expect(page.locator('.r-name')).toHaveCSS('opacity', '1')
+})
