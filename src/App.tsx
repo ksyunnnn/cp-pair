@@ -5,6 +5,7 @@ import { HostRoom, RoomMissing } from "./screens/host/HostRoom.tsx";
 import { HostStart } from "./screens/host/HostStart.tsx";
 import { ParticipantRoom } from "./screens/participant/ParticipantRoom.tsx";
 import { useRoom } from "./store/index.ts";
+import { OfflineReady } from "./ui/offlineReady.tsx";
 import { ToastProvider } from "./ui/toast.tsx";
 
 function Screen() {
@@ -32,6 +33,7 @@ export default function App() {
   const route = useRoute();
   return (
     <ToastProvider>
+      <OfflineReady />
       <Screen />
       {isDevMode() && <DevPanel route={route} />}
     </ToastProvider>

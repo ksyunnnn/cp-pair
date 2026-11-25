@@ -41,6 +41,8 @@ test('ホストの端末だけで、4人を登録して選び、結果を発表�
 
 test('一度開いた後は、オフラインで開き直しても遊べる', async ({ page, context }) => {
   await page.goto('/')
+  // 全ファイルの保存が終わると、トーストで知らせる
+  await expect(page.getByText('この端末は、オフラインでも開けるようになりました')).toBeVisible({ timeout: 30_000 })
   // Service Worker が全ファイルを保存し、このページを受け持つまで待つ
   await page.waitForFunction(async () => {
     await navigator.serviceWorker.ready
