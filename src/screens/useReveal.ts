@@ -3,7 +3,7 @@
 // 動く部品は transform（y）だけで中央から元の位置へ移し、隠す部品は opacity 0 で場所を取ったままにする。最後の配置は静止の配置と同じ。
 // 時刻は 12fps のコマで進める。画面を押すかキーを押すと、最後の状態へ飛ぶ（HIG Motion「Let people cancel motion」
 // https://developer.apple.com/design/human-interface-guidelines/motion ）。
-// 同じ結果の発表は 1 回だけ見せる。開き直したときは最後の状態から出す。reduced motion では段取りを省き、全体を opacity で一度に出す。
+// 結果の画面を開くたび（再読み込みを含む）に発表を見せる。reduced motion では段取りを省き、全体を opacity で一度に出す。
 import {
   animate,
   useMotionValue,
@@ -15,8 +15,6 @@ import {
 } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { FADE, FRAME, OFFSET, REVEAL, SPRING, STAMP, easeOutCubic } from "../styles/motion.ts";
-
-const revealed = new Set<string>();
 
 export type RevealStage = "hold" | "rise" | "count" | "seal" | "drop" | "settle" | "done";
 
@@ -69,9 +67,9 @@ function offsetToCenter(el: HTMLElement | null): number {
   return window.innerHeight / 2 - (r.top + r.height / 2);
 }
 
-export function useReveal(key: string, finalScore: number | null, glyphCount: number): Reveal {
+export function useReveal(_key: string, finalScore: number | null, glyphCount: number): Reveal {
   const reduced = useReducedMotion() ?? false;
-  const [seen] = useState(() => revealed.has(key));
+  const seen = false;
   const [start] = useState(() => performance.now());
   const [elapsed, setElapsed] = useState(() => (seen || reduced ? Infinity : 0));
   const [skipped, setSkipped] = useState(false);
@@ -88,10 +86,6 @@ export function useReveal(key: string, finalScore: number | null, glyphCount: nu
   const scoreRef = useRef<HTMLDivElement | null>(null);
   const eyebrowY = useMotionValue(0);
   const scoreY = useMotionValue(0);
-
-  useEffect(() => {
-    revealed.add(key);
-  }, [key]);
 
   const running = elapsed !== Infinity;
 
