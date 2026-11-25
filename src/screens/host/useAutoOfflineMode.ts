@@ -21,8 +21,16 @@ export function useAutoOfflineMode(roomId: string | null) {
         );
       }
     };
-    if (!navigator.onLine) enter();
+    // 画面を消している間に切れたときは、戻ったときに気づく
+    const check = () => {
+      if (!navigator.onLine) enter();
+    };
+    check();
     window.addEventListener("offline", enter);
-    return () => window.removeEventListener("offline", enter);
+    document.addEventListener("visibilitychange", check);
+    return () => {
+      window.removeEventListener("offline", enter);
+      document.removeEventListener("visibilitychange", check);
+    };
   }, [roomId, toast]);
 }
