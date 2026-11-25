@@ -1,4 +1,4 @@
-// about: つくったひと・開発の経緯・出典とライセンス。ルームを読まないので、どの画面からでも開ける。
+// about: つくったひと・開発の経緯・出典。ルームを読まないので、どの画面からでも開ける。
 import { useEffect, useState, type ReactNode } from "react";
 import { STORY } from "../content/story.ts";
 import { aboutEntry, navigate } from "../router.ts";
@@ -7,19 +7,11 @@ import { CpSymbol } from "../ui/symbols.tsx";
 
 const CREATOR_URL = "https://twitter.com/ksyunnnn";
 
-/* 出典とライセンス。事実は src/data/companies.json と node_modules の各パッケージの LICENSE による */
+/* 出典。企業理念の事実は src/data/companies.json による */
 const NOTICES: { label: string; body: string }[] = [
   {
     label: "企業理念",
     body: "100 社の企業理念は、各社のウェブサイトから引いています。社ごとの出典は、結果画面の「企業情報の出典」から開けます。性格診断のコメントと相性は、このゲームのための創作です。",
-  },
-  {
-    label: "書体",
-    body: "Zen Kaku Gothic New（© The Zen Project Authors）、Anton（© The Anton Project Authors）、Inter（© The Inter Project Authors）。いずれも SIL Open Font License 1.1 の書体で、Fontsource の配布をアプリに同梱しています。",
-  },
-  {
-    label: "記号",
-    body: "結果画面の記号の一部は Phosphor Icons（© 2020 Phosphor Icons、MIT License）です。",
   },
   {
     label: "デザイン",
@@ -96,7 +88,7 @@ export function AboutScreen() {
           ))}
         </Section>
 
-        <Section title="出典とライセンス">
+        <Section title="出典">
           <div className="cp-stack cp-stack--16">
             {NOTICES.map((n) => (
               <div key={n.label} className="cp-stack cp-stack--8">
