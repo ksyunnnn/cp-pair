@@ -46,6 +46,17 @@
   /* 浮いた操作バーの高さ（約 113px）＋余白。足した値 */
   --floating-clearance: 160px;
 
+  /* 動き（テーマ「判を押して、止まる」）。JS で動かす値は src/styles/motion.ts にあり、ここと揃える。Framer にない値 */
+  /* 12fps の 1 コマ。記号の差し替えは steps() でこの長さずつ進める */
+  --motion-frame: 83ms;
+  /* 選んだカードの印を描き込む（3 コマ） */
+  --motion-mark: 250ms;
+  /* 結果の発表の後半で、ほかの区画を出す opacity */
+  --motion-fade: 150ms;
+  --motion-fade-delay: 160ms;
+  /* reduced motion のとき、結果の発表を一度に出す opacity（motion.ts の FADE.reveal と同じ） */
+  --motion-fade-reveal: 200ms;
+
   /* 開発パネル（?dev のときだけ出る）。Framer にない値 */
   --dev-bg: #111;
   --dev-surface: #1d1d1d;

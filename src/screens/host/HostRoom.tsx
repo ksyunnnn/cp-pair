@@ -20,6 +20,7 @@ import {
   ParticipantRow,
   ProgressSteps,
   ScreenHeading,
+  ScreenMain,
   Section,
 } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
@@ -30,7 +31,7 @@ export function NotHost({ roomId }: { roomId: string }) {
   return (
     <div className="cp-page">
       <BrandHeader right="ホストの端末" />
-      <main className="cp-content">
+      <ScreenMain className="cp-content">
         <ScreenHeading
           eyebrow={`ROOM ${roomId}`}
           icon={<CpSymbol name="Secret" size={17} />}
@@ -40,7 +41,7 @@ export function NotHost({ roomId }: { roomId: string }) {
         <Button kind="secondary" onClick={() => navigate("/")}>
           新しいルームを作る
         </Button>
-      </main>
+      </ScreenMain>
     </div>
   );
 }
@@ -49,14 +50,14 @@ export function RoomMissing({ roomId }: { roomId: string }) {
   return (
     <div className="cp-page">
       <BrandHeader />
-      <main className="cp-content">
+      <ScreenMain className="cp-content">
         <ScreenHeading
           eyebrow={`ROOM ${roomId}`}
           icon={<CpSymbol name="Secret" size={17} />}
           title="ルームが見つかりません"
           lead="招待の URL をもう一度確かめてください。"
         />
-      </main>
+      </ScreenMain>
     </div>
   );
 }
@@ -81,6 +82,8 @@ function HostLobby({ room }: { room: Room }) {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");
   const [gender, setGender] = useState<Gender>("M");
+  // 開いたときにいた参加者。後から加わった行だけを打ち込む
+  const [initialIds] = useState(() => new Set(room.participants.map((p) => p.id)));
 
   const total = room.participants.length;
   const done = room.participants.filter((p) => p.selectedCompanyId !== null).length;
@@ -122,7 +125,7 @@ function HostLobby({ room }: { room: Room }) {
   return (
     <div className="cp-page">
       <BrandHeader right="ホストの端末" />
-      <main className="cp-content has-floating">
+      <ScreenMain className="cp-content has-floating">
         <ProgressSteps current={2} />
         <ScreenHeading eyebrow={`ROOM ${room.id}`} icon={<CpSymbol name="Pair" size={17} />} title="参加者を集める" />
         <ThemeCard room={room} />
@@ -185,6 +188,7 @@ function HostLobby({ room }: { room: Room }) {
                     gender={p.gender}
                     joinType={p.joinType}
                     done={isDone}
+                    entering={!initialIds.has(p.id)}
                     status={isDone ? "選び終えた" : "まだ選んでいません"}
                     action={isManual ? (isDone ? "選び直す" : "この端末で選ぶ") : undefined}
                     onAction={() => navigate(`/host/${room.id}/pick/${p.id}`)}
@@ -198,7 +202,7 @@ function HostLobby({ room }: { room: Room }) {
             </div>
           )}
         </Section>
-      </main>
+      </ScreenMain>
       <FloatingBar note={note}>
         <Button onClick={declare} disabled={!canDeclare}>
           登録完了を宣言
@@ -241,7 +245,7 @@ function HostResults({ room }: { room: Room }) {
   return (
     <div className="cp-page">
       <BrandHeader right="ホストの端末" />
-      <main className="cp-content">
+      <ScreenMain className="cp-content">
         <ProgressSteps current={3} />
         <ScreenHeading
           eyebrow={`ROOM ${room.id} · RESULTS`}
@@ -297,7 +301,7 @@ function HostResults({ room }: { room: Room }) {
         <Button kind="secondary" onClick={undo}>
           宣言を取り消して、参加管理に戻る
         </Button>
-      </main>
+      </ScreenMain>
     </div>
   );
 }

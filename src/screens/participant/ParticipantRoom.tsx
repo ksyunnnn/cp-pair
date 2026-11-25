@@ -12,6 +12,7 @@ import {
   NicknameInput,
   ProgressSteps,
   ScreenHeading,
+  ScreenMain,
 } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
@@ -73,7 +74,7 @@ function Join({ room, onJoined }: { room: Room; onJoined: () => void }) {
   return (
     <div className="cp-page">
       <BrandHeader right={`ルーム ${room.id}`} />
-      <main className="cp-content">
+      <ScreenMain className="cp-content">
         <ProgressSteps current={2} />
         <ScreenHeading
           eyebrow={`ROOM ${room.id} · JOIN`}
@@ -97,7 +98,7 @@ function Join({ room, onJoined }: { room: Room; onJoined: () => void }) {
             </Button>
           </div>
         </form>
-      </main>
+      </ScreenMain>
     </div>
   );
 }
@@ -106,14 +107,14 @@ function Closed({ room }: { room: Room }) {
   return (
     <div className="cp-page">
       <BrandHeader right={`ルーム ${room.id}`} />
-      <main className="cp-content">
+      <ScreenMain className="cp-content">
         <ScreenHeading
           eyebrow={`ROOM ${room.id}`}
           icon={<CpSymbol name="Secret" size={17} />}
           title="このルームは結果を発表しました"
           lead="参加の受け付けは終わっています。ホストに声をかけてください。"
         />
-      </main>
+      </ScreenMain>
     </div>
   );
 }
@@ -126,7 +127,7 @@ function Waiting({ room, me }: { room: Room; me: Participant }) {
   return (
     <div className="cp-page">
       <BrandHeader right={`ルーム ${room.id}`} />
-      <main className="cp-content">
+      <ScreenMain className="cp-content">
         <ProgressSteps current={2} />
         <ScreenHeading
           eyebrow="WAITING FOR THE HOST"
@@ -148,7 +149,7 @@ function Waiting({ room, me }: { room: Room; me: Participant }) {
         <Button kind="link" onClick={() => roomStore.clearSelection(room.id, me.id)}>
           選び直す
         </Button>
-      </main>
+      </ScreenMain>
     </div>
   );
 }
