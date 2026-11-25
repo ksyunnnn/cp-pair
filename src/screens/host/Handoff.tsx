@@ -1,14 +1,17 @@
 // のぞき見防止の画面: ホストの端末を本人に渡してから、本人が押して進む。
 import { BrandHeader, Button } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
+import { HostDeviceLabel } from "./OfflineMode.tsx";
 
 export function Handoff({
+  roomId,
   name,
   purpose,
   lead,
   onProceed,
   onBack,
 }: {
+  roomId: string;
   name: string;
   purpose: string;
   lead: string;
@@ -17,7 +20,7 @@ export function Handoff({
 }) {
   return (
     <div className="cp-page">
-      <BrandHeader right="ホストの端末" />
+      <BrandHeader right={<HostDeviceLabel roomId={roomId} />} />
       <main className="cp-handoff">
         <CpSymbol name="Secret" size={54} />
         <div className="cp-stack cp-stack--8">

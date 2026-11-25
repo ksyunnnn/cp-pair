@@ -1,13 +1,14 @@
 // ホストの端末の中で開く、参加者ひとりのための画面（手動登録者の理念選び / 各自の結果）。
 import { useState } from "react";
 import { navigate } from "../../router.ts";
-import type { Room } from "../../store/index.ts";
+import { useOfflineMode, type Room } from "../../store/index.ts";
 import { BrandHeader } from "../../ui/components.tsx";
 import { useToast } from "../../ui/toast.tsx";
 import { PhilosophyPicker } from "../PhilosophyPicker.tsx";
 import { ResultScreen } from "../ResultScreen.tsx";
 import { Handoff } from "./Handoff.tsx";
 import { HostRoom } from "./HostRoom.tsx";
+import { HostDeviceLabel } from "./OfflineMode.tsx";
 
 export function HostPick({ room, participantId }: { room: Room; participantId: string }) {
   const toast = useToast();
@@ -20,6 +21,7 @@ export function HostPick({ room, participantId }: { room: Room; participantId: s
   if (!passed) {
     return (
       <Handoff
+        roomId={room.id}
         name={participant.name}
         purpose="さんの番です"
         lead="ほかの人に画面が見えないようにしてから、下のボタンを押してください。選んだ理念は、ホストにも表示されません。"
@@ -31,7 +33,7 @@ export function HostPick({ room, participantId }: { room: Room; participantId: s
 
   return (
     <div className="cp-page">
-      <BrandHeader right="ホストの端末" />
+      <BrandHeader right={<HostDeviceLabel roomId={room.id} />} />
       <PhilosophyPicker
         room={room}
         participant={participant}
@@ -47,7 +49,9 @@ export function HostPick({ room, participantId }: { room: Room; participantId: s
 
 export function HostResultView({ room, participantId }: { room: Room; participantId: string }) {
   const participant = room.participants.find((p) => p.id === participantId);
-  const [passed, setPassed] = useState(participant?.joinType !== "manual");
+  // オフラインモードでは、自分の端末で参加した人にも、この端末を渡して見せる
+  const offline = useOfflineMode(room.id);
+  const [passed, setPassed] = useState(participant?.joinType !== "manual" && !offline);
   const back = () => navigate(`/host/${room.id}`);
 
   if (!participant || room.status !== "declared" || !room.result) return <HostRoom room={room} />;
@@ -55,6 +59,7 @@ export function HostResultView({ room, participantId }: { room: Room; participan
   if (!passed) {
     return (
       <Handoff
+        roomId={room.id}
         name={participant.name}
         purpose="さんの結果です"
         lead="マッチ相手が分かるのは本人とホストだけです。本人に端末を渡してから、下のボタンを押してください。"

@@ -4,7 +4,7 @@ import { PRESET_PROMPTS } from "../../game/presets.ts";
 import { pad2 } from "../../game/present.ts";
 import { rememberHostRoom } from "../../device.ts";
 import { navigate } from "../../router.ts";
-import { roomStore } from "../../store/index.ts";
+import { createHostRoom } from "../../store/index.ts";
 import { BrandHeader, Button, ChoiceCard, FloatingBar, ProgressSteps, ScreenHeading } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
@@ -17,9 +17,13 @@ export function HostStart() {
   const create = async () => {
     if (!presetId) return;
     setBusy(true);
-    const room = await roomStore.createRoom(presetId);
+    const { room, offline } = await createHostRoom(presetId);
     rememberHostRoom(room.id);
-    toast(`ルーム ${room.id} を作りました`, "success");
+    if (offline) {
+      toast(`つながらないため、この端末だけで進めます。参加者は全員、この端末で順番に選びます（ルーム ${room.id}）`, "info", 6000);
+    } else {
+      toast(`ルーム ${room.id} を作りました`, "success");
+    }
     navigate(`/host/${room.id}`);
   };
 
