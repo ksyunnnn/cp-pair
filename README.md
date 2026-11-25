@@ -26,6 +26,7 @@
 ### 必要なもの
 
 - Node.js 22.18 以上（`npm run verify` が `node` で TypeScript を直接実行するため）。手元と配信のビルドは Node.js 24 で動かしている
+- JDK 21 以上（`npm run test:firestore` が使う Firebase のエミュレーターの要件）
 
 ### はじめかた
 
@@ -46,6 +47,7 @@ npm run dev
 | `npm run lint` | oxlint で検査する |
 | `npm run verify` | 相性の計算が、元のモックと同じ結果を返すかを確かめる |
 | `npm run test:e2e` | ビルドした版を Playwright で動かし、ホストの端末だけで結果まで進む流れと、オフラインでの開き直しを確かめる |
+| `npm run test:firestore` | Firestore のエミュレーターを立て、`firestore.rules` が許す操作と拒む操作、Firestore 版の保存の動きを確かめる |
 
 `test:e2e` を初めて動かす前に `npx playwright install chromium` でブラウザを入れる。
 
@@ -55,18 +57,19 @@ npm run dev
 src/
   game/      相性の計算（エンジン・お題・こじつけの条件）
   data/      企業理念 100 社のデータ
-  store/     ルームの保存。RoomStore のインターフェースと、localStorage の実装
+  store/     ルームの保存。RoomStore のインターフェースと、localStorage の実装と Firestore の実装
   screens/   ホストと参加者の画面、理念選び、結果
   ui/        共通の部品・記号・トースト
   styles/    デザインの値（tokens.css）と画面のスタイル
   dev/       ?dev の開発パネル
 e2e/         Playwright のテスト
+test/        Firestore のルールと保存の層のテスト（Vitest）
 scripts/     計算の照合（verify-matching.ts）とスクリーンショットの撮影
 docs/        デザインの値（design/）と全画面のスクリーンショット（screenshots/）
 ```
 
 - 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`）で分ける
-- ルームのデータは `src/store/RoomStore.ts` のインターフェースを通して出し入れする。端末をまたいで同期する保存先に替えるときは、この実装を足して `src/store/index.ts` で差し替える
+- ルームのデータは `src/store/RoomStore.ts` のインターフェースを通して出し入れする。既定は localStorage の実装で、`VITE_ROOM_STORE=firestore` のときだけ Firestore の実装（`firestoreRoomStore.ts`）を使う。設定の雛形は `.env.local.example`、守りは `firestore.rules` にある
 - オフライン: `vite-plugin-pwa`（Workbox）の Service Worker が、ビルドした全ファイルを最初の表示のあとに保存する。新しい版は、オンラインで開いたときに取得して入れ替わる
 
 ## 配信
