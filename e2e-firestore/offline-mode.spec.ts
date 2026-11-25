@@ -18,11 +18,9 @@ async function createRoom(page: Page) {
   await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
 }
 
-async function openDevice(browser: Browser, roomId: string, options: { clock?: boolean } = {}) {
+async function openDevice(browser: Browser, roomId: string) {
   const context = await browser.newContext({ baseURL: test.info().project.use.baseURL })
   const page = await context.newPage()
-  // ホストの生存の印が途絶えるまで（90 秒）を待たずに進めるため、この端末の時計を進められるようにする
-  if (options.clock) await page.clock.install()
   await page.goto(`/#/r/${roomId}`)
   return page
 }
@@ -34,12 +32,13 @@ async function joinOnDevice(page: Page, name: string, gender: '男性' | '女性
   await page.getByRole('button', { name: '参加する' }).click()
 }
 
-/** 理念選びで、except と違う最初の理念を選び、その文を返す */
-async function pickOther(page: Page, except: string | null): Promise<string> {
+/** 理念選びで、except のどれとも違う最初の理念を選び、その文を返す */
+async function pickOther(page: Page, except: string | null | string[]): Promise<string> {
+  const skip = Array.isArray(except) ? except : [except]
   const cards = page.getByRole('button', { name: /^企業理念 / })
   await expect(cards.first()).toBeVisible()
   const labels = await cards.locator('.cp-choice__label').allTextContents()
-  const index = labels.findIndex((label) => label !== except)
+  const index = labels.findIndex((label) => !skip.includes(label))
   await cards.nth(index).click()
   await page.getByRole('button', { name: 'これにする' }).click()
   return labels[index]
@@ -97,51 +96,53 @@ test('ルームを作るときにつながらなければ、この端末だけ�
   await mei.context().close()
 })
 
-test('ルームの途中で切れたら、自分の端末で参加していた人はホストの端末で選び直し、本人の端末では選べず、解除すると本人の端末に戻る', async ({ page, context, browser }) => {
+test('ルームの途中で切れたら、ホストの端末で選び直した人だけホストの選択で上書きし、ほかの人は本人の端末の選択を残す', async ({ page, context, browser }) => {
   await page.goto('/')
   await createRoom(page)
   await expect(page.getByText('QR コードか URL を共有')).toBeVisible()
   const roomId = roomIdOf(page)
 
-  const aoi = await openDevice(browser, roomId, { clock: true })
+  const aoi = await openDevice(browser, roomId)
   await joinOnDevice(aoi, 'アオイ', '女性')
-  const first = await pickOther(aoi, null)
+  const aoiFirst = await pickOther(aoi, null)
   await expect(aoi.getByRole('heading', { name: 'ホストの発表を待っています' })).toBeVisible()
-  await expect(page.getByText('1人中、1人が選び終えた')).toBeVisible()
+  const ren = await openDevice(browser, roomId)
+  await joinOnDevice(ren, 'レン', '男性')
+  const renFirst = await pickOther(ren, null)
+  await expect(ren.getByRole('heading', { name: 'ホストの発表を待っています' })).toBeVisible()
+  await expect(page.getByText('2人中、2人が選び終えた')).toBeVisible()
   // ホストの端末が、切れる前に届いたルームを手元に写すまで待つ
-  await page.waitForFunction((id) => localStorage.getItem(`cp-pair:mirror:${id}`)?.includes('アオイ'), roomId)
+  await page.waitForFunction(
+    (id) => /アオイ.*レン|レン.*アオイ/.test(localStorage.getItem(`cp-pair:mirror:${id}`) ?? ''),
+    roomId,
+  )
 
   await context.setOffline(true)
   await expect(page.getByText('つながらなくなったため、この端末だけで進めます')).toBeVisible()
   await expect(page.getByText(LABEL)).toBeVisible()
   await expect(page.getByText('QR コードか URL を共有')).toBeHidden()
   // 切れる前に届いていた選択は残る
-  await expect(page.getByText('1人中、1人が選び終えた')).toBeVisible()
+  await expect(page.getByText('2人中、2人が選び終えた')).toBeVisible()
 
-  // ホストの端末で、アオイさんが選び直す
-  const onHost = await pickOnHost(page, 'アオイ', '選び直す', first)
-  await addManual(page, 'ハルト', '男性')
-  await pickOnHost(page, 'ハルト', 'この端末で選ぶ')
-
-  // 本人の端末はつながっているが、ホストの生存の印が途絶えたので選べない
-  await aoi.clock.fastForward(100_000)
-  await expect(aoi.getByRole('heading', { name: 'ホストの端末で選んでください' })).toBeVisible()
-  await expect(aoi.getByRole('button', { name: '選び直す' })).toBeHidden()
+  // アオイさんはホストの端末で選び直す。レンさんは、つながっている本人の端末で選び直す（ホストが切れても止まらない）
+  const aoiOnHost = await pickOnHost(page, 'アオイ', '選び直す', aoiFirst)
+  await ren.getByRole('button', { name: '選び直す' }).click()
+  const renOwn = await pickOther(ren, [renFirst, aoiOnHost])
+  await expect(ren.getByRole('heading', { name: 'ホストの発表を待っています' })).toBeVisible()
 
   await context.setOffline(false)
   await page.getByRole('button', { name: RELEASE }).click()
   await expect(page.getByText('各自の端末での参加に戻しました')).toBeVisible()
   await expect(page.getByText(LABEL)).toBeHidden()
 
-  // 解除するとホストの端末が印を書き、本人の端末は選べる状態に戻る。ホストの端末の選択が出る
-  await expect(aoi.getByRole('heading', { name: 'ホストの発表を待っています' })).toBeVisible()
-  await expect(aoi.locator('.r-you__phrase')).toHaveText(onHost)
-  await expect(aoi.getByRole('button', { name: '選び直す' })).toBeVisible()
+  await expect(aoi.locator('.r-you__phrase')).toHaveText(aoiOnHost)
+  await expect(ren.locator('.r-you__phrase')).toHaveText(renOwn)
 
   await page.getByRole('button', { name: '登録完了を宣言' }).click()
   await expect(page.getByRole('heading', { name: '結果を発表しました' })).toBeVisible()
   await expect(aoi.getByRole('heading', { name: 'ホストの発表を待っています' })).toBeHidden()
   await aoi.context().close()
+  await ren.context().close()
 })
 
 test('参加者の端末が切れたら選べず、つながると戻る', async ({ page, browser }) => {

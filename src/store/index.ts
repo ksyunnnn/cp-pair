@@ -2,7 +2,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { isHostOf, rememberHostRoom } from "../device.ts";
 import { LocalRoomStore } from "./localRoomStore.ts";
 import type { FirestoreRoomStore } from "./firestoreRoomStore.ts";
-import { getOfflineMode, onOfflineModeChange, readMirror, setOfflineMode, writeMirror } from "./offlineMode.ts";
+import { getOfflineMode, markRepicked, onOfflineModeChange, readMirror, setOfflineMode, writeMirror } from "./offlineMode.ts";
 import { randomRoomId } from "./roomId.ts";
 import type { MatchResult, Participant } from "../game/types.ts";
 import type { NewParticipant, Room, RoomStore, SelectOutcome } from "./RoomStore.ts";
@@ -52,12 +52,8 @@ class LazyFirestoreRoomStore implements RoomStore {
     return firebase.ensureSignedIn();
   }
 
-  async importRoom(source: Room, knownParticipantIds: string[]): Promise<string> {
-    return (await this.load()).importRoom(source, knownParticipantIds);
-  }
-
-  async touchHost(roomId: string): Promise<void> {
-    return (await this.load()).touchHost(roomId);
+  async importRoom(source: Room, knownParticipantIds: string[], repickedParticipantIds: string[]): Promise<string> {
+    return (await this.load()).importRoom(source, knownParticipantIds, repickedParticipantIds);
   }
 
   async createRoom(presetId: string): Promise<Room> {
@@ -152,11 +148,16 @@ class ModeRoomStore implements RoomStore {
   removeParticipant(roomId: string, participantId: string): Promise<void> {
     return this.pick(roomId).removeParticipant(roomId, participantId);
   }
-  selectCompany(roomId: string, participantId: string, companyId: number): Promise<SelectOutcome> {
-    return this.pick(roomId).selectCompany(roomId, participantId, companyId);
+  async selectCompany(roomId: string, participantId: string, companyId: number): Promise<SelectOutcome> {
+    const offline = Boolean(getOfflineMode(roomId));
+    const outcome = await this.pick(roomId).selectCompany(roomId, participantId, companyId);
+    if (offline && outcome === "ok") markRepicked(roomId, participantId);
+    return outcome;
   }
-  clearSelection(roomId: string, participantId: string): Promise<void> {
-    return this.pick(roomId).clearSelection(roomId, participantId);
+  async clearSelection(roomId: string, participantId: string): Promise<void> {
+    const offline = Boolean(getOfflineMode(roomId));
+    await this.pick(roomId).clearSelection(roomId, participantId);
+    if (offline) markRepicked(roomId, participantId);
   }
   declare(roomId: string, result: MatchResult): Promise<void> {
     return this.pick(roomId).declare(roomId, result);
@@ -215,16 +216,11 @@ export async function leaveOfflineMode(roomId: string): Promise<string> {
   const entry = getOfflineMode(roomId);
   const room = await localStore.getRoom(roomId);
   if (!remoteStore || !entry || !room) throw new Error(`room ${roomId} is not in offline mode`);
-  const nextId = await withTimeout(remoteStore.importRoom(room, entry.knownParticipantIds), IMPORT_TIMEOUT_MS);
+  const nextId = await withTimeout(remoteStore.importRoom(room, entry.knownParticipantIds, entry.repickedParticipantIds ?? []), IMPORT_TIMEOUT_MS);
   rememberHostRoom(nextId);
   setOfflineMode(roomId, null);
   localStore.deleteRoom(roomId);
   return nextId;
-}
-
-/** ホストの端末の生存の印を Firestore のルームに書く。Firestore 版でなければ何もしない */
-export async function touchHost(roomId: string): Promise<void> {
-  await remoteStore?.touchHost(roomId);
 }
 
 /** このルームがオフラインモードに入っているか */

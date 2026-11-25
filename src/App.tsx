@@ -4,7 +4,6 @@ import { DevPanel } from "./dev/DevPanel.tsx";
 import { isDevMode, useRoute } from "./router.ts";
 import { HostPick, HostResultView } from "./screens/host/HostDeviceViews.tsx";
 import { HostRoom, RoomMissing } from "./screens/host/HostRoom.tsx";
-import { HostHeartbeat } from "./screens/host/HostHeartbeat.tsx";
 import { HostStart } from "./screens/host/HostStart.tsx";
 import { useAutoOfflineMode } from "./screens/host/useAutoOfflineMode.ts";
 import { ParticipantRoom } from "./screens/participant/ParticipantRoom.tsx";
@@ -32,25 +31,15 @@ function Screen() {
   if (loading) return <div className="cp-page" />;
   if (!room) return <RoomMissing roomId={roomId ?? ""} />;
 
-  return (
-    <>
-      {hostRoute && <HostHeartbeat key={room.id} room={room} />}
-      {screen()}
-    </>
-  );
-
-  function screen() {
-    if (!room) return null;
-    switch (route.name) {
-      case "host":
-        return <HostRoom room={room} />;
-      case "hostPick":
-        return <HostPick key={route.participantId} room={room} participantId={route.participantId} />;
-      case "hostResult":
-        return <HostResultView key={route.participantId} room={room} participantId={route.participantId} />;
-      case "participant":
-        return <ParticipantRoom room={room} />;
-    }
+  switch (route.name) {
+    case "host":
+      return <HostRoom room={room} />;
+    case "hostPick":
+      return <HostPick key={route.participantId} room={room} participantId={route.participantId} />;
+    case "hostResult":
+      return <HostResultView key={route.participantId} room={room} participantId={route.participantId} />;
+    case "participant":
+      return <ParticipantRoom room={room} />;
   }
 }
 

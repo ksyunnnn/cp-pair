@@ -13,6 +13,8 @@ export interface OfflineModeEntry {
   since: number;
   /** 入ったときに Firestore にいた参加者の ID。解除のとき、ホストが外した人と、切れている間に加わった人を見分ける */
   knownParticipantIds: string[];
+  /** オフラインモードの間に、ホストの端末で選択・解除した参加者の ID。解除のとき、この人たちの選択だけで Firestore を上書きする */
+  repickedParticipantIds?: string[];
 }
 
 function readAll(): Record<string, OfflineModeEntry> {
@@ -44,6 +46,15 @@ export function setOfflineMode(roomId: string, entry: OfflineModeEntry | null) {
   else delete all[roomId];
   localStorage.setItem(MODE_KEY, JSON.stringify(all));
   emit();
+}
+
+/** オフラインモードの間に、ホストの端末で選択・解除した参加者を覚える */
+export function markRepicked(roomId: string, participantId: string) {
+  const entry = getOfflineMode(roomId);
+  if (!entry) return;
+  const ids = new Set(entry.repickedParticipantIds ?? []);
+  if (ids.has(participantId)) return;
+  setOfflineMode(roomId, { ...entry, repickedParticipantIds: [...ids, participantId] });
 }
 
 /** オフラインモードの出入りを受け取る。戻り値で解除する */

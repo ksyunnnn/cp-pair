@@ -4,7 +4,7 @@ import { getMyParticipantId, setMyParticipantId } from "../../device.ts";
 import { dataset } from "../../game/dataset.ts";
 import { getPreset } from "../../game/presets.ts";
 import type { Gender, Participant } from "../../game/types.ts";
-import { roomStore, type Room } from "../../store/index.ts";
+import { networkEnabled, roomStore, type Room } from "../../store/index.ts";
 import {
   BrandHeader,
   Button,
@@ -18,13 +18,13 @@ import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
 import { PhilosophyPicker } from "../PhilosophyPicker.tsx";
 import { ResultScreen } from "../ResultScreen.tsx";
-import { useHostReachable, type HostReach } from "./useHostReachable.ts";
+import { useOnline } from "./useOnline.ts";
 
 export function ParticipantRoom({ room }: { room: Room }) {
   const myId = getMyParticipantId(room.id);
   const me = room.participants.find((p) => p.id === myId) || null;
   const [, setTick] = useState(0);
-  const reach = useHostReachable(room);
+  const online = useOnline();
 
   if (!me) {
     if (room.status === "declared") return <Closed room={room} />;
@@ -33,8 +33,8 @@ export function ParticipantRoom({ room }: { room: Room }) {
   if (room.status === "declared" && room.result) {
     return <ResultScreen result={room.result} participantId={me.id} />;
   }
-  // ホストと切れている間は、選択も解除もさせない。オフラインモードの間はホストの端末の選択が残るため
-  if (reach !== "ok") return <PickOnHost room={room} reach={reach} />;
+  // この端末が切れている間は、選択も解除もさせない（ホストの端末で選んでもらう）
+  if (networkEnabled && !online) return <PickOnHost room={room} />;
   if (me.selectedCompanyId === null) {
     return (
       <div className="cp-page">
@@ -107,7 +107,7 @@ function Join({ room, onJoined }: { room: Room; onJoined: () => void }) {
   );
 }
 
-function PickOnHost({ room, reach }: { room: Room; reach: Exclude<HostReach, "ok"> }) {
+function PickOnHost({ room }: { room: Room }) {
   return (
     <div className="cp-page">
       <BrandHeader right={`ルーム ${room.id}`} />
@@ -117,11 +117,7 @@ function PickOnHost({ room, reach }: { room: Room; reach: Exclude<HostReach, "ok
           eyebrow="PICK ON THE HOST DEVICE"
           icon={<CpSymbol name="Talk" size={17} />}
           title="ホストの端末で選んでください"
-          lead={
-            reach === "selfOffline"
-              ? "この端末がつながっていません。ホストに声をかけて、ホストの端末で選んでください。つながると、この画面でまた選べます。"
-              : "ホストの端末とつながっていません。ホストに声をかけて、ホストの端末で選んでください。ホストがつながると、この画面でまた選べます。"
-          }
+          lead="この端末がつながっていません。ホストに声をかけて、ホストの端末で選んでください。つながると、この画面でまた選べます。"
         />
         <ThemeCard room={room} />
       </ScreenMain>

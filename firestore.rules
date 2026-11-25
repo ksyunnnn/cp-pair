@@ -3,8 +3,7 @@ rules_version = '2';
 // CP PAIR の通常モード（各自の端末で参加）の保存先。読み書きの実装は src/store/firestoreRoomStore.ts。
 //
 // 形:
-//  - rooms/{roomId}                       ホストが作る。hostUid が作った人の匿名認証の uid。
-//                                         hostSeenAt はホストの端末が一定間隔で書く生存の印（参加者の端末が、ホストと切れたことを知るため）
+//  - rooms/{roomId}                       ホストが作る。hostUid が作った人の匿名認証の uid
 //  - rooms/{roomId}/participants/{pid}    参加者。ownerUid がその参加者を動かせる uid
 //                                         （自分の端末で参加した人は本人、手動で登録した人はホスト）
 //  - rooms/{roomId}/claims/{companyId}    理念の札。1 つの理念を選べるのは 1 人だけ、を文書の一意性で守る
@@ -56,7 +55,7 @@ service cloud.firestore {
 
       allow create: if signedIn()
         && roomId.matches('^[0-9A-Z]{5}$')
-        && request.resource.data.keys().hasOnly(['hostUid', 'presetId', 'status', 'result', 'hostSeenAt', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['hostUid', 'presetId', 'status', 'result', 'createdAt', 'updatedAt'])
         && request.resource.data.keys().hasAll(['hostUid', 'presetId', 'status', 'result', 'createdAt', 'updatedAt'])
         && request.resource.data.hostUid == request.auth.uid
         && request.resource.data.presetId is string
@@ -65,15 +64,12 @@ service cloud.firestore {
         && request.resource.data.status == 'open'
         && request.resource.data.result == null
         && request.resource.data.createdAt == request.time
-        && request.resource.data.updatedAt == request.time
-        && (!('hostSeenAt' in request.resource.data) || request.resource.data.hostSeenAt == request.time);
+        && request.resource.data.updatedAt == request.time;
 
-      // 生存の印（hostSeenAt だけを今の時刻に）と、宣言（open → declared）と取り消し（declared → open）だけ。ホストだけ
+      // 宣言（open → declared）と取り消し（declared → open）だけ。ホストだけ
       allow update: if signedIn()
         && resource.data.hostUid == request.auth.uid
-        && ((request.resource.data.diff(resource.data).affectedKeys().hasOnly(['hostSeenAt'])
-            && request.resource.data.hostSeenAt == request.time)
-        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'result', 'updatedAt'])
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'result', 'updatedAt'])
         && request.resource.data.updatedAt == request.time
         && (
           (resource.data.status == 'open'
@@ -88,7 +84,7 @@ service cloud.firestore {
           (resource.data.status == 'declared'
             && request.resource.data.status == 'open'
             && request.resource.data.result == null)
-        )));
+        );
 
       allow delete: if false;
 

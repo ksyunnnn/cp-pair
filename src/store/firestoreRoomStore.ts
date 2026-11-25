@@ -1,7 +1,7 @@
 // RoomStore の Firestore の実装。端末をまたいでルームを共有する（通常モード）。
 // 形と守りは firestore.rules にある。書き込みは匿名認証でサインインしてから行う。
 //
-// - rooms/{roomId}                     presetId・status・result・hostUid・hostSeenAt・createdAt・updatedAt
+// - rooms/{roomId}                     presetId・status・result・hostUid・createdAt・updatedAt
 // - rooms/{roomId}/participants/{pid}  name・gender・joinType・selectedCompanyId・ownerUid・joinedAt
 // - rooms/{roomId}/claims/{companyId}  participantId。1 つの理念を選べるのは 1 人だけ、を文書の一意性で守る
 //
@@ -57,7 +57,6 @@ function toRoom(snap: DocumentSnapshot<DocumentData>, participants: Participant[
     createdAt: millis(data.createdAt),
     updatedAt: millis(data.updatedAt),
     hostUid: data.hostUid,
-    hostSeenAt: data.hostSeenAt instanceof Timestamp ? data.hostSeenAt.toMillis() : undefined,
   };
 }
 
@@ -102,7 +101,6 @@ export class FirestoreRoomStore implements RoomStore {
         presetId,
         status: "open",
         result: null,
-        hostSeenAt: serverTimestamp(),
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
@@ -262,27 +260,22 @@ export class FirestoreRoomStore implements RoomStore {
     await updateDoc(this.roomRef(roomId), { status: "declared", result: plain, updatedAt: serverTimestamp() });
   }
 
-  /** ホストの端末の生存の印を書く。参加者の端末は、これが途絶えたら選べなくなる */
-  async touchHost(roomId: string): Promise<void> {
-    await this.signIn();
-    await updateDoc(this.roomRef(roomId), { hostSeenAt: serverTimestamp() });
-  }
-
   async undoDeclare(roomId: string): Promise<void> {
     await this.signIn();
     await updateDoc(this.roomRef(roomId), { status: "open", result: null, updatedAt: serverTimestamp() });
   }
 
   /**
-   * オフラインモードを解除するときに、ホストの端末のルーム（source）を Firestore へ引き継ぐ。ホストの端末の内容を正とする。
+   * オフラインモードを解除するときに、ホストの端末のルーム（source）を Firestore へ引き継ぐ。
    * - Firestore に同じ ID のルームがなければ、同じ ID で作る。別の人がその ID のルームを持っていれば、新しい ID で作る
-   * - ホストの端末にいない参加者のうち、knownParticipantIds（オフラインモードに入ったときにいた人）にいる人は、
-   *   オフラインモードの間にホストが外した人として外す。いない人（切れている間に自分の端末で加わった人）は残し、
-   *   ホストの端末の誰かと同じ理念を選んでいれば、その選択だけを外す
-   * - 宣言の状態と結果も、ホストの端末に揃える
+   * - 参加者: ホストの端末で加えた人は作り、knownParticipantIds（入ったときにいた人）のうちホストの端末にいない人は外す。
+   *   切れている間に自分の端末で加わった人は残す
+   * - 選択: 上書きするのは、ホストの端末で選び直した人（repickedParticipantIds）と、ホストの端末で加えた人だけ。
+   *   ほかの人は Firestore の値（本人の端末で選んだもの）を残す。理念が重なったら、ホストの端末で選び直した人を残し、相手の選択を外す
+   * - 宣言の状態と結果は、ホストの端末に揃える
    * 途中で失敗しても、もう一度呼べば同じ状態に揃う。戻り値は引き継いだ先のルームの ID。
    */
-  async importRoom(source: Room, knownParticipantIds: string[]): Promise<string> {
+  async importRoom(source: Room, knownParticipantIds: string[], repickedParticipantIds: string[]): Promise<string> {
     const uid = await this.signIn();
     let roomId = source.id;
     const existing = await getDoc(this.roomRef(roomId));
@@ -299,19 +292,24 @@ export class FirestoreRoomStore implements RoomStore {
     const remote = new Map(remoteSnap.docs.map((d) => [d.id, (d.data().selectedCompanyId ?? null) as number | null]));
     const local = new Map(source.participants.map((p) => [p.id, p]));
     const known = new Set(knownParticipantIds);
-    const localPicks = new Set(source.participants.flatMap((p) => (p.selectedCompanyId === null ? [] : [p.selectedCompanyId])));
+    // ホストの端末の選択で上書きする人
+    const repicked = new Set(repickedParticipantIds);
+    const overrides = source.participants.filter((p) => repicked.has(p.id) || !remote.has(p.id));
+    const overrideIds = new Set(overrides.map((p) => p.id));
+    const hostPicks = new Set(overrides.flatMap((p) => (p.selectedCompanyId === null ? [] : [p.selectedCompanyId])));
 
-    // 先に、ホストの端末と食い違う選択をすべて外す。理念の札を空けてから、ホストの端末の選択を書く
+    // 先に、外す人と外す選択を片付けて理念の札を空けてから、ホストの端末の選択を書く
     for (const [id, selected] of remote) {
-      const mine = local.get(id);
-      if (!mine) {
-        if (known.has(id)) await this.removeParticipant(roomId, id);
-        else if (selected !== null && localPicks.has(selected)) await this.clearSelection(roomId, id);
+      if (!local.has(id) && known.has(id)) {
+        await this.removeParticipant(roomId, id);
         continue;
       }
-      if (selected !== null && selected !== mine.selectedCompanyId) await this.clearSelection(roomId, id);
+      if (selected === null) continue;
+      const replaced = overrideIds.has(id) && selected !== local.get(id)!.selectedCompanyId;
+      const collides = !overrideIds.has(id) && hostPicks.has(selected);
+      if (replaced || collides) await this.clearSelection(roomId, id);
     }
-    for (const p of source.participants) {
+    for (const p of overrides) {
       if (!remote.has(p.id)) {
         await setDoc(this.participantRef(roomId, p.id), {
           ownerUid: uid,

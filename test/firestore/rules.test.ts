@@ -157,20 +157,6 @@ describe("rooms", () => {
     await assertFails(updateDoc(ref, { status: "declared", result, updatedAt: serverTimestamp() }));
   });
 
-  it("ホストは生存の印（hostSeenAt）だけを今の時刻に書ける。ほかの人は書けない", async () => {
-    await seed();
-    await assertSucceeds(updateDoc(doc(as("host"), "rooms", ROOM), { hostSeenAt: serverTimestamp() }));
-    await assertFails(updateDoc(doc(as("alice"), "rooms", ROOM), { hostSeenAt: serverTimestamp() }));
-    await assertFails(updateDoc(doc(as("host"), "rooms", ROOM), { hostSeenAt: 0 }));
-    await assertFails(updateDoc(doc(as("host"), "rooms", ROOM), { hostSeenAt: serverTimestamp(), presetId: "propose" }));
-    await assertFails(updateDoc(doc(as("host"), "rooms", ROOM), { hostSeenAt: serverTimestamp(), status: "declared", result }));
-  });
-
-  it("ルームは生存の印を付けて作れる。印は今の時刻だけ", async () => {
-    await assertSucceeds(setDoc(doc(as("host"), "rooms", ROOM), { ...newRoom("host"), hostSeenAt: serverTimestamp() }));
-    await assertFails(setDoc(doc(as("host"), "rooms", "FGHIJ"), { ...newRoom("host"), hostSeenAt: 0 }));
-  });
-
   it("ルームは誰も消せない", async () => {
     await seed();
     await assertFails(deleteDoc(doc(as("host"), "rooms", ROOM)));

@@ -14,8 +14,6 @@ export interface Room {
   updatedAt: number;
   /** Firestore 版だけ。ルームを作った端末の匿名認証の uid。画面はこれでホストを判定する */
   hostUid?: string;
-  /** Firestore 版だけ。ホストの端末が最後に生存の印を書いた日時（サーバの時刻）。参加者の端末は、これが途絶えたらホストと切れたとみなす */
-  hostSeenAt?: number;
 }
 
 export interface NewParticipant {

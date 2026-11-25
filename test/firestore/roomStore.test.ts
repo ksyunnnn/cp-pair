@@ -149,29 +149,19 @@ describe("FirestoreRoomStore", () => {
   });
 });
 
-describe("FirestoreRoomStore.touchHost（ホストの生存の印）", () => {
-  it("作ったルームには印があり、ホストが書くと進む。ほかの端末は書けない", async () => {
-    const host = device("host");
-    const { id } = await host.createRoom("propose");
-    const first = (await device("alice").getRoom(id))?.hostSeenAt;
-    expect(typeof first).toBe("number");
-    await new Promise((resolve) => setTimeout(resolve, 20));
-    await host.touchHost(id);
-    expect((await device("alice").getRoom(id))!.hostSeenAt!).toBeGreaterThan(first!);
-    await expect(device("alice").touchHost(id)).rejects.toThrow();
-  });
-});
-
 describe("FirestoreRoomStore.importRoom（オフラインモードの解除）", () => {
-  it("途中で入ったルームを、ホストの端末の内容で引き継ぐ", async () => {
+  it("途中で入ったルームを引き継ぐ。上書きするのはホストの端末で選び直した人の選択だけ", async () => {
     const host = device("host");
     const alice = device("alice");
     const bob = device("bob");
     const carol = device("carol");
+    const dan = device("dan");
     const { id } = await host.createRoom("propose");
     const a = await alice.addParticipant(id, { name: "アオイ", gender: "F", joinType: "device" });
     const b = await bob.addParticipant(id, { name: "ハルト", gender: "M", joinType: "device" });
     expect(await alice.selectCompany(id, a.id, 1)).toBe("ok");
+    const d = await dan.addParticipant(id, { name: "ダイチ", gender: "M", joinType: "device" });
+    expect(await dan.selectCompany(id, d.id, 4)).toBe("ok");
 
     // ここで切れたとする。ホストの端末は、切れる前に届いていたルームを持つ
     const atEntry = (await host.getRoom(id))!;
@@ -179,6 +169,7 @@ describe("FirestoreRoomStore.importRoom（オフラインモードの解除）",
 
     // 切れている間に、本人の端末でも選び、別の人が自分の端末で加わる
     expect(await alice.selectCompany(id, a.id, 3)).toBe("ok");
+    expect(await dan.selectCompany(id, d.id, 5)).toBe("ok");
     const c = await carol.addParticipant(id, { name: "カエデ", gender: "F", joinType: "device" });
     expect(await carol.selectCompany(id, c.id, 2)).toBe("ok");
     const k = await carol.addParticipant(id, { name: "ケン", gender: "M", joinType: "device" });
@@ -189,21 +180,24 @@ describe("FirestoreRoomStore.importRoom（オフラインモードの解除）",
       ...atEntry,
       participants: [
         { ...atEntry.participants.find((p) => p.id === a.id)!, selectedCompanyId: 2 },
+        atEntry.participants.find((p) => p.id === d.id)!,
         { id: "manual-offline-1", name: "メイ", gender: "F" as const, joinType: "manual" as const, selectedCompanyId: 3 },
       ],
     };
 
-    expect(await host.importRoom(source, known)).toBe(id);
+    const repicked = [a.id, "manual-offline-1"];
+    expect(await host.importRoom(source, known, repicked)).toBe(id);
     const after = (await host.getRoom(id))!;
     const byId = new Map(after.participants.map((p) => [p.id, p.selectedCompanyId]));
-    expect(byId.get(a.id)).toBe(2); // ホストの端末の選択を残す
+    expect(byId.get(a.id)).toBe(2); // ホストの端末で選び直した人は、ホストの端末の選択を残す
+    expect(byId.get(d.id)).toBe(5); // 選び直していない人は、本人の端末で選んだものを残す
     expect(byId.has(b.id)).toBe(false); // ホストが外した人
     expect(byId.get("manual-offline-1")).toBe(3);
-    expect(byId.get(c.id)).toBeNull(); // 切れている間に加わった人は残し、ホストの端末と重なる選択だけ外す
+    expect(byId.get(c.id)).toBeNull(); // ホストの端末で選び直した人と重なる選択だけ外す
     expect(byId.get(k.id)).toBe(9);
 
     // もう一度呼んでも同じ状態
-    expect(await host.importRoom(source, known)).toBe(id);
+    expect(await host.importRoom(source, known, repicked)).toBe(id);
     expect((await host.getRoom(id))!.participants.map((p) => [p.id, p.selectedCompanyId])).toEqual(
       after.participants.map((p) => [p.id, p.selectedCompanyId]),
     );
@@ -230,7 +224,7 @@ describe("FirestoreRoomStore.importRoom（オフラインモードの解除）",
       createdAt: now,
       updatedAt: now,
     };
-    expect(await host.importRoom(source, [])).toBe("QWERT");
+    expect(await host.importRoom(source, [], [])).toBe("QWERT");
     const room = await device("alice").getRoom("QWERT");
     expect(room?.status).toBe("declared");
     expect(room?.hostUid).toBe("host");
@@ -254,7 +248,7 @@ describe("FirestoreRoomStore.importRoom（オフラインモードの解除）",
       createdAt: Date.now(),
       updatedAt: Date.now(),
     };
-    const newId = await host.importRoom(source, []);
+    const newId = await host.importRoom(source, [], []);
     expect(newId).not.toBe(taken.id);
     expect((await host.getRoom(newId))?.participants.map((p) => p.selectedCompanyId)).toEqual([4]);
     expect((await other.getRoom(taken.id))?.participants).toEqual([]);
