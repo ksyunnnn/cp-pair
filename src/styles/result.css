@@ -188,7 +188,7 @@
   overflow-wrap: anywhere;
 }
 
-/* 結果の発表（src/screens/useReveal.ts）。名前・理念・相性・称号は Motion が出し、ほかの区画（.r-later）はここで出す。
+/* 結果の発表（src/screens/useReveal.ts）。見出し・名前・理念・相性・称号は Motion が動かし、ほかの区画（.r-later）はここで出す。
    途中の区画は押せない。本文を押すと最後の状態へ飛ぶ */
 .r-content[data-revealing] > * {
   pointer-events: none;

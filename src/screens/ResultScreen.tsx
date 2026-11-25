@@ -30,7 +30,7 @@ export function ScoreAndTitle({ score, title, reveal }: { score: number; title: 
   const t = splitTitle(title);
   const [head, tail] = splitTitleBody(t.body);
   return (
-    <div className="r-score">
+    <m.div className="r-score" {...reveal?.travel("score")}>
       <m.div className="r-score__num" {...reveal?.part("appear")}>
         <p className="t-score c-accent">{reveal ? reveal.score : score}%</p>
         <p className="t-tiny c-muted">こじつけ相性度</p>
@@ -42,7 +42,7 @@ export function ScoreAndTitle({ score, title, reveal }: { score: number; title: 
           {tail && <span>{tail}</span>}
         </p>
       </m.div>
-    </div>
+    </m.div>
   );
 }
 
@@ -107,13 +107,13 @@ function Frame({ right, reveal, children }: { right: ReactNode; reveal: Reveal; 
   );
 }
 
-/* 見出しの記号。ための間は、結果画面にある記号をコマ打ちで差し替える */
+/* 見出しの記号。ための間は、結果画面にある記号をコマ打ちで差し替える。発表の初めは画面の中央に置き、元の位置へ上げる */
 function RevealEyebrow({ glyphs, reveal, children }: { glyphs: TagIcon[]; reveal: Reveal; children: ReactNode }) {
   return (
-    <div className="cp-eyebrow">
+    <m.div className="cp-eyebrow" {...reveal.travel("eyebrow")}>
       <PhIcon name={glyphs[reveal.glyph]} size={17} />
       <span className="t-eyebrow">{children}</span>
-    </div>
+    </m.div>
   );
 }
 
@@ -144,7 +144,7 @@ export function ResultScreen({
           <RevealEyebrow glyphs={PAIR_GLYPHS} reveal={reveal}>
             YOUR PHILOSOPHY PARTNER
           </RevealEyebrow>
-          <m.div className="r-name" {...reveal.part("settle", 0)}>
+          <m.div className="r-name" {...reveal.part("strike")} style={{ originX: 0 }}>
             <h1 className="t-name r-name__text">{partner.name}</h1>
             <span className="t-body">さん</span>
             <span className="r-name__mark">
@@ -211,7 +211,7 @@ function FreeResult({ me, reveal, onBackToHost }: { me: UnmatchedPerson; reveal:
         <RevealEyebrow glyphs={FREE_GLYPHS} reveal={reveal}>
           FREE / JOKER
         </RevealEyebrow>
-        <m.div className="r-name" {...reveal.part("settle", 0)}>
+        <m.div className="r-name" {...reveal.part("strike")} style={{ originX: 0 }}>
           <h1 className="t-name r-name__text">フリー枠</h1>
           <span className="r-name__mark">
             <PairLogo width={54} />

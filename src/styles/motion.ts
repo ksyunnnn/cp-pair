@@ -26,6 +26,8 @@ export const SPRING = {
   row: { type: "spring", visualDuration: TICK * 6, bounce: 0.1 },
   /** 結果の名前と理念が出る */
   settle: { type: "spring", visualDuration: TICK * 7, bounce: 0 },
+  /** 結果の見出しと相性度が、画面の中央から元の位置へ移る。行き過ぎずに着地して止める */
+  travel: { type: "spring", visualDuration: TICK * 7, bounce: 0 },
   /** ガラスの上のボタンを押した瞬間（膨らんで浮く）。gel のように少し行き過ぎる */
   glassPress: { type: "spring", visualDuration: 0.16, bounce: 0.3 },
   /** ガラスの上のボタンを押したまま指を動かしたとき（指へ寄って伸びる） */
@@ -53,6 +55,7 @@ const SEAL_TOTAL = SEAL_TICKS.windUp + SEAL_TICKS.hold + SEAL_TICKS.strike + SEA
  * 判を押す動き（keyframes）。値は OFFSET の seal* / card* を順に通る。
  * seal: 結果の称号。元の大きさから持ち上げて止め、元より少し下まで打ち込んで収める（19 コマ = 792ms）
  * card: 選んだカード。よく押すのでためと止めを省き、打ちと収めだけにする（4 コマ = 167ms）
+ * name: 結果の相手の名前。大きく現れて打ち込み、収める（4 コマ = 167ms）。発表の山なので、ためを挟まず一打で決める
  */
 export const STAMP = {
   seal: {
@@ -67,6 +70,11 @@ export const STAMP = {
     ease: ["easeOut", "linear", "easeIn", "easeOut"],
   },
   card: {
+    duration: TICK * 4,
+    times: [0, 0.5, 1],
+    ease: ["easeIn", "easeOut"],
+  },
+  name: {
     duration: TICK * 4,
     times: [0, 0.5, 1],
     ease: ["easeIn", "easeOut"],
@@ -134,20 +142,32 @@ export const OFFSET = {
   sealY: -6,
   sealStrikeScale: 0.985,
   sealStrikeY: 1,
+  /** 名前: 現れたときの大きさ → 打ち込んだ底 */
+  nameScale: 1.08,
+  nameStrikeScale: 0.985,
 } as const;
 
-/** 結果の発表の段取り（秒） */
+/**
+ * 結果の発表の段取り（秒）。見出しと相性度は画面の中央で見せてから、元の位置へ移る。
+ * ため（見出しだけが中央）→ 見出しが上へ → 相性度だけが中央で数え上げと判 → 相性度が下へ → 名前を打つ → ほかの区画
+ */
 export const REVEAL = {
-  /** ため。少し長すぎるくらい止める（24 コマ） */
-  hold: TICK * 24,
+  /** ため。見出しだけを画面の中央で見せる（16 コマ） */
+  hold: TICK * 16,
   /** ための間に記号を差し替える間隔（3 コマ） */
   glyphEvery: FRAME * 3,
+  /** 見出しが中央から元の位置へ移る（8 コマ。SPRING.travel が 7 コマで着く） */
+  rise: TICK * 8,
   /** 相性度の数え上げ。12fps のコマで数字を差し替える（20 コマ） */
   count: TICK * 20,
   /** 数え上げの後、最終値で止める（3 コマ）。判のためと止めがこの後に続く */
   countHold: TICK * 3,
-  /** 判が動き始めてから、打ち込んだ底に着くまで。名前と理念はここから出る */
-  afterSeal: TICK * (SEAL_TICKS.windUp + SEAL_TICKS.hold + SEAL_TICKS.strike),
+  /** 称号の判の全体（19 コマ） */
+  seal: TICK * SEAL_TOTAL,
+  /** 判を収めてから、相性度が下へ移り始めるまで（3 コマ） */
+  sealHold: TICK * 3,
+  /** 相性度が中央から元の位置へ移る（8 コマ）。着いたところで名前を打つ */
+  drop: TICK * 8,
   /** 名前・理念・ほかの区画を、上から何秒ずつずらすか（2 コマ） */
   stagger: TICK * 2,
 } as const;
