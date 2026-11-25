@@ -271,8 +271,8 @@ export function FloatingBar({ note, children }: { note?: ReactNode; children: Re
   );
 }
 
-/* 結果画面の上部「ブランド」。右端に about へのリンクを置く（about の画面では置かない） */
-export function BrandHeader({ right, aboutLink = true }: { right?: ReactNode; aboutLink?: boolean }) {
+/* 結果画面の上部「ブランド」。aboutLink のときは、右端に about へのリンクを置く（トップ画面だけ） */
+export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; aboutLink?: boolean }) {
   return (
     <header className="cp-brand">
       <PairLogo width={30} />

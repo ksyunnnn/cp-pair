@@ -73,7 +73,7 @@ export function AboutScreen() {
 
   return (
     <div className="cp-page">
-      <BrandHeader right="このアプリについて" aboutLink={false} />
+      <BrandHeader right="このアプリについて" />
       <ScreenMain className="cp-content">
         <ScreenHeading
           eyebrow="ABOUT CP PAIR"
