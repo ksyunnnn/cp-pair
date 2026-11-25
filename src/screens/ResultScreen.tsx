@@ -1,5 +1,6 @@
 // 参加者の結果画面。Framer のページ「CP PAIR — あなたの結果」（ブレイクポイント WQLkyLRf1）を再現する。
 import { Heart, Intersect, Sparkle } from "@phosphor-icons/react";
+import { m } from "motion/react";
 import type { ReactNode } from "react";
 import { getPreset } from "../game/presets.ts";
 import { TRIGGER_CONFIG } from "../game/triggers.ts";
@@ -8,6 +9,11 @@ import type { Archetype, MatchedPerson, MatchResult, UnmatchedPerson } from "../
 import { BrandHeader, Button } from "../ui/components.tsx";
 import { COLOR } from "../styles/tokens.ts";
 import { PairLogo } from "../ui/symbols.tsx";
+import { useReveal, type Reveal } from "./useReveal.ts";
+
+// ための間に差し替える記号。どれも結果画面にある記号で、最初の 1 つが最後に残る
+const PAIR_GLYPHS: TagIcon[] = ["Intersect", "Heart", "Sparkle"];
+const FREE_GLYPHS: TagIcon[] = ["Sparkle", "Heart", "Intersect"];
 
 const PHOSPHOR_WEIGHT = "regular" as const;
 
@@ -18,23 +24,24 @@ function PhIcon({ name, size }: { name: TagIcon; size: number }) {
   return <Intersect {...props} />;
 }
 
-/* 相性と称号（P74_Bj9RK）。称号の本体は、1 行に収まらないときだけ末尾の語を次の行に送る（行の間は 4px）。 */
-export function ScoreAndTitle({ score, title }: { score: number; title: string }) {
+/* 相性と称号（P74_Bj9RK）。称号の本体は、1 行に収まらないときだけ末尾の語を次の行に送る（行の間は 4px）。
+   reveal を渡すと、数え上げの数字と、判で打つ称号になる（参加者の結果画面だけ） */
+export function ScoreAndTitle({ score, title, reveal }: { score: number; title: string; reveal?: Reveal }) {
   const t = splitTitle(title);
   const [head, tail] = splitTitleBody(t.body);
   return (
     <div className="r-score">
-      <div className="r-score__num">
-        <p className="t-score c-accent">{score}%</p>
+      <m.div className="r-score__num" {...reveal?.part("appear")}>
+        <p className="t-score c-accent">{reveal ? reveal.score : score}%</p>
         <p className="t-tiny c-muted">こじつけ相性度</p>
-      </div>
-      <div className="r-score__title">
+      </m.div>
+      <m.div className="r-score__title" {...(reveal && { ...reveal.part("seal"), style: { originX: 0 } })}>
         {t.kicker && <p className="t-label c-accent-text">{t.kicker}</p>}
         <p className="t-strong r-title-body">
           <span>{head}</span>
           {tail && <span>{tail}</span>}
         </p>
-      </div>
+      </m.div>
     </div>
   );
 }
@@ -57,7 +64,7 @@ function Karte({ heading, person, arch }: { heading: string; person: MatchedPers
 
 function YouCard({ me }: { me: MatchedPerson }) {
   return (
-    <div className="r-you">
+    <div className="r-you r-later">
       <p className="t-chip c-muted">YOU · あなたが選んだ理念</p>
       <p className="r-you__phrase cp-phrase">{me.company.phrase}</p>
       <p className="t-small c-muted">{me.company.company_name}</p>
@@ -67,7 +74,7 @@ function YouCard({ me }: { me: MatchedPerson }) {
 
 function AboutGame() {
   return (
-    <div className="r-about">
+    <div className="r-about r-later">
       <p className="t-label">理念はまじめ。相性は、こじつけ。</p>
       <p className="t-small c-muted">企業の言葉を借りた、ジョークの相性診断です。結果は当人とホストだけが確認できます。</p>
     </div>
@@ -77,17 +84,35 @@ function AboutGame() {
 function HostBack({ onBack }: { onBack?: () => void }) {
   if (!onBack) return null;
   return (
-    <Button kind="secondary" onClick={onBack}>
+    <Button kind="secondary" className="r-later" onClick={onBack}>
       ホスト画面に戻る
     </Button>
   );
 }
 
-function Frame({ right, children }: { right: ReactNode; children: ReactNode }) {
+/* 発表の途中は、本文を押すと最後の状態へ飛ぶ。途中の区画は押せない（隠れたボタンを押さないように） */
+function Frame({ right, reveal, children }: { right: ReactNode; reveal: Reveal; children: ReactNode }) {
   return (
     <div className="cp-page r-page">
       <BrandHeader right={right} />
-      <main className="r-content">{children}</main>
+      <main
+        className="r-content"
+        data-revealing={reveal.running || undefined}
+        data-later={reveal.later}
+        onPointerDown={reveal.running ? reveal.skip : undefined}
+      >
+        {children}
+      </main>
+    </div>
+  );
+}
+
+/* 見出しの記号。ための間は、結果画面にある記号をコマ打ちで差し替える */
+function RevealEyebrow({ glyphs, reveal, children }: { glyphs: TagIcon[]; reveal: Reveal; children: ReactNode }) {
+  return (
+    <div className="cp-eyebrow">
+      <PhIcon name={glyphs[reveal.glyph]} size={17} />
+      <span className="t-eyebrow">{children}</span>
     </div>
   );
 }
@@ -104,6 +129,7 @@ export function ResultScreen({
   const preset = getPreset(result.presetId);
   const pair = result.pairs.find((p) => p.personA.id === participantId || p.personB.id === participantId);
   const unmatched = result.unmatched.find((u) => u.id === participantId);
+  const reveal = useReveal(`${result.timestamp}:${participantId}`, pair ? pair.evaluation.score : null, PAIR_GLYPHS.length);
 
   if (pair) {
     const isA = pair.personA.id === participantId;
@@ -113,28 +139,27 @@ export function ResultScreen({
     const partnerArch = isA ? pair.evaluation.archetypes.personB : pair.evaluation.archetypes.personA;
     
     return (
-      <Frame right="ふたりだけの結果">
+      <Frame right="ふたりだけの結果" reveal={reveal}>
         <section className="r-partner" aria-label="あなたのマッチ相手">
-          <div className="cp-eyebrow">
-            <PhIcon name="Intersect" size={17} />
-            <span className="t-eyebrow">YOUR PHILOSOPHY PARTNER</span>
-          </div>
-          <div className="r-name">
+          <RevealEyebrow glyphs={PAIR_GLYPHS} reveal={reveal}>
+            YOUR PHILOSOPHY PARTNER
+          </RevealEyebrow>
+          <m.div className="r-name" {...reveal.part("settle", 0)}>
             <h1 className="t-name r-name__text">{partner.name}</h1>
             <span className="t-body">さん</span>
             <span className="r-name__mark">
               <PairLogo width={54} />
             </span>
-          </div>
-          <div className="r-phrase-card">
+          </m.div>
+          <m.div className="r-phrase-card" {...reveal.part("settle", 1)}>
             <p className="t-small r-on-ink">{partner.name}さんが選んだ理念</p>
             <p className="r-phrase-card__phrase cp-phrase">{partner.company.phrase}</p>
             <p className="t-small r-on-ink">{partner.company.company_name}</p>
-          </div>
-          <ScoreAndTitle score={pair.evaluation.score} title={pair.evaluation.title} />
+          </m.div>
+          <ScoreAndTitle score={pair.evaluation.score} title={pair.evaluation.title} reveal={reveal} />
         </section>
 
-        <section className="r-talk" aria-label="話しかけるきっかけ">
+        <section className="r-talk r-later" aria-label="話しかけるきっかけ">
           <div className="r-talk__head">
             <PhIcon name="Sparkle" size={18} />
             <p className="t-label">まずは、こんな話から。</p>
@@ -154,7 +179,7 @@ export function ResultScreen({
 
         <YouCard me={me} />
 
-        <section className="r-karte" aria-label="ふたりの診断カルテ">
+        <section className="r-karte r-later" aria-label="ふたりの診断カルテ">
           <h2 className="t-strong">ふたりの診断カルテ</h2>
           <Karte heading={`${partner.name}さん`} person={partner} arch={partnerArch} />
           <Karte heading="あなた" person={me} arch={myArch} />
@@ -167,11 +192,11 @@ export function ResultScreen({
   }
 
   if (unmatched) {
-    return <FreeResult me={unmatched} onBackToHost={onBackToHost} />;
+    return <FreeResult me={unmatched} reveal={reveal} onBackToHost={onBackToHost} />;
   }
 
   return (
-    <Frame right="結果">
+    <Frame right="結果" reveal={reveal}>
       <p className="t-body">この端末の参加者は、今回の結果に含まれていません。</p>
       <HostBack onBack={onBackToHost} />
     </Frame>
@@ -179,30 +204,29 @@ export function ResultScreen({
 }
 
 /* フリー／ジョーカー枠。結果画面と同じ部品と余白で組む（Framer に画面はない）。 */
-function FreeResult({ me, onBackToHost }: { me: UnmatchedPerson; onBackToHost?: () => void }) {
+function FreeResult({ me, reveal, onBackToHost }: { me: UnmatchedPerson; reveal: Reveal; onBackToHost?: () => void }) {
   return (
-    <Frame right="あなたの結果">
+    <Frame right="あなたの結果" reveal={reveal}>
       <section className="r-partner" aria-label="フリー／ジョーカー枠">
-        <div className="cp-eyebrow">
-          <PhIcon name="Sparkle" size={17} />
-          <span className="t-eyebrow">FREE / JOKER</span>
-        </div>
-        <div className="r-name">
+        <RevealEyebrow glyphs={FREE_GLYPHS} reveal={reveal}>
+          FREE / JOKER
+        </RevealEyebrow>
+        <m.div className="r-name" {...reveal.part("settle", 0)}>
           <h1 className="t-name r-name__text">フリー枠</h1>
           <span className="r-name__mark">
             <PairLogo width={54} />
           </span>
-        </div>
-        <div className="r-free-note">
+        </m.div>
+        <m.div className="r-free-note" {...reveal.part("seal")} style={{ originX: 0 }}>
           <p className="t-label c-accent-text">今回はフリー／ジョーカー枠！</p>
           <p className="t-strong">全員と自由にトークできる特権ポジションです</p>
           <p className="t-body c-muted">{me.reason}</p>
-        </div>
+        </m.div>
       </section>
 
       <YouCard me={me} />
 
-      <section className="r-karte" aria-label="あなたの診断カルテ">
+      <section className="r-karte r-later" aria-label="あなたの診断カルテ">
         <h2 className="t-strong">あなたの診断カルテ</h2>
         <Karte heading="あなた" person={me} arch={TRIGGER_CONFIG.personalityArchetype.classify(me.company)} />
       </section>
