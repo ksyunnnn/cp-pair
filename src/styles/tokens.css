@@ -38,10 +38,34 @@
   --page-max: 440px;
 
   /* 操作の層（CP フローティング操作バー pm5oXSZwN） */
-  --glass-fill: rgba(244, 242, 235, 0.94);
-  --glass-blur: 20px;
-  --glass-border: 1px solid rgba(244, 242, 235, 0.9);
-  --glass-shadow: 0px 4px 16px 0px rgba(34, 35, 31, 0.08);
+  /* Liquid Glass の試作（feature/liquid-glass-trial）。塗りを薄くして背景を透かし、縁に光（specular）を足す。Framer にない値 */
+  --glass-fill: linear-gradient(180deg, rgba(255, 255, 253, 0.74) 0%, rgba(246, 244, 238, 0.66) 100%);
+  --glass-filter: blur(14px) saturate(1.8) brightness(1.06);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.55);
+  /* 外の影 2 段と、内側の上端の光・下端の照り返し・縁の明るい輪郭 */
+  --glass-shadow:
+    0 8px 24px rgba(34, 35, 31, 0.12),
+    0 1px 3px rgba(34, 35, 31, 0.08),
+    0 0 0 0.5px rgba(34, 35, 31, 0.1),
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.5),
+    inset 0 0 12px rgba(255, 255, 255, 0.45);
+  /* 上から差す光の映り込み */
+  --glass-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 45%);
+  /* ガラスの上の補足文字。塗りが薄いため、黒いカードが下を通っても 4.5:1 を保つよう CP muted より暗くした */
+  --glass-label-muted: #3f403a;
+  /* ガラスの上のボタンを押している間の塗り。不透明な塗りが透明なガラスに変わる。白い光は重ねない */
+  --glass-press-filter: blur(10px) saturate(1.8);
+  /* 主ボタン: 墨を透かす。CP paper の文字を読ませるため、指定の 35〜45% より濃い 50% にした */
+  --glass-press-primary: rgba(34, 35, 31, 0.5);
+  /* 副ボタン: 薄い透明なガラス */
+  --glass-press-secondary: rgba(255, 255, 255, 0.22);
+  /* 縁の細い光と、浮いた影 */
+  --glass-press-rim: inset 0 0 0 0.5px rgba(255, 255, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --glass-press-rim-light: inset 0 0 0 1px rgba(255, 255, 255, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --glass-press-lift: 0 8px 24px rgba(34, 35, 31, 0.18);
+  /* 透明度を下げる設定（prefers-reduced-transparency）のときの塗り */
+  --glass-fill-reduced: rgba(244, 242, 235, 0.96);
 
   /* 浮いた操作バーの高さ（約 113px）＋余白。足した値 */
   --floating-clearance: 160px;
@@ -56,6 +80,9 @@
   --motion-fade-delay: 160ms;
   /* reduced motion のとき、結果の発表を一度に出す opacity（motion.ts の FADE.reveal と同じ） */
   --motion-fade-reveal: 200ms;
+  /* ガラスの上のボタンの塗り。押すと速く透明なガラスに変わり、離すと motion.ts の SPRING.glassRelease と同じ長さで戻る */
+  --motion-glass-fill-in: 120ms;
+  --motion-glass-fill-out: 400ms;
 
   /* 開発パネル（?dev のときだけ出る）。Framer にない値 */
   --dev-bg: #111;
