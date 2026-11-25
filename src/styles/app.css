@@ -102,6 +102,13 @@ label {
   align-self: flex-start;
 }
 
+/* ページの最後のフッター。本文が短いときは画面の下端に寄せる（.cp-page は高さ 100dvh 以上の縦並び）。
+   余白は本文と同じ --page-x と、ホームインジケーターの領域の分 */
+.cp-footer {
+  margin-top: auto;
+  padding: 0 var(--page-x) calc(32px + env(safe-area-inset-bottom));
+}
+
 .cp-content {
   display: flex;
   flex-direction: column;

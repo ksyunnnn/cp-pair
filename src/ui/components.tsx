@@ -384,6 +384,17 @@ export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; a
   );
 }
 
+/* ページの最後のフッター。トップ（お題選び）へ移る文字リンクを置く。操作バーの無い画面にだけ置く */
+export function TopLinkFooter() {
+  return (
+    <footer className="cp-footer">
+      <a className="t-small cp-link" href="#/">
+        はじめの画面に戻る
+      </a>
+    </footer>
+  );
+}
+
 /* 結果画面の「結果ラベル」と同じ形の見出し（記号 + 英字ラベル） */
 export function Eyebrow({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (

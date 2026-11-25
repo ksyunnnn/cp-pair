@@ -22,6 +22,7 @@ import {
   ScreenHeading,
   ScreenMain,
   Section,
+  TopLinkFooter,
 } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
@@ -58,6 +59,7 @@ export function RoomMissing({ roomId }: { roomId: string }) {
           lead="招待の URL をもう一度確かめてください。"
         />
       </ScreenMain>
+      <TopLinkFooter />
     </div>
   );
 }
@@ -302,6 +304,7 @@ function HostResults({ room }: { room: Room }) {
           宣言を取り消して、参加管理に戻る
         </Button>
       </ScreenMain>
+      <TopLinkFooter />
     </div>
   );
 }
