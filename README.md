@@ -19,7 +19,7 @@
 
 - **iPhone の Safari 向け** — スマホの縦画面を前提にした画面
 - **電波がなくても遊べる** — 一度オンラインで開いた端末は、ネットワークなしでも開いて最後まで遊べる。地下の店でも、ホストの端末だけで進められる
-- **登録不要** — アカウントもアプリのインストールも要らない。データはその端末のブラウザの中だけに置く
+- **登録不要** — アカウントもアプリのインストールも要らない
 
 ## 開発
 
@@ -46,7 +46,7 @@ npm run dev
 | `npm run build` | 型を検査し、`dist/` にビルドする |
 | `npm run lint` | oxlint で検査する |
 | `npm run verify` | 相性の計算が、元のモックと同じ結果を返すかを確かめる |
-| `npm run test:e2e` | ビルドした版を Playwright で動かし、ホストの端末だけで結果まで進む流れと、オフラインでの開き直しを確かめる |
+| `npm run test:e2e` | localStorage 版をビルドして Playwright で動かし、ホストの端末だけで結果まで進む流れと、オフラインでの開き直しを確かめる |
 | `npm run test:firestore` | Firestore のエミュレーターを立て、`firestore.rules` が許す操作と拒む操作、Firestore 版の保存の動きを確かめる |
 | `npm run test:e2e:firestore` | Auth と Firestore のエミュレーターを立て、Firestore 版のビルドを Playwright で動かし、オフラインモードへの切り替えと解除を確かめる |
 
@@ -71,10 +71,11 @@ docs/        デザインの値（design/）と全画面のスクリーンショ
 ```
 
 - 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`）で分ける
-- ルームのデータは `src/store/RoomStore.ts` のインターフェースを通して出し入れする。既定は localStorage の実装で、`VITE_ROOM_STORE=firestore` のときだけ Firestore の実装（`firestoreRoomStore.ts`）を使う。設定の雛形は `.env.local.example`、守りは `firestore.rules` にある
+- ルームのデータは `src/store/RoomStore.ts` のインターフェースを通して出し入れする。`VITE_ROOM_STORE=firestore` のときは Firestore の実装（`firestoreRoomStore.ts`）を、そうでなければ localStorage の実装を使う。守りは `firestore.rules` にある
+- 設定: 本番とプレビューのビルド（`npm run build`）は、リポジトリの `.env.production`（Firestore 版と cp-pair の Firebase の値）を読む。値は秘密ではない。`npm run dev` は `.env.production` を読まず、`.env.local` がなければ localStorage 版で動く。手元の設定の雛形は `.env.local.example`
 - Firestore 版では、ホストの端末がつながらないときにオフラインモード（ホストの端末 1 台で進める状態）へ自動で入り、そのルームを localStorage の実装に置く。入るのは、ルームを作るときにネットが無いか Firestore に作れなかったときと、ルームの途中でブラウザの `offline` イベントを受けたとき。解除はホストが画面の「各自の端末での参加に戻す」で行い、ホストの端末のルームを Firestore へ引き継ぐ。切り替えは `src/store/index.ts`、記録は `src/store/offlineMode.ts` にある
 - Firestore 版では、参加者の端末は自分の端末が切れている間だけ「ホストの端末で選んでください」と出し、選択も解除もさせない。解除のときに Firestore を上書きするのは、オフラインモードの間にホストの端末で選び直した人の選択だけ
-- テストの設定（`playwright.config.ts`・`playwright.firestore.config.ts`）は `VITE_*` を環境変数で渡し、手元の `.env.local` の値を使わない
+- テストの設定（`playwright.config.ts`・`playwright.firestore.config.ts`）は `VITE_*` を環境変数で渡し、`.env.local`・`.env.production` の値を使わない
 - オフライン: `vite-plugin-pwa`（Workbox）の Service Worker が、ビルドした全ファイルを最初の表示のあとに保存する。新しい版は、オンラインで開いたときに取得して入れ替わる
 
 ## 配信
