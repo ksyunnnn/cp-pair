@@ -45,10 +45,18 @@ export function HostPick({ room, participantId }: { room: Room; participantId: s
   );
 }
 
+// 端末を渡し終えた結果。診断の説明（#/rules）へ進んで戻ったときに、渡す画面を出し直さないために覚える。
+// ホスト画面に戻るときに消す（次にその結果を開くときは、また渡す画面から）
+const handedOver = new Set<string>();
+
 export function HostResultView({ room, participantId }: { room: Room; participantId: string }) {
   const participant = room.participants.find((p) => p.id === participantId);
-  const [passed, setPassed] = useState(participant?.joinType !== "manual");
-  const back = () => navigate(`/host/${room.id}`);
+  const handKey = `${room.id}:${participantId}`;
+  const [passed, setPassed] = useState(participant?.joinType !== "manual" || handedOver.has(handKey));
+  const back = () => {
+    handedOver.delete(handKey);
+    navigate(`/host/${room.id}`);
+  };
 
   if (!participant || room.status !== "declared" || !room.result) return <HostRoom room={room} />;
 
@@ -58,7 +66,10 @@ export function HostResultView({ room, participantId }: { room: Room; participan
         name={participant.name}
         purpose="さんの結果です"
         lead="マッチ相手が分かるのは本人とホストだけです。本人に端末を渡してから、下のボタンを押してください。"
-        onProceed={() => setPassed(true)}
+        onProceed={() => {
+          handedOver.add(handKey);
+          setPassed(true);
+        }}
         onBack={back}
       />
     );

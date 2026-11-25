@@ -5,6 +5,7 @@ import { HostPick, HostResultView } from "./screens/host/HostDeviceViews.tsx";
 import { HostRoom, RoomMissing } from "./screens/host/HostRoom.tsx";
 import { HostStart } from "./screens/host/HostStart.tsx";
 import { ParticipantRoom } from "./screens/participant/ParticipantRoom.tsx";
+import { RulesScreen } from "./screens/RulesScreen.tsx";
 import { useRoom } from "./store/index.ts";
 import { OfflineReady } from "./ui/offlineReady.tsx";
 import { ToastProvider } from "./ui/toast.tsx";
@@ -18,6 +19,7 @@ function Screen() {
   const { room, loading } = useRoom(roomId);
 
   if (route.name === "hostStart") return <HostStart />;
+  if (route.name === "rules") return <RulesScreen />;
   if (loading) return <div className="cp-page" />;
   if (!room) return <RoomMissing roomId={roomId ?? ""} />;
 

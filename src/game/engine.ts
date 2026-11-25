@@ -1,5 +1,5 @@
 // gemini_output/v1.1_モック.html の DatasetRepository と MatchingEngine を移したもの。値と式は変えない。
-// モックとの違いは、runMatching が preset の代わりに presetId を返すことだけ（結果を JSON で保存するため）。
+// モックとの違いは、runMatching が preset の代わりに presetId を返すことと、既定の 2 つの称号を定数に出したこと（結果を JSON で保存するため・説明で読むため）。
 import { PRESET_PROMPTS } from "./presets.ts";
 import { TRIGGER_CONFIG } from "./triggers.ts";
 import type {
@@ -12,6 +12,10 @@ import type {
   Participant,
   PresetPrompt,
 } from "./types.ts";
+
+// どの条件にも当てはまらないときの称号。結果画面の「診断の説明」も読むため、evaluatePair から取り出した（文言は元のまま）。
+export const HYBRID_TITLE = `💎 理想のハイブリッド！堅実シンクロ × 凸凹補完ペア`;
+export const BALANCE_TITLE = `💞 絶妙バランス！理念クロス・パートナー`;
 
 export class DatasetRepository {
   private readonly _items: readonly Company[];
@@ -160,11 +164,11 @@ export class MatchingEngine {
       hybrid.axes.stabilitySync >= 0.75 &&
       (hybrid.axes.passionGap >= 0.5 || hybrid.axes.romanceGap >= 0.5)
     ) {
-      title = `💎 理想のハイブリッド！堅実シンクロ × 凸凹補完ペア`;
+      title = HYBRID_TITLE;
       badgeColor = "from-violet-600 to-pink-500";
       story = `安心感のベース（堅実度）はピタリと一致しつつ、熱量やロマンの違いで刺激し合える理想のバランス！`;
     } else {
-      title = `💞 絶妙バランス！理念クロス・パートナー`;
+      title = BALANCE_TITLE;
       badgeColor = "from-pink-500 to-purple-600";
       story = `「${cA.phrase}」と「${cB.phrase}」が交差する好相性ペア！お互いの診断タイプ（${typeA.label} × ${typeB.label}）をネタに乾杯しましょう。`;
     }

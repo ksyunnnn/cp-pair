@@ -200,3 +200,38 @@
     animation-duration: var(--motion-fade-reveal);
   }
 }
+
+/* 診断の説明（src/screens/RulesScreen.tsx、#/rules）。Framer に画面はない。区画は .cp-section（上の線 + padding-top 24）、
+   1 件は「ふたりの診断カルテ」の 1 人分の文字の組（型 .t-type ＋ 補足 .t-small）、タグは結果画面の札 .r-tag を使う */
+.rl-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rl-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rl-item__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rl-num {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.rl-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.rl-title + .rl-title {
+  margin-top: 8px;
+}

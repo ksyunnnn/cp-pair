@@ -9,6 +9,8 @@ import type { Archetype, MatchedPerson, MatchResult, UnmatchedPerson } from "../
 import { BrandHeader, Button } from "../ui/components.tsx";
 import { COLOR } from "../styles/tokens.ts";
 import { PairLogo } from "../ui/symbols.tsx";
+import { navigate } from "../router.ts";
+import { RULES_PATH } from "./RulesScreen.tsx";
 import { useReveal, type Reveal } from "./useReveal.ts";
 
 // ための間に差し替える記号。どれも結果画面にある記号で、最初の 1 つが最後に残る
@@ -78,6 +80,15 @@ function AboutGame() {
       <p className="t-label">理念はまじめ。相性は、こじつけ。</p>
       <p className="t-small c-muted">企業の言葉を借りた、ジョークの相性診断です。結果は当人とホストだけが確認できます。</p>
     </div>
+  );
+}
+
+/* 診断の説明（#/rules）へ。相性度・キャラ型・タグ・称号が何から決まるかを、ルームによらない 1 枚で見せる */
+function RulesLink() {
+  return (
+    <Button kind="link" className="r-later" onClick={() => navigate(RULES_PATH)}>
+      診断の説明
+    </Button>
   );
 }
 
@@ -186,6 +197,7 @@ export function ResultScreen({
         </section>
 
         <AboutGame />
+        <RulesLink />
         <HostBack onBack={onBackToHost} />
       </Frame>
     );
@@ -232,6 +244,7 @@ function FreeResult({ me, reveal, onBackToHost }: { me: UnmatchedPerson; reveal:
       </section>
 
       <AboutGame />
+      <RulesLink />
       <HostBack onBack={onBackToHost} />
     </Frame>
   );

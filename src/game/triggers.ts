@@ -1,5 +1,15 @@
-// gemini_output/v1.1_モック.html の TRIGGER_CONFIG を移したもの。値と式は変えない。
+// gemini_output/v1.1_モック.html の TRIGGER_CONFIG を移したもの。値と式は変えない（キャラ型の判定の並びだけ ARCHETYPE_RULES に出した）。
 import type { Archetype, Company } from "./types.ts";
+
+// キャラ型の判定。診断コメント（personality_comment）を上から順に照らし、最初に当てはまった型にする。
+// 結果画面の「診断の説明」が語の一覧を読むため、classify から取り出して並べた（値と順は元のまま）。
+export const ARCHETYPE_RULES: readonly (Archetype & { pattern: RegExp })[] = [
+  { code: "RM-型", label: "夢見るロマンチスト気質", pattern: /ロマン|夢|ドラマ|サプライズ|芸術|理想/ },
+  { code: "ST-型", label: "鉄壁の安心・堅実派", pattern: /堅実|安心|誠実|安全|家庭|守|計画/ },
+  { code: "LG-型", label: "スマート合理主義タイプ", pattern: /合理|効率|スマート|直球|マイペース/ },
+  { code: "AC-型", label: "熱血チャレンジャー気質", pattern: /情熱|野心|行動|挑戦|冒険|エネルギー/ },
+];
+export const ARCHETYPE_FALLBACK: Archetype = { code: "HM-型", label: "愛されムードメーカー気質" };
 
 export const TRIGGER_CONFIG = {
   unlistedSecret: {
@@ -47,11 +57,8 @@ export const TRIGGER_CONFIG = {
     bonus: 4,
     classify: (company: Company): Archetype => {
       const text = company.creative.personality_comment;
-      if (/ロマン|夢|ドラマ|サプライズ|芸術|理想/.test(text)) return { code: "RM-型", label: "夢見るロマンチスト気質" };
-      if (/堅実|安心|誠実|安全|家庭|守|計画/.test(text)) return { code: "ST-型", label: "鉄壁の安心・堅実派" };
-      if (/合理|効率|スマート|直球|マイペース/.test(text)) return { code: "LG-型", label: "スマート合理主義タイプ" };
-      if (/情熱|野心|行動|挑戦|冒険|エネルギー/.test(text)) return { code: "AC-型", label: "熱血チャレンジャー気質" };
-      return { code: "HM-型", label: "愛されムードメーカー気質" };
+      const rule = ARCHETYPE_RULES.find((r) => r.pattern.test(text));
+      return rule ? { code: rule.code, label: rule.label } : { ...ARCHETYPE_FALLBACK };
     },
   },
 };
