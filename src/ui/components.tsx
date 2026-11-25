@@ -1,0 +1,266 @@
+// Framer の部品 10 個を React にしたもの。値は docs/design/framer-values.md の「部品」による。
+import type { ReactNode } from "react";
+import type { Gender, JoinType } from "../game/types.ts";
+import { CpSymbol, PairLogo, type SymbolName } from "./symbols.tsx";
+
+/* CP 主ボタン / CP 副ボタン / CP 文字リンクボタン */
+export function Button({
+  kind = "primary",
+  children,
+  onClick,
+  disabled,
+  type = "button",
+  icon,
+}: {
+  kind?: "primary" | "secondary" | "link";
+  children: ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: "button" | "submit";
+  icon?: SymbolName;
+}) {
+  return (
+    <button type={type} className={`cp-button cp-button--${kind} t-label`} onClick={onClick} disabled={disabled}>
+      {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--cp-soft)" />}
+      <span>{children}</span>
+    </button>
+  );
+}
+
+/* CP ニックネーム入力 */
+export function NicknameInput({
+  value,
+  onChange,
+  placeholder = "例：アオイ",
+  autoFocus,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  autoFocus?: boolean;
+}) {
+  return (
+    <label className="cp-field">
+      <span className="t-label">ニックネーム</span>
+      <input
+        className="cp-input"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        maxLength={12}
+        autoComplete="off"
+        enterKeyHint="done"
+        autoFocus={autoFocus}
+      />
+    </label>
+  );
+}
+
+/* CP 性別選択 */
+export function GenderSelect({ value, onChange }: { value: Gender | null; onChange: (value: Gender) => void }) {
+  const options: { value: Gender; label: string }[] = [
+    { value: "M", label: "男性" },
+    { value: "F", label: "女性" },
+  ];
+  return (
+    <div className="cp-field">
+      <span className="t-label" id="gender-label">
+        性別
+      </span>
+      <div className="cp-gender" role="radiogroup" aria-labelledby="gender-label">
+        {options.map((o) => (
+          <button
+            key={o.value}
+            type="button"
+            role="radio"
+            aria-checked={value === o.value}
+            className={`cp-gender__option t-label${value === o.value ? " is-selected" : ""}`}
+            onClick={() => onChange(o.value)}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* CP 選択肢カード（お題と企業理念で共通） */
+export function ChoiceCard({
+  category,
+  label,
+  selected,
+  onClick,
+}: {
+  category: string;
+  label: string;
+  selected?: boolean;
+  onClick?: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={`cp-choice${selected ? " is-selected" : ""}`}
+      aria-pressed={selected}
+      onClick={onClick}
+    >
+      <span className="cp-choice__head">
+        <span className="t-small cp-choice__category">{category}</span>
+        {selected && (
+          <span className="cp-choice__mark">
+            <CpSymbol name="Done" size={16} />
+          </span>
+        )}
+      </span>
+      <span className="t-section cp-choice__label">{label}</span>
+    </button>
+  );
+}
+
+/* CP バッジ */
+export function Badge({ children }: { children: ReactNode }) {
+  return <span className="cp-badge t-small">{children}</span>;
+}
+
+export const GENDER_LABEL: Record<Gender, string> = { M: "男性", F: "女性" };
+export const JOIN_LABEL: Record<JoinType, string> = { device: "自分の端末", manual: "ホストの端末" };
+
+/* CP 参加者の行 */
+export function ParticipantRow({
+  name,
+  gender,
+  joinType,
+  status,
+  done,
+  action,
+  onAction,
+  onRemove,
+}: {
+  name: string;
+  gender: Gender;
+  joinType: JoinType;
+  status: string;
+  done: boolean;
+  action?: string;
+  onAction?: () => void;
+  onRemove?: () => void;
+}) {
+  const removeButton = onRemove && (
+    <button type="button" className="cp-row__remove" aria-label={`${name}さんを削除`} onClick={onRemove}>
+      <CpSymbol name="Remove" size={16} />
+    </button>
+  );
+  return (
+    <div className="cp-row">
+      <div className="cp-row__info">
+        <CpSymbol name="Person" size={28} />
+        <div className="cp-row__text">
+          <span className="t-section">{name}</span>
+          <span className="cp-row__attrs">
+            <span className="t-small c-muted">{GENDER_LABEL[gender]}</span>
+            <span className="t-small c-muted">{JOIN_LABEL[joinType]}</span>
+          </span>
+        </div>
+        {/* 操作ボタンがない行は、削除を名前の横に置く（空の行を作らない） */}
+        {!action && removeButton}
+      </div>
+      <span className={`t-label${done ? "" : " c-muted"}`}>{status}</span>
+      {action && (
+        <div className="cp-row__ops">
+          <button type="button" className="cp-row__action t-label" onClick={onAction}>
+            {action}
+          </button>
+          {removeButton}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* CP 進行ステップ */
+const STEPS = ["お題", "参加・選択", "結果"];
+export function ProgressSteps({ current }: { current: 1 | 2 | 3 }) {
+  return (
+    <ol className="cp-steps" aria-label="進行">
+      {STEPS.map((label, i) => {
+        const n = i + 1;
+        const active = n === current;
+        return (
+          <li key={label} className={`cp-steps__item${active ? " is-current" : ""}`} aria-current={active ? "step" : undefined}>
+            <span className="cp-steps__num t-label">{n}</span>
+            <span className="t-small">{label}</span>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+/* CP フローティング操作バー（操作の層。ここだけガラス） */
+export function FloatingBar({ note, children }: { note?: ReactNode; children: ReactNode }) {
+  return (
+    <div className="cp-floating" role="region" aria-label="操作">
+      <div className="cp-floating__bar">
+        {note && <p className="t-small c-muted cp-floating__note">{note}</p>}
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* 結果画面の上部「ブランド」 */
+export function BrandHeader({ right }: { right?: ReactNode }) {
+  return (
+    <header className="cp-brand">
+      <PairLogo width={30} />
+      <span className="t-logo">CP PAIR</span>
+      <span className="t-small c-muted cp-brand__right">{right}</span>
+    </header>
+  );
+}
+
+/* 結果画面の「結果ラベル」と同じ形の見出し（記号 + 英字ラベル） */
+export function Eyebrow({ icon, children }: { icon: ReactNode; children: ReactNode }) {
+  return (
+    <div className="cp-eyebrow">
+      {icon}
+      <span className="t-eyebrow">{children}</span>
+    </div>
+  );
+}
+
+/* 画面の見出し: 英字ラベル・題・補足 */
+export function ScreenHeading({
+  eyebrow,
+  icon,
+  title,
+  lead,
+}: {
+  eyebrow: string;
+  icon: ReactNode;
+  title: ReactNode;
+  lead?: ReactNode;
+}) {
+  return (
+    <div className="cp-heading">
+      <Eyebrow icon={icon}>{eyebrow}</Eyebrow>
+      <h1 className="t-title">{title}</h1>
+      {lead && <p className="t-body c-muted">{lead}</p>}
+    </div>
+  );
+}
+
+/* 本文の区切り（結果画面の border-top 1px + padding-top 24px の区画） */
+export function Section({ title, aside, children }: { title?: ReactNode; aside?: ReactNode; children: ReactNode }) {
+  return (
+    <section className="cp-section">
+      {(title || aside) && (
+        <div className="cp-section__head">
+          {title && <h2 className="t-strong">{title}</h2>}
+          {aside && <span className="t-small c-muted">{aside}</span>}
+        </div>
+      )}
+      {children}
+    </section>
+  );
+}
