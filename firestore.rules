@@ -11,7 +11,8 @@ rules_version = '2';
 // 守ること（RoomStore.ts の約束と、画面から読み取った役割）:
 //  - 読み書きはすべて匿名認証を含むサインイン済みの利用者だけ
 //  - 宣言・宣言の取り消し・参加者の削除・手動の参加者の登録はホストだけ
-//  - 参加者の選択を変えられるのは、その参加者の ownerUid だけ
+//  - 参加者の選択を変えられるのは、その参加者の ownerUid とホスト。ホストが変えるのは、オフラインモード
+//    （ホストの端末 1 台で進める状態）の間にホストの端末で選んだ内容を、解除のときに引き継ぐため
 //  - 他の参加者が選んだ理念は選べない（claims の文書が既にあれば作れない）
 //  - 宣言の後は、参加・選択・選択の解除・削除ができない
 //  - 参加者の selectedCompanyId と claims は常に食い違わない（同じ一括の書き込みで変える）
@@ -107,7 +108,7 @@ service cloud.firestore {
 
         // 選択と解除。変えられるのは selectedCompanyId だけで、claims と同じ一括の書き込みで変える
         allow update: if signedIn()
-          && resource.data.ownerUid == request.auth.uid
+          && (resource.data.ownerUid == request.auth.uid || isHost(roomId))
           && roomOpen(roomId)
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['selectedCompanyId'])
           && (
@@ -134,13 +135,14 @@ service cloud.firestore {
         allow get: if signedIn();
         allow list: if false;
 
-        // 札を取れるのは、同じ一括の書き込みでその理念を選ぶ参加者の ownerUid だけ。既にある札は作れない（create にならない）
+        // 札を取れるのは、同じ一括の書き込みでその理念を選ぶ参加者の ownerUid かホスト。既にある札は作れない（create にならない）
         allow create: if signedIn()
           && roomOpen(roomId)
           && companyId.matches('^[1-9][0-9]*$')
           && request.resource.data.keys().hasOnly(['participantId'])
           && request.resource.data.participantId is string
-          && get(participantPath(roomId, request.resource.data.participantId)).data.ownerUid == request.auth.uid
+          && (get(participantPath(roomId, request.resource.data.participantId)).data.ownerUid == request.auth.uid
+            || isHost(roomId))
           && getAfter(participantPath(roomId, request.resource.data.participantId)).data.selectedCompanyId == int(companyId);
 
         allow update: if false;

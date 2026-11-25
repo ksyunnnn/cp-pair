@@ -26,15 +26,9 @@ import {
 } from "firebase/firestore";
 import type { MatchResult, Participant } from "../game/types.ts";
 import type { NewParticipant, Room, RoomStatus, RoomStore, SelectOutcome } from "./RoomStore.ts";
+import { randomRoomId } from "./roomId.ts";
 
-const ROOM_ID_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const ROOM_ID_LENGTH = 5;
 const ROOM_ID_ATTEMPTS = 10;
-
-function randomRoomId(): string {
-  const values = crypto.getRandomValues(new Uint32Array(ROOM_ID_LENGTH));
-  return Array.from(values, (v) => ROOM_ID_CHARS[v % ROOM_ID_CHARS.length]).join("");
-}
 
 function millis(value: unknown): number {
   return value instanceof Timestamp ? value.toMillis() : Date.now();
@@ -62,6 +56,7 @@ function toRoom(snap: DocumentSnapshot<DocumentData>, participants: Participant[
     result: (data.result as MatchResult | null) ?? null,
     createdAt: millis(data.createdAt),
     updatedAt: millis(data.updatedAt),
+    hostUid: data.hostUid,
   };
 }
 
@@ -95,27 +90,31 @@ export class FirestoreRoomStore implements RoomStore {
     return query(collection(this.db, "rooms", roomId, "participants"), orderBy("joinedAt"));
   }
 
+  /** id のルームを uid をホストにして作る。同じ ID のルームが既にあれば作らずに false を返す */
+  private tryCreateRoom(id: string, presetId: string, uid: string): Promise<boolean> {
+    const ref = this.roomRef(id);
+    return runTransaction(this.db, async (tx) => {
+      const existing = await tx.get(ref);
+      if (existing.exists()) return false;
+      tx.set(ref, {
+        hostUid: uid,
+        presetId,
+        status: "open",
+        result: null,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+      return true;
+    });
+  }
+
   async createRoom(presetId: string): Promise<Room> {
     const uid = await this.signIn();
     for (let attempt = 0; attempt < ROOM_ID_ATTEMPTS; attempt++) {
       const id = randomRoomId();
-      const ref = this.roomRef(id);
-      const created = await runTransaction(this.db, async (tx) => {
-        const existing = await tx.get(ref);
-        if (existing.exists()) return false;
-        tx.set(ref, {
-          hostUid: uid,
-          presetId,
-          status: "open",
-          result: null,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
-        });
-        return true;
-      });
-      if (created) {
+      if (await this.tryCreateRoom(id, presetId, uid)) {
         const now = Date.now();
-        return { id, presetId, status: "open", participants: [], result: null, createdAt: now, updatedAt: now };
+        return { id, presetId, status: "open", participants: [], result: null, createdAt: now, updatedAt: now, hostUid: uid };
       }
     }
     throw new Error("空いているルームの ID が見つかりませんでした");
@@ -264,5 +263,64 @@ export class FirestoreRoomStore implements RoomStore {
   async undoDeclare(roomId: string): Promise<void> {
     await this.signIn();
     await updateDoc(this.roomRef(roomId), { status: "open", result: null, updatedAt: serverTimestamp() });
+  }
+
+  /**
+   * オフラインモードを解除するときに、ホストの端末のルーム（source）を Firestore へ引き継ぐ。ホストの端末の内容を正とする。
+   * - Firestore に同じ ID のルームがなければ、同じ ID で作る。別の人がその ID のルームを持っていれば、新しい ID で作る
+   * - ホストの端末にいない参加者のうち、knownParticipantIds（オフラインモードに入ったときにいた人）にいる人は、
+   *   オフラインモードの間にホストが外した人として外す。いない人（切れている間に自分の端末で加わった人）は残し、
+   *   ホストの端末の誰かと同じ理念を選んでいれば、その選択だけを外す
+   * - 宣言の状態と結果も、ホストの端末に揃える
+   * 途中で失敗しても、もう一度呼べば同じ状態に揃う。戻り値は引き継いだ先のルームの ID。
+   */
+  async importRoom(source: Room, knownParticipantIds: string[]): Promise<string> {
+    const uid = await this.signIn();
+    let roomId = source.id;
+    const existing = await getDoc(this.roomRef(roomId));
+    if (!existing.exists()) {
+      if (!(await this.tryCreateRoom(roomId, source.presetId, uid))) roomId = (await this.createRoom(source.presetId)).id;
+    } else if (existing.data().hostUid !== uid) {
+      roomId = (await this.createRoom(source.presetId)).id;
+    } else if (existing.data().status !== "open") {
+      // 参加者と選択は、宣言の前の状態でしか書き換えられない（firestore.rules）
+      await this.undoDeclare(roomId);
+    }
+
+    const remoteSnap = await getDocs(this.participantsQuery(roomId));
+    const remote = new Map(remoteSnap.docs.map((d) => [d.id, (d.data().selectedCompanyId ?? null) as number | null]));
+    const local = new Map(source.participants.map((p) => [p.id, p]));
+    const known = new Set(knownParticipantIds);
+    const localPicks = new Set(source.participants.flatMap((p) => (p.selectedCompanyId === null ? [] : [p.selectedCompanyId])));
+
+    // 先に、ホストの端末と食い違う選択をすべて外す。理念の札を空けてから、ホストの端末の選択を書く
+    for (const [id, selected] of remote) {
+      const mine = local.get(id);
+      if (!mine) {
+        if (known.has(id)) await this.removeParticipant(roomId, id);
+        else if (selected !== null && localPicks.has(selected)) await this.clearSelection(roomId, id);
+        continue;
+      }
+      if (selected !== null && selected !== mine.selectedCompanyId) await this.clearSelection(roomId, id);
+    }
+    for (const p of source.participants) {
+      if (!remote.has(p.id)) {
+        await setDoc(this.participantRef(roomId, p.id), {
+          ownerUid: uid,
+          name: p.name,
+          gender: p.gender,
+          joinType: p.joinType,
+          selectedCompanyId: null,
+          joinedAt: serverTimestamp(),
+        });
+      }
+      if (p.selectedCompanyId !== null && remote.get(p.id) !== p.selectedCompanyId) {
+        const outcome = await this.selectCompany(roomId, p.id, p.selectedCompanyId);
+        if (outcome !== "ok") throw new Error(`${p.name}さんの選択を引き継げませんでした（${outcome}）`);
+      }
+    }
+
+    if (source.status === "declared" && source.result) await this.declare(roomId, source.result);
+    return roomId;
   }
 }

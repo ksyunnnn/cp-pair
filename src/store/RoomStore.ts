@@ -12,6 +12,8 @@ export interface Room {
   result: MatchResult | null;
   createdAt: number;
   updatedAt: number;
+  /** Firestore 版だけ。ルームを作った端末の匿名認証の uid。画面はこれでホストを判定する */
+  hostUid?: string;
 }
 
 export interface NewParticipant {

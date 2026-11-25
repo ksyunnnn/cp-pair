@@ -135,4 +135,115 @@ describe("FirestoreRoomStore", () => {
     await host.addParticipant(id, { name: "メイ", gender: "F", joinType: "manual" });
     expect((await waiting)?.participants[0].name).toBe("メイ");
   });
+
+  it("ホストは、自分の端末で参加した人の選択も変えられる。ほかの参加者は変えられない", async () => {
+    const host = device("host");
+    const alice = device("alice");
+    const { id } = await host.createRoom("propose");
+    const a = await alice.addParticipant(id, { name: "アオイ", gender: "F", joinType: "device" });
+    expect(await alice.selectCompany(id, a.id, 1)).toBe("ok");
+    expect(await host.selectCompany(id, a.id, 2)).toBe("ok");
+    await host.clearSelection(id, a.id);
+    expect(await alice.selectCompany(id, a.id, 1)).toBe("ok");
+    await expect(device("bob").selectCompany(id, a.id, 3)).rejects.toThrow();
+  });
+});
+
+describe("FirestoreRoomStore.importRoom（オフラインモードの解除）", () => {
+  it("途中で入ったルームを、ホストの端末の内容で引き継ぐ", async () => {
+    const host = device("host");
+    const alice = device("alice");
+    const bob = device("bob");
+    const carol = device("carol");
+    const { id } = await host.createRoom("propose");
+    const a = await alice.addParticipant(id, { name: "アオイ", gender: "F", joinType: "device" });
+    const b = await bob.addParticipant(id, { name: "ハルト", gender: "M", joinType: "device" });
+    expect(await alice.selectCompany(id, a.id, 1)).toBe("ok");
+
+    // ここで切れたとする。ホストの端末は、切れる前に届いていたルームを持つ
+    const atEntry = (await host.getRoom(id))!;
+    const known = atEntry.participants.map((p) => p.id);
+
+    // 切れている間に、本人の端末でも選び、別の人が自分の端末で加わる
+    expect(await alice.selectCompany(id, a.id, 3)).toBe("ok");
+    const c = await carol.addParticipant(id, { name: "カエデ", gender: "F", joinType: "device" });
+    expect(await carol.selectCompany(id, c.id, 2)).toBe("ok");
+    const k = await carol.addParticipant(id, { name: "ケン", gender: "M", joinType: "device" });
+    expect(await carol.selectCompany(id, k.id, 9)).toBe("ok");
+
+    // ホストの端末では、アオイを 2 に選び直し、ハルトを外し、メイを手動で足して 3 を選んだ
+    const source = {
+      ...atEntry,
+      participants: [
+        { ...atEntry.participants.find((p) => p.id === a.id)!, selectedCompanyId: 2 },
+        { id: "manual-offline-1", name: "メイ", gender: "F" as const, joinType: "manual" as const, selectedCompanyId: 3 },
+      ],
+    };
+
+    expect(await host.importRoom(source, known)).toBe(id);
+    const after = (await host.getRoom(id))!;
+    const byId = new Map(after.participants.map((p) => [p.id, p.selectedCompanyId]));
+    expect(byId.get(a.id)).toBe(2); // ホストの端末の選択を残す
+    expect(byId.has(b.id)).toBe(false); // ホストが外した人
+    expect(byId.get("manual-offline-1")).toBe(3);
+    expect(byId.get(c.id)).toBeNull(); // 切れている間に加わった人は残し、ホストの端末と重なる選択だけ外す
+    expect(byId.get(k.id)).toBe(9);
+
+    // もう一度呼んでも同じ状態
+    expect(await host.importRoom(source, known)).toBe(id);
+    expect((await host.getRoom(id))!.participants.map((p) => [p.id, p.selectedCompanyId])).toEqual(
+      after.participants.map((p) => [p.id, p.selectedCompanyId]),
+    );
+
+    // 引き継いだ後は、本人の端末でまた選べる。外した 1 は空いている
+    expect(await alice.selectCompany(id, a.id, 1)).toBe("ok");
+    expect(await carol.selectCompany(id, c.id, 2)).toBe("ok");
+  });
+
+  it("作るときに入ったルームを同じ ID で作り、宣言と結果も引き継ぐ", async () => {
+    const host = device("host");
+    const now = Date.now();
+    const people = [
+      { id: "manual-1", name: "ハルト", gender: "M" as const, joinType: "manual" as const, selectedCompanyId: 2 },
+      { id: "manual-2", name: "アオイ", gender: "F" as const, joinType: "manual" as const, selectedCompanyId: 9 },
+    ];
+    const result = MatchingEngine.runMatching(people, dataset, { preset: getPreset("propose") });
+    const source: Room = {
+      id: "QWERT",
+      presetId: "propose",
+      status: "declared",
+      participants: people,
+      result,
+      createdAt: now,
+      updatedAt: now,
+    };
+    expect(await host.importRoom(source, [])).toBe("QWERT");
+    const room = await device("alice").getRoom("QWERT");
+    expect(room?.status).toBe("declared");
+    expect(room?.hostUid).toBe("host");
+    expect(room?.participants.map((p) => [p.id, p.selectedCompanyId])).toEqual([
+      ["manual-1", 2],
+      ["manual-2", 9],
+    ]);
+    expect(room?.result?.pairs.length).toBe(result.pairs.length);
+  });
+
+  it("同じ ID のルームを別の人が持っていれば、新しい ID で作る", async () => {
+    const other = device("other");
+    const host = device("host");
+    const taken = await other.createRoom("propose");
+    const source: Room = {
+      id: taken.id,
+      presetId: "propose",
+      status: "open",
+      participants: [{ id: "manual-1", name: "メイ", gender: "F", joinType: "manual", selectedCompanyId: 4 }],
+      result: null,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+    const newId = await host.importRoom(source, []);
+    expect(newId).not.toBe(taken.id);
+    expect((await host.getRoom(newId))?.participants.map((p) => p.selectedCompanyId)).toEqual([4]);
+    expect((await other.getRoom(taken.id))?.participants).toEqual([]);
+  });
 });

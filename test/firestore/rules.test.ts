@@ -228,11 +228,21 @@ describe("選択と claims", () => {
     await assertSucceeds(select(as("host"), "m1", 6));
   });
 
-  it("他人の参加者の選択は変えられない（ホストでも、自分の端末で参加した人のものは変えられない）", async () => {
+  it("他人の参加者の選択は変えられない。ホストは、自分の端末で参加した人の選択も変えられる（オフラインモードの引き継ぎ）", async () => {
     await seed();
     await assertFails(select(as("bob"), "p1", 5));
-    await assertFails(select(as("host"), "p1", 5));
     await assertFails(select(as("alice"), "m1", 5));
+    await assertSucceeds(select(as("host"), "p1", 5));
+  });
+
+  it("ホストは、自分の端末で参加した人の選択を解除できる。札は一緒に外す", async () => {
+    await seed({ p1Selected: 5 });
+    const db = as("host");
+    await assertFails(updateDoc(doc(db, "rooms", ROOM, "participants", "p1"), { selectedCompanyId: null }));
+    const batch = writeBatch(db);
+    batch.delete(doc(db, "rooms", ROOM, "claims", "5"));
+    batch.update(doc(db, "rooms", ROOM, "participants", "p1"), { selectedCompanyId: null });
+    await assertSucceeds(batch.commit());
   });
 
   it("他の参加者が選んだ理念は選べない", async () => {
