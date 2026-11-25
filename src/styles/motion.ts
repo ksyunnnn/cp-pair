@@ -85,8 +85,8 @@ export const NOD = {
   ticks: NOD_TICKS,
   beatTicks: 20,
   jitterTicks: 1,
-  rotate: [0, -4, -4, 1, 0],
-  y: [0, -3, -3, 1, 0],
+  rotate: [0, -10, -10, 2, 0],
+  y: [0, -5, -5, 1.5, 0],
   /** ため〜収めの長さ（秒）。拍の残りは休み */
   duration: TICK * NOD_MOVE,
   times: [
