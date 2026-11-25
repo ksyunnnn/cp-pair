@@ -60,7 +60,7 @@ export function RulesScreen() {
       <ScreenMain className="cp-content">
         <div className="cp-heading">
           <h1 className="t-title">診断の説明</h1>
-          <p className="t-body c-muted">企業の言葉を借りた、ジョークの相性診断です。</p>
+          <p className="t-body c-muted">企業理念を無理やりこじつけた、ジョークの相性診断です。</p>
         </div>
 
         <Section title="3 つの値">
