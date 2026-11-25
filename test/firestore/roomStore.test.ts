@@ -149,6 +149,19 @@ describe("FirestoreRoomStore", () => {
   });
 });
 
+describe("FirestoreRoomStore.touchHost（ホストの生存の印）", () => {
+  it("作ったルームには印があり、ホストが書くと進む。ほかの端末は書けない", async () => {
+    const host = device("host");
+    const { id } = await host.createRoom("propose");
+    const first = (await device("alice").getRoom(id))?.hostSeenAt;
+    expect(typeof first).toBe("number");
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    await host.touchHost(id);
+    expect((await device("alice").getRoom(id))!.hostSeenAt!).toBeGreaterThan(first!);
+    await expect(device("alice").touchHost(id)).rejects.toThrow();
+  });
+});
+
 describe("FirestoreRoomStore.importRoom（オフラインモードの解除）", () => {
   it("途中で入ったルームを、ホストの端末の内容で引き継ぐ", async () => {
     const host = device("host");

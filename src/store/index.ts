@@ -56,6 +56,10 @@ class LazyFirestoreRoomStore implements RoomStore {
     return (await this.load()).importRoom(source, knownParticipantIds);
   }
 
+  async touchHost(roomId: string): Promise<void> {
+    return (await this.load()).touchHost(roomId);
+  }
+
   async createRoom(presetId: string): Promise<Room> {
     return (await this.load()).createRoom(presetId);
   }
@@ -216,6 +220,11 @@ export async function leaveOfflineMode(roomId: string): Promise<string> {
   setOfflineMode(roomId, null);
   localStore.deleteRoom(roomId);
   return nextId;
+}
+
+/** ホストの端末の生存の印を Firestore のルームに書く。Firestore 版でなければ何もしない */
+export async function touchHost(roomId: string): Promise<void> {
+  await remoteStore?.touchHost(roomId);
 }
 
 /** このルームがオフラインモードに入っているか */

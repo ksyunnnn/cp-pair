@@ -1,7 +1,7 @@
 // RoomStore の Firestore の実装。端末をまたいでルームを共有する（通常モード）。
 // 形と守りは firestore.rules にある。書き込みは匿名認証でサインインしてから行う。
 //
-// - rooms/{roomId}                     presetId・status・result・hostUid・createdAt・updatedAt
+// - rooms/{roomId}                     presetId・status・result・hostUid・hostSeenAt・createdAt・updatedAt
 // - rooms/{roomId}/participants/{pid}  name・gender・joinType・selectedCompanyId・ownerUid・joinedAt
 // - rooms/{roomId}/claims/{companyId}  participantId。1 つの理念を選べるのは 1 人だけ、を文書の一意性で守る
 //
@@ -57,6 +57,7 @@ function toRoom(snap: DocumentSnapshot<DocumentData>, participants: Participant[
     createdAt: millis(data.createdAt),
     updatedAt: millis(data.updatedAt),
     hostUid: data.hostUid,
+    hostSeenAt: data.hostSeenAt instanceof Timestamp ? data.hostSeenAt.toMillis() : undefined,
   };
 }
 
@@ -101,6 +102,7 @@ export class FirestoreRoomStore implements RoomStore {
         presetId,
         status: "open",
         result: null,
+        hostSeenAt: serverTimestamp(),
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
@@ -258,6 +260,12 @@ export class FirestoreRoomStore implements RoomStore {
     // Firestore は undefined を保存できないため、JSON にできる形に揃える
     const plain = JSON.parse(JSON.stringify(result)) as MatchResult;
     await updateDoc(this.roomRef(roomId), { status: "declared", result: plain, updatedAt: serverTimestamp() });
+  }
+
+  /** ホストの端末の生存の印を書く。参加者の端末は、これが途絶えたら選べなくなる */
+  async touchHost(roomId: string): Promise<void> {
+    await this.signIn();
+    await updateDoc(this.roomRef(roomId), { hostSeenAt: serverTimestamp() });
   }
 
   async undoDeclare(roomId: string): Promise<void> {
