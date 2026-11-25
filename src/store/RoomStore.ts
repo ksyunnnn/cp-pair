@@ -1,5 +1,5 @@
 // ルームのデータの出し入れはこのインターフェースを通す。
-// ブラウザ内の実装は localRoomStore.ts。Firebase に差し替えるときは同じ形の実装を作り、index.ts で切り替える。
+// ブラウザ内の実装は localRoomStore.ts、端末をまたぐ実装は firestoreRoomStore.ts。どちらを使うかは index.ts で切り替える。
 import type { Gender, JoinType, MatchResult, Participant } from "../game/types.ts";
 
 export type RoomStatus = "open" | "declared";
@@ -12,6 +12,8 @@ export interface Room {
   result: MatchResult | null;
   createdAt: number;
   updatedAt: number;
+  /** Firestore 版だけ。ルームを作った端末の匿名認証の uid。画面はこれでホストを判定する */
+  hostUid?: string;
 }
 
 export interface NewParticipant {

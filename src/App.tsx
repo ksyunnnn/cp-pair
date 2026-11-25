@@ -5,6 +5,7 @@ import { isDevMode, useRoute } from "./router.ts";
 import { HostPick, HostResultView } from "./screens/host/HostDeviceViews.tsx";
 import { HostRoom, RoomMissing } from "./screens/host/HostRoom.tsx";
 import { HostStart } from "./screens/host/HostStart.tsx";
+import { useAutoOfflineMode } from "./screens/host/useAutoOfflineMode.ts";
 import { ParticipantRoom } from "./screens/participant/ParticipantRoom.tsx";
 import { RulesScreen } from "./screens/RulesScreen.tsx";
 import { useRoom } from "./store/index.ts";
@@ -19,6 +20,9 @@ function Screen() {
   const route = useRoute();
   const roomId = "roomId" in route ? route.roomId : null;
   const { room, loading } = useRoom(roomId);
+  const hostRoute = route.name === "host" || route.name === "hostPick" || route.name === "hostResult";
+  // ルームを受け取れないまま切れても入れるよう、読み込みを待たずに見張る
+  useAutoOfflineMode(hostRoute ? roomId : null);
 
   if (route.name === "hostStart") return <HostStart />;
   if (route.name === "rules") return <RulesScreen />;

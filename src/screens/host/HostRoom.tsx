@@ -1,14 +1,14 @@
 // ホスト Step 2（共有・参加管理）と Step 3（完了宣言・結果）
 import { QRCodeSVG } from "qrcode.react";
 import { useState } from "react";
-import { inviteUrl, isHostOf } from "../../device.ts";
+import { inviteUrl } from "../../device.ts";
 import { dataset } from "../../game/dataset.ts";
 import { MatchingEngine } from "../../game/engine.ts";
 import { getPreset } from "../../game/presets.ts";
 import { pad2 } from "../../game/present.ts";
 import type { Gender, MatchedPerson } from "../../game/types.ts";
 import { navigate } from "../../router.ts";
-import { roomStore, type Room } from "../../store/index.ts";
+import { roomStore, useIsHost, useOfflineMode, type Room } from "../../store/index.ts";
 import { COLOR } from "../../styles/tokens.ts";
 import {
   BrandHeader,
@@ -27,6 +27,7 @@ import {
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
 import { ScoreAndTitle } from "../ResultScreen.tsx";
+import { HostDeviceLabel, OfflineModeCard } from "./OfflineMode.tsx";
 
 export function NotHost({ roomId }: { roomId: string }) {
   return (
@@ -65,7 +66,9 @@ export function RoomMissing({ roomId }: { roomId: string }) {
 }
 
 export function HostRoom({ room }: { room: Room }) {
-  if (!isHostOf(room.id)) return <NotHost roomId={room.id} />;
+  const isHost = useIsHost(room);
+  if (isHost === null) return <div className="cp-page" />;
+  if (!isHost) return <NotHost roomId={room.id} />;
   return room.status === "declared" ? <HostResults room={room} /> : <HostLobby room={room} />;
 }
 
@@ -80,6 +83,7 @@ function ThemeCard({ room }: { room: Room }) {
 
 function HostLobby({ room }: { room: Room }) {
   const toast = useToast();
+  const offline = useOfflineMode(room.id);
   const url = inviteUrl(room.id);
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");
@@ -115,7 +119,10 @@ function HostLobby({ room }: { room: Room }) {
   const declare = async () => {
     const result = MatchingEngine.runMatching(room.participants, dataset, { preset: getPreset(room.presetId) });
     await roomStore.declare(room.id, result);
-    toast("登録完了を宣言しました。各自の端末に結果が出ます", "success");
+    toast(
+      offline ? "登録完了を宣言しました。この端末を本人に渡して、結果を見せてください" : "登録完了を宣言しました。各自の端末に結果が出ます",
+      "success",
+    );
   };
 
   const note = canDeclare
@@ -126,29 +133,36 @@ function HostLobby({ room }: { room: Room }) {
 
   return (
     <div className="cp-page">
-      <BrandHeader right="ホストの端末" />
+      <BrandHeader right={<HostDeviceLabel roomId={room.id} />} />
       <ScreenMain className="cp-content has-floating">
         <ProgressSteps current={2} />
         <ScreenHeading eyebrow={`ROOM ${room.id}`} icon={<CpSymbol name="Pair" size={17} />} title="参加者を集める" />
         <ThemeCard room={room} />
 
-        <div className="cp-card">
-          <div className="cp-stack cp-stack--8">
-            <p className="t-strong">QR コードか URL を共有</p>
-            <p className="t-small c-muted">参加者は自分のスマホで開き、ニックネームと性別を入れて参加します。</p>
+        {offline ? (
+          <OfflineModeCard room={room} />
+        ) : (
+          <div className="cp-card">
+            <div className="cp-stack cp-stack--8">
+              <p className="t-strong">QR コードか URL を共有</p>
+              <p className="t-small c-muted">参加者は自分のスマホで開き、ニックネームと性別を入れて参加します。</p>
+            </div>
+            <div className="cp-qr">
+              <QRCodeSVG value={url} size={176} bgColor={COLOR.paper} fgColor={COLOR.ink} level="M" marginSize={0} title={`ルーム ${room.id} の招待 URL`} />
+            </div>
+            <div className="cp-url">
+              <span className="t-small cp-url__text">{url}</span>
+            </div>
+            <Button kind="secondary" onClick={copy}>
+              URL をコピー
+            </Button>
           </div>
-          <div className="cp-qr">
-            <QRCodeSVG value={url} size={176} bgColor={COLOR.paper} fgColor={COLOR.ink} level="M" marginSize={0} title={`ルーム ${room.id} の招待 URL`} />
-          </div>
-          <div className="cp-url">
-            <span className="t-small cp-url__text">{url}</span>
-          </div>
-          <Button kind="secondary" onClick={copy}>
-            URL をコピー
-          </Button>
-        </div>
+        )}
 
-        <Section title="URL を開けない人" aside="ホストの端末で選びます">
+        <Section
+          title={offline ? "参加者を登録" : "URL を開けない人"}
+          aside={offline ? "この端末で選びます" : "ホストの端末で選びます"}
+        >
           {adding ? (
             <form
               className="cp-stack cp-stack--16"
@@ -182,7 +196,8 @@ function HostLobby({ room }: { room: Room }) {
             <div className="cp-stack cp-stack--8">
               {room.participants.map((p) => {
                 const isDone = p.selectedCompanyId !== null;
-                const isManual = p.joinType === "manual";
+                // オフラインモードでは、自分の端末で参加していた人も、この端末で選び直せる
+                const picksHere = p.joinType === "manual" || offline;
                 return (
                   <ParticipantRow
                     key={p.id}
@@ -192,7 +207,7 @@ function HostLobby({ room }: { room: Room }) {
                     done={isDone}
                     entering={!initialIds.has(p.id)}
                     status={isDone ? "選び終えた" : "まだ選んでいません"}
-                    action={isManual ? (isDone ? "選び直す" : "この端末で選ぶ") : undefined}
+                    action={picksHere ? (isDone ? "選び直す" : "この端末で選ぶ") : undefined}
                     onAction={() => navigate(`/host/${room.id}/pick/${p.id}`)}
                     onRemove={async () => {
                       await roomStore.removeParticipant(room.id, p.id);
@@ -230,6 +245,7 @@ function PersonLine({ person }: { person: MatchedPerson }) {
 
 function HostResults({ room }: { room: Room }) {
   const toast = useToast();
+  const offline = useOfflineMode(room.id);
   const result = room.result;
   if (!result) return null;
 
@@ -246,16 +262,21 @@ function HostResults({ room }: { room: Room }) {
 
   return (
     <div className="cp-page">
-      <BrandHeader right="ホストの端末" />
+      <BrandHeader right={<HostDeviceLabel roomId={room.id} />} />
       <ScreenMain className="cp-content">
         <ProgressSteps current={3} />
         <ScreenHeading
           eyebrow={`ROOM ${room.id} · RESULTS`}
           icon={<CpSymbol name="Pair" size={17} />}
           title="結果を発表しました"
-          lead="各自の端末に、本人の結果だけが出ています。マッチ相手が分かるのは本人とホストだけです。"
+          lead={
+            offline
+              ? "この端末を本人に渡して、結果を見せてください。マッチ相手が分かるのは本人とホストだけです。"
+              : "各自の端末に、本人の結果だけが出ています。マッチ相手が分かるのは本人とホストだけです。"
+          }
         />
         <ThemeCard room={room} />
+        {offline && <OfflineModeCard room={room} />}
 
         <Section title="各自の結果を開く">
           <div className="cp-stack cp-stack--8">
@@ -271,7 +292,7 @@ function HostResults({ room }: { room: Room }) {
                     joinType={p.joinType}
                     done
                     status={n ? `ペア ${pad2(n)}` : "フリー／ジョーカー枠"}
-                    action={p.joinType === "manual" ? "端末を渡して見せる" : "この人の画面を見る"}
+                    action={p.joinType === "manual" || offline ? "端末を渡して見せる" : "この人の画面を見る"}
                     onAction={() => navigate(`/host/${room.id}/result/${p.id}`)}
                   />
                 );
