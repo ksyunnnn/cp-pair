@@ -139,6 +139,17 @@ export class LocalRoomStore implements RoomStore {
     });
   }
 
+  /** ルームをそのまま置く。オフラインモードで、作ったルームや Firestore から引き継いだルームを置くときに使う */
+  putRoom(room: Room) {
+    this.write(structuredClone(room));
+  }
+
+  /** ルームを消す。オフラインモードを解除して、Firestore へ引き継いだ後に使う */
+  deleteRoom(roomId: string) {
+    localStorage.removeItem(ROOM_PREFIX + roomId);
+    this.emit(roomId);
+  }
+
   /** 開発用: 置いたルームをすべて消す */
   clearAll() {
     const keys: string[] = [];
