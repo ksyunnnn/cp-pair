@@ -2,7 +2,7 @@
 import { animate, m, useMotionValue, useReducedMotion, type MotionValue, type Variants } from "motion/react";
 import { createContext, useContext, useRef, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 import type { Gender, JoinType } from "../game/types.ts";
-import { FADE, GLASS_PRESS, OFFSET, PRESS_SCALE, SPRING } from "../styles/motion.ts";
+import { FADE, GLASS_PRESS, OFFSET, PRESS_SCALE, SPRING, STAMP } from "../styles/motion.ts";
 import { CpSymbol, PairLogo, type SymbolName } from "./symbols.tsx";
 
 /* FloatingBar の中のボタンは Liquid Glass の押し方にする（WWDC25 Meet Liquid Glass https://developer.apple.com/videos/play/wwdc2025/219/ ） */
@@ -222,12 +222,12 @@ export function GenderSelect({ value, onChange }: { value: Gender | null; onChan
   );
 }
 
-/* 選んだカードの押印: 少し大きく傾いた所から打ち、0° で止まる。選び外したときは動かさない */
+/* 選んだカードの押印: 少し大きく傾いた所から元より少し下まで打ち込み、0° で収める。選び外したときは動かさない */
 const CARD_VARIANTS: Variants = {
   stamped: {
-    scale: [OFFSET.cardScale, 1],
-    rotate: [OFFSET.cardRotate, 0],
-    transition: SPRING.stamp,
+    scale: [OFFSET.cardScale, OFFSET.cardStrikeScale, 1],
+    rotate: [OFFSET.cardRotate, 0, 0],
+    transition: STAMP.card,
   },
   rest: { scale: 1, rotate: 0 },
 };

@@ -4,7 +4,7 @@
 // 同じ結果の発表は 1 回だけ見せる。開き直したときは最後の状態から出す。reduced motion では段取りを省き、全体を opacity で一度に出す。
 import { useReducedMotion, type MotionProps, type Transition, type Variants } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
-import { FADE, FRAME, OFFSET, REVEAL, SPRING, easeOutCubic } from "../styles/motion.ts";
+import { FADE, FRAME, OFFSET, REVEAL, SPRING, STAMP, easeOutCubic } from "../styles/motion.ts";
 
 const revealed = new Set<string>();
 
@@ -12,9 +12,15 @@ export type RevealStage = "hold" | "count" | "seal" | "settle" | "done";
 
 const VARIANTS: Record<"appear" | "seal" | "settle", Variants> = {
   appear: { off: { opacity: 0 }, on: { opacity: 1 } },
+  // 判: 元の大きさで現れ、持ち上げて止め、元より少し下まで打ち込んで収める（STAMP.seal の times に合わせた 5 点）
   seal: {
-    off: { opacity: 0, scale: OFFSET.sealScale, rotate: OFFSET.sealRotate },
-    on: { opacity: 1, scale: 1, rotate: 0 },
+    off: { opacity: 0, scale: 1, rotate: 0, y: 0 },
+    on: {
+      opacity: 1,
+      scale: [1, OFFSET.sealScale, OFFSET.sealScale, OFFSET.sealStrikeScale, 1],
+      rotate: [0, OFFSET.sealRotate, OFFSET.sealRotate, 0, 0],
+      y: [0, OFFSET.sealY, OFFSET.sealY, OFFSET.sealStrikeY, 0],
+    },
   },
   settle: { off: { opacity: 0, y: OFFSET.settleY }, on: { opacity: 1, y: 0 } },
 };
@@ -98,8 +104,8 @@ export function useReveal(key: string, finalScore: number | null, glyphCount: nu
     if (skipped) return INSTANT;
     if (reduced) return { opacity: FADE.reveal };
     if (kind === "appear") return INSTANT;
-    // 判は一瞬で現れて、弾んで 0° で止まる
-    if (kind === "seal") return { default: SPRING.seal, opacity: INSTANT };
+    // 判は一瞬で現れて、ため・止め・打ち・収めの順に動き、0° で止まる
+    if (kind === "seal") return { default: STAMP.seal, opacity: INSTANT };
     const delay = index * REVEAL.stagger;
     return { y: { ...SPRING.settle, delay }, opacity: { ...FADE.quick, delay } };
   };
