@@ -17,5 +17,17 @@ export default defineConfig({
     url: `http://localhost:${port}`,
     reuseExistingServer: false,
     timeout: 120_000,
+    // 既定の版（localStorage 版）を確かめる。手元の .env.local に Firestore 版の設定があっても、ここの値が勝つ
+    // （Vite は実行時の環境変数を .env で上書きしない https://vite.dev/guide/env-and-mode ）
+    env: {
+      VITE_ROOM_STORE: 'local',
+      VITE_USE_FIREBASE_EMULATOR: 'false',
+      VITE_FIREBASE_API_KEY: '',
+      VITE_FIREBASE_AUTH_DOMAIN: '',
+      VITE_FIREBASE_PROJECT_ID: '',
+      VITE_FIREBASE_STORAGE_BUCKET: '',
+      VITE_FIREBASE_MESSAGING_SENDER_ID: '',
+      VITE_FIREBASE_APP_ID: '',
+    },
   },
 })

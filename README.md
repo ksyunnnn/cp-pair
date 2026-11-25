@@ -73,6 +73,8 @@ docs/        デザインの値（design/）と全画面のスクリーンショ
 - 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`）で分ける
 - ルームのデータは `src/store/RoomStore.ts` のインターフェースを通して出し入れする。既定は localStorage の実装で、`VITE_ROOM_STORE=firestore` のときだけ Firestore の実装（`firestoreRoomStore.ts`）を使う。設定の雛形は `.env.local.example`、守りは `firestore.rules` にある
 - Firestore 版では、ホストの端末がつながらないときにオフラインモード（ホストの端末 1 台で進める状態）へ自動で入り、そのルームを localStorage の実装に置く。入るのは、ルームを作るときにネットが無いか Firestore に作れなかったときと、ルームの途中でブラウザの `offline` イベントを受けたとき。解除はホストが画面の「各自の端末での参加に戻す」で行い、ホストの端末のルームを Firestore へ引き継ぐ。切り替えは `src/store/index.ts`、記録は `src/store/offlineMode.ts` にある
+- Firestore 版では、ホストの端末が宣言の前のルームに生存の印（`hostSeenAt`）を 30 秒ごとに書く。参加者の端末は、自分の端末が切れたときと、印が 90 秒変わらないときに「ホストの端末で選んでください」と出し、選択も解除もさせない。間隔の見積もりは `src/screens/participant/useHostReachable.ts` にある
+- テストの設定（`playwright.config.ts`・`playwright.firestore.config.ts`）は `VITE_*` を環境変数で渡し、手元の `.env.local` の値を使わない
 - オフライン: `vite-plugin-pwa`（Workbox）の Service Worker が、ビルドした全ファイルを最初の表示のあとに保存する。新しい版は、オンラインで開いたときに取得して入れ替わる
 
 ## 配信

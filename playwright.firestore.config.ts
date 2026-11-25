@@ -21,6 +21,8 @@ export default defineConfig({
     url: `http://localhost:${port}`,
     reuseExistingServer: false,
     timeout: 120_000,
+    // 手元の .env.local（本物のプロジェクトの値を置くことがある）より、ここの値が勝つ。Vite は実行時の環境変数を .env で上書きしない
+    // https://vite.dev/guide/env-and-mode
     env: {
       VITE_ROOM_STORE: 'firestore',
       VITE_USE_FIREBASE_EMULATOR: 'true',
@@ -29,6 +31,8 @@ export default defineConfig({
       VITE_FIREBASE_API_KEY: 'demo-api-key',
       VITE_FIREBASE_AUTH_DOMAIN: 'demo-cp-pair.firebaseapp.com',
       VITE_FIREBASE_APP_ID: 'demo-app-id',
+      VITE_FIREBASE_STORAGE_BUCKET: '',
+      VITE_FIREBASE_MESSAGING_SENDER_ID: '',
     },
   },
 })
