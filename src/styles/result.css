@@ -80,18 +80,13 @@
   gap: 4px;
 }
 
-/* 話しかけるきっかけ（oIXT7TAd0） */
+/* 診断者からの一言（Framer の「話しかけるきっかけ」oIXT7TAd0） */
 .r-talk {
   display: flex;
   flex-direction: column;
   gap: 12px;
   border-top: 1px solid var(--cp-line);
   padding-top: 32px;
-}
-.r-talk__head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 .r-tags {
   list-style: none;
