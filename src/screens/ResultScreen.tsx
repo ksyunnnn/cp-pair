@@ -77,8 +77,8 @@ function YouCard({ me }: { me: MatchedPerson }) {
 function AboutGame() {
   return (
     <div className="r-about r-later">
-      <p className="t-label">企業理念は意外とかっこいい</p>
-      <p className="t-small c-muted">企業理念を無理やりこじつけた、ジョークの相性診断です。結果は当人とホストだけが確認できます。</p>
+      <p className="t-label">理念はまじめ。相性は、こじつけ。</p>
+      <p className="t-small c-muted">企業の言葉を借りた、ジョークの相性診断です。結果は当人とホストだけが確認できます。</p>
     </div>
   );
 }
