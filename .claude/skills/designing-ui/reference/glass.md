@@ -18,4 +18,4 @@ Apple は Liquid Glass の部品を SwiftUI・UIKit・AppKit にしか配らな�
 
 ## cp-pair の実装
 
-ガラスの値は `src/styles/tokens.css` の `--glass-*`、使い方は `src/styles/app.css` にある。値は作り手が決めた値で、出典はない。値を足したら、足したことを明記し、レビューの対象にする。
+ガラスの値は `src/styles/tokens.css` の `--glass-*`、使い方は `src/styles/app.css` にある。`--glass-*` の値は HIG にも Framer のデザインの値（`docs/design/framer-values.md`）にもなく、`tokens.css` のコメントに「Framer にない値」と書いてある。出典のない値を足すときは、同じようにコメントに書き、PR の本文に挙げる。
