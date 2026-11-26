@@ -4,7 +4,8 @@
   // Worker のスクリプトを置かず、ビルドした静的ファイルだけを配信する
   // https://developers.cloudflare.com/workers/static-assets/
   "compatibility_date": "2026-11-25",
-  // 本番は workers.dev で配信する。main 以外のブランチは Workers Builds が Preview を作り、
+  // 本番の URL はカスタムドメインの cppair.synsk.me。この設定には routes を置かず、カスタムドメインは Cloudflare 側で設定する。
+  // workers.dev でも配信する。main 以外のブランチは Workers Builds が Preview を作り、
   // その URL を PR にコメントする。Preview の URL には workers.dev の Preview URL を有効にする必要がある
   // https://developers.cloudflare.com/workers/ci-cd/builds/troubleshoot/
   "workers_dev": true,
