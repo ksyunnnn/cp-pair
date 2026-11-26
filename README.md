@@ -2,7 +2,7 @@
 
 合コンで遊ぶ、真顔のパーティーゲーム。各自が好きな企業理念（Corporate Philosophy）をひとつ選び、選んだ理念どうしの「こじつけ相性」で男女のペアを決めて発表する。
 
-**https://cppair.is-syunsukekobashi.workers.dev/**
+**https://cppair.synsk.me/**
 
 <p>
   <img src="docs/screenshots/07-participant-step2-pick.png" alt="理念選びの画面。お題「無人島にひとつだけ持っていくならどの企業理念？」と、企業名を伏せた理念のカード" width="300">
@@ -70,7 +70,7 @@ scripts/     計算の照合（verify-matching.ts）とスクリーンショッ�
 docs/        デザインの値（design/）と全画面のスクリーンショット（screenshots/）
 ```
 
-- 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`）で分ける
+- 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`、`#/rules`、`#/about`）で分ける
 - ルームのデータは `src/store/RoomStore.ts` のインターフェースを通して出し入れする。`VITE_ROOM_STORE=firestore` のときは Firestore の実装（`firestoreRoomStore.ts`）を、そうでなければ localStorage の実装を使う。守りは `firestore.rules` にある
 - 設定: 本番とプレビューのビルド（`npm run build`）は、リポジトリの `.env.production`（Firestore 版と cp-pair の Firebase の値）を読む。値は秘密ではない。`npm run dev` は `.env.production` を読まず、`.env.local` がなければ localStorage 版で動く。手元の設定の雛形は `.env.local.example`
 - Firestore 版では、ホストの端末がつながらないときにオフラインモード（ホストの端末 1 台で進める状態）へ自動で入り、そのルームを localStorage の実装に置く。入るのは、ルームを作るときにネットが無いか Firestore に作れなかったときと、ルームの途中でブラウザの `offline` イベントを受けたとき。解除はホストが画面の「各自の端末での参加に戻す」で行い、ホストの端末のルームを Firestore へ引き継ぐ。切り替えは `src/store/index.ts`、記録は `src/store/offlineMode.ts` にある
@@ -94,6 +94,20 @@ Cloudflare Workers の静的アセット（Worker のスクリプトなし）で
 **3 欄は `npm run` を通す。** コマンドの実体を `package.json` に置き、リポジトリだけを読めば配信の手順が分かるようにするため。
 
 `main` への push は本番に、それ以外のブランチは Preview になり、PR にプレビュー URL がコメントされる（[Workers Builds の設定](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)）。
+
+### 戻し方
+
+本番を前の版に戻すには、`npx wrangler deployments list` で版の id を見て `npx wrangler rollback <版の id>` を実行する（[Rollbacks](https://developers.cloudflare.com/workers/configuration/versions-and-deployments/rollbacks/)）。`main` に次の push があると戻した版が再び出るので、コードも `git revert` する。
+
+### Firebase
+
+Firebase のプロジェクトは `cp-pair`（Spark プラン）。匿名認証を使い、匿名ユーザーの自動削除をオンにしている。これらの設定は Firebase のコンソールが持つ。
+
+Workers Builds は Firestore のルールをデプロイしない。`firestore.rules` を変えたら、次を手で実行する。`.firebaserc` の既定はエミュレーター用の `demo-cp-pair` なので、`--project cp-pair` を付ける（[ルールのデプロイ](https://firebase.google.com/docs/rules/manage-deploy)、[`--project`](https://firebase.google.com/docs/cli#project_aliases)）。
+
+```sh
+npx firebase deploy --only firestore:rules --project cp-pair
+```
 
 ## 背景
 
