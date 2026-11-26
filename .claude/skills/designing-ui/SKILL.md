@@ -9,7 +9,7 @@ description: Designs and implements screen UI and interaction from sourced guide
 
 ## 出典の優先順位
 
-1. リポジトリの規約（`docs/PRINCIPLES.md`・`design/guidelines.md`・`docs/VISION.md`・ADR）
+1. リポジトリの規約（`README.md`・`src/styles/tokens.css`・`docs/design/`）
 2. Apple Human Interface Guidelines（HIG）
 3. Liquid Glass の技術概要と WWDC のセッション
 
