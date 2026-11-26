@@ -16,23 +16,6 @@ Apple は Liquid Glass の部品を SwiftUI・UIKit・AppKit にしか配らな�
 5. コントラストを上げる設定（`prefers-contrast: more`）では、不透明の地と境界線に切り替える。透明度を下げる設定（`prefers-reduced-transparency`）は Safari が CSS で受け取れないので、既定を不透明寄りにする
    - MDN https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-contrast
 
-## CSS の例（Tailwind v4 の `@utility`）
+## cp-pair の実装
 
-```css
-@utility glass {
-  background-color: hsl(var(--background) / 0.72);
-  backdrop-filter: blur(24px) saturate(1.8);
-  border: 1px solid hsl(var(--foreground) / 0.08);
-  @media (prefers-contrast: more) {
-    background-color: hsl(var(--background));
-    backdrop-filter: none;
-    border-color: hsl(var(--foreground));
-  }
-}
-.glass .glass {
-  background-color: hsl(var(--background));
-  backdrop-filter: none;
-}
-```
-
-値（0.72・24px など）は作り手が決めた値で、出典はない。足したことを明記し、レビューの対象にする。
+ガラスの値は `src/styles/tokens.css` の `--glass-*`、使い方は `src/styles/app.css` にある。値は作り手が決めた値で、出典はない。値を足したら、足したことを明記し、レビューの対象にする。
