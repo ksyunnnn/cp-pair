@@ -4,7 +4,7 @@ cp-pair で Claude Code が従うルール。プロジェクトの概要・開�
 
 ## Git
 
-- main への push は許可を得てから行う
+- main へ直接 push しない。GitHub のルールセットが拒む
 - コミットは許可なしで行ってよい
 - push の前に、センシティブな情報が入っていないか確かめる。`.env.local` はコミットしない。`.env.production` の Firebase の値は秘密ではない
 
