@@ -96,6 +96,39 @@ test('ルームを作るときにつながらなければ、この端末だけ�
   await mei.context().close()
 })
 
+test('つながらないまま宣言した後に解除しても、「ルームが見つかりません」を出さない', async ({ page, context }) => {
+  await page.goto('/')
+  await expect(page.getByRole('heading', { name: '今夜のお題を選ぶ' })).toBeVisible()
+  await context.setOffline(true)
+  await createRoom(page)
+  await addManual(page, 'ハルト', '男性')
+  await addManual(page, 'アオイ', '女性')
+  await pickOnHost(page, 'ハルト', 'この端末で選ぶ')
+  await pickOnHost(page, 'アオイ', 'この端末で選ぶ')
+  await page.getByRole('button', { name: '登録完了を宣言' }).click()
+  await expect(page.getByRole('heading', { name: '結果を発表しました' })).toBeVisible()
+
+  // 解除した直後の見出しを、一瞬のものも含めてすべて記録する
+  await page.evaluate(() => {
+    const seen: string[] = []
+    ;(window as unknown as { __headings: string[] }).__headings = seen
+    const record = () => {
+      const heading = document.querySelector('h1')?.textContent?.trim()
+      if (heading && seen[seen.length - 1] !== heading) seen.push(heading)
+    }
+    new MutationObserver(record).observe(document.body, { subtree: true, childList: true, characterData: true })
+  })
+  await context.setOffline(false)
+  await page.getByRole('button', { name: RELEASE }).click()
+  await expect(page.getByText('各自の端末での参加に戻しました')).toBeVisible()
+  await expect(page.getByText(LABEL)).toBeHidden()
+  await expect(page.getByRole('heading', { name: '結果を発表しました' })).toBeVisible()
+
+  const headings = await page.evaluate(() => (window as unknown as { __headings: string[] }).__headings)
+  expect(headings).not.toContain('ルームが見つかりません')
+  expect(headings).not.toContain('この端末は、このルームのホストではありません')
+})
+
 test('ルームの途中で切れたら、ホストの端末で選び直した人だけホストの選択で上書きし、ほかの人は本人の端末の選択を残す', async ({ page, context, browser }) => {
   await page.goto('/')
   await createRoom(page)
