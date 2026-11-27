@@ -29,3 +29,8 @@
   background: var(--surface-inverse);
   color: var(--text-inverse);
 }
+/* 足した値: いまの段の名前を太字にする。Framer の部品（p_6G2PpCJ）は太字にしていないが、
+   部品シートの説明文「現在地は反転した番号と太字で表示します」に合わせた。11px の名前でも、番号の反転のほかにもう 1 つ手がかりを持たせる */
+.cp-steps__item.is-current .cp-steps__label {
+  font-weight: 700;
+}
