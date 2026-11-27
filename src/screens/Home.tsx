@@ -20,8 +20,8 @@ export function Home() {
         <ScreenHeading
           eyebrow="CORPORATE PHILOSOPHY PAIR"
           icon={<CpSymbol name="Pair" size={17} />}
-          title="あなたが好きな企業理念はなんですか？"
-          lead="各自が好きな企業理念をひとつ選び、理念どうしのこじつけ相性診断でペアを発表するジョークアプリです。"
+          title="企業理念で、ペアを決める"
+          lead="あなたが好きな企業理念はなんですか？各自が好きな企業理念をひとつ選び、理念どうしのこじつけ相性診断でペアを発表するジョークアプリです。"
         />
         <Section title="遊び方">
           <ol className="h-howto">
