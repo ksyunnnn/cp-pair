@@ -1,0 +1,102 @@
+/* 操作の層（Liquid Glass）。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-floating {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  /* 足した値: 画面の下端からの余白 16px と、ホームインジケーターの領域 */
+  padding: 0 16px calc(16px + env(safe-area-inset-bottom));
+  pointer-events: none;
+  z-index: 20;
+}
+.cp-floating__bar {
+  /* 操作バーだけが使うガラスの値。Framer にない値（ほかのガラスの値は tokens.css の --glass-*） */
+  /* ガラスの上の補足文字。塗りが薄いため、黒いカードが下を通っても 4.5:1 を保つよう --text-muted より暗くした */
+  --_glass-label-muted: #3f403a;
+  /* ガラスの上のボタンを押している間の塗り。不透明な塗りが透明なガラスに変わる。白い光は重ねない */
+  --_glass-press-filter: blur(10px) saturate(1.8);
+  /* 主ボタン: 墨を透かす。--text-inverse の文字を読ませるため、指定の 35〜45% より濃い 50% にした */
+  --_glass-press-primary: rgba(34, 35, 31, 0.5);
+  /* 副ボタン: 薄い透明なガラス */
+  --_glass-press-secondary: rgba(255, 255, 255, 0.22);
+  /* 縁の細い光と、浮いた影 */
+  --_glass-press-rim: inset 0 0 0 0.5px rgba(255, 255, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --_glass-press-rim-light: inset 0 0 0 1px rgba(255, 255, 255, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --_glass-press-lift: 0 8px 24px rgba(34, 35, 31, 0.18);
+  pointer-events: auto;
+  width: 100%;
+  max-width: 358px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 28px;
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+/* バーの中のボタン（Liquid Glass の押し方）。押すと塗りが透明なガラスに変わり、膨らんで浮く。
+   膨らみ・指への追従は Motion が書く（components.tsx の GlassButton）。はみ出させるため overflow で切らない */
+.cp-floating__bar .cp-button {
+  position: relative;
+  /* 押したまま横へ動かす指を、ブラウザのスクロールに取られないようにする */
+  touch-action: none;
+  transition:
+    opacity 0.18s ease,
+    background-color var(--motion-glass-fill-out) ease-out,
+    box-shadow var(--motion-glass-fill-out) ease-out;
+}
+.cp-floating__bar .cp-button[data-pressed],
+.cp-floating__bar .cp-button:active:focus-visible {
+  z-index: 1;
+  opacity: 1;
+  -webkit-backdrop-filter: var(--_glass-press-filter);
+  backdrop-filter: var(--_glass-press-filter);
+  transition-duration: var(--motion-glass-fill-in);
+}
+/* 副ボタンは塗らずにガラスの上の文字にする（HIG Toolbars: Reduce the use of toolbar backgrounds and tinted controls） */
+.cp-floating__bar .cp-button--secondary {
+  background-color: transparent;
+}
+.cp-floating__bar .cp-button--secondary[data-pressed],
+.cp-floating__bar .cp-button--secondary:active:focus-visible {
+  background-color: var(--_glass-press-secondary);
+  box-shadow: var(--_glass-press-rim-light), var(--_glass-press-lift);
+}
+/* 主ボタンは墨を透かし、文字は --text-inverse のまま。文字の縁を少し締めて読ませる */
+.cp-floating__bar .cp-button--primary[data-pressed],
+.cp-floating__bar .cp-button--primary:active:focus-visible {
+  background-color: var(--_glass-press-primary);
+  box-shadow: var(--_glass-press-rim), var(--_glass-press-lift);
+  text-shadow: 0 0 2px rgba(34, 35, 31, 0.45);
+}
+.cp-floating__note {
+  text-align: center;
+  color: var(--_glass-label-muted);
+}
+/* 下の 2 つの設定は、トースト（components/toast.css）の分もここに書く */
+@media (prefers-reduced-transparency: reduce) {
+  .cp-floating__bar,
+  .cp-toast {
+    background: var(--glass-fill-reduced);
+  }
+}
+@media (prefers-contrast: more) {
+  .cp-floating__bar,
+  .cp-toast {
+    background: var(--surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-color: var(--border-strong);
+  }
+  .cp-floating__note {
+    color: var(--text-muted);
+  }
+}

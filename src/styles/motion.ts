@@ -84,7 +84,7 @@ export const STAMP = {
 /**
  * うなずく動き（24fps のコマ数）。mcbess のループ（ベースを弾いてうなずく、約 72 BPM）の拍に合わせた。
  * 1 拍 = ため 8 → 止め 7 → 打ち 2 → 収め 2 → 休み。拍は beatTicks（20 コマ = 833ms）を中心に ±jitterTicks コマ揺らし、機械的にしない。
- * 動くのは頭（記号）だけ。回転の軸は記号の下端に置く（app.css の .cp-nod）。
+ * 動くのは頭（記号）だけ。回転の軸は記号の下端に置く（handoff.css の .cp-nod）。
  * rotate（deg）と y（px）は ため → 止め → 打ち込んだ底 → 元 を順に通る。まばたきは blinkEvery 拍に 1 回、止めの間に入れる
  */
 const NOD_TICKS = SEAL_TICKS;

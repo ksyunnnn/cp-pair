@@ -45,7 +45,7 @@ export function Button({
       whileTap={disabled ? undefined : { scale: PRESS_SCALE, transition: SPRING.press }}
       transition={SPRING.release}
     >
-      {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--cp-soft)" />}
+      {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--surface-sunken)" />}
       <span>{children}</span>
     </m.button>
   );
@@ -60,7 +60,7 @@ function to(value: MotionValue<number>, target: number, transition: (typeof SPRI
 
 /*
  * FloatingBar の中のボタン（iOS 26.3 Safari の segmented control の thumb の押し方）。
- * 押すと塗りが透明なガラスに変わり（app.css の [data-pressed]）、膨らんで浮く。押したまま動かすと指へ寄って伸び、離すと spring で戻る。
+ * 押すと塗りが透明なガラスに変わり（components/floating.css の [data-pressed]）、膨らんで浮く。押したまま動かすと指へ寄って伸び、離すと spring で戻る。
  * 動きは motion value に直接書き、指を動かすたびに React を描き直さない。reduced motion では塗りの変化だけを残す
  */
 function GlassButton({
@@ -131,7 +131,7 @@ function GlassButton({
       onPointerCancel={release}
       onPointerLeave={release}
     >
-      {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--cp-soft)" />}
+      {icon && <CpSymbol name={icon} size={14} color="currentColor" eyeColor="var(--surface-sunken)" />}
       <span>{children}</span>
     </m.button>
   );
@@ -259,7 +259,7 @@ export function ChoiceCard({
         <span className="t-small cp-choice__category">{category}</span>
         {selected && (
           <span className="cp-choice__mark">
-            {/* 印は 3 コマで左から描き込む（app.css の .cp-choice__mark svg） */}
+            {/* 印は 3 コマで左から描き込む（components/choice.css の .cp-choice__mark svg） */}
             <CpSymbol name="Done" size={16} />
           </span>
         )}

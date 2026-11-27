@@ -26,7 +26,7 @@ export function Handoff({
     <div className="cp-page">
       <BrandHeader right={<HostDeviceLabel roomId={roomId} />} />
       <ScreenMain className="cp-handoff">
-        {/* 記号だけが約 72 BPM でうなずき、4 拍に 1 回、止めの間に目が 2 コマでまばたきする（app.css の .cp-nod と .cp-blink） */}
+        {/* 記号だけが約 72 BPM でうなずき、4 拍に 1 回、止めの間に目が 2 コマでまばたきする（handoff.css の .cp-nod と .cp-blink） */}
         <span ref={nodRef} className="cp-nod">
           <CpSymbol name="Secret" size={54} eyeClassName="cp-blink" />
         </span>

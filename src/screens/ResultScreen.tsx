@@ -19,7 +19,7 @@ const FREE_GLYPHS: TagIcon[] = ["Sparkle", "Heart", "Intersect"];
 const PHOSPHOR_WEIGHT = "regular" as const;
 
 function PhIcon({ name, size }: { name: TagIcon; size: number }) {
-  const props = { size, color: "currentColor", weight: PHOSPHOR_WEIGHT, style: { display: "block", flexShrink: 0, color: "var(--cp-ink)" } };
+  const props = { size, color: "currentColor", weight: PHOSPHOR_WEIGHT, style: { display: "block", flexShrink: 0, color: "var(--text)" } };
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;
   return <Intersect {...props} />;

@@ -8,9 +8,7 @@ import "@fontsource/zen-kaku-gothic-new/900.css";
 import "@fontsource/anton/400.css";
 import "@fontsource/inter/700.css";
 
-import "./styles/tokens.css";
-import "./styles/app.css";
-import "./styles/result.css";
+import "./styles/index.css";
 import App from "./App.tsx";
 import { applyMotionVars } from "./styles/motion.ts";
 

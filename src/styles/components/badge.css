@@ -1,0 +1,12 @@
+/* バッジ。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-badge {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--radius-chip);
+  background: var(--surface-sunken);
+  color: var(--text);
+  white-space: nowrap;
+}

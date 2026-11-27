@@ -2,7 +2,7 @@
 
 出どころ: Framer プロジェクト `xdh5lhXEtr2QsuFohBhR`（Expansive Goals）の main ブランチ。2026-11-25 に Framer MCP の `exec`（`tree.serialize`・`tree.toSVG`・`tree.screenshot`）で読んだ。Framer は編集していない。
 
-実装での使い先は `src/styles/tokens.css`・`src/styles/app.css`・`src/styles/result.css`・`src/ui/symbols.tsx`。
+実装での使い先は `src/styles/`（入口は `index.css`。色の値と用途は `tokens.css`、部品は `components/`、画面は `result.css` などのファイル）と `src/ui/symbols.tsx`。`tokens.css` では、Framer の色トークンを値の名前（`--palette-*`）で置き、部品はそれを指す用途の名前（`--surface`・`--text` など）だけを使う。
 
 ## 目次
 

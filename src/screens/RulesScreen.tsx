@@ -17,7 +17,7 @@ import { BrandHeader, Button, ScreenMain, Section } from "../ui/components.tsx";
 export const RULES_PATH = "/rules";
 
 function PhIcon({ name }: { name: TagIcon }) {
-  const props = { size: 14, color: "currentColor", weight: "regular" as const, style: { display: "block", flexShrink: 0, color: "var(--cp-ink)" } };
+  const props = { size: 14, color: "currentColor", weight: "regular" as const, style: { display: "block", flexShrink: 0, color: "var(--text)" } };
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;
   return <Intersect {...props} />;

@@ -1,0 +1,68 @@
+/* 選択肢カード。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-choice {
+  appearance: none;
+  width: 100%;
+  min-height: 108px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+}
+.cp-choice:active {
+  opacity: 0.8;
+}
+.cp-choice.is-selected {
+  background: var(--surface-inverse);
+  border-color: var(--surface-inverse);
+  color: var(--text-inverse);
+}
+.cp-choice__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+}
+.cp-choice__category {
+  flex: 1;
+  color: var(--text-muted);
+}
+.cp-choice.is-selected .cp-choice__category {
+  color: var(--text-inverse);
+}
+.cp-choice__mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 印を左から 3 コマで描き込む（なめらかに補間しない）。印が出たときに 1 回だけ */
+.cp-choice__mark svg {
+  animation: cp-mark-draw var(--motion-mark) steps(3, jump-start);
+}
+@keyframes cp-mark-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 印の描き込みは位置が動かないため残す */
+  .cp-choice {
+    transition: none;
+  }
+}

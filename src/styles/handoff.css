@@ -1,0 +1,50 @@
+/* 全画面の確認（のぞき見防止）。src/screens/host/Handoff.tsx。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-handoff {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  padding: 24px var(--page-x) 32px;
+}
+.cp-handoff__name {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+/* 記号のうなずき: 回転の軸を記号の下端（viewBox 64 の y=59）に置き、頭が前後に振れるように見せる。
+   拍は Handoff.tsx が motion.ts の NOD で刻む */
+.cp-nod {
+  display: block;
+  width: fit-content;
+  transform-origin: 50% 92%;
+}
+/* 記号の目のまばたき: 半分 → 閉じる の 2 コマ。目の形は変えず、縦に縮めるだけ。
+   いつ付けるかは Handoff.tsx がうなずきの止めに合わせて is-blinking を付けて決める（ふだんは動きを持たせず、静止の描画を変えない） */
+.cp-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.cp-blink.is-blinking {
+  animation: cp-blink calc(var(--motion-frame) * 2) step-end;
+}
+@keyframes cp-blink {
+  0% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(0.1);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* まばたきは止めて静止画にする */
+  .cp-blink.is-blinking {
+    animation: none;
+  }
+}

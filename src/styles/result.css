@@ -47,16 +47,16 @@
   gap: 18px;
   padding: 24px;
   border-radius: var(--radius-card-ink);
-  background: var(--cp-ink);
-  color: var(--cp-paper);
+  background: var(--surface-inverse);
+  color: var(--text-inverse);
 }
 .r-on-ink {
-  color: var(--cp-on-ink-muted);
+  color: var(--text-inverse-muted);
 }
 .r-phrase-card__phrase {
   font: 900 26px/1.45 var(--font-ja);
   letter-spacing: -0.02em;
-  color: var(--cp-paper);
+  color: var(--text-inverse);
 }
 
 /* 相性と称号（P74_Bj9RK） */
@@ -85,7 +85,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-top: 1px solid var(--cp-line);
+  border-top: 1px solid var(--border);
   padding-top: 32px;
 }
 .r-tags {
@@ -103,7 +103,7 @@
   gap: 7px;
   padding: 6px 11px;
   border-radius: var(--radius-chip);
-  background: var(--cp-soft);
+  background: var(--surface-sunken);
 }
 /* Framer の描画では、この文字の枠は高さ 20px（Inter の行に日本語が混ざるため）。行の高さを 20px にして揃える */
 .r-tag .t-chip {
@@ -117,7 +117,7 @@
   gap: 8px;
   padding: 20px;
   border-radius: var(--radius-card);
-  border: 1px solid var(--cp-line);
+  border: 1px solid var(--border);
 }
 .r-you__phrase {
   font: 900 21px/1.45 var(--font-ja);
@@ -129,7 +129,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  border-top: 1px solid var(--cp-line);
+  border-top: 1px solid var(--border);
   padding-top: 24px;
 }
 .r-karte__item {
@@ -138,7 +138,7 @@
   gap: 8px;
 }
 .r-source {
-  color: var(--cp-muted);
+  color: var(--text-muted);
   text-decoration: underline;
   align-self: flex-start;
   position: relative;
@@ -150,7 +150,7 @@
   inset: -14px -8px;
 }
 .r-source:hover {
-  color: var(--cp-ink);
+  color: var(--text);
 }
 
 /* ゲームについて（dRC26Wq3b） */
@@ -160,7 +160,7 @@
   gap: 8px;
   padding: 16px;
   border-radius: var(--radius-field);
-  background: var(--cp-soft);
+  background: var(--surface-sunken);
   text-align: center;
 }
 
@@ -206,39 +206,4 @@
     animation-delay: 0s;
     animation-duration: var(--motion-fade-reveal);
   }
-}
-
-/* 診断の説明（src/screens/RulesScreen.tsx、/rules）。Framer に画面はない。区画は .cp-section（上の線 + padding-top 24）、
-   1 件は「ふたりの診断カルテ」の 1 人分の文字の組（型 .t-type ＋ 補足 .t-small）、タグは結果画面の札 .r-tag を使う */
-.rl-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.rl-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.rl-item__head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.rl-num {
-  margin-left: auto;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-.rl-title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-}
-.rl-title + .rl-title {
-  margin-top: 8px;
 }
