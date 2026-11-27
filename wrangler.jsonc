@@ -13,6 +13,10 @@
   // https://developers.cloudflare.com/workers/versions-and-deployments/version-urls/
   "workers_dev": false,
   "preview_urls": true,
+  // Preview コマンドの wrangler preview は、previews のブロックがないと止まる。中身は空でよい。
+  // 静的アセットと互換日は上の階層の値を使うので、ここには書かない
+  // https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file
+  "previews": {},
   "assets": {
     "directory": "./dist",
     // 見つからない画面の経路は index.html を返し、画面の振り分けを SPA に任せる
