@@ -10,6 +10,14 @@ const FOLDED_COUNT = 3;
 
 type Entry = { record: RoomRecord; room: Room };
 
+/* 作った日時。同じお題のルームを見分けるため、時刻まで出す。年は今年でないときだけ付ける（例: 11月27日 21:30） */
+function formatCreatedAt(ms: number): string {
+  const d = new Date(ms);
+  const year = d.getFullYear() === new Date().getFullYear() ? "" : `${d.getFullYear()}年`;
+  const time = `${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`;
+  return `${year}${d.getMonth() + 1}月${d.getDate()}日 ${time}`;
+}
+
 async function loadEntries(): Promise<Entry[]> {
   const loaded = await Promise.all(
     roomRecords().map(async (record) => {
@@ -54,7 +62,7 @@ export function RecentRooms() {
           <a key={room.id} className="cp-row cp-row--link h-recent__row" href={href}>
             <span className="t-strong">{getPreset(room.presetId).label}</span>
             <span className="t-small c-muted">
-              {role}・{status}
+              {formatCreatedAt(room.createdAt)}・{role}・{status}
             </span>
           </a>
         );
