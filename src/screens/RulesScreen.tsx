@@ -17,6 +17,7 @@ import { BrandHeader, Button, ScreenMain, Section } from "../ui/components.tsx";
 export const RULES_PATH = "/rules";
 
 function PhIcon({ name }: { name: TagIcon }) {
+  // アイコンは常に墨で描く。SVG の fill 属性に var() を書く方法は仕様で決まっていないので、currentColor と style の color で渡す
   const props = { size: 14, color: "currentColor", weight: "regular" as const, style: { display: "block", flexShrink: 0, color: "var(--text)" } };
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;

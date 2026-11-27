@@ -19,13 +19,13 @@
   /* ガラスの上のボタンを押している間の塗り。不透明な塗りが透明なガラスに変わる。白い光は重ねない */
   --_glass-press-filter: blur(10px) saturate(1.8);
   /* 主ボタン: 墨を透かす。--text-inverse の文字を読ませるため、指定の 35〜45% より濃い 50% にした */
-  --_glass-press-primary: rgba(34, 35, 31, 0.5);
+  --_glass-press-primary: color-mix(in srgb, var(--surface-inverse) 50%, transparent);
   /* 副ボタン: 薄い透明なガラス */
   --_glass-press-secondary: rgba(255, 255, 255, 0.22);
   /* 縁の細い光と、浮いた影 */
   --_glass-press-rim: inset 0 0 0 0.5px rgba(255, 255, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   --_glass-press-rim-light: inset 0 0 0 1px rgba(255, 255, 255, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  --_glass-press-lift: 0 8px 24px rgba(34, 35, 31, 0.18);
+  --_glass-press-lift: 0 8px 24px color-mix(in srgb, var(--surface-inverse) 18%, transparent);
   pointer-events: auto;
   width: 100%;
   max-width: 358px;
@@ -49,7 +49,7 @@
   /* 押したまま横へ動かす指を、ブラウザのスクロールに取られないようにする */
   touch-action: none;
   transition:
-    opacity 0.18s ease,
+    opacity var(--motion-press-fade) ease,
     background-color var(--motion-glass-fill-out) ease-out,
     box-shadow var(--motion-glass-fill-out) ease-out;
 }
@@ -75,7 +75,7 @@
 .cp-floating__bar .cp-button--primary:active:focus-visible {
   background-color: var(--_glass-press-primary);
   box-shadow: var(--_glass-press-rim), var(--_glass-press-lift);
-  text-shadow: 0 0 2px rgba(34, 35, 31, 0.45);
+  text-shadow: 0 0 2px color-mix(in srgb, var(--surface-inverse) 45%, transparent);
 }
 .cp-floating__note {
   text-align: center;

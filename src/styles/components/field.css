@@ -42,7 +42,7 @@
   background: transparent;
   color: var(--text);
   cursor: pointer;
-  transition: background-color 0.18s ease, color 0.18s ease;
+  transition: background-color var(--motion-press-fade) ease, color var(--motion-press-fade) ease;
 }
 .cp-gender__option.is-selected {
   background: var(--surface-inverse);

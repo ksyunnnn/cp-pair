@@ -179,6 +179,8 @@ export const REVEAL = {
 export const CSS_MOTION = {
   /** 12fps の 1 コマ。記号の差し替えは steps() でこの長さずつ進める */
   frame: FRAME,
+  /** 押せる・押せないの切り替えと、選んだ状態の塗りの切り替え（ボタン・入力・選択肢カード・参加者の行） */
+  "press-fade": 0.18,
   /** 選んだカードの印を描き込む（3 コマ） */
   mark: FRAME * 3,
   /** 結果の発表の後半で、ほかの区画を出す opacity */

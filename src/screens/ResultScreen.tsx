@@ -19,6 +19,7 @@ const FREE_GLYPHS: TagIcon[] = ["Sparkle", "Heart", "Intersect"];
 const PHOSPHOR_WEIGHT = "regular" as const;
 
 function PhIcon({ name, size }: { name: TagIcon; size: number }) {
+  // アイコンは常に墨で描く。SVG の fill 属性に var() を書く方法は仕様で決まっていないので、currentColor と style の color で渡す
   const props = { size, color: "currentColor", weight: PHOSPHOR_WEIGHT, style: { display: "block", flexShrink: 0, color: "var(--text)" } };
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;

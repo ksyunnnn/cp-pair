@@ -40,7 +40,7 @@
   background: var(--surface-sunken);
   color: var(--text);
   cursor: pointer;
-  transition: opacity 0.18s ease;
+  transition: opacity var(--motion-press-fade) ease;
 }
 .cp-row__action:active,
 .cp-row__remove:active {
