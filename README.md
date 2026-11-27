@@ -64,6 +64,17 @@ npm run dev
 - 動きの時間は CSS に書かない。`motion.ts` の `CSS_MOTION` に足すと、起動時に `--motion-*` として `:root` に入る
 - Framer の元データ（2026-11-27 に書き出した写し）は `docs/design/framer/` にある。Framer は今後の原本ではない
 
+### 部品とレイアウトの承認
+
+部品とレイアウトは、Storybook の一覧（`npm run storybook`、iPhone からは `npm run storybook:lan`）で目で見て承認する。承認するのはリポジトリの持ち主 1 人。
+
+- 部品（`src/ui/`）やレイアウトを足す・変える PR は、一覧で確かめてからマージする
+- 部品を足したら、状態（押せない・選択済み・ガラスの上など）ごとの story を、同じ PR で `src/ui/*.stories.tsx` に足す
+- レイアウトの見本は `src/stories/` にある。基本形（Every Layout の Stack・Box・Center・Cluster・Cover・Frame）と、画面の型 6 つを状態（理想・空・読み込み中・一部だけ・失敗・オフライン）ごとに並べたもの。中身はダミー
+- 新しい画面を作るときは、一覧を見て、既存の部品で組めるか、部品を足すかを決める
+- 決まりは `DESIGN.md` に書く。story の説明に決まりを書き写さない
+- 一覧の準備（書体・全体の CSS・動きの変数）は `.storybook/preview.tsx` で、`src/main.tsx` と同じものを読む。起動の処理を変えたら、こちらも合わせる
+
 ### 見た目を変えない変更の確かめ方
 
 CSS の整理など、見た目を変えないはずの変更は、全画面を撮り直して変更の前の画像と比べる。撮影のスクリプトは乱数の種を固定しているので、同じ画面なら同じ画像になる。
@@ -85,7 +96,8 @@ src/
   data/      企業理念 100 社のデータ
   store/     ルームの保存。RoomStore のインターフェースと、localStorage の実装と Firestore の実装
   screens/   ホストと参加者の画面、理念選び、結果
-  ui/        共通の部品・記号・トースト
+  ui/        共通の部品・記号・トースト（*.stories.tsx は Storybook の一覧）
+  stories/   Storybook のレイアウトの見本（基本形・画面の型）
   styles/    デザインの値（tokens.css）、部品ごとのスタイル（components/）、画面のスタイル
   dev/       ?dev の開発パネル
 e2e/         Playwright のテスト（既定の版）
@@ -94,6 +106,7 @@ test/        Firestore のルールと保存の層のテスト（Vitest）
 scripts/     計算の照合（verify-matching.ts）とスクリーンショットの撮影
 docs/        デザインの値（design/。Framer の元データは design/framer/）と全画面のスクリーンショット（screenshots/）
 DESIGN.md    デザインの決まり（意図・使い方・Do's and Don'ts）
+.storybook/  Storybook の設定（main.ts）と、本体と同じ準備・一覧でだけ使う CSS（preview.*）
 ```
 
 - 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`、`#/rules`、`#/about`）で分ける
