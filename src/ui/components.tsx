@@ -348,7 +348,7 @@ export function ProgressSteps({ current }: { current: 1 | 2 | 3 }) {
         return (
           <li key={label} className={`cp-steps__item${active ? " is-current" : ""}`} aria-current={active ? "step" : undefined}>
             <span className="cp-steps__num t-label">{n}</span>
-            <span className="t-small">{label}</span>
+            <span className="t-small cp-steps__label">{label}</span>
           </li>
         );
       })}
