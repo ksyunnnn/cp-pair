@@ -217,6 +217,9 @@ export async function leaveOfflineMode(roomId: string): Promise<string> {
   const room = await localStore.getRoom(roomId);
   if (!remoteStore || !entry || !room) throw new Error(`room ${roomId} is not in offline mode`);
   const nextId = await withTimeout(remoteStore.importRoom(room, entry.knownParticipantIds, entry.repickedParticipantIds ?? []), IMPORT_TIMEOUT_MS);
+  // 解除すると、ホストの判定は uid で行う（useIsHost）。Firestore の応答が届くまで画面は手元のルームを出し続けるため、
+  // オフラインで作った hostUid の無いルームのままだと「ホストではない」と出る。書き戻したときの uid を先に入れておく
+  localStore.putRoom({ ...room, hostUid: await remoteStore.uid() });
   rememberHostRoom(nextId);
   setOfflineMode(roomId, null);
   localStore.deleteRoom(roomId);
