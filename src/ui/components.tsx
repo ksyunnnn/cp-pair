@@ -368,12 +368,33 @@ export function FloatingBar({ note, children }: { note?: ReactNode; children: Re
   );
 }
 
-/* 結果画面の上部「ブランド」。aboutLink のときは、右端に about へのリンクを置く（トップ画面だけ） */
-export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; aboutLink?: boolean }) {
-  return (
-    <header className="cp-brand">
+/* 画面の上部「ブランド」。aboutLink のときは、右端に about へのリンクを置く（トップ画面だけ）。
+   ロゴはトップ（/）へのリンク（#34）。ホストが端末を参加者に渡している画面では homeLink={false} にする。
+   渡された人がトップを開くと、ホストの最近のルームが見えてしまうため。そこでの戻り先は各画面の「ホスト画面に戻る」 */
+export function BrandHeader({
+  right,
+  aboutLink = false,
+  homeLink = true,
+}: {
+  right?: ReactNode;
+  aboutLink?: boolean;
+  homeLink?: boolean;
+}) {
+  const logo = (
+    <>
       <PairLogo width={30} />
       <span className="t-logo">CP PAIR</span>
+    </>
+  );
+  return (
+    <header className="cp-brand">
+      {homeLink ? (
+        <a className="cp-brand__home" href="/" aria-label="CP PAIR はじめの画面へ">
+          {logo}
+        </a>
+      ) : (
+        logo
+      )}
       <span className="t-small c-muted cp-brand__right">{right}</span>
       {aboutLink && (
         <a className="t-chip cp-link" href="/about" onClick={() => (aboutEntry.fromApp = true)}>
@@ -384,7 +405,7 @@ export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; a
   );
 }
 
-/* ページの最後のフッター。トップ（お題選び）へ移る文字リンクを置く。操作バーの無い画面にだけ置く */
+/* ページの最後のフッター。トップ（/、最近のルームとアプリの説明）へ移る文字リンクを置く。操作バーの無い画面にだけ置く */
 export function TopLinkFooter() {
   return (
     <footer className="cp-footer">
@@ -412,7 +433,7 @@ export function ScreenHeading({
   title,
   lead,
 }: {
-  eyebrow: string;
+  eyebrow: ReactNode;
   icon: ReactNode;
   title: ReactNode;
   lead?: ReactNode;

@@ -8,7 +8,7 @@ import { companyMeta, splitTitle, splitTitleBody, tagIcon, tagLabel, type TagIco
 import type { Archetype, MatchedPerson, MatchResult, UnmatchedPerson } from "../game/types.ts";
 import { BrandHeader, Button } from "../ui/components.tsx";
 import { PairLogo } from "../ui/symbols.tsx";
-import { navigate } from "../router.ts";
+import { navigate, rulesEntry } from "../router.ts";
 import { RULES_PATH } from "./RulesScreen.tsx";
 import { useReveal, type Reveal } from "./useReveal.ts";
 
@@ -84,16 +84,27 @@ function AboutGame() {
 }
 
 /* 診断の説明（/rules）へ。相性度・キャラ型・タグ・称号が何から決まるかを、ルームによらない 1 枚で見せる */
-function RulesLink() {
+function RulesLink({ fromHostDevice }: { fromHostDevice: boolean }) {
+  const open = () => {
+    rulesEntry.fromHostDevice = fromHostDevice;
+    navigate(RULES_PATH);
+  };
   return (
-    <Button kind="link" className="r-later" onClick={() => navigate(RULES_PATH)}>
+    <Button kind="link" className="r-later" onClick={open}>
       診断の説明
     </Button>
   );
 }
 
+/* ホストの端末で開いたときはホストの画面へ、参加者の端末ではトップ（最近のルーム）へ戻る（#34） */
 function HostBack({ onBack }: { onBack?: () => void }) {
-  if (!onBack) return null;
+  if (!onBack) {
+    return (
+      <Button kind="link" className="r-later" onClick={() => navigate("/")}>
+        はじめの画面に戻る
+      </Button>
+    );
+  }
   return (
     <Button kind="secondary" className="r-later" onClick={onBack}>
       ホスト画面に戻る
@@ -102,10 +113,20 @@ function HostBack({ onBack }: { onBack?: () => void }) {
 }
 
 /* 発表の途中は、本文を押すと最後の状態へ飛ぶ。途中の区画は押せない（隠れたボタンを押さないように） */
-function Frame({ right, reveal, children }: { right: ReactNode; reveal: Reveal; children: ReactNode }) {
+function Frame({
+  right,
+  reveal,
+  homeLink,
+  children,
+}: {
+  right: ReactNode;
+  reveal: Reveal;
+  homeLink: boolean;
+  children: ReactNode;
+}) {
   return (
     <div className="cp-page r-page">
-      <BrandHeader right={right} />
+      <BrandHeader right={right} homeLink={homeLink} />
       <main
         className="r-content"
         data-revealing={reveal.running || undefined}
@@ -150,7 +171,7 @@ export function ResultScreen({
     const partnerArch = isA ? pair.evaluation.archetypes.personB : pair.evaluation.archetypes.personA;
     
     return (
-      <Frame right="ふたりだけの結果" reveal={reveal}>
+      <Frame right="ふたりだけの結果" reveal={reveal} homeLink={!onBackToHost}>
         <section className="r-partner" aria-label="あなたのマッチ相手">
           <RevealEyebrow glyphs={PAIR_GLYPHS} reveal={reveal}>
             YOUR PHILOSOPHY PARTNER
@@ -194,7 +215,7 @@ export function ResultScreen({
         </section>
 
         <AboutGame />
-        <RulesLink />
+        <RulesLink fromHostDevice={Boolean(onBackToHost)} />
         <HostBack onBack={onBackToHost} />
       </Frame>
     );
@@ -205,7 +226,7 @@ export function ResultScreen({
   }
 
   return (
-    <Frame right="結果" reveal={reveal}>
+    <Frame right="結果" reveal={reveal} homeLink={!onBackToHost}>
       <p className="t-body">この端末の参加者は、今回の結果に含まれていません。</p>
       <HostBack onBack={onBackToHost} />
     </Frame>
@@ -215,7 +236,7 @@ export function ResultScreen({
 /* フリー／ジョーカー枠。結果画面と同じ部品と余白で組む（Framer に画面はない）。 */
 function FreeResult({ me, reveal, onBackToHost }: { me: UnmatchedPerson; reveal: Reveal; onBackToHost?: () => void }) {
   return (
-    <Frame right="あなたの結果" reveal={reveal}>
+    <Frame right="あなたの結果" reveal={reveal} homeLink={!onBackToHost}>
       <section className="r-partner" aria-label="フリー／ジョーカー枠">
         <RevealEyebrow glyphs={FREE_GLYPHS} reveal={reveal}>
           FREE / JOKER
@@ -241,7 +262,7 @@ function FreeResult({ me, reveal, onBackToHost }: { me: UnmatchedPerson; reveal:
       </section>
 
       <AboutGame />
-      <RulesLink />
+      <RulesLink fromHostDevice={Boolean(onBackToHost)} />
       <HostBack onBack={onBackToHost} />
     </Frame>
   );

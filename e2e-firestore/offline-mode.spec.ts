@@ -61,7 +61,7 @@ async function pickOnHost(page: Page, name: string, action: string, except: stri
 }
 
 test('ルームを作るときにつながらなければ、この端末だけで進め、解除すると各自の端末で参加できる', async ({ page, context, browser }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await expect(page.getByRole('heading', { name: '今夜のお題を選ぶ' })).toBeVisible()
   await context.setOffline(true)
   await createRoom(page)
@@ -97,7 +97,7 @@ test('ルームを作るときにつながらなければ、この端末だけ�
 })
 
 test('つながらないまま宣言した後に解除しても、「ルームが見つかりません」を出さない', async ({ page, context }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await expect(page.getByRole('heading', { name: '今夜のお題を選ぶ' })).toBeVisible()
   await context.setOffline(true)
   await createRoom(page)
@@ -130,7 +130,7 @@ test('つながらないまま宣言した後に解除しても、「ルーム�
 })
 
 test('ルームの途中で切れたら、ホストの端末で選び直した人だけホストの選択で上書きし、ほかの人は本人の端末の選択を残す', async ({ page, context, browser }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await createRoom(page)
   await expect(page.getByText('QR コードか URL を共有')).toBeVisible()
   const roomId = roomIdOf(page)
@@ -179,7 +179,7 @@ test('ルームの途中で切れたら、ホストの端末で選び直した�
 })
 
 test('参加者の端末が切れたら選べず、つながると戻る', async ({ page, browser }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await createRoom(page)
   const roomId = roomIdOf(page)
   const mei = await openDevice(browser, roomId)

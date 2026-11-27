@@ -24,7 +24,7 @@ export function Handoff({
   const nodRef = useNod();
   return (
     <div className="cp-page">
-      <BrandHeader right={<HostDeviceLabel roomId={roomId} />} />
+      <BrandHeader right={<HostDeviceLabel roomId={roomId} />} homeLink={false} />
       <ScreenMain className="cp-handoff">
         {/* 記号だけが約 72 BPM でうなずき、4 拍に 1 回、止めの間に目が 2 コマでまばたきする（handoff.css の .cp-nod と .cp-blink） */}
         <span ref={nodRef} className="cp-nod">

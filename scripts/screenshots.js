@@ -48,7 +48,11 @@ async (page) => {
   await page.goto(BASE);
   await page.reload();
 
+  // トップ（記録が空）
+  await shot("00-home");
+
   // ホスト Step 1
+  await page.getByRole("button", { name: "ルームを作る" }).click();
   await page.getByRole("button", { name: /無人島/ }).click();
   await shot("01-host-step1-theme");
   await page.getByRole("button", { name: "このお題でルームを作る" }).click();

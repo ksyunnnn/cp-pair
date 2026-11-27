@@ -5,6 +5,7 @@ import { isDevMode, useRoute } from "./router.ts";
 import { HostPick, HostResultView } from "./screens/host/HostDeviceViews.tsx";
 import { HostRoom, RoomMissing } from "./screens/host/HostRoom.tsx";
 import { HostStart } from "./screens/host/HostStart.tsx";
+import { Home } from "./screens/Home.tsx";
 import { useAutoOfflineMode } from "./screens/host/useAutoOfflineMode.ts";
 import { ParticipantRoom } from "./screens/participant/ParticipantRoom.tsx";
 import { RulesScreen } from "./screens/RulesScreen.tsx";
@@ -24,6 +25,7 @@ function Screen() {
   // ルームを受け取れないまま切れても入れるよう、読み込みを待たずに見張る
   useAutoOfflineMode(hostRoute ? roomId : null);
 
+  if (route.name === "home") return <Home />;
   if (route.name === "hostStart") return <HostStart />;
   if (route.name === "rules") return <RulesScreen />;
   // about はルームを読まない。どの画面からでも開ける

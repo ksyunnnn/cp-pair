@@ -13,6 +13,7 @@ import {
   ProgressSteps,
   ScreenHeading,
   ScreenMain,
+  TopLinkFooter,
 } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
@@ -137,6 +138,7 @@ function Closed({ room }: { room: Room }) {
           lead="参加の受け付けは終わっています。ホストに声をかけてください。"
         />
       </ScreenMain>
+      <TopLinkFooter />
     </div>
   );
 }

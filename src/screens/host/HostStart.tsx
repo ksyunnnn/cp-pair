@@ -1,4 +1,4 @@
-// ホスト Step 1: お題決定・ルーム作成
+// ホスト Step 1（/new）: お題決定・ルーム作成。トップ（/）の「ルームを作る」から来る
 import { useState } from "react";
 import { PRESET_PROMPTS } from "../../game/presets.ts";
 import { pad2 } from "../../game/present.ts";
@@ -29,7 +29,7 @@ export function HostStart() {
 
   return (
     <div className="cp-page">
-      <BrandHeader aboutLink />
+      <BrandHeader />
       <ScreenMain className="cp-content has-floating">
         <ProgressSteps current={1} />
         <ScreenHeading

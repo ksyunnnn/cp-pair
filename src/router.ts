@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 export type Route =
+  | { name: "home" }
   | { name: "hostStart" }
   | { name: "rules" }
   | { name: "about" }
@@ -18,10 +19,11 @@ export function parsePath(pathname: string): Route {
     if (parts[2] === "result" && parts[3]) return { name: "hostResult", roomId: parts[1], participantId: parts[3] };
     return { name: "host", roomId: parts[1] };
   }
+  if (parts[0] === "new") return { name: "hostStart" };
   if (parts[0] === "rules") return { name: "rules" };
   if (parts[0] === "about") return { name: "about" };
   if (parts[0] === "r" && parts[1]) return { name: "participant", roomId: parts[1].toUpperCase() };
-  return { name: "hostStart" };
+  return { name: "home" };
 }
 
 /* # の後ろに画面のパスを書いた URL（例 /#/host/DE40C）は、履歴を増やさずにそのパスの URL（/host/DE40C）へ置き換える */
@@ -75,5 +77,9 @@ export function useRoute(): Route {
 
 /* about をアプリの中のリンクから開いたか。開いたなら「戻る」は履歴を 1 つ戻す。URL を直に開いたときは false */
 export const aboutEntry = { fromApp: false };
+
+/* 診断の説明（/rules）を、ホストが端末を参加者に渡している結果の画面から開いたか。開いたなら、/rules でもロゴを
+   トップへのリンクにせず、直接開いたときの戻り先もトップにしない。渡された人に、ホストの最近のルームを見せないため（#34） */
+export const rulesEntry = { fromHostDevice: false };
 
 export const isDevMode = () => new URLSearchParams(location.search).has("dev");
