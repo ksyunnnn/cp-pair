@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Badge, ParticipantRow, ProgressSteps } from "./components.tsx";
+import { Badge, GENDER_LABEL, JOIN_LABEL, ParticipantRow, ProgressSteps } from "./components.tsx";
 
 // 表示の部品。決まりは DESIGN.md の Components にある。ここには書き写さない
 const meta = { title: "部品/表示" } satisfies Meta;
@@ -8,12 +8,17 @@ type Story = StoryObj<typeof meta>;
 
 const noop = () => {};
 
+/* Framer の部品シート「05 バッジと参加者」の 6 種。性別・参加方法・相性・裏の顔。文言は画面で出る言葉そのもの */
 export const BadgeStates: Story = {
   name: "Badge",
   render: () => (
     <div className="sb-row">
-      <Badge>3 人</Badge>
-      <Badge>ダミーのバッジ</Badge>
+      <Badge>{GENDER_LABEL.M}</Badge>
+      <Badge>{GENDER_LABEL.F}</Badge>
+      <Badge>{JOIN_LABEL.device}</Badge>
+      <Badge>{JOIN_LABEL.manual}</Badge>
+      <Badge>相性 100%</Badge>
+      <Badge>非上場・裏の顔</Badge>
     </div>
   ),
 };
