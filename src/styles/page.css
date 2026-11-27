@@ -66,6 +66,13 @@ html:has(.cp-floating) {
   align-items: center;
   gap: 8px;
 }
+/* 英字ラベルの中の補助の情報（例: ルームを作った日時）。識別子より一段下げる。
+   英字用の広い字間（.t-eyebrow の 0.12em）は日本語と数字には広すぎるので、本文と同じ字間に戻す */
+.cp-eyebrow__sub {
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: -0.02em;
+}
 
 .cp-heading {
   display: flex;

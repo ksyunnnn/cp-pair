@@ -92,8 +92,15 @@ function RulesLink() {
   );
 }
 
+/* ホストの端末で開いたときはホストの画面へ、参加者の端末ではトップ（最近のルーム）へ戻る（#34） */
 function HostBack({ onBack }: { onBack?: () => void }) {
-  if (!onBack) return null;
+  if (!onBack) {
+    return (
+      <Button kind="link" className="r-later" onClick={() => navigate("/")}>
+        はじめの画面に戻る
+      </Button>
+    );
+  }
   return (
     <Button kind="secondary" className="r-later" onClick={onBack}>
       ホスト画面に戻る

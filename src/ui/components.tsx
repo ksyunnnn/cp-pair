@@ -412,7 +412,7 @@ export function ScreenHeading({
   title,
   lead,
 }: {
-  eyebrow: string;
+  eyebrow: ReactNode;
   icon: ReactNode;
   title: ReactNode;
   lead?: ReactNode;

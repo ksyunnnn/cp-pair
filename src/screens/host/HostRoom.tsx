@@ -23,6 +23,7 @@ import {
   Section,
   TopLinkFooter,
 } from "../../ui/components.tsx";
+import { formatExact } from "../../ui/datetime.ts";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
 import { ScoreAndTitle } from "../ResultScreen.tsx";
@@ -43,6 +44,7 @@ export function NotHost({ roomId }: { roomId: string }) {
           新しいルームを作る
         </Button>
       </ScreenMain>
+      <TopLinkFooter />
     </div>
   );
 }
@@ -135,7 +137,7 @@ function HostLobby({ room }: { room: Room }) {
       <BrandHeader right={<HostDeviceLabel roomId={room.id} />} />
       <ScreenMain className="cp-content has-floating">
         <ProgressSteps current={2} />
-        <ScreenHeading eyebrow={`ROOM ${room.id}`} icon={<CpSymbol name="Pair" size={17} />} title="参加者を集める" />
+        <ScreenHeading eyebrow={<RoomEyebrow room={room} />} icon={<CpSymbol name="Pair" size={17} />} title="参加者を集める" />
         <ThemeCard room={room} />
 
         {offline ? (
@@ -265,7 +267,7 @@ function HostResults({ room }: { room: Room }) {
       <ScreenMain className="cp-content">
         <ProgressSteps current={3} />
         <ScreenHeading
-          eyebrow={`ROOM ${room.id} · RESULTS`}
+          eyebrow={<RoomEyebrow room={room} suffix="RESULTS" />}
           icon={<CpSymbol name="Pair" size={17} />}
           title="結果を発表しました"
           lead={
@@ -326,5 +328,16 @@ function HostResults({ room }: { room: Room }) {
       </ScreenMain>
       <TopLinkFooter />
     </div>
+  );
+}
+
+/* ホストの画面の英字ラベル。識別子（ROOM の番号）は墨・太字、作った日時は照合のための補助なので薄墨・細字に下げる（#34） */
+function RoomEyebrow({ room, suffix }: { room: Room; suffix?: string }) {
+  return (
+    <>
+      ROOM {room.id}
+      {suffix && ` · ${suffix}`}
+      <span className="cp-eyebrow__sub"> · {formatExact(room.createdAt)} 作成</span>
+    </>
   );
 }

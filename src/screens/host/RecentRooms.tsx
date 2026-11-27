@@ -5,31 +5,11 @@ import { roomRecords, type RoomRecord } from "../../device.ts";
 import { getPreset } from "../../game/presets.ts";
 import { roomStore, type Room } from "../../store/index.ts";
 import { Button } from "../../ui/components.tsx";
+import { formatExact, formatRelative } from "../../ui/datetime.ts";
 
 const FOLDED_COUNT = 3;
 
 type Entry = { record: RoomRecord; room: Room };
-
-const MINUTE = 60_000;
-const HOUR = 60 * MINUTE;
-const DAY = 24 * HOUR;
-
-/* 作った日時の正確な表記（例: 11月27日 21:30）。年は今年でないときだけ付ける */
-function formatExact(ms: number): string {
-  const d = new Date(ms);
-  const year = d.getFullYear() === new Date().getFullYear() ? "" : `${d.getFullYear()}年`;
-  const time = `${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`;
-  return `${year}${d.getMonth() + 1}月${d.getDate()}日 ${time}`;
-}
-
-/* 一覧での表記。X（Twitter）に倣い、24 時間以内は「N 分前」「N 時間前」、それより前は日付だけにする */
-function formatRelative(ms: number): string {
-  const ago = Date.now() - ms;
-  if (ago < MINUTE) return "たった今";
-  if (ago < HOUR) return `${Math.floor(ago / MINUTE)}分前`;
-  if (ago < DAY) return `${Math.floor(ago / HOUR)}時間前`;
-  return formatExact(ms).replace(/ .*$/, "");
-}
 
 async function loadEntries(): Promise<Entry[]> {
   const loaded = await Promise.all(
