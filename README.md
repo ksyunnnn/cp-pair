@@ -62,13 +62,14 @@ src/
   store/     ルームの保存。RoomStore のインターフェースと、localStorage の実装と Firestore の実装
   screens/   ホストと参加者の画面、理念選び、結果
   ui/        共通の部品・記号・トースト
-  styles/    デザインの値（tokens.css）と画面のスタイル
+  styles/    デザインの値（tokens.css）、部品ごとのスタイル（components/）、画面のスタイル
   dev/       ?dev の開発パネル
 e2e/         Playwright のテスト（既定の版）
 e2e-firestore/ Playwright のテスト（Firestore 版。エミュレーターにつなぐ）
 test/        Firestore のルールと保存の層のテスト（Vitest）
 scripts/     計算の照合（verify-matching.ts）とスクリーンショットの撮影
-docs/        デザインの値（design/）と全画面のスクリーンショット（screenshots/）
+docs/        デザインの値（design/。Framer の元データは design/framer/）と全画面のスクリーンショット（screenshots/）
+DESIGN.md    デザインの決まり（意図・使い方・Do's and Don'ts）
 ```
 
 - 画面の経路は URL のハッシュ（`#/host/...`、`#/r/<ルーム ID>`、`#/rules`、`#/about`）で分ける
