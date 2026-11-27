@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { roomRecords, type RoomRecord } from "../../device.ts";
 import { getPreset } from "../../game/presets.ts";
 import { roomStore, type Room } from "../../store/index.ts";
-import { Badge, Button, Section } from "../../ui/components.tsx";
+import { Button } from "../../ui/components.tsx";
 
 const FOLDED_COUNT = 3;
 
@@ -39,21 +39,22 @@ export function RecentRooms() {
   const shown = expanded ? entries : entries.slice(0, FOLDED_COUNT);
   const hidden = entries.length - shown.length;
 
+  // 紹介の区画と同じ強さに見えないよう、区画名は小さいラベル、お題は 1 段下の太字、補足は 1 行の小さい文字にする（#34 の V1）
   return (
-    <Section title="最近のルーム" className="h-recent">
+    <section className="cp-stack cp-stack--8" aria-labelledby="recent-rooms-title">
+      <h2 id="recent-rooms-title" className="t-label c-muted">
+        最近のルーム
+      </h2>
       {shown.map(({ record, room }) => {
         const href = record.role === "host" ? `/host/${room.id}` : `/r/${room.id}`;
         const me = room.participants.find((p) => p.id === record.participantId);
         const role = record.role === "host" ? "ホスト" : me ? `参加者・${me.name}` : "参加者";
+        const status = room.status === "declared" ? "発表済み" : "受付中";
         return (
-          <a key={room.id} className="cp-row cp-row--link" href={href}>
-            <span className="cp-row__text">
-              <span className="t-small c-muted">ROOM {room.id}</span>
-              <span className="t-section">{getPreset(room.presetId).label}</span>
-              <span className="cp-row__attrs">
-                <Badge>{role}</Badge>
-                <Badge>{room.status === "declared" ? "発表済み" : "受付中"}</Badge>
-              </span>
+          <a key={room.id} className="cp-row cp-row--link h-recent__row" href={href}>
+            <span className="t-strong">{getPreset(room.presetId).label}</span>
+            <span className="t-small c-muted">
+              {role}・{status}
             </span>
           </a>
         );
@@ -63,6 +64,6 @@ export function RecentRooms() {
           ほかのルーム（{hidden} 件）
         </Button>
       )}
-    </Section>
+    </section>
   );
 }

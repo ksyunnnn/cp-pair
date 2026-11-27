@@ -14,13 +14,10 @@
   column-gap: 8px;
 }
 
-/* トップの「最近のルーム」（src/screens/host/RecentRooms.tsx）。ページの一番上に置くので、区画の上の線と余白は外し、
-   下に線を引いて説明と分ける */
-.h-recent {
-  border-top: 0;
-  padding-top: 0;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 24px;
+/* トップの「最近のルーム」（src/screens/host/RecentRooms.tsx）。行は参加者の行（.cp-row）を詰めて使う */
+.h-recent__row {
+  gap: 2px;
+  padding: 12px 16px;
 }
 .h-recent__more {
   align-self: center;
