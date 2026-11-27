@@ -35,12 +35,12 @@ export function RecentRooms() {
   // 読み終えるまでと、記録が空のときは何も出さない。無いことは告げない（#34）
   if (entries === null || entries.length === 0) return null;
 
-  // ほかの区画を押し下げすぎないよう、はじめは新しい順に 3 件だけ出す
+  // 説明と遊び方を押し下げすぎないよう、はじめは新しい順に 3 件だけ出す
   const shown = expanded ? entries : entries.slice(0, FOLDED_COUNT);
   const hidden = entries.length - shown.length;
 
   return (
-    <Section title="最近のルーム">
+    <Section title="最近のルーム" className="h-recent">
       {shown.map(({ record, room }) => {
         const href = record.role === "host" ? `/host/${room.id}` : `/r/${room.id}`;
         const me = room.participants.find((p) => p.id === record.participantId);

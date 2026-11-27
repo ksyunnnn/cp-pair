@@ -14,7 +14,14 @@
   column-gap: 8px;
 }
 
-/* トップの「最近のルーム」（src/screens/host/RecentRooms.tsx） */
+/* トップの「最近のルーム」（src/screens/host/RecentRooms.tsx）。ページの一番上に置くので、区画の上の線と余白は外し、
+   下に線を引いて説明と分ける */
+.h-recent {
+  border-top: 0;
+  padding-top: 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+}
 .h-recent__more {
   align-self: center;
 }

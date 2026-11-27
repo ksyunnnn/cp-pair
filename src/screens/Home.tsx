@@ -16,13 +16,13 @@ export function Home() {
     <div className="cp-page">
       <BrandHeader aboutLink />
       <ScreenMain className="cp-content has-floating">
+        <RecentRooms />
         <ScreenHeading
           eyebrow="CORPORATE PHILOSOPHY PAIR"
           icon={<CpSymbol name="Pair" size={17} />}
-          title="企業理念で、ペアを決める"
-          lead="合コンで遊ぶ、真顔のパーティーゲーム。各自が好きな企業理念をひとつ選び、理念どうしのこじつけ相性でペアを発表します。"
+          title="あなたが好きな企業理念はなんですか？"
+          lead="各自が好きな企業理念をひとつ選び、理念どうしのこじつけ相性診断でペアを発表するジョークアプリです。"
         />
-        <RecentRooms />
         <Section title="遊び方">
           <ol className="h-howto">
             {HOW_TO_PLAY.map((step, i) => (

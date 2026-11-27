@@ -427,9 +427,19 @@ export function ScreenHeading({
 }
 
 /* 本文の区切り（結果画面の border-top 1px + padding-top 24px の区画） */
-export function Section({ title, aside, children }: { title?: ReactNode; aside?: ReactNode; children: ReactNode }) {
+export function Section({
+  title,
+  aside,
+  className,
+  children,
+}: {
+  title?: ReactNode;
+  aside?: ReactNode;
+  className?: string;
+  children: ReactNode;
+}) {
   return (
-    <section className="cp-section">
+    <section className={className ? `cp-section ${className}` : "cp-section"}>
       {(title || aside) && (
         <div className="cp-section__head">
           {title && <h2 className="t-strong">{title}</h2>}
