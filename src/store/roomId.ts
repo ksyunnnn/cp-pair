@@ -10,3 +10,8 @@ export function randomRoomId(): string {
   const values = crypto.getRandomValues(new Uint32Array(ROOM_ID_LENGTH));
   return Array.from(values, (v) => ROOM_ID_CHARS[v % ROOM_ID_CHARS.length]).join("");
 }
+
+/* 新しい形の ID か。前の形（英数字 36 文字）で作ったオフラインのルームを引き継ぐときに、ルールに拒まれる ID を見分ける */
+export function isRoomId(id: string): boolean {
+  return id.length === ROOM_ID_LENGTH && [...id].every((c) => ROOM_ID_CHARS.includes(c));
+}

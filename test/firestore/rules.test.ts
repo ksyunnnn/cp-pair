@@ -95,7 +95,7 @@ describe("サインイン", () => {
     await seed();
     await assertFails(getDoc(doc(guest(), "rooms", ROOM)));
     await assertFails(getDocs(collection(guest(), "rooms", ROOM, "participants")));
-    await assertFails(setDoc(doc(guest(), "rooms", "FGHIJ"), newRoom("x")));
+    await assertFails(setDoc(doc(guest(), "rooms", "FGHJK"), newRoom("x")));
   });
 });
 
