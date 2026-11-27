@@ -1,6 +1,7 @@
 // RoomStore のブラウザ内の実装。localStorage に置き、同じタブの購読者と、別タブ（storage イベント）に変化を伝える。
 import type { MatchResult, Participant } from "../game/types.ts";
 import type { NewParticipant, Room, RoomStore, SelectOutcome } from "./RoomStore.ts";
+import { randomRoomId } from "./roomId.ts";
 
 const ROOM_PREFIX = "cp-pair:room:";
 
@@ -11,10 +12,6 @@ function readRoom(roomId: string): Room | null {
   } catch {
     return null;
   }
-}
-
-function randomRoomId(): string {
-  return Math.random().toString(36).substring(2, 7).toUpperCase();
 }
 
 function randomId(prefix: string): string {

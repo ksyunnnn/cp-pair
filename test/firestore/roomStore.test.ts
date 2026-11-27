@@ -49,7 +49,7 @@ describe("FirestoreRoomStore", () => {
     const bob = device("bob");
 
     const created = await host.createRoom("desert_island");
-    expect(created.id).toMatch(/^[0-9A-Z]{5}$/);
+    expect(created.id).toMatch(/^[2-35-68-9A-HJKMNP-UW-Z]{5}$/);
     expect(created.status).toBe("open");
 
     const a = await alice.addParticipant(created.id, { name: "アオイ", gender: "F", joinType: "device" });

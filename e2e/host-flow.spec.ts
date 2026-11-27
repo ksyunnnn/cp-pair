@@ -113,7 +113,7 @@ test('ルームの画面はパスの URL で開き、招待の URL も参加の�
   await page.getByRole('button', { name: 'このお題でルームを作る' }).click()
   await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
   const url = new URL(page.url())
-  const roomId = url.pathname.match(/^\/host\/([0-9A-Z]{5})$/)?.[1]
+  const roomId = url.pathname.match(/^\/host\/([2-35-68-9A-HJKMNP-UW-Z]{5})$/)?.[1]
   expect(roomId).toBeTruthy()
   await expect(page.locator('.cp-url__text')).toHaveText(`${url.origin}/r/${roomId}`)
 
