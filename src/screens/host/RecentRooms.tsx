@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { roomRecords, type RoomRecord } from "../../device.ts";
 import { getPreset } from "../../game/presets.ts";
-import { roomStore, type Room } from "../../store/index.ts";
+import { roomStore, withTimeout, type Room } from "../../store/index.ts";
 import { Button } from "../../ui/components.tsx";
 import { formatExact, formatRelative } from "../../ui/datetime.ts";
 
@@ -11,10 +11,17 @@ const FOLDED_COUNT = 3;
 
 type Entry = { record: RoomRecord; room: Room };
 
+/* 1 件を待つ上限と、役割ごとに読みに行く件数の上限。切れているときや遅いときに、1 件のために一覧ぜんぶが出なくなるのを防ぎ、
+   開くたびの読み取りを抑える。記録は役割ごとに古い順に並んでいるので、新しい側から読む */
+const FETCH_TIMEOUT_MS = 4000;
+const MAX_FETCH_PER_ROLE = 10;
+
 async function loadEntries(): Promise<Entry[]> {
+  const records = roomRecords();
+  const recent = (role: RoomRecord["role"]) => records.filter((r) => r.role === role).slice(-MAX_FETCH_PER_ROLE);
   const loaded = await Promise.all(
-    roomRecords().map(async (record) => {
-      const room = await roomStore.getRoom(record.roomId).catch(() => null);
+    [...recent("host"), ...recent("participant")].map(async (record) => {
+      const room = await withTimeout(roomStore.getRoom(record.roomId), FETCH_TIMEOUT_MS).catch(() => null);
       return room ? { record, room } : null;
     }),
   );
@@ -42,10 +49,11 @@ export function RecentRooms() {
 
   // 紹介の区画と同じ強さに見えないよう、区画名は小さいラベル、お題は 1 段下の太字、補足は 1 行の小さい文字にする（#34 の V1）
   return (
+    // 区画名は見出しにしない。ページの見出し（h1）より前に h2 が来ると、読み上げの見出しの順が崩れるため
     <section className="cp-stack cp-stack--8" aria-labelledby="recent-rooms-title">
-      <h2 id="recent-rooms-title" className="t-label c-muted">
+      <p id="recent-rooms-title" className="t-label c-muted">
         最近のルーム
-      </h2>
+      </p>
       {shown.map(({ record, room }) => {
         const href = record.role === "host" ? `/host/${room.id}` : `/r/${room.id}`;
         const me = room.participants.find((p) => p.id === record.participantId);

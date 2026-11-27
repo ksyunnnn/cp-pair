@@ -10,7 +10,7 @@ import {
   type TagRule,
 } from "../game/explain.ts";
 import { tagIcon, type TagIcon } from "../game/present.ts";
-import { navigate } from "../router.ts";
+import { navigate, rulesEntry } from "../router.ts";
 import { BrandHeader, Button, ScreenMain, Section } from "../ui/components.tsx";
 
 /** 診断の説明の経路。about ページからもこの経路へリンクする */
@@ -47,16 +47,17 @@ function TagItem({ rule, isTheme, theme }: { rule: TagRule; isTheme: boolean; th
   );
 }
 
-/** 結果画面や about から来たときはそこへ戻る。直接開いたときはホストの最初の画面へ */
+/** 結果画面から来たときはそこへ戻る。直接開いたときはトップ（/）へ。
+    ホストが端末を渡している結果の画面から来たときは、トップへは移らない（rulesEntry） */
 function back() {
   if (history.length > 1) history.back();
-  else navigate("/");
+  else if (!rulesEntry.fromHostDevice) navigate("/");
 }
 
 export function RulesScreen() {
   return (
     <div className="cp-page">
-      <BrandHeader />
+      <BrandHeader homeLink={!rulesEntry.fromHostDevice} />
       <ScreenMain className="cp-content">
         <div className="cp-heading">
           <h1 className="t-title">診断の説明</h1>

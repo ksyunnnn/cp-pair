@@ -78,4 +78,8 @@ export function useRoute(): Route {
 /* about をアプリの中のリンクから開いたか。開いたなら「戻る」は履歴を 1 つ戻す。URL を直に開いたときは false */
 export const aboutEntry = { fromApp: false };
 
+/* 診断の説明（/rules）を、ホストが端末を参加者に渡している結果の画面から開いたか。開いたなら、/rules でもロゴを
+   トップへのリンクにせず、直接開いたときの戻り先もトップにしない。渡された人に、ホストの最近のルームを見せないため（#34） */
+export const rulesEntry = { fromHostDevice: false };
+
 export const isDevMode = () => new URLSearchParams(location.search).has("dev");

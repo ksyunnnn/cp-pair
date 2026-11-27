@@ -1,5 +1,5 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { isHostOf, rememberHostRoom } from "../device.ts";
+import { isHostOf, rememberHostRoom, replaceHostRoom } from "../device.ts";
 import { LocalRoomStore } from "./localRoomStore.ts";
 import type { FirestoreRoomStore } from "./firestoreRoomStore.ts";
 import { getOfflineMode, markRepicked, onOfflineModeChange, readMirror, setOfflineMode, writeMirror } from "./offlineMode.ts";
@@ -19,7 +19,7 @@ export const localStore = new LocalRoomStore();
 const CREATE_TIMEOUT_MS = 8_000;
 const IMPORT_TIMEOUT_MS = 20_000;
 
-function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+export function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timer = window.setTimeout(() => reject(new Error(`${ms}ms 待っても応答がありませんでした`)), ms);
     promise.then(
@@ -220,7 +220,8 @@ export async function leaveOfflineMode(roomId: string): Promise<string> {
   // 解除すると、ホストの判定は uid で行う（useIsHost）。Firestore の応答が届くまで画面は手元のルームを出し続けるため、
   // オフラインで作った hostUid の無いルームのままだと「ホストではない」と出る。書き戻したときの uid を先に入れておく
   localStore.putRoom({ ...room, hostUid: await remoteStore.uid() });
-  rememberHostRoom(nextId);
+  if (nextId === roomId) rememberHostRoom(nextId);
+  else replaceHostRoom(roomId, nextId);
   setOfflineMode(roomId, null);
   localStore.deleteRoom(roomId);
   return nextId;

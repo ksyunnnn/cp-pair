@@ -50,6 +50,14 @@ export function rememberHostRoom(roomId: string) {
   localStorage.setItem(HOST_KEY, JSON.stringify(list));
 }
 
+/* オフラインモードのルームを Firestore へ引き継いだとき、ID が変わったら記録も置き換える。古い ID を残すと、
+   トップの最近のルームに、同じ ID を持つ別の人のルームが「ホスト」として出てしまう（#34） */
+export function replaceHostRoom(oldId: string, newId: string) {
+  const list = readJson<string[]>(HOST_KEY, []).map((id) => (id === oldId ? newId : id));
+  if (!list.includes(newId)) list.push(newId);
+  localStorage.setItem(HOST_KEY, JSON.stringify([...new Set(list)]));
+}
+
 export function lastHostRoom(): string | null {
   const list = readJson<string[]>(HOST_KEY, []);
   return list.length ? list[list.length - 1] : null;

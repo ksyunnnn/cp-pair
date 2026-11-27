@@ -8,7 +8,7 @@ import { companyMeta, splitTitle, splitTitleBody, tagIcon, tagLabel, type TagIco
 import type { Archetype, MatchedPerson, MatchResult, UnmatchedPerson } from "../game/types.ts";
 import { BrandHeader, Button } from "../ui/components.tsx";
 import { PairLogo } from "../ui/symbols.tsx";
-import { navigate } from "../router.ts";
+import { navigate, rulesEntry } from "../router.ts";
 import { RULES_PATH } from "./RulesScreen.tsx";
 import { useReveal, type Reveal } from "./useReveal.ts";
 
@@ -84,9 +84,13 @@ function AboutGame() {
 }
 
 /* 診断の説明（/rules）へ。相性度・キャラ型・タグ・称号が何から決まるかを、ルームによらない 1 枚で見せる */
-function RulesLink() {
+function RulesLink({ fromHostDevice }: { fromHostDevice: boolean }) {
+  const open = () => {
+    rulesEntry.fromHostDevice = fromHostDevice;
+    navigate(RULES_PATH);
+  };
   return (
-    <Button kind="link" className="r-later" onClick={() => navigate(RULES_PATH)}>
+    <Button kind="link" className="r-later" onClick={open}>
       診断の説明
     </Button>
   );
@@ -211,7 +215,7 @@ export function ResultScreen({
         </section>
 
         <AboutGame />
-        <RulesLink />
+        <RulesLink fromHostDevice={Boolean(onBackToHost)} />
         <HostBack onBack={onBackToHost} />
       </Frame>
     );
@@ -258,7 +262,7 @@ function FreeResult({ me, reveal, onBackToHost }: { me: UnmatchedPerson; reveal:
       </section>
 
       <AboutGame />
-      <RulesLink />
+      <RulesLink fromHostDevice={Boolean(onBackToHost)} />
       <HostBack onBack={onBackToHost} />
     </Frame>
   );
