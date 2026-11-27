@@ -96,6 +96,18 @@ Cloudflare Workers の静的アセット（Worker のスクリプトなし）で
 
 `main` への push は本番に、それ以外のブランチは Preview になり、PR にプレビュー URL がコメントされる（[Workers Builds の設定](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)）。
 
+### Preview の消し方
+
+Preview は、ブランチを消しても PR をマージしても残る。自動で消えるのは、Worker あたりの数の上限（無料のプランで 100）に達したときに、最後のデプロイが一番古いものから消えるときだけ（[Workers Previews](https://developers.cloudflare.com/workers/previews/)）。
+
+手で消すときは、ブランチ名を `--name` に渡す。
+
+```sh
+npx wrangler preview delete --name <ブランチ名>
+```
+
+PR を閉じたときに自動で消したくなったら、GitHub Actions で上のコマンドを動かす手がある（[例](https://developers.cloudflare.com/workers/previews/examples/)）。
+
 ### 戻し方
 
 本番を前の版に戻すには、`npx wrangler deployments list` で版の id を見て `npx wrangler rollback <版の id>` を実行する（[Rollbacks](https://developers.cloudflare.com/workers/configuration/versions-and-deployments/rollbacks/)）。`main` に次の push があると戻した版が再び出るので、コードも `git revert` する。
