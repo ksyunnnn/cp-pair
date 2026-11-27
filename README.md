@@ -5,8 +5,7 @@
 **https://cppair.synsk.me/**
 
 <p>
-  <img src="docs/screenshots/07-participant-step2-pick.png" alt="理念選びの画面。お題「無人島にひとつだけ持っていくならどの企業理念？」と、企業名を伏せた理念のカード" width="300">
-  <img src="docs/screenshots/12-participant-step3-result.png" alt="結果の画面。ペアの相手の名前、相手が選んだ理念と企業名、こじつけ相性度 100%、称号「実は非上場！表舞台 × 裏の実力者ギャップペア」" width="300">
+  <img src="docs/demo/pick-to-result.webp" alt="参加者の端末の動き。企業名を伏せた理念のカードからひとつ選んで決め、ホストの発表を待つ。発表が始まると、相性度 77% を数え上げ、称号「創業年差100年！老舗×新興のタイムスリップペア」を判で押し、ペアの相手アオイさんの名前と、相手が選んだ理念「うまい、やすい、はやい」（吉野家ホールディングス）が出る" width="300">
 </p>
 
 ## 遊び方
@@ -88,6 +87,19 @@ CSS の整理など、見た目を変えないはずの変更は、全画面を�
 - `04-handoff-manual`（うなずき）と `09-toast-success`（トーストが出る途中）は、動きの途中を撮るので毎回少し変わる。この 2 枚は目で比べる
 - ルール・about・開発パネルの画面はスクリプトに入っていない。触ったときは別に撮って比べる
 
+### 紹介の動く画像の撮り直し方
+
+冒頭の動く画像（`docs/demo/pick-to-result.webp`）は、参加者の端末で理念を選んでから結果の発表が終わるまでを録画し、アニメーションする WebP にしたもの。理念選び・待機・結果の画面や、発表の動き（`src/styles/motion.ts`）を変えたら撮り直す。
+
+1. `ffmpeg` と `img2webp` を入れる（`brew install ffmpeg webp`）。Homebrew の `ffmpeg` は WebP を書き出せないので、書き出しは `img2webp` で行う
+2. `npm run dev -- --port 5199` で開発用のサーバを起動する
+3. `sh scripts/demo.sh` を実行する。ブラウザを画面に出さずに録画し、`docs/demo/pick-to-result.webp` に書き出す。最後に、切り出しの開始の秒・コマ数・大きさが出る
+4. 書き出した画像をブラウザで開いて、通して見る
+
+- 流れは、準備（`scripts/demo-setup.js`。ルームを作り、ハルト以外の 3 人に選ばせる）→ 録画（`scripts/demo-record.js`。ハルトが選んで決め、ホストの宣言で発表が出る）→ 書き出し（`scripts/demo-encode.sh`）。乱数の種は `scripts/screenshots.js` と同じなので、毎回同じルームと同じ結果になる。ただし録画のコマの時刻は少しずれるので、ファイルは毎回少し変わる
+- 書き出しの設定（12fps・幅 390px・品質 70・キーフレームの間隔）と、そう決めた理由は `scripts/demo-encode.sh` に書いてある。2026-11-27 の時点で、約 10 秒・460KB
+- 録画中は、ホストの画面を別のタブで開かない。タブが 2 つあると、録画の映りが崩れた。ホストの宣言は `demo-record.js` が同じタブから行う
+
 ### 構成
 
 ```
@@ -103,8 +115,8 @@ src/
 e2e/         Playwright のテスト（既定の版）
 e2e-firestore/ Playwright のテスト（Firestore 版。エミュレーターにつなぐ）
 test/        Firestore のルールと保存の層のテスト（Vitest）
-scripts/     計算の照合（verify-matching.ts）とスクリーンショットの撮影
-docs/        デザインの値（design/。Framer の元データは design/framer/）と全画面のスクリーンショット（screenshots/）
+scripts/     計算の照合（verify-matching.ts）、スクリーンショットの撮影、紹介の動く画像の録画（demo*）
+docs/        デザインの値（design/。Framer の元データは design/framer/）、全画面のスクリーンショット（screenshots/）、紹介の動く画像（demo/）
 DESIGN.md    デザインの決まり（意図・使い方・Do's and Don'ts）
 .storybook/  Storybook の設定（main.ts）と、本体と同じ準備・一覧でだけ使う CSS（preview.*）
 ```
