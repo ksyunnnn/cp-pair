@@ -9,6 +9,7 @@ import "@fontsource/anton/400.css";
 import "@fontsource/inter/700.css";
 
 import "../src/styles/index.css";
+import "./preview.css";
 import { applyMotionVars } from "../src/styles/motion.ts";
 import loadMotionFeatures from "../src/ui/motionFeatures.ts";
 import { ToastProvider } from "../src/ui/toast.tsx";

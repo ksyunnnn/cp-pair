@@ -3,7 +3,7 @@ import { Button, FloatingBar } from "./components.tsx";
 
 // 決まりは DESIGN.md の Components にある。ここには書き写さない
 const meta = {
-  title: "部品/Button",
+  title: "部品/操作/Button",
   component: Button,
   args: { children: "はじめる" },
 } satisfies Meta<typeof Button>;

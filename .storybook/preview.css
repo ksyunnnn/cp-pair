@@ -1,0 +1,24 @@
+/* 一覧でだけ使う並べ方。本体の CSS には入れない。値は tokens.css の変数を使う */
+.sb-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 390px;
+}
+.sb-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+.sb-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.sb-inverse {
+  padding: 16px;
+  background: var(--surface-inverse);
+}
