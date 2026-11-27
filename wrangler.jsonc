@@ -5,10 +5,13 @@
   // https://developers.cloudflare.com/workers/static-assets/
   "compatibility_date": "2026-11-25",
   // 本番の URL はカスタムドメインの cppair.synsk.me。この設定には routes を置かず、カスタムドメインは Cloudflare 側で設定する。
-  // workers.dev でも配信する。main 以外のブランチは Workers Builds が Preview を作り、
-  // その URL を PR にコメントする。Preview の URL には workers.dev の Preview URL を有効にする必要がある
+  // 本番の workers.dev の URL は配信しない。止めても Preview の URL は止まらない
+  // https://developers.cloudflare.com/workers/configuration/routing/workers-dev/
+  // main 以外のブランチは Workers Builds が Preview を作り、その URL を PR にコメントする。
+  // preview_urls を書かないと workers_dev に合わせて無効になるため、true を明示する
   // https://developers.cloudflare.com/workers/ci-cd/builds/troubleshoot/
-  "workers_dev": true,
+  // https://developers.cloudflare.com/workers/versions-and-deployments/version-urls/
+  "workers_dev": false,
   "preview_urls": true,
   "assets": {
     "directory": "./dist",
