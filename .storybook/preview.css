@@ -22,3 +22,73 @@
   padding: 16px;
   background: var(--surface-inverse);
 }
+
+/* レイアウトの見本（src/stories/）で使う。本体に共通のクラスがない Cluster・Frame・Cover の主役 */
+.sb-block {
+  padding: 12px;
+  border-radius: var(--radius-chip);
+  background: var(--surface-sunken);
+}
+.sb-outline {
+  outline: 1px dashed var(--border);
+}
+.sb-l-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 240px;
+}
+.sb-l-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--surface-sunken);
+}
+.sb-l-cover__principal {
+  margin-block: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0 var(--page-x);
+  text-align: center;
+}
+.sb-skeleton {
+  height: 20px;
+  border-radius: var(--radius-chip);
+  background: var(--surface-sunken);
+}
+
+/* 画面の型: iPhone の大きさの端末を横に並べる */
+.sb-devices {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  overflow-x: auto;
+  background: var(--border);
+}
+.sb-device-wrap {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.sb-device {
+  width: 390px;
+  height: 844px;
+  overflow-y: auto;
+  background: var(--surface);
+  /* 画面の下に固定する部品（.cp-floating）を、この枠の中に留める */
+  transform: translateZ(0);
+}
+.sb-device .cp-page {
+  min-height: 100%;
+}
+
+/* 縦に積んだ中で、文字の幅に留める（一覧 → 詳細の「一覧に戻る」） */
+.sb-fit {
+  align-self: flex-start;
+}
