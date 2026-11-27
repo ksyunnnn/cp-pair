@@ -3,6 +3,7 @@ version: alpha
 name: CP PAIR
 description: 合コンで遊ぶ、真顔のパーティーゲーム。紙に墨で刷った書類のような画面。
 colors:
+  primary: "#22231F"
   surface: "#F4F2EB"
   surface-sunken: "#E9E9DF"
   surface-inverse: "#22231F"
@@ -51,6 +52,12 @@ typography:
     fontWeight: 500
     lineHeight: 1.6
     letterSpacing: -0.02em
+  score:
+    fontFamily: Anton
+    fontSize: 42px
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: -0.02em
   display:
     fontFamily: Anton
     fontSize: 24px
@@ -98,6 +105,28 @@ components:
     textColor: "{colors.text}"
     rounded: "{rounded.field}"
     height: 52px
+  progress-step:
+    backgroundColor: "{colors.surface-sunken}"
+    textColor: "{colors.text-muted}"
+    typography: "{typography.label}"
+    size: 28px
+  progress-step-current:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.text-inverse}"
+  partner-card:
+    backgroundColor: "{colors.surface-inverse}"
+    textColor: "{colors.text-inverse}"
+    rounded: "{rounded.card-ink}"
+    padding: 24px
+  partner-card-caption:
+    textColor: "{colors.text-inverse-muted}"
+    typography: "{typography.small}"
+  compatibility-score:
+    textColor: "{colors.accent}"
+    typography: "{typography.score}"
+  pair-title-kicker:
+    textColor: "{colors.text-accent}"
+    typography: "{typography.label}"
 ---
 
 # CP PAIR
@@ -114,7 +143,7 @@ components:
 
 ## Colors
 
-紙 {colors.surface} と墨 {colors.surface-inverse} の 2 色が骨格で、朱 {colors.accent} を 1 色だけ差す。
+紙 {colors.surface} と墨 {colors.surface-inverse} の 2 色が骨格で、朱 {colors.accent} を 1 色だけ差す。主の色 {colors.primary} は墨（主ボタン・いまの段・選んだ状態の塗り）。
 
 - **紙** {colors.surface}：すべての面の地。真っ白にしない
 - **刷りの薄い面** {colors.surface-sunken}：副ボタン・バッジ・性別選択の溝など、紙より一段沈んだ面

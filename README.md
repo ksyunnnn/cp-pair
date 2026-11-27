@@ -45,6 +45,7 @@ npm run dev
 | `npm run dev` | 開発用のサーバを起動する |
 | `npm run build` | 型を検査し、`dist/` にビルドする |
 | `npm run lint` | oxlint で検査する |
+| `npm run design:lint` | `DESIGN.md` が DESIGN.md の仕様どおりかを、公式の CLI（`@google/design.md`）で検査する。値の形・参照切れ・文字と背景のコントラストを見る。エラーがあると失敗する。警告の 2 件（罫の色が部品から参照されていない）は、仕様に線の色の項目がないため消せない |
 | `npm run verify` | 相性の計算が、元のモックと同じ結果を返すかを確かめる |
 | `npm run test:e2e` | localStorage 版をビルドして Playwright で動かし、ホストの端末だけで結果まで進む流れと、オフラインでの開き直しを確かめる |
 | `npm run test:deploy` | Preview コマンドの `wrangler preview` が、`wrangler.jsonc` の設定の検査を通るかを確かめる。無効なトークンを渡すので、Cloudflare には何も作られない。トークンが拒まれるところまで進むので、ネットワークが要る |
@@ -52,6 +53,27 @@ npm run dev
 | `npm run test:e2e:firestore` | Auth と Firestore のエミュレーターを立て、Firestore 版のビルドを Playwright で動かし、オフラインモードへの切り替えと解除を確かめる |
 
 `test:e2e` を初めて動かす前に `npx playwright install chromium` でブラウザを入れる。
+
+### デザイン
+
+- 決まり（意図・使い方・Do's and Don'ts）は `DESIGN.md` にある。画面や部品を作る・変えるときは、これに従う
+- 描画に使う値の原本は `src/styles/tokens.css`、動きの時間は `src/styles/motion.ts`。`DESIGN.md` の値は文章から指すための写しなので、値を変えたら `DESIGN.md` も合わせ、`npm run design:lint` を通す
+- 色は 2 段。`--palette-*` は値そのもので `tokens.css` の外では使わない。部品は用途の名前（`--surface`・`--text` など）だけを使う。1 つの部品でしか使わない値は、その部品のファイルに `--_*` として置く
+- 動きの時間は CSS に書かない。`motion.ts` の `CSS_MOTION` に足すと、起動時に `--motion-*` として `:root` に入る
+- Framer の元データ（2026-11-27 に書き出した写し）は `docs/design/framer/` にある。Framer は今後の原本ではない
+
+### 見た目を変えない変更の確かめ方
+
+CSS の整理など、見た目を変えないはずの変更は、全画面を撮り直して変更の前の画像と比べる。撮影のスクリプトは乱数の種を固定しているので、同じ画面なら同じ画像になる。
+
+1. `npm run dev -- --port 5199` で開発用のサーバを起動する
+2. `npx -y @playwright/cli@latest open http://localhost:5199/` と `npx -y @playwright/cli@latest resize 390 844` でブラウザを開く
+3. `npx -y @playwright/cli@latest run-code --filename=scripts/screenshots.js` で `docs/screenshots/` に撮る
+4. 変更の前の画像（`git show HEAD:docs/screenshots/<名前>.png`）と比べる。ImageMagick があれば `magick compare -metric AE <前> <後> null:` で、違う画素の数が出る
+5. `npx -y @playwright/cli@latest close` でブラウザを閉じる
+
+- `04-handoff-manual`（うなずき）と `09-toast-success`（トーストが出る途中）は、動きの途中を撮るので毎回少し変わる。この 2 枚は目で比べる
+- ルール・about・開発パネルの画面はスクリプトに入っていない。触ったときは別に撮って比べる
 
 ### 構成
 
