@@ -376,7 +376,7 @@ export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; a
       <span className="t-logo">CP PAIR</span>
       <span className="t-small c-muted cp-brand__right">{right}</span>
       {aboutLink && (
-        <a className="t-chip cp-link" href="#/about" onClick={() => (aboutEntry.fromApp = true)}>
+        <a className="t-chip cp-link" href="/about" onClick={() => (aboutEntry.fromApp = true)}>
           ABOUT
         </a>
       )}
@@ -388,7 +388,7 @@ export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; a
 export function TopLinkFooter() {
   return (
     <footer className="cp-footer">
-      <a className="t-small cp-link" href="#/">
+      <a className="t-small cp-link" href="/">
         はじめの画面に戻る
       </a>
     </footer>

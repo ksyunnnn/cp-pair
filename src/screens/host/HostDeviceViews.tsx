@@ -47,7 +47,7 @@ export function HostPick({ room, participantId }: { room: Room; participantId: s
   );
 }
 
-// 端末を渡し終えた結果。診断の説明（#/rules）へ進んで戻ったときに、渡す画面を出し直さないために覚える。
+// 端末を渡し終えた結果。診断の説明（/rules）へ進んで戻ったときに、渡す画面を出し直さないために覚える。
 // ホスト画面に戻るときに消す（次にその結果を開くときは、また渡す画面から）
 const handedOver = new Set<string>();
 

@@ -106,3 +106,58 @@ test('reduced motion では、結果の発表を待たずに出す', async ({ pa
   await expect(page.locator('main.r-content')).not.toHaveAttribute('data-revealing')
   await expect(page.locator('.r-name')).toHaveCSS('opacity', '1')
 })
+
+test('ルームの画面はパスの URL で開き、招待の URL も参加の画面のパスになる', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /^お題 01/ }).click()
+  await page.getByRole('button', { name: 'このお題でルームを作る' }).click()
+  await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
+  const url = new URL(page.url())
+  const roomId = url.pathname.match(/^\/host\/([0-9A-Z]{5})$/)?.[1]
+  expect(roomId).toBeTruthy()
+  await expect(page.locator('.cp-url__text')).toHaveText(`${url.origin}/r/${roomId}`)
+
+  await page.reload()
+  await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
+  await page.goBack()
+  await expect(page.getByRole('heading', { name: '今夜のお題を選ぶ' })).toBeVisible()
+})
+
+test('# の後ろに画面のパスを書いた URL は、そのパスの URL で開き直す', async ({ page }) => {
+  await page.goto('/#/rules')
+  await expect(page).toHaveURL(/\/rules$/)
+})
+
+test('一度開いた後は、オフラインで深いパスの URL を開いても、再読み込みしても画面が出る', async ({ page, context }) => {
+  await page.goto('/')
+  await expect(page.getByText('この端末は、オフラインでも開けるようになりました')).toBeVisible({ timeout: 30_000 })
+  await page.waitForFunction(async () => {
+    await navigator.serviceWorker.ready
+    return navigator.serviceWorker.controller !== null
+  })
+  await page.getByRole('button', { name: /^お題 01/ }).click()
+  await page.getByRole('button', { name: 'このお題でルームを作る' }).click()
+  await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
+  const hostPath = new URL(page.url()).pathname
+
+  await context.setOffline(true)
+  await page.goto(`${hostPath}/result/nobody`)
+  await expect(page.locator('#root')).not.toBeEmpty()
+  await page.goto(hostPath)
+  await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
+  await page.reload()
+  await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
+  const fontsOk = await page.evaluate(async () => {
+    await document.fonts.ready
+    return [...document.fonts].filter((f) => f.status === 'error').length === 0
+  })
+  expect(fontsOk).toBe(true)
+})
+
+test('アプリの中のリンクは、ページを読み直さずに画面を移す', async ({ page }) => {
+  await page.goto('/')
+  await page.evaluate(() => ((window as unknown as { marker: boolean }).marker = true))
+  await page.getByRole('link', { name: 'ABOUT' }).click()
+  await expect(page).toHaveURL(/\/about$/)
+  expect(await page.evaluate(() => (window as unknown as { marker?: boolean }).marker)).toBe(true)
+})

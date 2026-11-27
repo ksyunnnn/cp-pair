@@ -34,7 +34,7 @@ function withLinks(text: string): ReactNode[] {
     const at = m.index ?? 0;
     out.push(text.slice(last, at));
     const href = m[2];
-    const external = !href.startsWith("#");
+    const external = !href.startsWith("/");
     out.push(
       <a
         key={at}
