@@ -1,0 +1,61 @@
+/* 参加者の行。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.cp-row__info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cp-row__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cp-row__attrs {
+  display: flex;
+  gap: 8px;
+}
+.cp-row__ops {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cp-row__action {
+  appearance: none;
+  border: 0;
+  flex: 1;
+  height: 44px;
+  padding: 8px 16px;
+  border-radius: 22px;
+  background: var(--surface-sunken);
+  color: var(--text);
+  cursor: pointer;
+  transition: opacity var(--motion-press-fade) ease;
+}
+.cp-row__action:active,
+.cp-row__remove:active {
+  opacity: 0.8;
+}
+.cp-row__remove {
+  appearance: none;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  padding: 12px;
+  border-radius: 22px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

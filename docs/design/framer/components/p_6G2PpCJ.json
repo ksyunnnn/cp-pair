@@ -1,0 +1,1601 @@
+{
+  "id": "p_6G2PpCJ",
+  "type": "ComponentNode",
+  "name": "CP 進行ステップ",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "DoTjVDpEl",
+      "name": "1 お題"
+    },
+    {
+      "id": "dK8CcKzzW",
+      "name": "2 参加・選択"
+    },
+    {
+      "id": "N2MKwAqq3",
+      "name": "3 結果"
+    }
+  ],
+  "variables": [],
+  "visible": false,
+  "children": [
+    {
+      "id": "DoTjVDpEl",
+      "type": "FrameNode",
+      "name": "1 お題",
+      "$groundNodeId": "DoTjVDpEl",
+      "$isPrimary": true,
+      "$scopeId": "p_6G2PpCJ",
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "8px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "0px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "paddingRight": "0px",
+      "paddingTop": "0px",
+      "stackAlignment": "start",
+      "stackDirection": "horizontal",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "JXt_v7WGC",
+          "type": "FrameNode",
+          "name": "お題",
+          "$groundNodeId": "DoTjVDpEl",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "r2Z5ahIvh",
+              "type": "FrameNode",
+              "name": "1",
+              "$groundNodeId": "DoTjVDpEl",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-SC8uq7EE3)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "MJbkhsm23",
+                  "type": "RichTextNode",
+                  "name": "1",
+                  "$groundNodeId": "DoTjVDpEl",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-kl8VXvaIM)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "1",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:MJbkhsm23:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-kl8VXvaIM)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:MJbkhsm23:0:0",
+                          "type": "TextRun",
+                          "text": "1",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-kl8VXvaIM)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "YBxndZ2bw",
+              "type": "RichTextNode",
+              "name": "お題",
+              "$groundNodeId": "DoTjVDpEl",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "お題",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:YBxndZ2bw:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:YBxndZ2bw:0:0",
+                      "type": "TextRun",
+                      "text": "お題",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "KiZwggOmr",
+          "type": "FrameNode",
+          "name": "参加・選択",
+          "$groundNodeId": "DoTjVDpEl",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "ql4XrSQEq",
+              "type": "FrameNode",
+              "name": "2",
+              "$groundNodeId": "DoTjVDpEl",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "y_u0cBMjJ",
+                  "type": "RichTextNode",
+                  "name": "2",
+                  "$groundNodeId": "DoTjVDpEl",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-W0brTCMkj)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "2",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:y_u0cBMjJ:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:y_u0cBMjJ:0:0",
+                          "type": "TextRun",
+                          "text": "2",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-W0brTCMkj)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "ca1XvHlnc",
+              "type": "RichTextNode",
+              "name": "参加・選択",
+              "$groundNodeId": "DoTjVDpEl",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "参加・選択",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:ca1XvHlnc:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:ca1XvHlnc:0:0",
+                      "type": "TextRun",
+                      "text": "参加・選択",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "Gzguymoim",
+          "type": "FrameNode",
+          "name": "結果",
+          "$groundNodeId": "DoTjVDpEl",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "JMhGIrmxt",
+              "type": "FrameNode",
+              "name": "3",
+              "$groundNodeId": "DoTjVDpEl",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "yPECO2UXg",
+                  "type": "RichTextNode",
+                  "name": "3",
+                  "$groundNodeId": "DoTjVDpEl",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-W0brTCMkj)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "3",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:yPECO2UXg:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:yPECO2UXg:0:0",
+                          "type": "TextRun",
+                          "text": "3",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-W0brTCMkj)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "U3N70hQjz",
+              "type": "RichTextNode",
+              "name": "結果",
+              "$groundNodeId": "DoTjVDpEl",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "結果",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:U3N70hQjz:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:U3N70hQjz:0:0",
+                      "type": "TextRun",
+                      "text": "結果",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    },
+    {
+      "id": "dK8CcKzzW",
+      "type": "FrameNode",
+      "name": "2 参加・選択",
+      "$groundNodeId": "dK8CcKzzW",
+      "$isReplica": true,
+      "$originalId": "DoTjVDpEl",
+      "$scopeId": "p_6G2PpCJ",
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "8px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "430px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "paddingRight": "0px",
+      "paddingTop": "0px",
+      "stackAlignment": "start",
+      "stackDirection": "horizontal",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "dK8CcKzzWJXt_v7WGC",
+          "type": "FrameNode",
+          "name": "お題",
+          "$groundNodeId": "dK8CcKzzW",
+          "$originalId": "JXt_v7WGC",
+          "$replicaId": "dK8CcKzzW",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "dK8CcKzzWr2Z5ahIvh",
+              "type": "FrameNode",
+              "name": "1",
+              "$groundNodeId": "dK8CcKzzW",
+              "$originalId": "r2Z5ahIvh",
+              "$replicaId": "dK8CcKzzW",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "dK8CcKzzWMJbkhsm23",
+                  "type": "RichTextNode",
+                  "name": "1",
+                  "$groundNodeId": "dK8CcKzzW",
+                  "$originalId": "MJbkhsm23",
+                  "$replicaId": "dK8CcKzzW",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-W0brTCMkj)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "1",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:dK8CcKzzWMJbkhsm23:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:dK8CcKzzWMJbkhsm23:0:0",
+                          "type": "TextRun",
+                          "text": "1",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-W0brTCMkj)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "dK8CcKzzWYBxndZ2bw",
+              "type": "RichTextNode",
+              "name": "お題",
+              "$groundNodeId": "dK8CcKzzW",
+              "$originalId": "YBxndZ2bw",
+              "$replicaId": "dK8CcKzzW",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "お題",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:dK8CcKzzWYBxndZ2bw:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:dK8CcKzzWYBxndZ2bw:0:0",
+                      "type": "TextRun",
+                      "text": "お題",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "dK8CcKzzWKiZwggOmr",
+          "type": "FrameNode",
+          "name": "参加・選択",
+          "$groundNodeId": "dK8CcKzzW",
+          "$originalId": "KiZwggOmr",
+          "$replicaId": "dK8CcKzzW",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "dK8CcKzzWql4XrSQEq",
+              "type": "FrameNode",
+              "name": "2",
+              "$groundNodeId": "dK8CcKzzW",
+              "$originalId": "ql4XrSQEq",
+              "$replicaId": "dK8CcKzzW",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-SC8uq7EE3)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "dK8CcKzzWy_u0cBMjJ",
+                  "type": "RichTextNode",
+                  "name": "2",
+                  "$groundNodeId": "dK8CcKzzW",
+                  "$originalId": "y_u0cBMjJ",
+                  "$replicaId": "dK8CcKzzW",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-kl8VXvaIM)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "2",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:dK8CcKzzWy_u0cBMjJ:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-kl8VXvaIM)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:dK8CcKzzWy_u0cBMjJ:0:0",
+                          "type": "TextRun",
+                          "text": "2",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-kl8VXvaIM)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "dK8CcKzzWca1XvHlnc",
+              "type": "RichTextNode",
+              "name": "参加・選択",
+              "$groundNodeId": "dK8CcKzzW",
+              "$originalId": "ca1XvHlnc",
+              "$replicaId": "dK8CcKzzW",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "参加・選択",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:dK8CcKzzWca1XvHlnc:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:dK8CcKzzWca1XvHlnc:0:0",
+                      "type": "TextRun",
+                      "text": "参加・選択",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "dK8CcKzzWGzguymoim",
+          "type": "FrameNode",
+          "name": "結果",
+          "$groundNodeId": "dK8CcKzzW",
+          "$originalId": "Gzguymoim",
+          "$replicaId": "dK8CcKzzW",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "dK8CcKzzWJMhGIrmxt",
+              "type": "FrameNode",
+              "name": "3",
+              "$groundNodeId": "dK8CcKzzW",
+              "$originalId": "JMhGIrmxt",
+              "$replicaId": "dK8CcKzzW",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "dK8CcKzzWyPECO2UXg",
+                  "type": "RichTextNode",
+                  "name": "3",
+                  "$groundNodeId": "dK8CcKzzW",
+                  "$originalId": "yPECO2UXg",
+                  "$replicaId": "dK8CcKzzW",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-W0brTCMkj)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "3",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:dK8CcKzzWyPECO2UXg:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:dK8CcKzzWyPECO2UXg:0:0",
+                          "type": "TextRun",
+                          "text": "3",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-W0brTCMkj)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "dK8CcKzzWU3N70hQjz",
+              "type": "RichTextNode",
+              "name": "結果",
+              "$groundNodeId": "dK8CcKzzW",
+              "$originalId": "U3N70hQjz",
+              "$replicaId": "dK8CcKzzW",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "結果",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:dK8CcKzzWU3N70hQjz:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:dK8CcKzzWU3N70hQjz:0:0",
+                      "type": "TextRun",
+                      "text": "結果",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 430,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    },
+    {
+      "id": "N2MKwAqq3",
+      "type": "FrameNode",
+      "name": "3 結果",
+      "$groundNodeId": "N2MKwAqq3",
+      "$isReplica": true,
+      "$originalId": "DoTjVDpEl",
+      "$scopeId": "p_6G2PpCJ",
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "8px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "860px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "paddingRight": "0px",
+      "paddingTop": "0px",
+      "stackAlignment": "start",
+      "stackDirection": "horizontal",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "N2MKwAqq3JXt_v7WGC",
+          "type": "FrameNode",
+          "name": "お題",
+          "$groundNodeId": "N2MKwAqq3",
+          "$originalId": "JXt_v7WGC",
+          "$replicaId": "N2MKwAqq3",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "N2MKwAqq3r2Z5ahIvh",
+              "type": "FrameNode",
+              "name": "1",
+              "$groundNodeId": "N2MKwAqq3",
+              "$originalId": "r2Z5ahIvh",
+              "$replicaId": "N2MKwAqq3",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "N2MKwAqq3MJbkhsm23",
+                  "type": "RichTextNode",
+                  "name": "1",
+                  "$groundNodeId": "N2MKwAqq3",
+                  "$originalId": "MJbkhsm23",
+                  "$replicaId": "N2MKwAqq3",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-W0brTCMkj)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "1",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:N2MKwAqq3MJbkhsm23:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:N2MKwAqq3MJbkhsm23:0:0",
+                          "type": "TextRun",
+                          "text": "1",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-W0brTCMkj)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "N2MKwAqq3YBxndZ2bw",
+              "type": "RichTextNode",
+              "name": "お題",
+              "$groundNodeId": "N2MKwAqq3",
+              "$originalId": "YBxndZ2bw",
+              "$replicaId": "N2MKwAqq3",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "お題",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:N2MKwAqq3YBxndZ2bw:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:N2MKwAqq3YBxndZ2bw:0:0",
+                      "type": "TextRun",
+                      "text": "お題",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "N2MKwAqq3KiZwggOmr",
+          "type": "FrameNode",
+          "name": "参加・選択",
+          "$groundNodeId": "N2MKwAqq3",
+          "$originalId": "KiZwggOmr",
+          "$replicaId": "N2MKwAqq3",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "N2MKwAqq3ql4XrSQEq",
+              "type": "FrameNode",
+              "name": "2",
+              "$groundNodeId": "N2MKwAqq3",
+              "$originalId": "ql4XrSQEq",
+              "$replicaId": "N2MKwAqq3",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "N2MKwAqq3y_u0cBMjJ",
+                  "type": "RichTextNode",
+                  "name": "2",
+                  "$groundNodeId": "N2MKwAqq3",
+                  "$originalId": "y_u0cBMjJ",
+                  "$replicaId": "N2MKwAqq3",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-W0brTCMkj)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "2",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:N2MKwAqq3y_u0cBMjJ:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:N2MKwAqq3y_u0cBMjJ:0:0",
+                          "type": "TextRun",
+                          "text": "2",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-W0brTCMkj)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "N2MKwAqq3ca1XvHlnc",
+              "type": "RichTextNode",
+              "name": "参加・選択",
+              "$groundNodeId": "N2MKwAqq3",
+              "$originalId": "ca1XvHlnc",
+              "$replicaId": "N2MKwAqq3",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "参加・選択",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:N2MKwAqq3ca1XvHlnc:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:N2MKwAqq3ca1XvHlnc:0:0",
+                      "type": "TextRun",
+                      "text": "参加・選択",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "N2MKwAqq3Gzguymoim",
+          "type": "FrameNode",
+          "name": "結果",
+          "$groundNodeId": "N2MKwAqq3",
+          "$originalId": "Gzguymoim",
+          "$replicaId": "N2MKwAqq3",
+          "$scopeId": "p_6G2PpCJ",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "N2MKwAqq3JMhGIrmxt",
+              "type": "FrameNode",
+              "name": "3",
+              "$groundNodeId": "N2MKwAqq3",
+              "$originalId": "JMhGIrmxt",
+              "$replicaId": "N2MKwAqq3",
+              "$scopeId": "p_6G2PpCJ",
+              "fill": "var(--token-SC8uq7EE3)",
+              "gap": "12px",
+              "height": "28px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "14px",
+              "radiusBottomLeft": "14px",
+              "radiusBottomRight": "14px",
+              "radiusTopLeft": "14px",
+              "radiusTopRight": "14px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "28px",
+              "children": [
+                {
+                  "id": "N2MKwAqq3yPECO2UXg",
+                  "type": "RichTextNode",
+                  "name": "3",
+                  "$groundNodeId": "N2MKwAqq3",
+                  "$originalId": "yPECO2UXg",
+                  "$replicaId": "N2MKwAqq3",
+                  "$scopeId": "p_6G2PpCJ",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-kl8VXvaIM)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "3",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:N2MKwAqq3yPECO2UXg:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textColor": "var(--token-kl8VXvaIM)",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:N2MKwAqq3yPECO2UXg:0:0",
+                          "type": "TextRun",
+                          "text": "3",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false,
+                          "textColor": "var(--token-kl8VXvaIM)"
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -14,
+                "y": -14,
+                "width": 28,
+                "height": 28
+              }
+            },
+            {
+              "id": "N2MKwAqq3U3N70hQjz",
+              "type": "RichTextNode",
+              "name": "結果",
+              "$groundNodeId": "N2MKwAqq3",
+              "$originalId": "U3N70hQjz",
+              "$replicaId": "N2MKwAqq3",
+              "$scopeId": "p_6G2PpCJ",
+              "textAlignment": "center",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "結果",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:N2MKwAqq3U3N70hQjz:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textStylePreset": "phDSpJBNi",
+                  "children": [
+                    {
+                      "id": "v:N2MKwAqq3U3N70hQjz:0:0",
+                      "type": "TextRun",
+                      "text": "結果",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 860,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}

@@ -9,7 +9,6 @@ import { pad2 } from "../../game/present.ts";
 import type { Gender, MatchedPerson } from "../../game/types.ts";
 import { navigate } from "../../router.ts";
 import { roomStore, useIsHost, useOfflineMode, type Room } from "../../store/index.ts";
-import { COLOR } from "../../styles/tokens.ts";
 import {
   BrandHeader,
   Button,
@@ -158,7 +157,7 @@ function HostLobby({ room }: { room: Room }) {
               <p className="t-small c-muted">参加者は自分のスマホで開き、ニックネームと性別を入れて参加します。</p>
             </div>
             <div className="cp-qr">
-              <QRCodeSVG value={url} size={176} bgColor={COLOR.paper} fgColor={COLOR.ink} level="M" marginSize={0} title={`ルーム ${room.id} の招待 URL`} />
+              <QRCodeSVG value={url} size={176} bgColor="transparent" fgColor="currentColor" level="M" marginSize={0} title={`ルーム ${room.id} の招待 URL`} />
             </div>
             <div className="cp-url">
               <span className="t-small cp-url__text">{url}</span>

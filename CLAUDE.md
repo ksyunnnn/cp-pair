@@ -27,6 +27,11 @@ cp-pair で Claude Code が従うルール。プロジェクトの概要・開�
 - `desk-NN` は git worktree の常設ワークスペースで、`repository/main` と並べて `repository/desk-01` のように置く
 - `desk-NN` ブランチにはコミットしない。main を取り込むだけにし、作業は `desk-NN` の中で `feature/*` を checkout して行う
 
+## デザイン
+
+- 画面や部品を作る・変えるときは、`DESIGN.md` の決まりに従う。描画に使う値の原本は `src/styles/tokens.css`（動きは `src/styles/motion.ts`）で、`DESIGN.md` の値はその写し。値を変えたら両方を合わせ、`npm run design:lint` を通す
+- 見た目を変えない整理のときは、`scripts/screenshots.js` で撮り直し、変更前の画像と比べる
+
 ## 注意
 
 - `firestore.rules` を変えたら、PR のマージとは別に、README の手順でルールをデプロイする。Workers Builds はルールをデプロイしない

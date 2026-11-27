@@ -1,0 +1,146 @@
+{
+  "id": "cFuw2JrcM",
+  "type": "ComponentNode",
+  "name": "CP フローティング操作バー",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "pm5oXSZwN",
+      "name": "標準"
+    }
+  ],
+  "variables": [],
+  "visible": false,
+  "children": [
+    {
+      "id": "pm5oXSZwN",
+      "type": "FrameNode",
+      "name": "標準",
+      "$groundNodeId": "pm5oXSZwN",
+      "$isPrimary": true,
+      "$scopeId": "cFuw2JrcM",
+      "backgroundBlur": "20px",
+      "border": "1px solid rgba(244,242,235,0.9)",
+      "borderBottom": "1px",
+      "borderLeft": "1px",
+      "borderRight": "1px",
+      "borderWidth": "1px",
+      "borderTop": "1px",
+      "boxShadows": [
+        "0px 4px 16px 0px rgba(34,35,31,0.08)"
+      ],
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "8px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "0px",
+      "opacity": 0.94,
+      "overflow": "clip",
+      "padding": "12px",
+      "paddingBottom": "12px",
+      "paddingLeft": "12px",
+      "paddingRight": "12px",
+      "paddingTop": "12px",
+      "radius": "28px",
+      "radiusBottomLeft": "28px",
+      "radiusBottomRight": "28px",
+      "radiusTopLeft": "28px",
+      "radiusTopRight": "28px",
+      "stackAlignment": "start",
+      "stackDirection": "vertical",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "358px",
+      "children": [
+        {
+          "id": "T9Yk0zD3t",
+          "type": "RichTextNode",
+          "name": "全員が選ぶと、結果を発表できます",
+          "$groundNodeId": "pm5oXSZwN",
+          "$scopeId": "cFuw2JrcM",
+          "textAlignment": "center",
+          "textColor": "var(--token-W0brTCMkj)",
+          "textStylePreset": "phDSpJBNi",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": "全員が選ぶと、結果を発表できます",
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "v:T9Yk0zD3t:0",
+              "type": "TextBlock",
+              "tag": "p",
+              "textAlignment": "center",
+              "textColor": "var(--token-W0brTCMkj)",
+              "textStylePreset": "phDSpJBNi",
+              "children": [
+                {
+                  "id": "v:T9Yk0zD3t:0:0",
+                  "type": "TextRun",
+                  "text": "全員が選ぶと、結果を発表できます",
+                  "bold": false,
+                  "italic": false,
+                  "inlineCode": false,
+                  "textColor": "var(--token-W0brTCMkj)"
+                }
+              ]
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "YuqZPCjBq",
+          "type": "ComponentInstanceNode",
+          "name": "CP 主ボタン",
+          "$componentDisplayName": "CP 主ボタン",
+          "$groundNodeId": "pm5oXSZwN",
+          "$scopeId": "cFuw2JrcM",
+          "paginationVariants": null,
+          "component": "oMAZq6Ik4",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "visible": true,
+          "width": "1fr",
+          "$control__variant": "fIh1ZIGEU",
+          "$control__heD7u2rkD": "登録完了を宣言",
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 358,
+        "height": 200
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}

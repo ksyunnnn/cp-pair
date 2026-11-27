@@ -1,0 +1,59 @@
+/* 開発パネル（?dev のときだけ出る。本番の画面には出ない）。src/dev/DevPanel.tsx */
+
+.dev-panel {
+  /* 開発パネルの色。Framer にない値 */
+  --_dev-bg: #111;
+  --_dev-surface: #1d1d1d;
+  --_dev-fg: #e5e5e5;
+  --_dev-fg-muted: #9a9a9a;
+  --_dev-line: #888;
+  --_dev-line-soft: #444;
+  position: fixed;
+  right: 4px;
+  bottom: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 100;
+  font: 500 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--_dev-fg);
+}
+.dev-panel__toggle {
+  border: 1px dashed var(--_dev-line);
+  background: var(--_dev-bg);
+  color: var(--_dev-fg);
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+.dev-panel__body {
+  margin-bottom: 6px;
+  width: 260px;
+  max-height: 60dvh;
+  overflow: auto;
+  background: var(--_dev-bg);
+  border: 1px dashed var(--_dev-line);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dev-panel__body button {
+  text-align: left;
+  border: 1px solid var(--_dev-line-soft);
+  background: var(--_dev-surface);
+  color: var(--_dev-fg);
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+}
+.dev-panel__body button.is-active {
+  border-color: var(--_dev-fg);
+}
+.dev-panel__title {
+  color: var(--_dev-fg-muted);
+  margin-top: 4px;
+}

@@ -1,0 +1,63 @@
+/* ページ全体の下地（要素の既定・文節での改行・フォーカスの輪郭）。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--surface);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-ja);
+  min-height: 100dvh;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  font-weight: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+/* 押す部品では、2 回続けて押したときの拡大を止める（ピンチでの拡大は残る）
+   https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action */
+button,
+a,
+input,
+label {
+  touch-action: manipulation;
+}
+
+/* 日本語の改行を文節で（題や理念が単語の途中で折れないように） */
+.t-title,
+.t-section,
+.t-strong,
+.t-phrase,
+.cp-phrase,
+.t-name {
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--border-strong);
+  outline-offset: 2px;
+}

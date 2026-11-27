@@ -1,0 +1,299 @@
+{
+  "id": "PEwhoSoyL",
+  "type": "ComponentNode",
+  "name": "CP 文字リンクボタン",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "QhMboxJ62",
+      "name": "押せる"
+    },
+    {
+      "id": "vL35CKTYq",
+      "name": "押せない"
+    },
+    {
+      "id": "CEP1hVE2h",
+      "name": "Pressed"
+    }
+  ],
+  "variables": [
+    {
+      "id": "JQQaD4PIP",
+      "initialValue": "参加者を手動で追加",
+      "name": "ラベル",
+      "type": "string"
+    },
+    {
+      "id": "zOZ0In3lY",
+      "name": "実行",
+      "type": "eventhandler"
+    }
+  ],
+  "visible": false,
+  "$control__JQQaD4PIP": "参加者を手動で追加",
+  "children": [
+    {
+      "id": "QhMboxJ62",
+      "type": "FrameNode",
+      "name": "押せる",
+      "$groundNodeId": "QhMboxJ62",
+      "$isPrimary": true,
+      "$scopeId": "PEwhoSoyL",
+      "constraintsLocked": false,
+      "cursor": "pointer",
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "12px",
+      "height": "48px",
+      "htmlTag": "button",
+      "layout": "stack",
+      "left": "0px",
+      "onTap": [
+        {
+          "action": "TRIGGER_EVENT",
+          "controls": {
+            "id": {
+              "type": "reference",
+              "id": "zOZ0In3lY"
+            }
+          }
+        }
+      ],
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "12px 20px 12px 20px",
+      "paddingBottom": "12px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "12px",
+      "radius": "24px",
+      "radiusBottomLeft": "24px",
+      "radiusBottomRight": "24px",
+      "radiusTopLeft": "24px",
+      "radiusTopRight": "24px",
+      "stackAlignment": "center",
+      "stackDirection": "horizontal",
+      "stackDistribution": "center",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "eSPS3PT5K",
+          "type": "RichTextNode",
+          "name": "ラベル",
+          "$groundNodeId": "QhMboxJ62",
+          "$scopeId": "PEwhoSoyL",
+          "textColor": "var(--token-SC8uq7EE3)",
+          "textStylePreset": "sAS8XY6m6",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": {
+            "type": "reference",
+            "id": "JQQaD4PIP",
+            "providerId": "PEwhoSoyL"
+          },
+          "visible": true,
+          "width": "auto",
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 342,
+        "height": 48
+      }
+    },
+    {
+      "id": "vL35CKTYq",
+      "type": "FrameNode",
+      "name": "押せない",
+      "$groundNodeId": "vL35CKTYq",
+      "$isReplica": true,
+      "$originalId": "QhMboxJ62",
+      "$scopeId": "PEwhoSoyL",
+      "ariaDisabled": true,
+      "constraintsLocked": false,
+      "cursor": "not-allowed",
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "12px",
+      "height": "48px",
+      "htmlTag": "button",
+      "layout": "stack",
+      "left": "430px",
+      "opacity": 0.35,
+      "overflow": "clip",
+      "padding": "12px 20px 12px 20px",
+      "paddingBottom": "12px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "12px",
+      "radius": "24px",
+      "radiusBottomLeft": "24px",
+      "radiusBottomRight": "24px",
+      "radiusTopLeft": "24px",
+      "radiusTopRight": "24px",
+      "stackAlignment": "center",
+      "stackDirection": "horizontal",
+      "stackDistribution": "center",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "vL35CKTYqeSPS3PT5K",
+          "type": "RichTextNode",
+          "name": "ラベル",
+          "$groundNodeId": "vL35CKTYq",
+          "$originalId": "eSPS3PT5K",
+          "$replicaId": "vL35CKTYq",
+          "$scopeId": "PEwhoSoyL",
+          "textColor": "var(--token-SC8uq7EE3)",
+          "textStylePreset": "sAS8XY6m6",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": {
+            "type": "reference",
+            "id": "JQQaD4PIP",
+            "providerId": "PEwhoSoyL"
+          },
+          "visible": true,
+          "width": "auto",
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 430,
+        "y": 0,
+        "width": 342,
+        "height": 48
+      }
+    },
+    {
+      "id": "CEP1hVE2h",
+      "type": "FrameNode",
+      "name": "Pressed",
+      "gesture": "pressed",
+      "$groundNodeId": "CEP1hVE2h",
+      "$inheritsFrom": "QhMboxJ62",
+      "$isReplica": true,
+      "$originalId": "QhMboxJ62",
+      "$scopeId": "PEwhoSoyL",
+      "constraintsLocked": false,
+      "cursor": "pointer",
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "12px",
+      "height": "48px",
+      "htmlTag": "button",
+      "layout": "stack",
+      "left": "0px",
+      "onTap": [
+        {
+          "action": "TRIGGER_EVENT",
+          "controls": {
+            "id": {
+              "type": "reference",
+              "id": "zOZ0In3lY"
+            }
+          }
+        }
+      ],
+      "opacity": 0.8,
+      "overflow": "clip",
+      "padding": "12px 20px 12px 20px",
+      "paddingBottom": "12px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "12px",
+      "radius": "24px",
+      "radiusBottomLeft": "24px",
+      "radiusBottomRight": "24px",
+      "radiusTopLeft": "24px",
+      "radiusTopRight": "24px",
+      "stackAlignment": "center",
+      "stackDirection": "horizontal",
+      "stackDistribution": "center",
+      "stackWrapEnabled": false,
+      "top": "100px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "CEP1hVE2heSPS3PT5K",
+          "type": "RichTextNode",
+          "name": "ラベル",
+          "$groundNodeId": "CEP1hVE2h",
+          "$originalId": "eSPS3PT5K",
+          "$replicaId": "CEP1hVE2h",
+          "$scopeId": "PEwhoSoyL",
+          "textColor": "var(--token-SC8uq7EE3)",
+          "textStylePreset": "sAS8XY6m6",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": {
+            "type": "reference",
+            "id": "JQQaD4PIP",
+            "providerId": "PEwhoSoyL"
+          },
+          "visible": true,
+          "width": "auto",
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 100,
+        "width": 342,
+        "height": 48
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}
