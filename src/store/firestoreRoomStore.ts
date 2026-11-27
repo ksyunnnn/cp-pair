@@ -150,6 +150,10 @@ export class FirestoreRoomStore implements RoomStore {
           onSnapshot(
             this.roomRef(roomId),
             (snap) => {
+              // 手元の控え（キャッシュ）に無いだけでは、ルームが無いとは言えない。サーバーの答えを待つ。
+              // オフラインモードを解除した直後は、書き戻したルームが控えに無く、最初の応答がこれになる
+              // https://firebase.google.com/docs/firestore/query-data/listen#events-metadata-changes
+              if (!snap.exists() && snap.metadata.fromCache) return;
               roomSnap = snap;
               emit();
             },
