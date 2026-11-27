@@ -88,6 +88,7 @@ function HostLobby({ room }: { room: Room }) {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState("");
   const [gender, setGender] = useState<Gender>("M");
+  const [busy, setBusy] = useState(false);
   // 開いたときにいた参加者。後から加わった行だけを打ち込む
   const [initialIds] = useState(() => new Set(room.participants.map((p) => p.id)));
 
@@ -110,10 +111,19 @@ function HostLobby({ room }: { room: Room }) {
       toast("ニックネームを入れてください", "warn");
       return;
     }
-    await roomStore.addParticipant(room.id, { name: trimmed, gender, joinType: "manual" });
-    toast(`${trimmed}さんを登録しました。ホストの端末で選んでもらいます`, "info");
-    setName("");
-    setAdding(false);
+    // 応答を待つ間に続けて押すと、同じ人が押した回数だけ登録される（#37）
+    setBusy(true);
+    try {
+      await roomStore.addParticipant(room.id, { name: trimmed, gender, joinType: "manual" });
+      toast(`${trimmed}さんを登録しました。ホストの端末で選んでもらいます`, "info");
+      setName("");
+      setAdding(false);
+    } catch (error) {
+      console.error(error);
+      toast("登録できませんでした。つながりを確かめて、もう一度押してください", "warn");
+    } finally {
+      setBusy(false);
+    }
   };
 
   const declare = async () => {
@@ -177,7 +187,7 @@ function HostLobby({ room }: { room: Room }) {
                 <Button kind="link" onClick={() => setAdding(false)}>
                   やめる
                 </Button>
-                <Button kind="secondary" type="submit">
+                <Button kind="secondary" type="submit" disabled={busy}>
                   登録する
                 </Button>
               </div>
