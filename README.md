@@ -46,6 +46,8 @@ npm run dev
 | `npm run build` | 型を検査し、`dist/` にビルドする |
 | `npm run lint` | oxlint で検査する |
 | `npm run design:lint` | `DESIGN.md` が DESIGN.md の仕様どおりかを、公式の CLI（`@google/design.md`）で検査する。値の形・参照切れ・文字と背景のコントラストを見る。エラーがあると失敗する。警告の 2 件（罫の色が部品から参照されていない）は、仕様に線の色の項目がないため消せない |
+| `npm run storybook` | 部品とレイアウトの一覧（Storybook）を http://127.0.0.1:6006/ で開く。story は `src/**/*.stories.tsx` |
+| `npm run storybook:lan` | 同じ一覧を、同じ Wi-Fi の iPhone からも開けるようにして起動する。同じネットワークの誰もが、一覧とソースを読め、Storybook の通信からプロジェクトのファイルを書き換えられる。信頼できるネットワークでだけ使い、見終えたら止める |
 | `npm run verify` | 相性の計算が、元のモックと同じ結果を返すかを確かめる |
 | `npm run test:e2e` | localStorage 版をビルドして Playwright で動かし、ホストの端末だけで結果まで進む流れと、オフラインでの開き直しを確かめる |
 | `npm run test:deploy` | Preview コマンドの `wrangler preview` が、`wrangler.jsonc` の設定の検査を通るかを確かめる。無効なトークンを渡すので、Cloudflare には何も作られない。トークンが拒まれるところまで進むので、ネットワークが要る |
