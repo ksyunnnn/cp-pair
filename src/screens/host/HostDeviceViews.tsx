@@ -33,7 +33,7 @@ export function HostPick({ room, participantId }: { room: Room; participantId: s
 
   return (
     <div className="cp-page">
-      <BrandHeader right={<HostDeviceLabel roomId={room.id} />} />
+      <BrandHeader right={<HostDeviceLabel roomId={room.id} />} homeLink={false} />
       <PhilosophyPicker
         room={room}
         participant={participant}
