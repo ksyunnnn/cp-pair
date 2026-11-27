@@ -585,6 +585,8 @@ html:has(.cp-floating) {
   background: var(--cp-paper);
   border: 1px solid var(--cp-line);
   line-height: 0;
+  /* QR コードの点は currentColor で描く */
+  color: var(--cp-ink);
 }
 .cp-url {
   display: flex;

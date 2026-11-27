@@ -12,6 +12,10 @@ import "./styles/tokens.css";
 import "./styles/app.css";
 import "./styles/result.css";
 import App from "./App.tsx";
+import { applyMotionVars } from "./styles/motion.ts";
+
+// CSS で使う動きの時間を、motion.ts から :root に書き込む（値の原本は motion.ts だけにする）
+applyMotionVars();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

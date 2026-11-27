@@ -11,14 +11,13 @@ import {
 } from "../game/explain.ts";
 import { tagIcon, type TagIcon } from "../game/present.ts";
 import { navigate } from "../router.ts";
-import { COLOR } from "../styles/tokens.ts";
 import { BrandHeader, Button, ScreenMain, Section } from "../ui/components.tsx";
 
 /** 診断の説明の経路。about ページからもこの経路へリンクする */
 export const RULES_PATH = "/rules";
 
 function PhIcon({ name }: { name: TagIcon }) {
-  const props = { size: 14, color: COLOR.ink, weight: "regular" as const, style: { display: "block", flexShrink: 0 } };
+  const props = { size: 14, color: "currentColor", weight: "regular" as const, style: { display: "block", flexShrink: 0, color: "var(--cp-ink)" } };
   if (name === "Sparkle") return <Sparkle {...props} />;
   if (name === "Heart") return <Heart {...props} />;
   return <Intersect {...props} />;

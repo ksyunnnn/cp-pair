@@ -1,4 +1,4 @@
-// 動きの値（テーマ「判を押して、止まる」）。動きの時間・spring・easing はここと tokens.css の「動き」だけに書く。
+// 動きの値（テーマ「判を押して、止まる」）。動きの時間・spring・easing はここだけに書く（CSS で使う時間は CSS_MOTION）。
 // - 操作の層（ボタン・トースト）: Apple の spring。bounce は 0〜0.15（WWDC23 Animate with springs https://developer.apple.com/videos/play/wwdc2023/10158/ ）
 // - コンテンツの層（画面・カード・結果）: 速く打って、着地したら止める。着地の後は動かさない
 // - 記号の差し替え: 12fps のコマ打ち（LOVE DEATH + ROBOTS の title animation の「frames hold slightly too long」https://luckydumpling.github.io/motion-archive/entries/love-death-robots-title-animation/ ）
@@ -9,7 +9,7 @@
 // reduced motion では MotionConfig reducedMotion="user" が transform を止め、opacity だけが残る（https://motion.dev/docs/react-accessibility ）
 import type { Transition } from "motion/react";
 
-/** 12fps の 1 コマ（秒）。tokens.css の --motion-frame と同じ */
+/** 12fps の 1 コマ（秒） */
 export const FRAME = 1 / 12;
 
 /** 24fps の 1 コマ（秒、41.7ms）。時間はこの倍数に揃える */
@@ -171,6 +171,32 @@ export const REVEAL = {
   /** 名前・理念・ほかの区画を、上から何秒ずつずらすか（2 コマ） */
   stagger: TICK * 2,
 } as const;
+
+/**
+ * CSS の animation と transition で使う動きの時間（秒）。applyMotionVars が :root に --motion-* として書き込む。
+ * CSS には値を書かず、var(--motion-*) で読むだけにする
+ */
+export const CSS_MOTION = {
+  /** 12fps の 1 コマ。記号の差し替えは steps() でこの長さずつ進める */
+  frame: FRAME,
+  /** 選んだカードの印を描き込む（3 コマ） */
+  mark: FRAME * 3,
+  /** 結果の発表の後半で、ほかの区画を出す opacity */
+  fade: 0.15,
+  "fade-delay": 0.16,
+  /** reduced motion のとき、結果の発表を一度に出す opacity */
+  "fade-reveal": FADE.reveal.duration,
+  /** ガラスの上のボタンの塗り。押すと速く透明なガラスに変わり、離すと SPRING.glassRelease と同じ長さで戻る */
+  "glass-fill-in": 0.12,
+  "glass-fill-out": SPRING.glassRelease.visualDuration,
+} as const;
+
+/** CSS_MOTION を :root の CSS カスタムプロパティ（ms）として書き込む。描画の前に 1 回呼ぶ */
+export function applyMotionVars(root: HTMLElement = document.documentElement) {
+  for (const [name, seconds] of Object.entries(CSS_MOTION)) {
+    root.style.setProperty(`--motion-${name}`, `${Math.round(seconds * 1000 * 10) / 10}ms`);
+  }
+}
 
 /** 数え上げの減速（easeOutCubic）。12fps に量子化して使う */
 export const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
