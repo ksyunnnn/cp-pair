@@ -9,8 +9,10 @@ export type Route =
   | { name: "hostResult"; roomId: string; participantId: string }
   | { name: "participant"; roomId: string };
 
-export function parseHash(hash: string): Route {
-  const parts = hash.replace(/^#\/?/, "").split("/").filter(Boolean);
+/* 画面は URL のパスで決める（例 /host/DE40C）。見つからない経路は、Cloudflare（wrangler.jsonc の not_found_handling）と
+   Service Worker（vite.config.ts の navigateFallback）が index.html を返す */
+export function parsePath(pathname: string): Route {
+  const parts = pathname.split("/").filter(Boolean);
   if (parts[0] === "host" && parts[1]) {
     if (parts[2] === "pick" && parts[3]) return { name: "hostPick", roomId: parts[1], participantId: parts[3] };
     if (parts[2] === "result" && parts[3]) return { name: "hostResult", roomId: parts[1], participantId: parts[3] };
@@ -22,20 +24,51 @@ export function parseHash(hash: string): Route {
   return { name: "hostStart" };
 }
 
+/* # の後ろに画面のパスを書いた URL（例 /#/host/DE40C）は、履歴を増やさずにそのパスの URL（/host/DE40C）へ置き換える */
+function replaceHashPath() {
+  if (!location.hash.startsWith("#/")) return;
+  history.replaceState(null, "", location.hash.slice(1).replace(/^\/?/, "/") + location.search);
+}
+replaceHashPath();
+
+const listeners = new Set<() => void>();
+
+/* ?dev などのクエリは、画面を移っても残す */
 export function navigate(path: string) {
-  if (location.hash !== `#${path}`) location.hash = path;
+  if (location.pathname !== path) {
+    history.pushState(null, "", path + location.search);
+    listeners.forEach((l) => l());
+  }
   window.scrollTo(0, 0);
 }
 
+/* アプリの中の <a href="/..."> を押したときに、ページを読み直さずに画面を移す */
+function onLinkClick(e: MouseEvent) {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = (e.target as Element | null)?.closest?.("a");
+  if (!a || a.target || a.hasAttribute("download")) return;
+  const url = new URL(a.href, location.href);
+  if (url.origin !== location.origin) return;
+  e.preventDefault();
+  navigate(url.pathname);
+}
+
 export function useRoute(): Route {
-  const [route, setRoute] = useState(() => parseHash(location.hash));
+  const [route, setRoute] = useState(() => parsePath(location.pathname));
   useEffect(() => {
-    const onChange = () => {
-      setRoute(parseHash(location.hash));
+    const onChange = () => setRoute(parsePath(location.pathname));
+    const onPop = () => {
+      onChange();
       window.scrollTo(0, 0);
     };
-    window.addEventListener("hashchange", onChange);
-    return () => window.removeEventListener("hashchange", onChange);
+    listeners.add(onChange);
+    window.addEventListener("popstate", onPop);
+    document.addEventListener("click", onLinkClick);
+    return () => {
+      listeners.delete(onChange);
+      window.removeEventListener("popstate", onPop);
+      document.removeEventListener("click", onLinkClick);
+    };
   }, []);
   return route;
 }

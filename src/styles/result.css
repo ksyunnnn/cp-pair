@@ -208,7 +208,7 @@
   }
 }
 
-/* 診断の説明（src/screens/RulesScreen.tsx、#/rules）。Framer に画面はない。区画は .cp-section（上の線 + padding-top 24）、
+/* 診断の説明（src/screens/RulesScreen.tsx、/rules）。Framer に画面はない。区画は .cp-section（上の線 + padding-top 24）、
    1 件は「ふたりの診断カルテ」の 1 人分の文字の組（型 .t-type ＋ 補足 .t-small）、タグは結果画面の札 .r-tag を使う */
 .rl-list {
   list-style: none;

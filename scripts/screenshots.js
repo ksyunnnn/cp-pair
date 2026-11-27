@@ -15,9 +15,9 @@ async (page) => {
   };
   const readRoom = (id) =>
     page.evaluate((roomId) => JSON.parse(localStorage.getItem(`cp-pair:room:${roomId}`)), id);
-  const asDevice = async (key, hash) => {
+  const asDevice = async (key, path) => {
     await page.evaluate((k) => sessionStorage.setItem("cp-pair-dev:device", k), key);
-    await page.goto(`${BASE}${hash}`);
+    await page.goto(`${BASE}${path}`);
     await page.reload();
   };
 
@@ -38,7 +38,7 @@ async (page) => {
   const roomId = page.url().split("/host/")[1];
 
   // 開発パネルでテストの 4 人（未選択）を入れ、ハルトとアオイだけ選んだ状態にする
-  await page.goto(`${BASE}?dev#/host/${roomId}`);
+  await page.goto(`${BASE}host/${roomId}?dev`);
   await page.getByRole("button", { name: "DEV" }).click();
   await page.getByRole("button", { name: /4人（未選択）/ }).click();
   await page.waitForTimeout(300);
@@ -53,7 +53,7 @@ async (page) => {
   }, roomId);
 
   // ホスト Step 2（開発パネルなし）
-  await page.goto(`${BASE}#/host/${roomId}`);
+  await page.goto(`${BASE}host/${roomId}`);
   await page.reload();
   await shot("02-host-step2-share");
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -62,7 +62,7 @@ async (page) => {
   // 手動登録者: のぞき見防止 → ホストの端末で選ぶ
   let room = await readRoom(roomId);
   const riku = room.participants.find((p) => p.name === "リク");
-  await page.goto(`${BASE}#/host/${roomId}/pick/${riku.id}`);
+  await page.goto(`${BASE}host/${roomId}/pick/${riku.id}`);
   await shot("04-handoff-manual");
   await page.getByRole("button", { name: "私はリクです" }).click();
   await page.waitForTimeout(200);
@@ -80,7 +80,7 @@ async (page) => {
   );
 
   // 参加者 Step 1: 新しい端末で招待 URL を開く（ソウタが参加する → 男性 3 人でフリー枠が出る）
-  await asDevice("device-new-sota", `#/r/${roomId}`);
+  await asDevice("device-new-sota", `r/${roomId}`);
   await page.getByRole("textbox").fill("ソウタ");
   await page.getByRole("radio", { name: "男性" }).click();
   await shot("06-participant-step1-join");
@@ -108,11 +108,11 @@ async (page) => {
 
   // 参加者 Step 2: 選んだ後の待機（ハルトの端末）
   const haruto = room.participants.find((p) => p.name === "ハルト");
-  await asDevice(`device-${haruto.id}`, `#/r/${roomId}`);
+  await asDevice(`device-${haruto.id}`, `r/${roomId}`);
   await shot("08-participant-step2-waiting");
 
   // ホストが宣言する → トースト
-  await asDevice("default", `#/host/${roomId}`);
+  await asDevice("default", `host/${roomId}`);
   await page.getByRole("button", { name: "登録完了を宣言" }).click();
   await page.waitForTimeout(150);
   await page.screenshot({ path: `${OUT}09-toast-success.png` });
@@ -122,7 +122,7 @@ async (page) => {
   await shot("11-host-step3-all-results");
 
   // 参加者 Step 3: ハルトの結果（Framer の結果画面）
-  await asDevice(`device-${haruto.id}`, `#/r/${roomId}`);
+  await asDevice(`device-${haruto.id}`, `r/${roomId}`);
   await shot("12-participant-step3-result");
   await page.screenshot({ path: `${OUT}12b-participant-step3-result-full.png`, fullPage: true });
 
@@ -132,16 +132,16 @@ async (page) => {
   if (free) {
     if (free.joinType === "device") {
       const key = free.name === "ソウタ" ? "device-new-sota" : `device-${free.id}`;
-      await asDevice(key, `#/r/${roomId}`);
+      await asDevice(key, `r/${roomId}`);
     } else {
-      await asDevice("default", `#/host/${roomId}/result/${free.id}`);
+      await asDevice("default", `host/${roomId}/result/${free.id}`);
       await page.getByRole("button", { name: new RegExp(`私は${free.name}です`) }).click();
     }
     await shot("13-participant-step3-free");
   }
 
   // 警告のトースト: すでに選ばれた理念を選ぶ（宣言を取り消して確かめる）
-  await asDevice("default", `#/host/${roomId}`);
+  await asDevice("default", `host/${roomId}`);
   await page.getByRole("button", { name: /宣言を取り消して/ }).click();
   await page.waitForTimeout(3200);
   return { roomId, free: free && free.name };

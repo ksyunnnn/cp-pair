@@ -12,6 +12,7 @@
     "deploy": "wrangler deploy",
     "preview:branch": "wrangler preview",
     "test:e2e": "playwright test",
+    "test:deploy": "vitest run test/deploy",
     "test:firestore": "firebase emulators:exec --only firestore \"vitest run test/firestore\"",
     "test:e2e:firestore": "firebase emulators:exec --only auth,firestore \"playwright test -c playwright.firestore.config.ts\""
   },

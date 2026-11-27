@@ -7,7 +7,7 @@ const LABEL = 'ホストの端末 · この端末だけで進行中'
 const RELEASE = '各自の端末での参加に戻す'
 
 function roomIdOf(page: Page): string {
-  const match = new URL(page.url()).hash.match(/#\/host\/([0-9A-Z]{5})/)
+  const match = new URL(page.url()).pathname.match(/^\/host\/([0-9A-Z]{5})/)
   if (!match) throw new Error(`ルームの ID が URL にありません: ${page.url()}`)
   return match[1]
 }
@@ -21,7 +21,7 @@ async function createRoom(page: Page) {
 async function openDevice(browser: Browser, roomId: string) {
   const context = await browser.newContext({ baseURL: test.info().project.use.baseURL })
   const page = await context.newPage()
-  await page.goto(`/#/r/${roomId}`)
+  await page.goto(`/r/${roomId}`)
   return page
 }
 
