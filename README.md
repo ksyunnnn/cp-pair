@@ -47,6 +47,7 @@ npm run dev
 | `npm run lint` | oxlint で検査する |
 | `npm run verify` | 相性の計算が、元のモックと同じ結果を返すかを確かめる |
 | `npm run test:e2e` | localStorage 版をビルドして Playwright で動かし、ホストの端末だけで結果まで進む流れと、オフラインでの開き直しを確かめる |
+| `npm run test:deploy` | Preview コマンドの `wrangler preview` が、`wrangler.jsonc` の設定の検査を通るかを確かめる。無効なトークンを渡すので、Cloudflare には何も作られない。トークンが拒まれるところまで進むので、ネットワークが要る |
 | `npm run test:firestore` | Firestore のエミュレーターを立て、`firestore.rules` が許す操作と拒む操作、Firestore 版の保存の動きを確かめる |
 | `npm run test:e2e:firestore` | Auth と Firestore のエミュレーターを立て、Firestore 版のビルドを Playwright で動かし、オフラインモードへの切り替えと解除を確かめる |
 
