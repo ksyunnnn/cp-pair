@@ -69,10 +69,17 @@ function Join({ room, onJoined }: { room: Room; onJoined: () => void }) {
   const join = async () => {
     if (!ready || !gender) return;
     setBusy(true);
-    const participant = await roomStore.addParticipant(room.id, { name: name.trim(), gender, joinType: "device" });
-    setMyParticipantId(room.id, participant.id);
-    toast(`${participant.name}さんとして参加しました`, "success");
-    onJoined();
+    try {
+      const participant = await roomStore.addParticipant(room.id, { name: name.trim(), gender, joinType: "device" });
+      setMyParticipantId(room.id, participant.id);
+      toast(`${participant.name}さんとして参加しました`, "success");
+      onJoined();
+    } catch (error) {
+      // 失敗したまま押せない状態で残さない（#37）
+      console.error(error);
+      toast("参加できませんでした。つながりを確かめて、もう一度押してください", "warn");
+      setBusy(false);
+    }
   };
 
   return (
