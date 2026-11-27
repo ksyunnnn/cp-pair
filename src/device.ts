@@ -56,5 +56,5 @@ export function lastHostRoom(): string | null {
 }
 
 export function inviteUrl(roomId: string): string {
-  return `${location.origin}${location.pathname}#/r/${roomId}`;
+  return `${location.origin}/r/${roomId}`;
 }

@@ -1,4 +1,4 @@
-// 診断の説明（#/rules）。結果画面に出る相性度・キャラ型・タグ・称号が何から決まるかを、src/game/explain.ts の中身で並べる。
+// 診断の説明（/rules）。結果画面に出る相性度・キャラ型・タグ・称号が何から決まるかを、src/game/explain.ts の中身で並べる。
 // ルームに依存しない。結果画面の最後と about ページからリンクする。Framer に画面はなく、部品と文字の組は結果画面の区画に揃える。
 import { Heart, Intersect, Sparkle } from "@phosphor-icons/react";
 import {

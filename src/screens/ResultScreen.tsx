@@ -83,7 +83,7 @@ function AboutGame() {
   );
 }
 
-/* 診断の説明（#/rules）へ。相性度・キャラ型・タグ・称号が何から決まるかを、ルームによらない 1 枚で見せる */
+/* 診断の説明（/rules）へ。相性度・キャラ型・タグ・称号が何から決まるかを、ルームによらない 1 枚で見せる */
 function RulesLink() {
   return (
     <Button kind="link" className="r-later" onClick={() => navigate(RULES_PATH)}>

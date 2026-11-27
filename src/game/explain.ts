@@ -1,4 +1,4 @@
-// 診断の説明（#/rules）に出す中身。相性度・キャラ型・タグ・称号が何から決まるかを、計算の値と文言から組み立てる。
+// 診断の説明（/rules）に出す中身。相性度・キャラ型・タグ・称号が何から決まるかを、計算の値と文言から組み立てる。
 // 点と称号とキャラ型は engine.ts・triggers.ts・presets.ts の値を読む。条件の言い回しだけはここで書き下す（式は各ファイルの行を参照）。
 import { BALANCE_TITLE, HYBRID_TITLE } from "./engine.ts";
 import { splitTitle } from "./present.ts";
