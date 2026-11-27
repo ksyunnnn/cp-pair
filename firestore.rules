@@ -54,7 +54,8 @@ service cloud.firestore {
       allow list: if false;
 
       allow create: if signedIn()
-        && roomId.matches('^[0-9A-Z]{5}$')
+        // 読み違えやすい I・L・O・V・0・1・4・7 を外した 28 文字で 5 文字（src/store/roomId.ts と同じ形、#51）
+        && roomId.matches('^[2-35-68-9A-HJKMNP-UW-Z]{5}$')
         && request.resource.data.keys().hasOnly(['hostUid', 'presetId', 'status', 'result', 'createdAt', 'updatedAt'])
         && request.resource.data.keys().hasAll(['hostUid', 'presetId', 'status', 'result', 'createdAt', 'updatedAt'])
         && request.resource.data.hostUid == request.auth.uid

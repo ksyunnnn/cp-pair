@@ -95,7 +95,7 @@ describe("サインイン", () => {
     await seed();
     await assertFails(getDoc(doc(guest(), "rooms", ROOM)));
     await assertFails(getDocs(collection(guest(), "rooms", ROOM, "participants")));
-    await assertFails(setDoc(doc(guest(), "rooms", "FGHIJ"), newRoom("x")));
+    await assertFails(setDoc(doc(guest(), "rooms", "FGHJK"), newRoom("x")));
   });
 });
 
@@ -113,6 +113,10 @@ describe("rooms", () => {
     await assertFails(setDoc(doc(db, "rooms", ROOM), { ...newRoom("host"), createdAt: 0 }));
     await assertFails(setDoc(doc(db, "rooms", "abcde"), newRoom("host")));
     await assertFails(setDoc(doc(db, "rooms", "ABCDEF"), newRoom("host")));
+    // 読み違えやすい文字（I・L・O・V・0・1・4・7）を含む ID は作れない（#51）
+    for (const id of ["ABCDI", "ABCDL", "ABCDO", "ABCDV", "ABCD0", "ABCD1", "ABCD4", "ABCD7"]) {
+      await assertFails(setDoc(doc(db, "rooms", id), newRoom("host")));
+    }
   });
 
   it("既にあるルームを、別の人が作り直して乗っ取ることはできない", async () => {

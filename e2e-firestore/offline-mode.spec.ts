@@ -7,7 +7,7 @@ const LABEL = 'ホストの端末 · この端末だけで進行中'
 const RELEASE = '各自の端末での参加に戻す'
 
 function roomIdOf(page: Page): string {
-  const match = new URL(page.url()).pathname.match(/^\/host\/([0-9A-Z]{5})/)
+  const match = new URL(page.url()).pathname.match(/^\/host\/([2-35-68-9A-HJKMNP-UW-Z]{5})/)
   if (!match) throw new Error(`ルームの ID が URL にありません: ${page.url()}`)
   return match[1]
 }

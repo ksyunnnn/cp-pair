@@ -49,7 +49,7 @@ describe("FirestoreRoomStore", () => {
     const bob = device("bob");
 
     const created = await host.createRoom("desert_island");
-    expect(created.id).toMatch(/^[0-9A-Z]{5}$/);
+    expect(created.id).toMatch(/^[2-35-68-9A-HJKMNP-UW-Z]{5}$/);
     expect(created.status).toBe("open");
 
     const a = await alice.addParticipant(created.id, { name: "アオイ", gender: "F", joinType: "device" });
@@ -252,5 +252,21 @@ describe("FirestoreRoomStore.importRoom（オフラインモードの解除）",
     expect(newId).not.toBe(taken.id);
     expect((await host.getRoom(newId))?.participants.map((p) => p.selectedCompanyId)).toEqual([4]);
     expect((await other.getRoom(taken.id))?.participants).toEqual([]);
+  });
+
+  it("前の形の ID（読み違えやすい文字を含むもの）のルームは、新しい形の ID で作る", async () => {
+    const host = device("host");
+    const source: Room = {
+      id: "AB0C7",
+      presetId: "propose",
+      status: "open",
+      participants: [{ id: "manual-1", name: "メイ", gender: "F", joinType: "manual", selectedCompanyId: 4 }],
+      result: null,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+    const newId = await host.importRoom(source, [], []);
+    expect(newId).toMatch(/^[2-35-68-9A-HJKMNP-UW-Z]{5}$/);
+    expect((await host.getRoom(newId))?.participants.map((p) => p.selectedCompanyId)).toEqual([4]);
   });
 });

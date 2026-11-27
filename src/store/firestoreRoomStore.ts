@@ -26,7 +26,7 @@ import {
 } from "firebase/firestore";
 import type { MatchResult, Participant } from "../game/types.ts";
 import type { NewParticipant, Room, RoomStatus, RoomStore, SelectOutcome } from "./RoomStore.ts";
-import { randomRoomId } from "./roomId.ts";
+import { isRoomId, randomRoomId } from "./roomId.ts";
 
 const ROOM_ID_ATTEMPTS = 10;
 
@@ -282,8 +282,11 @@ export class FirestoreRoomStore implements RoomStore {
   async importRoom(source: Room, knownParticipantIds: string[], repickedParticipantIds: string[]): Promise<string> {
     const uid = await this.signIn();
     let roomId = source.id;
-    const existing = await getDoc(this.roomRef(roomId));
-    if (!existing.exists()) {
+    // 前の形の ID（読み違えやすい文字を含むもの、#51）は、ルールで作れないので、最初から新しい ID で作る
+    const existing = isRoomId(roomId) ? await getDoc(this.roomRef(roomId)) : null;
+    if (!existing) {
+      roomId = (await this.createRoom(source.presetId)).id;
+    } else if (!existing.exists()) {
       if (!(await this.tryCreateRoom(roomId, source.presetId, uid))) roomId = (await this.createRoom(source.presetId)).id;
     } else if (existing.data().hostUid !== uid) {
       roomId = (await this.createRoom(source.presetId)).id;
