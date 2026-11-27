@@ -18,15 +18,19 @@ function GenderPicker({ initial }: { initial: Gender | null }) {
   return <GenderSelect value={value} onChange={setValue} />;
 }
 
+/* 3 つ目は長い企業理念。省略せずに折り返す（Framer の部品シート「04 共通の選択肢カード」の「長い企業理念」） */
+const LONG_LABEL =
+  "ダミーの長い企業理念。創造と革新で、人と社会と地球に貢献し、すべてのいのちが調和するこころ豊かな未来をめざします。";
+
 function Choices() {
   const [selected, setSelected] = useState(1);
   return (
     <>
-      {["価値観", "働き方", "未来"].map((category, i) => (
+      {["価値観", "働き方", "企業理念"].map((category, i) => (
         <ChoiceCard
           key={category}
           category={category}
-          label={`ダミーの選択肢 ${i + 1}`}
+          label={i === 2 ? LONG_LABEL : `ダミーの選択肢 ${i + 1}`}
           selected={selected === i}
           onClick={() => setSelected(i)}
         />

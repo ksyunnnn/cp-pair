@@ -88,6 +88,38 @@
   min-height: 100%;
 }
 
+/* 操作バーの見本（Framer の部品シートの 390 × 330）。背後に内容を通して、ガラスの透け方を見る */
+.sb-device--short {
+  height: 330px;
+}
+.sb-glass-behind {
+  padding: 24px var(--page-x) var(--floating-clearance);
+}
+.sb-glass-behind .sb-block {
+  height: 40px;
+}
+.sb-block--ink {
+  background: var(--surface-inverse);
+}
+
+/* 色と文字の見本 */
+.sb-swatch {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sb-swatch__chip {
+  flex-shrink: 0;
+  width: 64px;
+  height: 40px;
+  border-radius: var(--radius-chip);
+  outline: 1px solid var(--border);
+}
+.sb-type {
+  align-items: flex-start;
+}
+
 /* 縦に積んだ中で、文字の幅に留める（一覧 → 詳細の「一覧に戻る」） */
 .sb-fit {
   align-self: flex-start;
