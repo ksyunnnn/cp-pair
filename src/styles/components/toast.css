@@ -1,0 +1,48 @@
+/* トースト（操作の層）。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-toasts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: calc(12px + env(safe-area-inset-top)) 16px 0;
+  pointer-events: none;
+  z-index: 40;
+}
+.cp-toast {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 358px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-card);
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-sheen), var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+.cp-toast__icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  background: var(--surface-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cp-toast--info .cp-toast__icon {
+  background: var(--surface-sunken);
+}
+.cp-toast--warn .cp-toast__icon {
+  background: var(--accent);
+}

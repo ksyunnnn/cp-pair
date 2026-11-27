@@ -1,0 +1,23 @@
+/*
+  スタイルの入口。src/main.tsx はこのファイルだけを読む。
+  値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。
+  後に書いたものが勝つため、読む順を変えない（値 → 下地 → ページ → 部品 → 画面）。
+*/
+@import "./tokens.css";
+@import "./base.css";
+@import "./page.css";
+@import "./components/button.css";
+@import "./components/field.css";
+@import "./components/choice.css";
+@import "./components/badge.css";
+@import "./components/row.css";
+@import "./components/steps.css";
+@import "./components/floating.css";
+@import "./components/toast.css";
+@import "./components/card.css";
+@import "./handoff.css";
+@import "./dev-panel.css";
+@import "./host.css";
+@import "./participant.css";
+@import "./result.css";
+@import "./rules.css";

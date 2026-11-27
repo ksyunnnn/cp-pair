@@ -1,0 +1,53 @@
+/* 共有カード。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.cp-card--ink {
+  background: var(--surface-inverse);
+  border-color: var(--surface-inverse);
+  color: var(--text-inverse);
+  border-radius: var(--radius-card-ink);
+  padding: 24px;
+  gap: 18px;
+}
+.cp-card--soft {
+  background: var(--surface-sunken);
+  border-color: var(--surface-sunken);
+  border-radius: var(--radius-field);
+  padding: 16px;
+  gap: 8px;
+}
+.cp-qr {
+  align-self: center;
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  line-height: 0;
+  /* QR コードの点は currentColor で描く */
+  color: var(--text);
+}
+.cp-url {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-field);
+  background: var(--surface-sunken);
+  min-width: 0;
+}
+.cp-url__text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-feature-settings: var(--inter-features);
+}

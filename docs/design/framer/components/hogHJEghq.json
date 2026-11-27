@@ -1,0 +1,102 @@
+{
+  "id": "hogHJEghq",
+  "type": "ComponentNode",
+  "name": "CP バッジ",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "kogUeGP_A",
+      "name": "標準"
+    }
+  ],
+  "variables": [
+    {
+      "id": "VV0tzuylT",
+      "initialValue": "男性",
+      "name": "ラベル",
+      "type": "string"
+    }
+  ],
+  "visible": false,
+  "$control__VV0tzuylT": "男性",
+  "children": [
+    {
+      "id": "kogUeGP_A",
+      "type": "FrameNode",
+      "name": "標準",
+      "$groundNodeId": "kogUeGP_A",
+      "$isPrimary": true,
+      "$scopeId": "hogHJEghq",
+      "constraintsLocked": false,
+      "fill": "var(--token-vDcPmJKek)",
+      "gap": "6px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "0px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "6px 10px 6px 10px",
+      "paddingBottom": "6px",
+      "paddingLeft": "10px",
+      "paddingRight": "10px",
+      "paddingTop": "6px",
+      "radius": "8px",
+      "radiusBottomLeft": "8px",
+      "radiusBottomRight": "8px",
+      "radiusTopLeft": "8px",
+      "radiusTopRight": "8px",
+      "stackAlignment": "start",
+      "stackDirection": "horizontal",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "auto",
+      "children": [
+        {
+          "id": "Q685zwjyN",
+          "type": "RichTextNode",
+          "name": "ラベル",
+          "$groundNodeId": "kogUeGP_A",
+          "$scopeId": "hogHJEghq",
+          "textStylePreset": "phDSpJBNi",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": {
+            "type": "reference",
+            "id": "VV0tzuylT",
+            "providerId": "hogHJEghq"
+          },
+          "visible": true,
+          "width": "auto",
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 200,
+        "height": 200
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}

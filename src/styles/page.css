@@ -1,0 +1,100 @@
+/* ページの骨組み（ヘッダ・本文・フッター・区画）。値の出どころは docs/design/framer-values.md。Framer にない値には「足した値」と書く。 */
+
+.cp-page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  /* ホーム画面から開いたとき、状態バーの領域に重ならないように（Safari のタブの中では 0） */
+  padding: calc(24px + env(safe-area-inset-top)) var(--page-x) 16px;
+}
+.cp-brand__right {
+  flex: 1;
+  text-align: right;
+}
+/* 文字のリンク（ヘッダの ABOUT、about の画面）。色と下線は CP Source（L7rQ5OG8k）による */
+.cp-link {
+  color: var(--text-muted);
+  text-decoration: underline;
+  position: relative;
+}
+/* 押せる範囲を、見た目を変えずに上下 14px・左右 8px 広げる（11px の文字の行 17.6px で高さ 45.6px。HIG Buttons の 44×44pt） */
+.cp-link::after {
+  content: "";
+  position: absolute;
+  inset: -14px -8px;
+}
+.cp-link:hover {
+  color: var(--text);
+}
+/* about の画面のリンクは、縦に積んだ中で文字の幅に留める */
+.cp-about__link {
+  align-self: flex-start;
+}
+
+/* ページの最後のフッター。本文が短いときは画面の下端に寄せる（.cp-page は高さ 100dvh 以上の縦並び）。
+   余白は本文と同じ --page-x と、ホームインジケーターの領域の分 */
+.cp-footer {
+  margin-top: auto;
+  padding: 0 var(--page-x) calc(32px + env(safe-area-inset-bottom));
+}
+
+.cp-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--block-gap);
+  padding: 16px var(--page-x) 32px;
+}
+.cp-content.has-floating {
+  /* 操作バーはホームインジケーターの領域の分だけ上がるため、同じ分を足す */
+  padding-bottom: calc(var(--floating-clearance) + env(safe-area-inset-bottom));
+}
+/* キーボードで移った先が操作バーの下に隠れないように（WCAG 2.2 の 2.4.11 Focus Not Obscured） */
+html:has(.cp-floating) {
+  scroll-padding-bottom: calc(var(--floating-clearance) + env(safe-area-inset-bottom));
+}
+
+.cp-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cp-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cp-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cp-stack--8 {
+  gap: 8px;
+}
+.cp-stack--16 {
+  gap: 16px;
+}
+
+.cp-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+.cp-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}

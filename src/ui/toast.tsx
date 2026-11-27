@@ -44,9 +44,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
               exit={{ opacity: 0, y: OFFSET.toastY, scale: OFFSET.toastScale, transition: FADE.out }}
             >
               <span className="cp-toast__icon">
-                {t.kind === "success" && <CpSymbol name="Done" size={14} color="var(--cp-paper)" />}
-                {t.kind === "info" && <CpSymbol name="Talk" size={16} eyeColor="var(--cp-soft)" />}
-                {t.kind === "warn" && <CpSymbol name="Secret" size={14} color="var(--cp-paper)" eyeColor="var(--cp-accent)" />}
+                {t.kind === "success" && <CpSymbol name="Done" size={14} color="var(--text-inverse)" />}
+                {t.kind === "info" && <CpSymbol name="Talk" size={16} eyeColor="var(--surface-sunken)" />}
+                {t.kind === "warn" && <CpSymbol name="Secret" size={14} color="var(--text-inverse)" eyeColor="var(--accent)" />}
               </span>
               <span className="t-label">{t.message}</span>
             </m.div>

@@ -1,0 +1,1052 @@
+{
+  "id": "DkHwa6fLy",
+  "type": "ComponentNode",
+  "name": "CP 参加者の行",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "MsRs7FkL5",
+      "name": "選び終えた"
+    },
+    {
+      "id": "yvOBrksrz",
+      "name": "まだ"
+    }
+  ],
+  "variables": [
+    {
+      "id": "j0mdcucgO",
+      "initialValue": "アオイ",
+      "name": "名前",
+      "type": "string"
+    },
+    {
+      "id": "BH1h6gLkf",
+      "initialValue": "自分の端末",
+      "name": "参加方法",
+      "type": "string"
+    },
+    {
+      "id": "SS_Un1Zfu",
+      "initialValue": "女性",
+      "name": "性別",
+      "type": "string"
+    },
+    {
+      "id": "sOIO73cg3",
+      "name": "削除",
+      "type": "eventhandler"
+    },
+    {
+      "id": "vWqPzB5jG",
+      "name": "操作",
+      "type": "eventhandler"
+    }
+  ],
+  "visible": false,
+  "$control__j0mdcucgO": "アオイ",
+  "$control__BH1h6gLkf": "自分の端末",
+  "$control__SS_Un1Zfu": "女性",
+  "children": [
+    {
+      "id": "MsRs7FkL5",
+      "type": "FrameNode",
+      "name": "選び終えた",
+      "$groundNodeId": "MsRs7FkL5",
+      "$isPrimary": true,
+      "$scopeId": "DkHwa6fLy",
+      "border": "1px solid #D8D8CE",
+      "borderBottom": "1px",
+      "borderLeft": "1px",
+      "borderRight": "1px",
+      "borderWidth": "1px",
+      "borderTop": "1px",
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "12px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "0px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "16px",
+      "paddingBottom": "16px",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "paddingTop": "16px",
+      "radius": "20px",
+      "radiusBottomLeft": "20px",
+      "radiusBottomRight": "20px",
+      "radiusTopLeft": "20px",
+      "radiusTopRight": "20px",
+      "stackAlignment": "start",
+      "stackDirection": "vertical",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "h4B1dLyq9",
+          "type": "FrameNode",
+          "name": "参加者情報",
+          "$groundNodeId": "MsRs7FkL5",
+          "$scopeId": "DkHwa6fLy",
+          "gap": "12px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "horizontal",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "pHPNDq86t",
+              "type": "IconNode",
+              "name": "Person",
+              "icon": "Person",
+              "$groundNodeId": "MsRs7FkL5",
+              "$scopeId": "DkHwa6fLy",
+              "paginationVariants": null,
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "set": "qVkSETKBD",
+              "visible": true,
+              "width": "28px",
+              "$rect": {
+                "x": -14,
+                "y": -100,
+                "width": 28,
+                "height": 200
+              }
+            },
+            {
+              "id": "bFdXEh8jh",
+              "type": "FrameNode",
+              "name": "名前と参加方法",
+              "$groundNodeId": "MsRs7FkL5",
+              "$scopeId": "DkHwa6fLy",
+              "gap": "4px",
+              "height": "auto",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "stackAlignment": "start",
+              "stackDirection": "vertical",
+              "stackDistribution": "start",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "OUuLzAIl8",
+                  "type": "RichTextNode",
+                  "name": "ラベル",
+                  "$groundNodeId": "MsRs7FkL5",
+                  "$scopeId": "DkHwa6fLy",
+                  "textStylePreset": "uUqlDaRbo",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": {
+                    "type": "reference",
+                    "id": "j0mdcucgO",
+                    "providerId": "DkHwa6fLy"
+                  },
+                  "visible": true,
+                  "width": "1fr",
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                },
+                {
+                  "id": "gRvIcU5jY",
+                  "type": "FrameNode",
+                  "name": "参加者属性",
+                  "$groundNodeId": "MsRs7FkL5",
+                  "$scopeId": "DkHwa6fLy",
+                  "gap": "8px",
+                  "height": "auto",
+                  "layout": "stack",
+                  "opacity": 1,
+                  "overflow": "clip",
+                  "padding": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "paddingRight": "0px",
+                  "paddingTop": "0px",
+                  "position": "relative",
+                  "stackAlignment": "start",
+                  "stackDirection": "horizontal",
+                  "stackDistribution": "start",
+                  "stackWrapEnabled": false,
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "RphGvHYWW",
+                      "type": "RichTextNode",
+                      "name": "ラベル",
+                      "$groundNodeId": "MsRs7FkL5",
+                      "$scopeId": "DkHwa6fLy",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "phDSpJBNi",
+                      "height": "auto",
+                      "opacity": 1,
+                      "position": "relative",
+                      "tag": "p",
+                      "text": {
+                        "type": "reference",
+                        "id": "SS_Un1Zfu",
+                        "providerId": "DkHwa6fLy"
+                      },
+                      "visible": true,
+                      "width": "auto",
+                      "$rect": {
+                        "x": -100,
+                        "y": -100,
+                        "width": 200,
+                        "height": 200
+                      }
+                    },
+                    {
+                      "id": "nypYtCJO_",
+                      "type": "RichTextNode",
+                      "name": "ラベル",
+                      "$groundNodeId": "MsRs7FkL5",
+                      "$scopeId": "DkHwa6fLy",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "phDSpJBNi",
+                      "height": "auto",
+                      "opacity": 1,
+                      "position": "relative",
+                      "tag": "p",
+                      "text": {
+                        "type": "reference",
+                        "id": "BH1h6gLkf",
+                        "providerId": "DkHwa6fLy"
+                      },
+                      "visible": true,
+                      "width": "auto",
+                      "$rect": {
+                        "x": -100,
+                        "y": -100,
+                        "width": 200,
+                        "height": 200
+                      }
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "qkgkF3sOJ",
+          "type": "RichTextNode",
+          "name": "選び終えた",
+          "$groundNodeId": "MsRs7FkL5",
+          "$scopeId": "DkHwa6fLy",
+          "textStylePreset": "sAS8XY6m6",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": "選び終えた",
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "v:qkgkF3sOJ:0",
+              "type": "TextBlock",
+              "tag": "p",
+              "textStylePreset": "sAS8XY6m6",
+              "children": [
+                {
+                  "id": "v:qkgkF3sOJ:0:0",
+                  "type": "TextRun",
+                  "text": "選び終えた",
+                  "bold": false,
+                  "italic": false,
+                  "inlineCode": false
+                }
+              ]
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "xkeP3gl5H",
+          "type": "FrameNode",
+          "name": "操作",
+          "$groundNodeId": "MsRs7FkL5",
+          "$scopeId": "DkHwa6fLy",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "horizontal",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "SCtwmU6ks",
+              "type": "FrameNode",
+              "name": "操作ボタン",
+              "$groundNodeId": "MsRs7FkL5",
+              "$scopeId": "DkHwa6fLy",
+              "cursor": "pointer",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "44px",
+              "htmlTag": "button",
+              "layout": "stack",
+              "onTap": [
+                {
+                  "action": "TRIGGER_EVENT",
+                  "controls": {
+                    "id": {
+                      "type": "reference",
+                      "id": "vWqPzB5jG"
+                    }
+                  }
+                }
+              ],
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "8px 16px 8px 16px",
+              "paddingBottom": "8px",
+              "paddingLeft": "16px",
+              "paddingRight": "16px",
+              "paddingTop": "8px",
+              "position": "relative",
+              "radius": "22px",
+              "radiusBottomLeft": "22px",
+              "radiusBottomRight": "22px",
+              "radiusTopLeft": "22px",
+              "radiusTopRight": "22px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "tahtR0NOE",
+                  "type": "RichTextNode",
+                  "name": "参加情報を確認",
+                  "$groundNodeId": "MsRs7FkL5",
+                  "$scopeId": "DkHwa6fLy",
+                  "textAlignment": "center",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "参加情報を確認",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:tahtR0NOE:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:tahtR0NOE:0:0",
+                          "type": "TextRun",
+                          "text": "参加情報を確認",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -22,
+                "width": 200,
+                "height": 44
+              }
+            },
+            {
+              "id": "IsAXp9CRE",
+              "type": "FrameNode",
+              "name": "削除ボタン",
+              "$groundNodeId": "MsRs7FkL5",
+              "$scopeId": "DkHwa6fLy",
+              "ariaLabel": "参加者を削除",
+              "cursor": "pointer",
+              "gap": "12px",
+              "height": "44px",
+              "htmlTag": "button",
+              "layout": "stack",
+              "onTap": [
+                {
+                  "action": "TRIGGER_EVENT",
+                  "controls": {
+                    "id": {
+                      "type": "reference",
+                      "id": "sOIO73cg3"
+                    }
+                  }
+                }
+              ],
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "12px",
+              "paddingBottom": "12px",
+              "paddingLeft": "12px",
+              "paddingRight": "12px",
+              "paddingTop": "12px",
+              "position": "relative",
+              "radius": "22px",
+              "radiusBottomLeft": "22px",
+              "radiusBottomRight": "22px",
+              "radiusTopLeft": "22px",
+              "radiusTopRight": "22px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "44px",
+              "children": [
+                {
+                  "id": "b1JwrijSv",
+                  "type": "IconNode",
+                  "name": "Remove",
+                  "icon": "Remove",
+                  "$groundNodeId": "MsRs7FkL5",
+                  "$scopeId": "DkHwa6fLy",
+                  "paginationVariants": null,
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "set": "qVkSETKBD",
+                  "visible": true,
+                  "width": "16px",
+                  "$rect": {
+                    "x": -8,
+                    "y": -100,
+                    "width": 16,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -22,
+                "y": -22,
+                "width": 44,
+                "height": 44
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    },
+    {
+      "id": "yvOBrksrz",
+      "type": "FrameNode",
+      "name": "まだ",
+      "$groundNodeId": "yvOBrksrz",
+      "$isReplica": true,
+      "$originalId": "MsRs7FkL5",
+      "$scopeId": "DkHwa6fLy",
+      "border": "1px solid #D8D8CE",
+      "borderBottom": "1px",
+      "borderLeft": "1px",
+      "borderRight": "1px",
+      "borderWidth": "1px",
+      "borderTop": "1px",
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "12px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "430px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "16px",
+      "paddingBottom": "16px",
+      "paddingLeft": "16px",
+      "paddingRight": "16px",
+      "paddingTop": "16px",
+      "radius": "20px",
+      "radiusBottomLeft": "20px",
+      "radiusBottomRight": "20px",
+      "radiusTopLeft": "20px",
+      "radiusTopRight": "20px",
+      "stackAlignment": "start",
+      "stackDirection": "vertical",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "yvOBrksrzh4B1dLyq9",
+          "type": "FrameNode",
+          "name": "参加者情報",
+          "$groundNodeId": "yvOBrksrz",
+          "$originalId": "h4B1dLyq9",
+          "$replicaId": "yvOBrksrz",
+          "$scopeId": "DkHwa6fLy",
+          "gap": "12px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "horizontal",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "yvOBrksrzpHPNDq86t",
+              "type": "IconNode",
+              "name": "Person",
+              "icon": "Person",
+              "$groundNodeId": "yvOBrksrz",
+              "$originalId": "pHPNDq86t",
+              "$replicaId": "yvOBrksrz",
+              "$scopeId": "DkHwa6fLy",
+              "paginationVariants": null,
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "set": "qVkSETKBD",
+              "visible": true,
+              "width": "28px",
+              "$rect": {
+                "x": -14,
+                "y": -100,
+                "width": 28,
+                "height": 200
+              }
+            },
+            {
+              "id": "yvOBrksrzbFdXEh8jh",
+              "type": "FrameNode",
+              "name": "名前と参加方法",
+              "$groundNodeId": "yvOBrksrz",
+              "$originalId": "bFdXEh8jh",
+              "$replicaId": "yvOBrksrz",
+              "$scopeId": "DkHwa6fLy",
+              "gap": "4px",
+              "height": "auto",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "stackAlignment": "start",
+              "stackDirection": "vertical",
+              "stackDistribution": "start",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "yvOBrksrzOUuLzAIl8",
+                  "type": "RichTextNode",
+                  "name": "ラベル",
+                  "$groundNodeId": "yvOBrksrz",
+                  "$originalId": "OUuLzAIl8",
+                  "$replicaId": "yvOBrksrz",
+                  "$scopeId": "DkHwa6fLy",
+                  "textStylePreset": "uUqlDaRbo",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": {
+                    "type": "reference",
+                    "id": "j0mdcucgO",
+                    "providerId": "DkHwa6fLy"
+                  },
+                  "visible": true,
+                  "width": "1fr",
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                },
+                {
+                  "id": "yvOBrksrzgRvIcU5jY",
+                  "type": "FrameNode",
+                  "name": "参加者属性",
+                  "$groundNodeId": "yvOBrksrz",
+                  "$originalId": "gRvIcU5jY",
+                  "$replicaId": "yvOBrksrz",
+                  "$scopeId": "DkHwa6fLy",
+                  "gap": "8px",
+                  "height": "auto",
+                  "layout": "stack",
+                  "opacity": 1,
+                  "overflow": "clip",
+                  "padding": "0px",
+                  "paddingBottom": "0px",
+                  "paddingLeft": "0px",
+                  "paddingRight": "0px",
+                  "paddingTop": "0px",
+                  "position": "relative",
+                  "stackAlignment": "start",
+                  "stackDirection": "horizontal",
+                  "stackDistribution": "start",
+                  "stackWrapEnabled": false,
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "yvOBrksrzRphGvHYWW",
+                      "type": "RichTextNode",
+                      "name": "ラベル",
+                      "$groundNodeId": "yvOBrksrz",
+                      "$originalId": "RphGvHYWW",
+                      "$replicaId": "yvOBrksrz",
+                      "$scopeId": "DkHwa6fLy",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "phDSpJBNi",
+                      "height": "auto",
+                      "opacity": 1,
+                      "position": "relative",
+                      "tag": "p",
+                      "text": {
+                        "type": "reference",
+                        "id": "SS_Un1Zfu",
+                        "providerId": "DkHwa6fLy"
+                      },
+                      "visible": true,
+                      "width": "auto",
+                      "$rect": {
+                        "x": -100,
+                        "y": -100,
+                        "width": 200,
+                        "height": 200
+                      }
+                    },
+                    {
+                      "id": "yvOBrksrznypYtCJO_",
+                      "type": "RichTextNode",
+                      "name": "ラベル",
+                      "$groundNodeId": "yvOBrksrz",
+                      "$originalId": "nypYtCJO_",
+                      "$replicaId": "yvOBrksrz",
+                      "$scopeId": "DkHwa6fLy",
+                      "textColor": "var(--token-W0brTCMkj)",
+                      "textStylePreset": "phDSpJBNi",
+                      "height": "auto",
+                      "opacity": 1,
+                      "position": "relative",
+                      "tag": "p",
+                      "text": {
+                        "type": "reference",
+                        "id": "BH1h6gLkf",
+                        "providerId": "DkHwa6fLy"
+                      },
+                      "visible": true,
+                      "width": "auto",
+                      "$rect": {
+                        "x": -100,
+                        "y": -100,
+                        "width": 200,
+                        "height": 200
+                      }
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "yvOBrksrzqkgkF3sOJ",
+          "type": "RichTextNode",
+          "name": "選び終えた",
+          "$groundNodeId": "yvOBrksrz",
+          "$originalId": "qkgkF3sOJ",
+          "$replicaId": "yvOBrksrz",
+          "$scopeId": "DkHwa6fLy",
+          "textColor": "var(--token-W0brTCMkj)",
+          "textStylePreset": "sAS8XY6m6",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": "まだ選んでいません",
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "v:yvOBrksrzqkgkF3sOJ:0",
+              "type": "TextBlock",
+              "tag": "p",
+              "textColor": "var(--token-W0brTCMkj)",
+              "textStylePreset": "sAS8XY6m6",
+              "children": [
+                {
+                  "id": "v:yvOBrksrzqkgkF3sOJ:0:0",
+                  "type": "TextRun",
+                  "text": "まだ選んでいません",
+                  "bold": false,
+                  "italic": false,
+                  "inlineCode": false,
+                  "textColor": "var(--token-W0brTCMkj)"
+                }
+              ]
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "yvOBrksrzxkeP3gl5H",
+          "type": "FrameNode",
+          "name": "操作",
+          "$groundNodeId": "yvOBrksrz",
+          "$originalId": "xkeP3gl5H",
+          "$replicaId": "yvOBrksrz",
+          "$scopeId": "DkHwa6fLy",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "horizontal",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "yvOBrksrzSCtwmU6ks",
+              "type": "FrameNode",
+              "name": "操作ボタン",
+              "$groundNodeId": "yvOBrksrz",
+              "$originalId": "SCtwmU6ks",
+              "$replicaId": "yvOBrksrz",
+              "$scopeId": "DkHwa6fLy",
+              "cursor": "pointer",
+              "fill": "var(--token-vDcPmJKek)",
+              "gap": "12px",
+              "height": "44px",
+              "htmlTag": "button",
+              "layout": "stack",
+              "onTap": [
+                {
+                  "action": "TRIGGER_EVENT",
+                  "controls": {
+                    "id": {
+                      "type": "reference",
+                      "id": "vWqPzB5jG"
+                    }
+                  }
+                }
+              ],
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "8px 16px 8px 16px",
+              "paddingBottom": "8px",
+              "paddingLeft": "16px",
+              "paddingRight": "16px",
+              "paddingTop": "8px",
+              "position": "relative",
+              "radius": "22px",
+              "radiusBottomLeft": "22px",
+              "radiusBottomRight": "22px",
+              "radiusTopLeft": "22px",
+              "radiusTopRight": "22px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "yvOBrksrztahtR0NOE",
+                  "type": "RichTextNode",
+                  "name": "参加情報を確認",
+                  "$groundNodeId": "yvOBrksrz",
+                  "$originalId": "tahtR0NOE",
+                  "$replicaId": "yvOBrksrz",
+                  "$scopeId": "DkHwa6fLy",
+                  "textAlignment": "center",
+                  "textStylePreset": "sAS8XY6m6",
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "tag": "p",
+                  "text": "この端末で選ぶ",
+                  "visible": true,
+                  "width": "1fr",
+                  "children": [
+                    {
+                      "id": "v:yvOBrksrztahtR0NOE:0",
+                      "type": "TextBlock",
+                      "tag": "p",
+                      "textAlignment": "center",
+                      "textStylePreset": "sAS8XY6m6",
+                      "children": [
+                        {
+                          "id": "v:yvOBrksrztahtR0NOE:0:0",
+                          "type": "TextRun",
+                          "text": "この端末で選ぶ",
+                          "bold": false,
+                          "italic": false,
+                          "inlineCode": false
+                        }
+                      ]
+                    }
+                  ],
+                  "$rect": {
+                    "x": -100,
+                    "y": -100,
+                    "width": 200,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -22,
+                "width": 200,
+                "height": 44
+              }
+            },
+            {
+              "id": "yvOBrksrzIsAXp9CRE",
+              "type": "FrameNode",
+              "name": "削除ボタン",
+              "$groundNodeId": "yvOBrksrz",
+              "$originalId": "IsAXp9CRE",
+              "$replicaId": "yvOBrksrz",
+              "$scopeId": "DkHwa6fLy",
+              "ariaLabel": "参加者を削除",
+              "cursor": "pointer",
+              "gap": "12px",
+              "height": "44px",
+              "htmlTag": "button",
+              "layout": "stack",
+              "onTap": [
+                {
+                  "action": "TRIGGER_EVENT",
+                  "controls": {
+                    "id": {
+                      "type": "reference",
+                      "id": "sOIO73cg3"
+                    }
+                  }
+                }
+              ],
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "12px",
+              "paddingBottom": "12px",
+              "paddingLeft": "12px",
+              "paddingRight": "12px",
+              "paddingTop": "12px",
+              "position": "relative",
+              "radius": "22px",
+              "radiusBottomLeft": "22px",
+              "radiusBottomRight": "22px",
+              "radiusTopLeft": "22px",
+              "radiusTopRight": "22px",
+              "stackAlignment": "center",
+              "stackDirection": "vertical",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "44px",
+              "children": [
+                {
+                  "id": "yvOBrksrzb1JwrijSv",
+                  "type": "IconNode",
+                  "name": "Remove",
+                  "icon": "Remove",
+                  "$groundNodeId": "yvOBrksrz",
+                  "$originalId": "b1JwrijSv",
+                  "$replicaId": "yvOBrksrz",
+                  "$scopeId": "DkHwa6fLy",
+                  "paginationVariants": null,
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "set": "qVkSETKBD",
+                  "visible": true,
+                  "width": "16px",
+                  "$rect": {
+                    "x": -8,
+                    "y": -100,
+                    "width": 16,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -22,
+                "y": -22,
+                "width": 44,
+                "height": 44
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 430,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}

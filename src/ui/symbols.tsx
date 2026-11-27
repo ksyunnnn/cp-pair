@@ -48,8 +48,8 @@ const EYES: Partial<Record<SymbolName, string[]>> = {
 export function CpSymbol({
   name,
   size = 16,
-  color = "var(--cp-ink)",
-  eyeColor = "var(--cp-paper)",
+  color = "var(--text)",
+  eyeColor = "var(--surface)",
   style,
   className,
   eyeClassName,
@@ -93,10 +93,10 @@ export function PairLogo({ width = 30 }: { width?: number }) {
       aria-hidden="true"
       style={{ display: "block", flexShrink: 0 }}
     >
-      <path d="M4 23C4 9 12 2 21 2s15 8 15 21-7 19-16 19S4 36 4 23Z" fill="var(--cp-ink)" />
-      <path d="M29 23C29 9 37 2 46 2s15 8 15 21-7 19-16 19-16-6-16-19Z" fill="var(--cp-ink)" />
-      <rect x="19" y="14" width="5" height="14" rx="2.5" fill="var(--cp-paper)" />
-      <rect x="40" y="14" width="5" height="14" rx="2.5" fill="var(--cp-paper)" />
+      <path d="M4 23C4 9 12 2 21 2s15 8 15 21-7 19-16 19S4 36 4 23Z" fill="var(--text)" />
+      <path d="M29 23C29 9 37 2 46 2s15 8 15 21-7 19-16 19-16-6-16-19Z" fill="var(--text)" />
+      <rect x="19" y="14" width="5" height="14" rx="2.5" fill="var(--surface)" />
+      <rect x="40" y="14" width="5" height="14" rx="2.5" fill="var(--surface)" />
     </svg>
   );
 }
