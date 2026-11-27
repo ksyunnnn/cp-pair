@@ -9,6 +9,15 @@
   border: 1px solid var(--border);
   background: var(--surface);
 }
+/* 行全体が 1 つのリンクになる行（トップの「最近のルーム」） */
+.cp-row--link {
+  color: var(--text);
+  text-decoration: none;
+  transition: opacity var(--motion-press-fade) ease;
+}
+.cp-row--link:active {
+  opacity: 0.8;
+}
 .cp-row__info {
   display: flex;
   align-items: center;

@@ -55,6 +55,19 @@ export function lastHostRoom(): string | null {
   return list.length ? list[list.length - 1] : null;
 }
 
+/* この端末が関わったルーム。ホストとして作ったものと、参加者として入ったもの。両方にあるルームはホストとして数える */
+export type RoomRecord = { roomId: string; role: "host" | "participant"; participantId?: string };
+
+export function roomRecords(): RoomRecord[] {
+  const hosted = readJson<string[]>(HOST_KEY, []);
+  const joined = readJson<Record<string, Record<string, string>>>(ME_KEY, {})[deviceKey()] || {};
+  const records: RoomRecord[] = hosted.map((roomId) => ({ roomId, role: "host" }));
+  for (const [roomId, participantId] of Object.entries(joined)) {
+    if (!hosted.includes(roomId)) records.push({ roomId, role: "participant", participantId });
+  }
+  return records;
+}
+
 export function inviteUrl(roomId: string): string {
   return `${location.origin}/r/${roomId}`;
 }
