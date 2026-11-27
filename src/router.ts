@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 export type Route =
+  | { name: "home" }
   | { name: "hostStart" }
   | { name: "rules" }
   | { name: "about" }
@@ -18,10 +19,11 @@ export function parsePath(pathname: string): Route {
     if (parts[2] === "result" && parts[3]) return { name: "hostResult", roomId: parts[1], participantId: parts[3] };
     return { name: "host", roomId: parts[1] };
   }
+  if (parts[0] === "new") return { name: "hostStart" };
   if (parts[0] === "rules") return { name: "rules" };
   if (parts[0] === "about") return { name: "about" };
   if (parts[0] === "r" && parts[1]) return { name: "participant", roomId: parts[1].toUpperCase() };
-  return { name: "hostStart" };
+  return { name: "home" };
 }
 
 /* # の後ろに画面のパスを書いた URL（例 /#/host/DE40C）は、履歴を増やさずにそのパスの URL（/host/DE40C）へ置き換える */

@@ -13,3 +13,26 @@
   flex-wrap: wrap;
   column-gap: 8px;
 }
+
+/* トップの「最近のルーム」（src/screens/host/RecentRooms.tsx） */
+.h-recent__more {
+  align-self: center;
+}
+
+/* トップの「遊び方」（src/screens/Home.tsx）。番号は進行ステップの番号（.cp-steps__num）を使う */
+.h-howto {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.h-howto__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.h-howto__step .cp-steps__num {
+  flex: none;
+}

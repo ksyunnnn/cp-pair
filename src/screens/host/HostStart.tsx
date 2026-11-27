@@ -1,4 +1,4 @@
-// ホスト Step 1: お題決定・ルーム作成
+// ホスト Step 1（/new）: お題決定・ルーム作成。トップ（/）の「ルームを作る」から来る
 import { useState } from "react";
 import { PRESET_PROMPTS } from "../../game/presets.ts";
 import { pad2 } from "../../game/present.ts";
@@ -8,7 +8,6 @@ import { createHostRoom } from "../../store/index.ts";
 import { BrandHeader, Button, ChoiceCard, FloatingBar, ProgressSteps, ScreenHeading, ScreenMain } from "../../ui/components.tsx";
 import { CpSymbol } from "../../ui/symbols.tsx";
 import { useToast } from "../../ui/toast.tsx";
-import { RecentRooms } from "./RecentRooms.tsx";
 
 export function HostStart() {
   const toast = useToast();
@@ -30,9 +29,8 @@ export function HostStart() {
 
   return (
     <div className="cp-page">
-      <BrandHeader aboutLink />
+      <BrandHeader />
       <ScreenMain className="cp-content has-floating">
-        <RecentRooms />
         <ProgressSteps current={1} />
         <ScreenHeading
           eyebrow="HOST · CHOOSE A THEME"

@@ -39,7 +39,7 @@ export function NotHost({ roomId }: { roomId: string }) {
           title="この端末は、このルームのホストではありません"
           lead="ルームを作った端末で開いてください。"
         />
-        <Button kind="secondary" onClick={() => navigate("/")}>
+        <Button kind="secondary" onClick={() => navigate("/new")}>
           新しいルームを作る
         </Button>
       </ScreenMain>

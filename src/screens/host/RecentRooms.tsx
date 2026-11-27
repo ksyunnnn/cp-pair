@@ -1,10 +1,12 @@
-// トップ（/）の「最近のルーム」。この端末の記録にあるルームを 1 件ずつ読み、新しい順に並べる（#34）。
+// トップ（/、src/screens/Home.tsx）の「最近のルーム」。この端末の記録にあるルームを 1 件ずつ読み、新しい順に並べる（#34）。
 // firestore.rules はルームの一覧（list）を禁じているため、記録にある ID で 1 件ずつ get する
 import { useEffect, useState } from "react";
 import { roomRecords, type RoomRecord } from "../../device.ts";
 import { getPreset } from "../../game/presets.ts";
 import { roomStore, type Room } from "../../store/index.ts";
-import { Badge } from "../../ui/components.tsx";
+import { Badge, Button, Section } from "../../ui/components.tsx";
+
+const FOLDED_COUNT = 3;
 
 type Entry = { record: RoomRecord; room: Room };
 
@@ -20,6 +22,7 @@ async function loadEntries(): Promise<Entry[]> {
 
 export function RecentRooms() {
   const [entries, setEntries] = useState<Entry[] | null>(null);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -29,26 +32,16 @@ export function RecentRooms() {
     };
   }, []);
 
-  // 読み終えるまでは何も出さない（空の文言が一瞬出て消えるのを避ける）
-  if (entries === null) return null;
+  // 読み終えるまでと、記録が空のときは何も出さない。無いことは告げない（#34）
+  if (entries === null || entries.length === 0) return null;
 
-  if (entries.length === 0) {
-    return (
-      <div className="cp-stack cp-stack--8">
-        <p className="t-body">この端末に、最近のルームの記録はありません。</p>
-        <p className="t-small c-muted">前のルームは、招待の URL から開けます。</p>
-      </div>
-    );
-  }
+  // ほかの区画を押し下げすぎないよう、はじめは新しい順に 3 件だけ出す
+  const shown = expanded ? entries : entries.slice(0, FOLDED_COUNT);
+  const hidden = entries.length - shown.length;
 
   return (
-    <section className="cp-stack" aria-labelledby="recent-rooms-title">
-      <div className="cp-section__head">
-        <h2 id="recent-rooms-title" className="t-strong">
-          最近のルーム
-        </h2>
-      </div>
-      {entries.map(({ record, room }) => {
+    <Section title="最近のルーム">
+      {shown.map(({ record, room }) => {
         const href = record.role === "host" ? `/host/${room.id}` : `/r/${room.id}`;
         const me = room.participants.find((p) => p.id === record.participantId);
         const role = record.role === "host" ? "ホスト" : me ? `参加者・${me.name}` : "参加者";
@@ -65,6 +58,11 @@ export function RecentRooms() {
           </a>
         );
       })}
-    </section>
+      {hidden > 0 && (
+        <Button kind="link" className="h-recent__more" onClick={() => setExpanded(true)}>
+          ほかのルーム（{hidden} 件）
+        </Button>
+      )}
+    </Section>
   );
 }

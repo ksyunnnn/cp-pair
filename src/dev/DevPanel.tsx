@@ -25,7 +25,7 @@ export function DevPanel({ route }: { route: Route }) {
   const current = deviceKey();
 
   const asHost = () => {
-    if (!roomId) return navigate("/");
+    if (!roomId) return navigate("/new");
     setDeviceKey("default");
     rememberHostRoom(roomId);
     navigate(`/host/${roomId}`);

@@ -35,12 +35,12 @@ async function playHostOnly(page: Page) {
 }
 
 test('ホストの端末だけで、4人を登録して選び、結果を発表できる', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await playHostOnly(page)
 })
 
 test('一度開いた後は、オフラインで開き直しても遊べる', async ({ page, context }) => {
-  await page.goto('/')
+  await page.goto('/new')
   // 全ファイルの保存が終わると、トーストで知らせる
   await expect(page.getByText('この端末は、オフラインでも開けるようになりました')).toBeVisible({ timeout: 30_000 })
   // Service Worker が全ファイルを保存し、このページを受け持つまで待つ
@@ -56,7 +56,7 @@ test('一度開いた後は、オフラインで開き直しても遊べる', as
 })
 
 test('結果の発表は、画面を押すと最後の状態へ飛ぶ', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await playHostOnly(page)
   await page.getByRole('button', { name: '端末を渡して見せる' }).first().click()
   await page.getByRole('button', { name: /^私は.+です$/ }).click()
@@ -74,7 +74,7 @@ test('結果の発表は、画面を押すと最後の状態へ飛ぶ', async ({
 })
 
 test('結果の発表は、再読み込みで結果の画面を開き直しても、もう一度見せる', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await playHostOnly(page)
   await page.getByRole('button', { name: '端末を渡して見せる' }).first().click()
   await page.getByRole('button', { name: /^私は.+です$/ }).click()
@@ -98,7 +98,7 @@ test('結果の発表は、再読み込みで結果の画面を開き直して�
 
 test('reduced motion では、結果の発表を待たずに出す', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  await page.goto('/')
+  await page.goto('/new')
   await playHostOnly(page)
   await page.getByRole('button', { name: '端末を渡して見せる' }).first().click()
   await page.getByRole('button', { name: /^私は.+です$/ }).click()
@@ -108,7 +108,7 @@ test('reduced motion では、結果の発表を待たずに出す', async ({ pa
 })
 
 test('ルームの画面はパスの URL で開き、招待の URL も参加の画面のパスになる', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await page.getByRole('button', { name: /^お題 01/ }).click()
   await page.getByRole('button', { name: 'このお題でルームを作る' }).click()
   await expect(page.getByRole('heading', { name: '参加者を集める' })).toBeVisible()
@@ -129,7 +129,7 @@ test('# の後ろに画面のパスを書いた URL は、そのパスの URL �
 })
 
 test('一度開いた後は、オフラインで深いパスの URL を開いても、再読み込みしても画面が出る', async ({ page, context }) => {
-  await page.goto('/')
+  await page.goto('/new')
   await expect(page.getByText('この端末は、オフラインでも開けるようになりました')).toBeVisible({ timeout: 30_000 })
   await page.waitForFunction(async () => {
     await navigator.serviceWorker.ready

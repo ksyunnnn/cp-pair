@@ -384,7 +384,7 @@ export function BrandHeader({ right, aboutLink = false }: { right?: ReactNode; a
   );
 }
 
-/* ページの最後のフッター。トップ（お題選び）へ移る文字リンクを置く。操作バーの無い画面にだけ置く */
+/* ページの最後のフッター。トップ（/、最近のルームとアプリの説明）へ移る文字リンクを置く。操作バーの無い画面にだけ置く */
 export function TopLinkFooter() {
   return (
     <footer className="cp-footer">
