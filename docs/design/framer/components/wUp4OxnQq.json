@@ -1,0 +1,296 @@
+{
+  "id": "wUp4OxnQq",
+  "type": "ComponentNode",
+  "name": "CP ニックネーム入力",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "PHkwNklcv",
+      "name": "空"
+    },
+    {
+      "id": "xlopC7ym2",
+      "name": "入力あり"
+    }
+  ],
+  "variables": [],
+  "visible": false,
+  "children": [
+    {
+      "id": "PHkwNklcv",
+      "type": "FrameNode",
+      "name": "空",
+      "$groundNodeId": "PHkwNklcv",
+      "$isPrimary": true,
+      "$scopeId": "wUp4OxnQq",
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "8px",
+      "height": "auto",
+      "htmlTag": "label",
+      "layout": "stack",
+      "left": "0px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "paddingRight": "0px",
+      "paddingTop": "0px",
+      "stackAlignment": "start",
+      "stackDirection": "vertical",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "HHFirJxgS",
+          "type": "RichTextNode",
+          "name": "ニックネーム",
+          "$groundNodeId": "PHkwNklcv",
+          "$scopeId": "wUp4OxnQq",
+          "textStylePreset": "sAS8XY6m6",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": "ニックネーム",
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "v:HHFirJxgS:0",
+              "type": "TextBlock",
+              "tag": "p",
+              "textStylePreset": "sAS8XY6m6",
+              "children": [
+                {
+                  "id": "v:HHFirJxgS:0:0",
+                  "type": "TextRun",
+                  "text": "ニックネーム",
+                  "bold": false,
+                  "italic": false,
+                  "inlineCode": false
+                }
+              ]
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "PIihCUSyG",
+          "type": "FormPlainTextInputNode",
+          "name": "ニックネーム",
+          "$groundNodeId": "PHkwNklcv",
+          "$scopeId": "wUp4OxnQq",
+          "border": "1px solid #D8D8CE",
+          "borderBottom": "1px",
+          "borderLeft": "1px",
+          "borderRight": "1px",
+          "borderWidth": "1px",
+          "borderTop": "1px",
+          "fill": "var(--token-kl8VXvaIM)",
+          "fontName": "Zen Kaku Gothic New",
+          "fontSize": "16px",
+          "fontStyle": "normal",
+          "fontWeight": 500,
+          "letterSpacing": "0em",
+          "lineHeight": "1.2em",
+          "textColor": "var(--token-SC8uq7EE3)",
+          "formInputFocusedBorder": "1px solid #22231F",
+          "formInputFocusedBorderColor": "#22231F",
+          "formInputFocusedBorderStyle": "solid",
+          "formInputFocusedBorderWidth": 1,
+          "formInputName": "nickname",
+          "formInputPlaceholder": "呼ばれたい名前",
+          "formInputPlaceholderColor": "var(--token-W0brTCMkj)",
+          "formTextInputType": "text",
+          "height": "52px",
+          "opacity": 1,
+          "padding": "12px 16px 12px 16px",
+          "paddingBottom": "12px",
+          "paddingLeft": "16px",
+          "paddingRight": "16px",
+          "paddingTop": "12px",
+          "position": "relative",
+          "radius": "12px",
+          "radiusBottomLeft": "12px",
+          "radiusBottomRight": "12px",
+          "radiusTopLeft": "12px",
+          "radiusTopRight": "12px",
+          "visible": true,
+          "width": "1fr",
+          "$rect": {
+            "x": -100,
+            "y": -26,
+            "width": 200,
+            "height": 52
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    },
+    {
+      "id": "xlopC7ym2",
+      "type": "FrameNode",
+      "name": "入力あり",
+      "$groundNodeId": "xlopC7ym2",
+      "$isReplica": true,
+      "$originalId": "PHkwNklcv",
+      "$scopeId": "wUp4OxnQq",
+      "constraintsLocked": false,
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "8px",
+      "height": "auto",
+      "htmlTag": "label",
+      "layout": "stack",
+      "left": "430px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "0px",
+      "paddingBottom": "0px",
+      "paddingLeft": "0px",
+      "paddingRight": "0px",
+      "paddingTop": "0px",
+      "stackAlignment": "start",
+      "stackDirection": "vertical",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "xlopC7ym2HHFirJxgS",
+          "type": "RichTextNode",
+          "name": "ニックネーム",
+          "$groundNodeId": "xlopC7ym2",
+          "$originalId": "HHFirJxgS",
+          "$replicaId": "xlopC7ym2",
+          "$scopeId": "wUp4OxnQq",
+          "textStylePreset": "sAS8XY6m6",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": "ニックネーム",
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "v:xlopC7ym2HHFirJxgS:0",
+              "type": "TextBlock",
+              "tag": "p",
+              "textStylePreset": "sAS8XY6m6",
+              "children": [
+                {
+                  "id": "v:xlopC7ym2HHFirJxgS:0:0",
+                  "type": "TextRun",
+                  "text": "ニックネーム",
+                  "bold": false,
+                  "italic": false,
+                  "inlineCode": false
+                }
+              ]
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "xlopC7ym2PIihCUSyG",
+          "type": "FormPlainTextInputNode",
+          "name": "ニックネーム",
+          "$groundNodeId": "xlopC7ym2",
+          "$originalId": "PIihCUSyG",
+          "$replicaId": "xlopC7ym2",
+          "$scopeId": "wUp4OxnQq",
+          "border": "1px solid #D8D8CE",
+          "borderBottom": "1px",
+          "borderLeft": "1px",
+          "borderRight": "1px",
+          "borderWidth": "1px",
+          "borderTop": "1px",
+          "fill": "var(--token-kl8VXvaIM)",
+          "fontName": "Zen Kaku Gothic New",
+          "fontSize": "16px",
+          "fontStyle": "normal",
+          "fontWeight": 500,
+          "letterSpacing": "0em",
+          "lineHeight": "1.2em",
+          "textColor": "var(--token-SC8uq7EE3)",
+          "formInputFocusedBorder": "1px solid #22231F",
+          "formInputFocusedBorderColor": "#22231F",
+          "formInputFocusedBorderStyle": "solid",
+          "formInputFocusedBorderWidth": 1,
+          "formInputName": "nickname",
+          "formInputPlaceholder": "呼ばれたい名前",
+          "formInputPlaceholderColor": "var(--token-W0brTCMkj)",
+          "formInputValue": "アオイ",
+          "formTextInputType": "text",
+          "height": "52px",
+          "opacity": 1,
+          "padding": "12px 16px 12px 16px",
+          "paddingBottom": "12px",
+          "paddingLeft": "16px",
+          "paddingRight": "16px",
+          "paddingTop": "12px",
+          "position": "relative",
+          "radius": "12px",
+          "radiusBottomLeft": "12px",
+          "radiusBottomRight": "12px",
+          "radiusTopLeft": "12px",
+          "radiusTopRight": "12px",
+          "visible": true,
+          "width": "1fr",
+          "$rect": {
+            "x": -100,
+            "y": -26,
+            "width": 200,
+            "height": 52
+          }
+        }
+      ],
+      "$rect": {
+        "x": 430,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}

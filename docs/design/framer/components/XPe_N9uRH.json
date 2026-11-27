@@ -1,0 +1,469 @@
+{
+  "id": "XPe_N9uRH",
+  "type": "ComponentNode",
+  "name": "CP 選択肢カード",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "pDZsymHcc",
+      "name": "通常"
+    },
+    {
+      "id": "RHiSf4kjU",
+      "name": "選択済み"
+    }
+  ],
+  "variables": [
+    {
+      "id": "rGQepcBUj",
+      "initialValue": "人と自然と響きあう",
+      "name": "内容",
+      "type": "string"
+    },
+    {
+      "id": "th0PYtBUh",
+      "initialValue": "企業理念",
+      "name": "Category",
+      "type": "string"
+    }
+  ],
+  "visible": false,
+  "$control__rGQepcBUj": "人と自然と響きあう",
+  "$control__th0PYtBUh": "企業理念",
+  "children": [
+    {
+      "id": "pDZsymHcc",
+      "type": "FrameNode",
+      "name": "通常",
+      "$groundNodeId": "pDZsymHcc",
+      "$isPrimary": true,
+      "$scopeId": "XPe_N9uRH",
+      "ariaPressed": false,
+      "border": "1px solid #D8D8CE",
+      "borderBottom": "1px",
+      "borderLeft": "1px",
+      "borderRight": "1px",
+      "borderWidth": "1px",
+      "borderTop": "1px",
+      "constraintsLocked": false,
+      "cursor": "pointer",
+      "fill": "var(--token-kl8VXvaIM)",
+      "gap": "12px",
+      "height": "auto",
+      "htmlTag": "button",
+      "layout": "stack",
+      "left": "0px",
+      "minHeight": "108px",
+      "onTap": [
+        {
+          "action": "SET_VARIANT",
+          "controls": {
+            "variant": "cycle"
+          }
+        }
+      ],
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "20px",
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
+      "radius": "20px",
+      "radiusBottomLeft": "20px",
+      "radiusBottomRight": "20px",
+      "radiusTopLeft": "20px",
+      "radiusTopRight": "20px",
+      "stackAlignment": "start",
+      "stackDirection": "vertical",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "zNUrzBGvL",
+          "type": "FrameNode",
+          "name": "選択状態",
+          "$groundNodeId": "pDZsymHcc",
+          "$scopeId": "XPe_N9uRH",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "horizontal",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "IKLeXnytw",
+              "type": "RichTextNode",
+              "name": "企業理念",
+              "$groundNodeId": "pDZsymHcc",
+              "$scopeId": "XPe_N9uRH",
+              "textColor": "var(--token-W0brTCMkj)",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": {
+                "type": "reference",
+                "id": "th0PYtBUh",
+                "providerId": "XPe_N9uRH"
+              },
+              "visible": true,
+              "width": "1fr",
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            },
+            {
+              "id": "fHfGpb8Nc",
+              "type": "FrameNode",
+              "name": "選択済みマーク",
+              "$groundNodeId": "pDZsymHcc",
+              "$scopeId": "XPe_N9uRH",
+              "fill": "var(--token-kl8VXvaIM)",
+              "gap": "0px",
+              "height": "24px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "12px",
+              "radiusBottomLeft": "12px",
+              "radiusBottomRight": "12px",
+              "radiusTopLeft": "12px",
+              "radiusTopRight": "12px",
+              "stackAlignment": "center",
+              "stackDirection": "horizontal",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": false,
+              "width": "24px",
+              "children": [
+                {
+                  "id": "O_YC_IZUJ",
+                  "type": "IconNode",
+                  "name": "Done",
+                  "icon": "Done",
+                  "$groundNodeId": "pDZsymHcc",
+                  "$scopeId": "XPe_N9uRH",
+                  "paginationVariants": null,
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "set": "qVkSETKBD",
+                  "visible": true,
+                  "width": "16px",
+                  "$rect": {
+                    "x": -8,
+                    "y": -100,
+                    "width": 16,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -12,
+                "y": -12,
+                "width": 24,
+                "height": 24
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "u0iPU8VSC",
+          "type": "RichTextNode",
+          "name": "ラベル",
+          "$groundNodeId": "pDZsymHcc",
+          "$scopeId": "XPe_N9uRH",
+          "textStylePreset": "uUqlDaRbo",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": {
+            "type": "reference",
+            "id": "rGQepcBUj",
+            "providerId": "XPe_N9uRH"
+          },
+          "textWrap": "pretty",
+          "visible": true,
+          "width": "1fr",
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    },
+    {
+      "id": "RHiSf4kjU",
+      "type": "FrameNode",
+      "name": "選択済み",
+      "$groundNodeId": "RHiSf4kjU",
+      "$isReplica": true,
+      "$originalId": "pDZsymHcc",
+      "$scopeId": "XPe_N9uRH",
+      "ariaPressed": true,
+      "border": "1px solid #22231F",
+      "borderBottom": "1px",
+      "borderLeft": "1px",
+      "borderRight": "1px",
+      "borderWidth": "1px",
+      "borderTop": "1px",
+      "constraintsLocked": false,
+      "cursor": "pointer",
+      "fill": "var(--token-SC8uq7EE3)",
+      "gap": "12px",
+      "height": "auto",
+      "htmlTag": "button",
+      "layout": "stack",
+      "left": "430px",
+      "minHeight": "108px",
+      "onTap": [
+        {
+          "action": "SET_VARIANT",
+          "controls": {
+            "variant": "cycle"
+          }
+        }
+      ],
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "20px",
+      "paddingBottom": "20px",
+      "paddingLeft": "20px",
+      "paddingRight": "20px",
+      "paddingTop": "20px",
+      "radius": "20px",
+      "radiusBottomLeft": "20px",
+      "radiusBottomRight": "20px",
+      "radiusTopLeft": "20px",
+      "radiusTopRight": "20px",
+      "stackAlignment": "start",
+      "stackDirection": "vertical",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "RHiSf4kjUzNUrzBGvL",
+          "type": "FrameNode",
+          "name": "選択状態",
+          "$groundNodeId": "RHiSf4kjU",
+          "$originalId": "zNUrzBGvL",
+          "$replicaId": "RHiSf4kjU",
+          "$scopeId": "XPe_N9uRH",
+          "gap": "8px",
+          "height": "auto",
+          "layout": "stack",
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "paddingTop": "0px",
+          "position": "relative",
+          "stackAlignment": "center",
+          "stackDirection": "horizontal",
+          "stackDistribution": "start",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "RHiSf4kjUIKLeXnytw",
+              "type": "RichTextNode",
+              "name": "企業理念",
+              "$groundNodeId": "RHiSf4kjU",
+              "$originalId": "IKLeXnytw",
+              "$replicaId": "RHiSf4kjU",
+              "$scopeId": "XPe_N9uRH",
+              "textColor": "var(--token-kl8VXvaIM)",
+              "textStylePreset": "phDSpJBNi",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": {
+                "type": "reference",
+                "id": "th0PYtBUh",
+                "providerId": "XPe_N9uRH"
+              },
+              "visible": true,
+              "width": "1fr",
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            },
+            {
+              "id": "RHiSf4kjUfHfGpb8Nc",
+              "type": "FrameNode",
+              "name": "選択済みマーク",
+              "$groundNodeId": "RHiSf4kjU",
+              "$originalId": "fHfGpb8Nc",
+              "$replicaId": "RHiSf4kjU",
+              "$scopeId": "XPe_N9uRH",
+              "fill": "var(--token-kl8VXvaIM)",
+              "gap": "0px",
+              "height": "24px",
+              "layout": "stack",
+              "opacity": 1,
+              "overflow": "clip",
+              "padding": "0px",
+              "paddingBottom": "0px",
+              "paddingLeft": "0px",
+              "paddingRight": "0px",
+              "paddingTop": "0px",
+              "position": "relative",
+              "radius": "12px",
+              "radiusBottomLeft": "12px",
+              "radiusBottomRight": "12px",
+              "radiusTopLeft": "12px",
+              "radiusTopRight": "12px",
+              "stackAlignment": "center",
+              "stackDirection": "horizontal",
+              "stackDistribution": "center",
+              "stackWrapEnabled": false,
+              "visible": true,
+              "width": "24px",
+              "children": [
+                {
+                  "id": "RHiSf4kjUO_YC_IZUJ",
+                  "type": "IconNode",
+                  "name": "Done",
+                  "icon": "Done",
+                  "$groundNodeId": "RHiSf4kjU",
+                  "$originalId": "O_YC_IZUJ",
+                  "$replicaId": "RHiSf4kjU",
+                  "$scopeId": "XPe_N9uRH",
+                  "paginationVariants": null,
+                  "height": "auto",
+                  "opacity": 1,
+                  "position": "relative",
+                  "set": "qVkSETKBD",
+                  "visible": true,
+                  "width": "16px",
+                  "$rect": {
+                    "x": -8,
+                    "y": -100,
+                    "width": 16,
+                    "height": 200
+                  }
+                }
+              ],
+              "$rect": {
+                "x": -12,
+                "y": -12,
+                "width": 24,
+                "height": 24
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        },
+        {
+          "id": "RHiSf4kjUu0iPU8VSC",
+          "type": "RichTextNode",
+          "name": "ラベル",
+          "$groundNodeId": "RHiSf4kjU",
+          "$originalId": "u0iPU8VSC",
+          "$replicaId": "RHiSf4kjU",
+          "$scopeId": "XPe_N9uRH",
+          "textColor": "var(--token-kl8VXvaIM)",
+          "textStylePreset": "uUqlDaRbo",
+          "height": "auto",
+          "opacity": 1,
+          "position": "relative",
+          "tag": "p",
+          "text": {
+            "type": "reference",
+            "id": "rGQepcBUj",
+            "providerId": "XPe_N9uRH"
+          },
+          "textWrap": "pretty",
+          "visible": true,
+          "width": "1fr",
+          "$rect": {
+            "x": -100,
+            "y": -100,
+            "width": 200,
+            "height": 200
+          }
+        }
+      ],
+      "$rect": {
+        "x": 430,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}

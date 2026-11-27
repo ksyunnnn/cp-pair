@@ -1,0 +1,365 @@
+[
+  {
+    "id": "kl8VXvaIM",
+    "type": "ColorStyleTokenNode",
+    "name": "CP paper",
+    "$parentId": "colorStyles",
+    "light": "#F4F2EB",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "SC8uq7EE3",
+    "type": "ColorStyleTokenNode",
+    "name": "CP ink",
+    "$parentId": "colorStyles",
+    "light": "#22231F",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "W0brTCMkj",
+    "type": "ColorStyleTokenNode",
+    "name": "CP muted",
+    "$parentId": "colorStyles",
+    "light": "#75766D",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "CkOmUdZdx",
+    "type": "ColorStyleTokenNode",
+    "name": "CP line",
+    "$parentId": "colorStyles",
+    "light": "#D8D8CE",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "a7DtIEZoH",
+    "type": "ColorStyleTokenNode",
+    "name": "CP accent",
+    "$parentId": "colorStyles",
+    "light": "#F4523D",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "vDcPmJKek",
+    "type": "ColorStyleTokenNode",
+    "name": "CP soft",
+    "$parentId": "colorStyles",
+    "light": "#E9E9DF",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "uUqlDaRbo",
+    "type": "TextStylePresetNode",
+    "name": "CP section",
+    "$parentId": "presets",
+    "breakpoint": {
+      "default": {
+        "minWidth": "0px",
+        "fontSize": "17px",
+        "letterSpacing": "-0.02em",
+        "lineHeight": "1.5em",
+        "paragraphSpacing": "20px"
+      }
+    },
+    "fontName": "Zen Kaku Gothic New",
+    "fontSize": "17px",
+    "fontStyle": "normal",
+    "fontWeight": 900,
+    "letterSpacing": "-0.02em",
+    "lineHeight": "1.5em",
+    "openTypeFontFeatures": {
+      "blwf": "on",
+      "cv03": "on",
+      "cv04": "on",
+      "cv09": "on",
+      "cv11": "on"
+    },
+    "textAlignment": "start",
+    "textColor": "var(--token-SC8uq7EE3)",
+    "textDecoration": "none",
+    "textStrokeColor": "initial",
+    "textStrokeWidth": "initial",
+    "textTransform": "none",
+    "paragraphSpacing": 20,
+    "tag": "p",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "Al2o1Hz3V",
+    "type": "TextStylePresetNode",
+    "name": "CP phrase",
+    "$parentId": "presets",
+    "breakpoint": {
+      "default": {
+        "minWidth": "0px",
+        "fontSize": "30px",
+        "letterSpacing": "-0.02em",
+        "lineHeight": "1.5em",
+        "paragraphSpacing": "20px"
+      }
+    },
+    "fontName": "Zen Kaku Gothic New",
+    "fontSize": "30px",
+    "fontStyle": "normal",
+    "fontWeight": 900,
+    "letterSpacing": "-0.02em",
+    "lineHeight": "1.5em",
+    "openTypeFontFeatures": {
+      "blwf": "on",
+      "cv03": "on",
+      "cv04": "on",
+      "cv09": "on",
+      "cv11": "on"
+    },
+    "textAlignment": "start",
+    "textColor": "var(--token-SC8uq7EE3)",
+    "textDecoration": "none",
+    "textStrokeColor": "initial",
+    "textStrokeWidth": "initial",
+    "textTransform": "none",
+    "paragraphSpacing": 20,
+    "tag": "p",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "jJ1dOOYQW",
+    "type": "TextStylePresetNode",
+    "name": "CP body",
+    "$parentId": "presets",
+    "breakpoint": {
+      "default": {
+        "minWidth": "0px",
+        "fontSize": "14px",
+        "letterSpacing": "-0.02em",
+        "lineHeight": "1.8em",
+        "paragraphSpacing": "20px"
+      }
+    },
+    "fontName": "Zen Kaku Gothic New",
+    "fontSize": "14px",
+    "fontStyle": "normal",
+    "fontWeight": 500,
+    "letterSpacing": "-0.02em",
+    "lineHeight": "1.8em",
+    "openTypeFontFeatures": {
+      "blwf": "on",
+      "cv03": "on",
+      "cv04": "on",
+      "cv09": "on",
+      "cv11": "on"
+    },
+    "textAlignment": "start",
+    "textColor": "var(--token-SC8uq7EE3)",
+    "textDecoration": "none",
+    "textStrokeColor": "initial",
+    "textStrokeWidth": "initial",
+    "textTransform": "none",
+    "paragraphSpacing": 20,
+    "tag": "p",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "phDSpJBNi",
+    "type": "TextStylePresetNode",
+    "name": "CP small",
+    "$parentId": "presets",
+    "breakpoint": {
+      "default": {
+        "minWidth": "0px",
+        "fontSize": "11px",
+        "letterSpacing": "-0.02em",
+        "lineHeight": "1.6em",
+        "paragraphSpacing": "20px"
+      }
+    },
+    "fontName": "Zen Kaku Gothic New",
+    "fontSize": "11px",
+    "fontStyle": "normal",
+    "fontWeight": 500,
+    "letterSpacing": "-0.02em",
+    "lineHeight": "1.6em",
+    "openTypeFontFeatures": {
+      "blwf": "on",
+      "cv03": "on",
+      "cv04": "on",
+      "cv09": "on",
+      "cv11": "on"
+    },
+    "textAlignment": "start",
+    "textColor": "var(--token-SC8uq7EE3)",
+    "textDecoration": "none",
+    "textStrokeColor": "initial",
+    "textStrokeWidth": "initial",
+    "textTransform": "none",
+    "paragraphSpacing": 20,
+    "tag": "p",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "sAS8XY6m6",
+    "type": "TextStylePresetNode",
+    "name": "CP label",
+    "$parentId": "presets",
+    "breakpoint": {
+      "default": {
+        "minWidth": "0px",
+        "fontSize": "12px",
+        "letterSpacing": "-0.02em",
+        "lineHeight": "1.5em",
+        "paragraphSpacing": "20px"
+      }
+    },
+    "fontName": "Zen Kaku Gothic New",
+    "fontSize": "12px",
+    "fontStyle": "normal",
+    "fontWeight": 700,
+    "letterSpacing": "-0.02em",
+    "lineHeight": "1.5em",
+    "openTypeFontFeatures": {
+      "blwf": "on",
+      "cv03": "on",
+      "cv04": "on",
+      "cv09": "on",
+      "cv11": "on"
+    },
+    "textAlignment": "start",
+    "textColor": "var(--token-SC8uq7EE3)",
+    "textDecoration": "none",
+    "textStrokeColor": "initial",
+    "textStrokeWidth": "initial",
+    "textTransform": "none",
+    "paragraphSpacing": 20,
+    "tag": "p",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "tE6RqninO",
+    "type": "TextStylePresetNode",
+    "name": "CP title",
+    "$parentId": "presets",
+    "breakpoint": {
+      "default": {
+        "minWidth": "0px",
+        "fontSize": "24px",
+        "letterSpacing": "-0.02em",
+        "lineHeight": "1.45em",
+        "paragraphSpacing": "20px"
+      }
+    },
+    "fontName": "Zen Kaku Gothic New",
+    "fontSize": "24px",
+    "fontStyle": "normal",
+    "fontWeight": 900,
+    "letterSpacing": "-0.02em",
+    "lineHeight": "1.45em",
+    "openTypeFontFeatures": {
+      "blwf": "on",
+      "cv03": "on",
+      "cv04": "on",
+      "cv09": "on",
+      "cv11": "on"
+    },
+    "textAlignment": "start",
+    "textColor": "var(--token-SC8uq7EE3)",
+    "textDecoration": "none",
+    "textStrokeColor": "initial",
+    "textStrokeWidth": "initial",
+    "textTransform": "none",
+    "paragraphSpacing": 20,
+    "tag": "p",
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  {
+    "id": "L7rQ5OG8k",
+    "type": "LinkStylePresetNode",
+    "name": "CP Source",
+    "$parentId": "presets",
+    "link": {
+      "textColor": "#75766D",
+      "textDecoration": "underline",
+      "hover": {
+        "textColor": "#22231F"
+      },
+      "current": {}
+    },
+    "visible": false,
+    "$rect": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0
+    }
+  }
+]

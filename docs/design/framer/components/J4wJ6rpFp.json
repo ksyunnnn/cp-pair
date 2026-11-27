@@ -1,0 +1,503 @@
+{
+  "id": "J4wJ6rpFp",
+  "type": "ComponentNode",
+  "name": "CP 性別選択",
+  "$parentId": "sn7IXw6X9",
+  "$variants": [
+    {
+      "id": "i6yN2AYh8",
+      "name": "男性"
+    },
+    {
+      "id": "eWo7CT8hE",
+      "name": "女性"
+    }
+  ],
+  "variables": [],
+  "visible": false,
+  "children": [
+    {
+      "id": "i6yN2AYh8",
+      "type": "FrameNode",
+      "name": "男性",
+      "$groundNodeId": "i6yN2AYh8",
+      "$isPrimary": true,
+      "$scopeId": "J4wJ6rpFp",
+      "ariaLabel": "性別",
+      "ariaRole": "group",
+      "constraintsLocked": false,
+      "fill": "var(--token-vDcPmJKek)",
+      "gap": "8px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "0px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "4px",
+      "paddingBottom": "4px",
+      "paddingLeft": "4px",
+      "paddingRight": "4px",
+      "paddingTop": "4px",
+      "radius": "16px",
+      "radiusBottomLeft": "16px",
+      "radiusBottomRight": "16px",
+      "radiusTopLeft": "16px",
+      "radiusTopRight": "16px",
+      "stackAlignment": "start",
+      "stackDirection": "horizontal",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "fRrl36Xnf",
+          "type": "FrameNode",
+          "name": "男性",
+          "$groundNodeId": "i6yN2AYh8",
+          "$scopeId": "J4wJ6rpFp",
+          "ariaPressed": true,
+          "cursor": "pointer",
+          "fill": "var(--token-SC8uq7EE3)",
+          "gap": "12px",
+          "height": "44px",
+          "htmlTag": "button",
+          "layout": "stack",
+          "onTap": [
+            {
+              "action": "SET_VARIANT",
+              "controls": {
+                "variant": "i6yN2AYh8"
+              }
+            }
+          ],
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "8px 16px 8px 16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "paddingRight": "16px",
+          "paddingTop": "8px",
+          "position": "relative",
+          "radius": "12px",
+          "radiusBottomLeft": "12px",
+          "radiusBottomRight": "12px",
+          "radiusTopLeft": "12px",
+          "radiusTopRight": "12px",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "center",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "Bb2deaQsW",
+              "type": "RichTextNode",
+              "name": "男性",
+              "$groundNodeId": "i6yN2AYh8",
+              "$scopeId": "J4wJ6rpFp",
+              "textAlignment": "center",
+              "textColor": "var(--token-kl8VXvaIM)",
+              "textStylePreset": "sAS8XY6m6",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "男性",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:Bb2deaQsW:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-kl8VXvaIM)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "children": [
+                    {
+                      "id": "v:Bb2deaQsW:0:0",
+                      "type": "TextRun",
+                      "text": "男性",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false,
+                      "textColor": "var(--token-kl8VXvaIM)"
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -22,
+            "width": 200,
+            "height": 44
+          }
+        },
+        {
+          "id": "tGWG02GJZ",
+          "type": "FrameNode",
+          "name": "女性",
+          "$groundNodeId": "i6yN2AYh8",
+          "$scopeId": "J4wJ6rpFp",
+          "ariaPressed": false,
+          "cursor": "pointer",
+          "gap": "12px",
+          "height": "44px",
+          "htmlTag": "button",
+          "layout": "stack",
+          "onTap": [
+            {
+              "action": "SET_VARIANT",
+              "controls": {
+                "variant": "eWo7CT8hE"
+              }
+            }
+          ],
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "8px 16px 8px 16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "paddingRight": "16px",
+          "paddingTop": "8px",
+          "position": "relative",
+          "radius": "12px",
+          "radiusBottomLeft": "12px",
+          "radiusBottomRight": "12px",
+          "radiusTopLeft": "12px",
+          "radiusTopRight": "12px",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "center",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "OPvQKOTI6",
+              "type": "RichTextNode",
+              "name": "女性",
+              "$groundNodeId": "i6yN2AYh8",
+              "$scopeId": "J4wJ6rpFp",
+              "textAlignment": "center",
+              "textColor": "var(--token-SC8uq7EE3)",
+              "textStylePreset": "sAS8XY6m6",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "女性",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:OPvQKOTI6:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-SC8uq7EE3)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "children": [
+                    {
+                      "id": "v:OPvQKOTI6:0:0",
+                      "type": "TextRun",
+                      "text": "女性",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false,
+                      "textColor": "var(--token-SC8uq7EE3)"
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -22,
+            "width": 200,
+            "height": 44
+          }
+        }
+      ],
+      "$rect": {
+        "x": 0,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    },
+    {
+      "id": "eWo7CT8hE",
+      "type": "FrameNode",
+      "name": "女性",
+      "$groundNodeId": "eWo7CT8hE",
+      "$isReplica": true,
+      "$originalId": "i6yN2AYh8",
+      "$scopeId": "J4wJ6rpFp",
+      "ariaLabel": "性別",
+      "ariaRole": "group",
+      "constraintsLocked": false,
+      "fill": "var(--token-vDcPmJKek)",
+      "gap": "8px",
+      "height": "auto",
+      "layout": "stack",
+      "left": "430px",
+      "opacity": 1,
+      "overflow": "clip",
+      "padding": "4px",
+      "paddingBottom": "4px",
+      "paddingLeft": "4px",
+      "paddingRight": "4px",
+      "paddingTop": "4px",
+      "radius": "16px",
+      "radiusBottomLeft": "16px",
+      "radiusBottomRight": "16px",
+      "radiusTopLeft": "16px",
+      "radiusTopRight": "16px",
+      "stackAlignment": "start",
+      "stackDirection": "horizontal",
+      "stackDistribution": "start",
+      "stackWrapEnabled": false,
+      "top": "0px",
+      "transition": {
+        "type": "spring",
+        "duration": "0.4s",
+        "bounce": 0.2,
+        "delay": "0s"
+      },
+      "visible": true,
+      "width": "342px",
+      "children": [
+        {
+          "id": "eWo7CT8hEfRrl36Xnf",
+          "type": "FrameNode",
+          "name": "男性",
+          "$groundNodeId": "eWo7CT8hE",
+          "$originalId": "fRrl36Xnf",
+          "$replicaId": "eWo7CT8hE",
+          "$scopeId": "J4wJ6rpFp",
+          "ariaPressed": false,
+          "cursor": "pointer",
+          "gap": "12px",
+          "height": "44px",
+          "htmlTag": "button",
+          "layout": "stack",
+          "onTap": [
+            {
+              "action": "SET_VARIANT",
+              "controls": {
+                "variant": "i6yN2AYh8"
+              }
+            }
+          ],
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "8px 16px 8px 16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "paddingRight": "16px",
+          "paddingTop": "8px",
+          "position": "relative",
+          "radius": "12px",
+          "radiusBottomLeft": "12px",
+          "radiusBottomRight": "12px",
+          "radiusTopLeft": "12px",
+          "radiusTopRight": "12px",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "center",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "eWo7CT8hEBb2deaQsW",
+              "type": "RichTextNode",
+              "name": "男性",
+              "$groundNodeId": "eWo7CT8hE",
+              "$originalId": "Bb2deaQsW",
+              "$replicaId": "eWo7CT8hE",
+              "$scopeId": "J4wJ6rpFp",
+              "textAlignment": "center",
+              "textColor": "var(--token-SC8uq7EE3)",
+              "textStylePreset": "sAS8XY6m6",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "男性",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:eWo7CT8hEBb2deaQsW:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-SC8uq7EE3)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "children": [
+                    {
+                      "id": "v:eWo7CT8hEBb2deaQsW:0:0",
+                      "type": "TextRun",
+                      "text": "男性",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false,
+                      "textColor": "var(--token-SC8uq7EE3)"
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -22,
+            "width": 200,
+            "height": 44
+          }
+        },
+        {
+          "id": "eWo7CT8hEtGWG02GJZ",
+          "type": "FrameNode",
+          "name": "女性",
+          "$groundNodeId": "eWo7CT8hE",
+          "$originalId": "tGWG02GJZ",
+          "$replicaId": "eWo7CT8hE",
+          "$scopeId": "J4wJ6rpFp",
+          "ariaPressed": true,
+          "cursor": "pointer",
+          "fill": "var(--token-SC8uq7EE3)",
+          "gap": "12px",
+          "height": "44px",
+          "htmlTag": "button",
+          "layout": "stack",
+          "onTap": [
+            {
+              "action": "SET_VARIANT",
+              "controls": {
+                "variant": "eWo7CT8hE"
+              }
+            }
+          ],
+          "opacity": 1,
+          "overflow": "clip",
+          "padding": "8px 16px 8px 16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "paddingRight": "16px",
+          "paddingTop": "8px",
+          "position": "relative",
+          "radius": "12px",
+          "radiusBottomLeft": "12px",
+          "radiusBottomRight": "12px",
+          "radiusTopLeft": "12px",
+          "radiusTopRight": "12px",
+          "stackAlignment": "center",
+          "stackDirection": "vertical",
+          "stackDistribution": "center",
+          "stackWrapEnabled": false,
+          "visible": true,
+          "width": "1fr",
+          "children": [
+            {
+              "id": "eWo7CT8hEOPvQKOTI6",
+              "type": "RichTextNode",
+              "name": "女性",
+              "$groundNodeId": "eWo7CT8hE",
+              "$originalId": "OPvQKOTI6",
+              "$replicaId": "eWo7CT8hE",
+              "$scopeId": "J4wJ6rpFp",
+              "textAlignment": "center",
+              "textColor": "var(--token-kl8VXvaIM)",
+              "textStylePreset": "sAS8XY6m6",
+              "height": "auto",
+              "opacity": 1,
+              "position": "relative",
+              "tag": "p",
+              "text": "女性",
+              "visible": true,
+              "width": "1fr",
+              "children": [
+                {
+                  "id": "v:eWo7CT8hEOPvQKOTI6:0",
+                  "type": "TextBlock",
+                  "tag": "p",
+                  "textAlignment": "center",
+                  "textColor": "var(--token-kl8VXvaIM)",
+                  "textStylePreset": "sAS8XY6m6",
+                  "children": [
+                    {
+                      "id": "v:eWo7CT8hEOPvQKOTI6:0:0",
+                      "type": "TextRun",
+                      "text": "女性",
+                      "bold": false,
+                      "italic": false,
+                      "inlineCode": false,
+                      "textColor": "var(--token-kl8VXvaIM)"
+                    }
+                  ]
+                }
+              ],
+              "$rect": {
+                "x": -100,
+                "y": -100,
+                "width": 200,
+                "height": 200
+              }
+            }
+          ],
+          "$rect": {
+            "x": -100,
+            "y": -22,
+            "width": 200,
+            "height": 44
+          }
+        }
+      ],
+      "$rect": {
+        "x": 430,
+        "y": 0,
+        "width": 342,
+        "height": 200
+      }
+    }
+  ],
+  "$rect": {
+    "x": 0,
+    "y": 0,
+    "width": 0,
+    "height": 0
+  }
+}
