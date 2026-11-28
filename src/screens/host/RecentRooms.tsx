@@ -1,7 +1,7 @@
 // トップ（/、src/screens/Home.tsx）の「最近のルーム」。この端末の記録にあるルームを 1 件ずつ読み、新しい順に並べる（#34）。
 // firestore.rules はルームの一覧（list）を禁じているため、記録にある ID で 1 件ずつ get する
 import { useEffect, useState } from "react";
-import { roomRecords, type RoomRecord } from "../../device.ts";
+import { isHostOf, replaceHostRoom, roomRecords, type RoomRecord } from "../../device.ts";
 import { getPreset } from "../../game/presets.ts";
 import { roomStore, withTimeout, type Room } from "../../store/index.ts";
 import { Button } from "../../ui/components.tsx";
@@ -17,6 +17,9 @@ const FETCH_TIMEOUT_MS = 4000;
 const MAX_FETCH_PER_ROLE = 10;
 
 async function loadEntries(): Promise<Entry[]> {
+  // 一度だけの置き換え（#51）。本番のルーム IPYPC を 3YK33 へ移したため、移す前に作った端末の記録を新しい ID に直す。
+  // その端末でトップを一度開いたら、この 1 行は消す
+  if (isHostOf("IPYPC")) replaceHostRoom("IPYPC", "3YK33");
   const records = roomRecords();
   const recent = (role: RoomRecord["role"]) => records.filter((r) => r.role === role).slice(-MAX_FETCH_PER_ROLE);
   const loaded = await Promise.all(
